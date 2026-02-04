@@ -1,0 +1,275 @@
+---
+title: "Supporting Information for : Continent-scale macroevolutionary insights from the last 23 million years of South American mammalian diversity"
+author:  
+  - Lucas Buffan¹, Myriam Boivin², Narla S. Stutz¹, François Pujos³, Pierre-Olivier Antoine¹,
+  - Fabien L. Condamine¹, Laurent Marivaux¹
+format:
+  pdf:
+    documentclass: article
+    papersize: letter
+    geometry: 
+      - left=20mm
+      - right=20mm
+      - bottom=25mm
+      - top=25mm
+    link-citations: true
+    include-in-header:
+      text: \usepackage[labelfont=bf]{caption}
+editor: visual
+bibliography: supp_references.bib
+csl: systematic-biology.csl
+crossref:
+  fig-title: "\\mbox{Supplementary Figure}"
+  tbl-title: "\\mbox{Supplementary Table}"
+  title-delim: "."
+fontsize: "9pt"
+fig-cap-location: bottom
+---
+
+Affiliations:\
+¹ Institut des Sciences de l’Evolution de Montpellier, Université de Montpellier, CNRS, IRD, Place Eugène Bataillon, 34095 Montpellier cedex 5, France.\
+² Instituto de Ecorregiones Andinas (INECOA), Universidad Nacional de Jujuy, CONICET, IdGyM, Avenida Bolivia 1661, 4600 San Salvador de Jujuy, Jujuy, Argentina.\
+³ IANIGLA, CCT–CONICET–Mendoza, Avenida Ruiz Leal s/n, Parque General San Martín, 5500 Mendoza, Argentina.
+
+| 
+| 
+
+This file contains:
+
+-   Supplementary text
+-   Supplementary figures
+-   Supplementary tables
+
+| 
+| 
+
+Other Supplementary Materials may be found at `<placeholder>`.\
+Codes are available at: <https://github.com/Buffan3369/PostPal_SAM.git>
+
+\newpage
+
+# Supplementary text: about occurrence data cleaning
+
+## Foreword
+
+As done in Buffan et al. (in press), we proceeded to an intense cleaning of the genus-level occurrence primarily downloaded from *The Paleobiology Database*. Occurrences of uncertain affinity, presenting elements of open nomenclature such as *cf.*, *aff.* or *?* were removed from the database. In addition, taxa associated to an inappropriate paper (*i*.*e*., that made no clear mention of it) were removed from the database. Below, we present the great lines of our cleaning procedure, taxonomic subdivision per taxonomic subdivision. For tracability reasons, each occurrence that was not linked to a systematics paper describing it -- or clearly referring to a such a paper -- were removed from our dataset.
+
+## Chinchilloidea occurrence cleaning *per se*
+
+Age ranges of the Miocene occurrences from the Río Santa Cruz (Santacrucian SALMA) were sharpened based on their assigned locality [@arnal2019]. Hence, occurrence from Barrancas Blancas were respectively assigned the 16.3--17.21 and 15.3--16.47 Ma intervals.
+
+Given that *Lagostomus (Lagostomopsis)* is a subgenus [@rasia2012], we set the `genus` column of each *Lagostomus (Lagostomopsis)* occurrence to *Lagostomus*, and switched their `genus_level_status` from `extinct` to `extant`.
+
+Uncertain age of the Ituzáingo formation was set to Huayquerian (Late Miocene), *ca*. 5--8 Ma.
+
+Age range of occurrences from @bucher2021 were set to the one of the original publication: 14.86--12.75 Ma when coming from the "Cruces Infinitos" and "Los Yeguarizos localities", 12.75--12 Ma when coming from the "La Gloria" and "La Hoyada" localities.
+
+Based on @brandoni2016, the age range of the occurrences from the Pinturas fauna (*e*.*g*., [@kramarz2002; @kramarz2004; @kramarz2006]), Burdigalian, were set between 20 and 16.8 Ma.
+
+According to [@esteban2014; @esteban2019], the age range of the occurrences belonging to the Andalhualá formation was set to Huayquerian--Chapadmalalan (*c*. 7.14--3.66 Ma).
+
+*Perimys perpinguis* and *Perimys impactus* lumped in *Perimys onostus* according to @mcgrath2022.
+
+Age range of the occurrence belonging to the Sierra Baguales (Santa Cruz formation, Magallanes, Chile) were set to 19--17.8 Ma according to the isotopic constraints provided in @bostelmann2013.
+
+Age range of the occurrences reported from the Cerro Boleadoras Formation was set to 16.5--15.1 Ma, according to @vizcaino2022.
+
+Added two occurrences of *Saremmys ligcura* from the two localities of Bryn Gwyn and Gran Barranca (Chubut, Argentina), according to @busker2019.
+
+We acknowledge the proposition of synonimisation between *Telicomys gigantissimus* and *Telicomys giganteus* made by @rasia2025. However, in the light of our phylogenetic results, we decided not to account for it, therefore treating *T. gigantissimus* and *T. giganteus* as two distinct taxa.
+
+\newpage
+
+# Supplementary Figures
+
+```{r, echo=FALSE}
+#| label: figs1
+#| fig-cap: "Selection of the preservation model best fitting our occurrence data, based on a maximum likelihood test incorporated in PyRate [@silvestro2019]. HPP, NHPP and TPP respectively stand for Homogeneous, Non-Homogeneous and Time-variable Poisson Processes for modelling preservation in our fossil data. In the case of TPP, we allowed for preservation rate to vary across geological stages (with only one bin for Quaternary). Models on the left of the x axis indexed by numbers are TPP with one removed bin, the lower (*i*.*e*., older) boundary of which corresponds to the aforementioned number. Best model: TPP without the 23.03−15.98 Ma bin (mean $AICc = 21928.78$, **Supp. tab. 1**)."
+
+knitr::include_graphics("../PPTEST/result_boxplot.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: figs2
+#| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising 3 Long Short Term Memory (LSTM) units (128, 64 and 32 nodes) connected to two dense layers (64 and 32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts icreasing. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
+
+knitr::include_graphics("../Results/DeepDive/Tropical_Extratropical/Neogene_SAM_Tropical_Extratropical_models/simulations_20250313_lstm128_64_32_d64_32_conditional/history_plotsimulations_20250313_lstm128_64_32_d64_32_conditional.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: figs3
+#| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising 2 LSTM units (64 and 32 nodes) connected to one dense layer (32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts icreasing. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
+
+knitr::include_graphics("../Results/DeepDive/Tropical_Extratropical/Neogene_SAM_Tropical_Extratropical_models/simulations_20250321_lstm64_32_d32_conditional/history_plotsimulations_20250321_lstm64_32_d32_conditional.pdf")
+```
+
+\newpage
+
+# Supplementary Tables
+
+```{r, echo=FALSE}
+# Load kableExtra library
+library(kableExtra)
+# Function to convert elements of a table cell to bold
+convert_bold <- function(el){
+  return(paste0("**", el, "**"))
+}
+```
+
+```{r, echo=FALSE}
+#| label: tbl1
+#| tbl-cap: "Mean AICc assigned to each preservation model given our occurrence data, across the 20 replicates of age assignment. HPP, NHPP and TPP respectively stand for Homogeneous, Non-Homogeneous and Time-variable Poisson Processes for modelling preservation in our fossil data. In the case of TPP, we allowed for preservation rate to vary across geological stages (with only one bin for Quaternary). Models indexed by numbers are TPP with one removed bin, the lower (*i*.*e*., older) boundary of which corresponds to the aforementioned number. The model best fitting our data (*i*.*e*., having the lowest AICc) is shown in bold."
+
+pptbl <- read.table("../PPTEST/tab.tsv", header = T, quote = "", sep = ";")
+pptbl <- pptbl[,-c(ncol(pptbl))]
+# Compute average
+av_AICc <- apply(X = pptbl[,-c(1)], 
+                 MARGIN = 2, 
+                 FUN = function(x){
+                   avg <- mean(x, na.rm = T)
+                   return(round(avg, digits = 2))
+                 })
+# Remove "X" before numbers in the table headers
+names(av_AICc) <- c("HPP", "NHPP", "TPP", "23.03", "15.98", "11.63", "5.33", "2.58")
+# Turn to dataframe and bolding the lowest AICc
+best_model <- which.min(av_AICc)
+av_AICc_df <- t(data.frame(av_AICc))
+av_AICc_df[, best_model] <- convert_bold(av_AICc_df[, best_model])
+rownames(av_AICc_df) <- "mean AICc"
+# Display
+knitr::kable(av_AICc_df, align = 'c')
+```
+
+```{r, echo=FALSE}
+#| label: tbl2
+#| tbl-cap: Posterior estimates of the multivariate birth-death correlation parameters with the origination rate ($G_{\lambda}$) for our full early Neogene (23.04--13.82 Ma) dataset, and their associated Shrinkage weights ($w_{\lambda}$). Median estimates are shown along with their 95% Highest Posterior Density (HPD) interval. Significant correlations, *i*.*e*., having a $w_{\lambda}$ larger than 0.5 and of which the 95% HPD of the associated coefficients do not overlap 0 are shown in bold.
+
+tbl <- read.table("../Figures/MBD_old/recap_tables/Full_Early_Neogene.txt", header = T, sep = "\t")
+# Only retain correlations with origination rate
+tbl_orig <- tbl[, 1:5]
+# Turn to bold significant correlations
+tbl_orig[3,] <- sapply(tbl_orig[3,], FUN = convert_bold) #Andean uplift
+tbl_orig[4,] <- sapply(tbl_orig[4,], FUN = convert_bold) #Sea level
+# Better header
+colnames(tbl_orig) <- c('Covariate', '$G_{\\lambda}$', '$G_{\\lambda}$ 95% HPD', '$w_{G, \\lambda}$', '$w_{G, \\lambda}$ 95% HPD')
+# Display
+knitr::kable(tbl_orig, align = 'c')
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl3
+#| tbl-cap: Posterior estimates of the multivariate birth-death correlation parameters with the extinction rate ($G_{\mu}$) for our full early Neogene (23.04--13.82 Ma) dataset, and their associated Shrinkage weights ($w_{\mu}$). Median estimates are shown along with their 95% Highest Posterior Density (HPD) interval. Significant correlations, *i*.*e*., having a $w_{\lambda}$ larger than 0.5 and of which the 95% HPD of the associated coefficients do not overlap 0 are shown in bold.
+
+tbl <- read.table("../Figures/MBD_old/recap_tables/Full_Early_Neogene.txt", header = T, sep = "\t")
+# Only retain correlations with extinction rate
+tbl_ext <- tbl[, c(1, 6:9)]
+# Turn to bold significant correlations
+tbl_ext[1,] <- sapply(tbl_ext[1,], FUN = convert_bold) #Self-diversity
+tbl_ext[4,] <- sapply(tbl_ext[4,], FUN = convert_bold) #Sea level
+# Better header
+colnames(tbl_ext) <- c('Covariate', '$G_{\\mu}$', '$G_{\\mu}$ 95% HPD', '$w_{G, \\mu}$', '$w_{G, \\mu}$ 95% HPD')
+# Display
+knitr::kable(tbl_ext, align = 'c')
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl4
+#| tbl-cap: Posterior estimates of the multivariate birth-death correlation parameters with the origination rate ($G_{\lambda}$) for our full late Neogene (13.82--2.58 Ma) dataset, and their associated Shrinkage weights ($w_{\lambda}$). Median estimates are shown along with their 95% Highest Posterior Density (HPD) interval. Significant correlations, *i*.*e*., having a $w_{\lambda}$ larger than 0.5 and of which the 95% HPD of the associated coefficients do not overlap 0 are shown in bold.
+
+tbl <- read.table("../Figures/MBD_old/recap_tables/Full_Late_Neogene.txt", header = T, sep = "\t")
+# Only retain correlations with origination rate
+tbl_orig <- tbl[, 1:5]
+# Turn to bold significant correlations
+tbl_orig[4,] <- sapply(tbl_orig[4,], FUN = convert_bold) #Sea level
+# Better header
+colnames(tbl_orig) <- c('Covariate', '$G_{\\lambda}$', '$G_{\\lambda}$ 95% HPD', '$w_{G, \\lambda}$', '$w_{G, \\lambda}$ 95% HPD')
+# Display
+knitr::kable(tbl_orig, align = 'c')
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl5
+#| tbl-cap: Posterior estimates of the multivariate birth-death correlation parameters with the extinction rate ($G_{\mu}$) for our full early Neogene (13.82--2.58 Ma) dataset, and their associated Shrinkage weights ($w_{\mu}$). Median estimates are shown along with their 95% Highest Posterior Density (HPD) interval. Significant correlations, *i*.*e*., having a $w_{\lambda}$ larger than 0.5 and of which the 95% HPD of the associated coefficients do not overlap 0 are shown in bold.
+
+tbl <- read.table("../Figures/MBD_old/recap_tables/Full_Late_Neogene.txt", header = T, sep = "\t")
+# Only retain correlations with extinction rate
+tbl_ext <- tbl[, c(1, 6:9)]
+# Turn to bold significant correlations
+tbl_ext[1,] <- sapply(tbl_ext[1,], FUN = convert_bold) #Self-diversity
+tbl_ext[2,] <- sapply(tbl_ext[2,], FUN = convert_bold) #Temperature
+tbl_ext[3,] <- sapply(tbl_ext[3,], FUN = convert_bold) #Andean uplift
+# Better header
+colnames(tbl_ext) <- c('Covariate', '$G_{\\mu}$', '$G_{\\mu}$ 95% HPD', '$w_{G, \\mu}$', '$w_{G, \\mu}$ 95% HPD')
+# Display
+knitr::kable(tbl_ext, align = 'c')
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl6
+#| tbl-cap: Posterior estimates of the multivariate birth-death correlation parameters with the origination rate ($G_{\lambda}$) for our full Quaternary (2.58--0 Ma) dataset, and their associated Shrinkage weights ($w_{\lambda}$). Median estimates are shown along with their 95% Highest Posterior Density (HPD) interval. Significant correlations, *i*.*e*., having a $w_{\lambda}$ larger than 0.5 and of which the 95% HPD of the associated coefficients do not overlap 0 are shown in bold.
+
+tbl <- read.table("../Figures/MBD_old/recap_tables/Full_Quaternary.txt", header = T, sep = "\t")
+# Only retain correlations with origination rate
+tbl_orig <- tbl[, 1:5]
+# Turn to bold significant correlations
+tbl_orig[2,] <- sapply(tbl_orig[2,], FUN = convert_bold) #Temperature
+tbl_orig[4,] <- sapply(tbl_orig[4,], FUN = convert_bold) #Sea level
+# Better header
+colnames(tbl_orig) <- c('Covariate', '$G_{\\lambda}$', '$G_{\\lambda}$ 95% HPD', '$w_{G, \\lambda}$', '$w_{G, \\lambda}$ 95% HPD')
+# Display
+knitr::kable(tbl_orig, align = 'c')
+```
+
+\newpage
+
+```{r, echo=FALSE}
+#| label: tbl7
+#| tbl-cap: Posterior estimates of the multivariate birth-death correlation parameters with the extinction rate ($G_{\mu}$) for our full Quaternary (2.58--0 Ma) dataset, and their associated Shrinkage weights ($w_{\mu}$). Median estimates are shown along with their 95% Highest Posterior Density (HPD) interval. Significant correlations, *i*.*e*., having a $w_{\lambda}$ larger than 0.5 and of which the 95% HPD of the associated coefficients do not overlap 0 are shown in bold.
+
+tbl <- read.table("../Figures/MBD_old/recap_tables/Full_Quaternary.txt", header = T, sep = "\t")
+# Only retain correlations with extinction rate
+tbl_ext <- tbl[, c(1, 6:9)]
+# Turn to bold significant correlations
+tbl_ext[1,] <- sapply(tbl_ext[1,], FUN = convert_bold) #Self-diversity
+tbl_ext[3,] <- sapply(tbl_ext[3,], FUN = convert_bold) #Andean uplift
+# Better header
+colnames(tbl_ext) <- c('Covariate', '$G_{\\mu}$', '$G_{\\mu}$ 95% HPD', '$w_{G, \\mu}$', '$w_{G, \\mu}$ 95% HPD')
+# Display
+knitr::kable(tbl_ext, align = 'c')
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl8
+#| tbl-cap: "Performance of the different network architectures tested in our DeepDive analyses. `LSTM Layers` and `Fully-connected` are respectively the number of Long Short Term Memory and Fully-connected units of the network (3: 128, 64 and 32 nodes; 2: 64 and 32 nodes; 1: 32 nodes). `Dropout` represents the Monte-Carlo dropout fraction, that is, the proportion of connections between neurons randomly toggled off between two learning epochs − one epoch being characterised by a complete pass through the entire training dataset −, preventing from overfitting. `Nb. training epochs` is the optimal number of training epochs. `Training loss` and `Validation loss` are the values of the Mean Squared Error (MSE) estimated between the 'true' diversity of each simulated dataset (resp. from the training or the validation set), and the predicted diversity made by the network after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs. `Evaluation loss` represent the MSE between each true and its associated predicted diversity trajectory from the test datset, once the is trained (*i*.*e*., after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs). The optimal number of epochs is determined when the `Validation loss` starts increasing (see *Supp. Fig. 1 and 2*). Architectures resulting in the smallest evaluation loss values, *i*.*e*., which we believe to generate the most accurate predictions, are depicted in bold."
+
+tbl_dd <- read.csv("../Data/supp_tbl/dd_TropEtrop_network_perf.csv")
+colnames(tbl_dd) <- c("LSTM layers", "Fully-connected", "Dropout", "Nb. training epochs", "Training loss", "Validation loss",
+                   "Evaluation loss")
+# Turn to bold best architectures
+tbl_dd[1,] <- sapply(tbl_dd[1,], FUN = convert_bold)
+tbl_dd[5,] <- sapply(tbl_dd[5,], FUN = convert_bold)
+# Display
+knitr::kable(tbl_dd, align = 'c')
+```
+
+\newpage
+
+# Supplementary references
+
+::: {#refs}
+:::

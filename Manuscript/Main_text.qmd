@@ -1,0 +1,201 @@
+---
+title: "Téma la taille du rat"
+author:  
+  - Lucas Buffan¹\*, Myriam Boivin²\*, Alicia Álvarez², Fabien L. Condamine¹, Laurent Marivaux¹
+format: 
+  docx:
+    number-sections: false
+    reference-doc: template.docx
+editor: visual
+bibliography: references.bib
+csl: systematic-biology.csl
+---
+
+¹ Institut des Sciences de l’Evolution de Montpellier, Université de Montpellier, CNRS, IRD, Place Eugène Bataillon, 34095 Montpellier cedex 5, France.
+
+² Instituto de Ecorregiones Andinas (INECOA), Universidad Nacional de Jujuy, CONICET, IdGyM, Avenida Bolivia 1661, 4600 San Salvador de Jujuy, Jujuy, Argentina.
+
+\* corresponding authors: lucas.l.buffan\@gmail.com, mboivin\@idgym.unju.edu.ar
+
+**Keywords:** Bayesian inference; Body mass; Deep Learning; Disparity; Macroevolution; Rodents
+
+*Journal(s) aimed*: Systematic biology (research article =\> we do not have phylogeny) ? Journal of Evolutionary Biology ? Evolution ?
+
+# Abstract
+
+# Introduction
+
+During most of the Cenozoic, the isolation of South America constrained the landmass' mammalian fauna to evolve in a vacuum, leading to a vast array of endemic radiations [*e*.*g*., @simpson1980]. Among the most emblematic are the impressively disparate New World hystricognaths (Hystricognathi: Caviomorpha), accounting for *c.* 10% of the extant rodent diversity [@database]. The astonishing disparity within Caviomorpha is greatly exemplified by their body size range, going far beyond what is usually found in the Rodentia, from 50--80 g (*Tympanoctomys kirchnerorum* Teta, 2014) to 50 kg (*Hydrochoerus hydrochaeris* Linnaeus, 1766, the largest living rodent) [@patton2015]. In fact, hystricognaths, and particularly caviomorphs, appear to have an enhanced capacity to evolve large sizes [@vucetich2015], raising questions regarding the drivers underlying such an unusual evolutionary pathway among rodents.
+
+Interestingly, evolution towards large (*i*.*e*., body mass above 10 kg) to giant (*i*.*e*., above 100 kg) body sizes occurred iteratively and independently in an almost coordinated way among distinct caviomorph lineages [*e*.*g*., @vucetich2015; @álvarez2017]. Such a trend is particularly well illustrated in the superfamily Chinchilloidea. Today, chinchilloids include seven to eight species distributed among four distantly-related genera [*e*.*g*., @upham2015] -- *Chinchilla* Bennett, 1829, *Lagidium* Meyen, 1933 and *Lagostomus* Brookes, 1828, forming the family Chinchillidae, and *Dinomys* Peters, 1873, the only living representative of the Dinomyidae. The fossil record of Chinchilloidea extends back to the late Eocene [@antoine2021] and comprises more than 100 described species [*e*.*g*., @candela2005, this study], including many of the largest rodents ever recorded. On the South American landmass, fossils of giant chinchilloids were assigned to $\dagger$Neoepiblemidae (*e*.*g*., $\dagger$*Phoberomys* Kraglievitch, 1926) and Dinomyidae (*e*.*g*., $\dagger$*Isostylomys* Kraglievich, 1926 or $\dagger$*Josephoartigasia* Mones 2007, the latter being the largest rodent ever recorded) [*e*.*g*., @sánchez-villagra2003; @rinderknecht2008; @rasia2024]. Nonetheless, it is worth mentioning that all these giant taxa were parts of a larger radiation that flourished in the late Cenozoic, in particular in the Mio-Pliocene, and further vanished, leaving the modest extant diversity of the group as a relic of a formerly speciose superfamily [@vucetich2015; @marivaux_early_2020; @rasia_comprehensive_2021]. In addition, systematics based on morphological characters (primarily dental traits) also placed the Pleistocene Caribbean 'giant hutias' $\dagger$*Amblyrhiza inundata* Cope, 1868 and $\dagger$*Elasmodontomys obliquus* Anthony, 1916 within Chinchilloidea [see @marivaux_early_2020; @marivaux2022 and literature therein][^1]. Therefore, over their evolutionary history, chinchilloids have experienced a simultaneous increase and further decline in both disparity and diversity [@carrillo].
+
+[^1]: One might however mention that, as summarised by @marivaux2022, the phylogenetic placement of $\dagger$*Elasmodontomys* still represents a real *conundrum*, with contrasting sources of evidence either suggesting this taxon to be nested within Chinchilloidea [*e*.*g*., @marivaux_early_2020; @marivaux2022], Octodontoidea [*e*.*g*., @woods2021] -- another caviomorph superfamily -- or to be a morphological intermediate between those two clades (*i*.*e*., Octochinchilloi, sensu @boivin2019) [@macphee2011; @dacunha2023].
+
+Understanding how taxonomic diversity and morphological disparity covary through evolutionary timescales has been a central aim of macroevolutionary research. Seminal works highlighted that clades could experience coordinated or decoupled diversity and disparity trajectories linked to biological diversification -- *i*.*e*., origination and extinction, the processes generating diversity [@foote1993; @foote1997]. This would stand for many different frameworks, for instance adaptive radiations or biological crises, and origination and extinction could either act as opposing forces or reinforce one another in the contraction/expansion of the morphospace [@simpson1944; @foote1993; @foote1997; @balseiro2025; @esteve2025]. Moreover, diversification has long been postulated to be affected by external biotic or abiotic factors [*e*.*g*., @vanvalen1973; @benton1983; @vrba1995; @barnosky2001], which promoted significant development of methods aiming to elucidate the role of the external environment in the pace at which clades diversify [*e*.*g*., @silvestro2015; @lehtonen2017; @morlon2024 and literature therein]. Also noteworthy, studies illustrated that phenotypic evolution in itself could also be ruled by similar factors [*e*.*g*., @drury2016; @clavel2017].
+
+For the Chinchilloidea, several hypotheses have been advocated to explain their unusual body mass evolution, though few relate to their diversification dynamics. @vucetich2015 proposed a climate component relying on cooling and aridification, coinciding with an expansion of open habitats in continental South America from the Middle Miocene onwards [@palazzesi2012]. Similar climatic factors are also often invoked to explain a concomitant increase in cheek teeth crown height (*i*.*e*., hypsodonty index) observed in several groups of caviomorphs. Role of Paranense sea regression and resulting environments in Mesopotamian region \[see **candela2013** and literature therein\]. In addition, a role of biotic factors, such as intra- or interspecific competition, predator avoidance or physiological constraints (*e*.*g*., metabolic rate) was also suggested, on the basis of results established on modern species showing size-increase patterns [@vucetich2015]. @álvarez2017 added that the environmentally-driven emergence of new niches and their further colonisation by caviomorphs must have promoted size increase in this rodent clade. Regarding the Caribbean 'giant hutias', instead of environmental drivers, the 'island rule' [@van_valen_pattern_1973; @damuth1993; @lomolino2005; @faurby2016] *but see* [@meiri2007] has been proposed to explain their spectacular increase in size -- particularly in the case of *Amblyrhiza* [*e*.*g*., @biknevicius1993; @mcfarlane1998]. Besides, questions are also raised by chinchilloid's recent evolutionary decline. Can this be replaced in the context of the Holocene megafaunal wipe-out, in turn related to climatic and/or anthropogenetic factors [@barnosky2010]? To the arrival and further diversification of new mammalian predators from North America during the Great American Biotic Interchange [@marshall1982; @faurby2016_asym]?
+
+Despite all this, the question of the evolutionary fate of Chinchilloidea has never been approached in its entirety, and many of the hypotheses raised to explain the exceptional phenotypical evolutionary pathway of this rodent group have poorly considered the likely interplay between the latter and biological diversification, even less taking advantage of the quantitative frameworks that have flourished over the last decade.
+
+Here, we investigate the evolutionary history of Chinchilloidea and underpin its environmental correlates, with an emphasis on body mass evolution. To do so, we compiled and revised 715 chinchilloid fossil occurrences from the literature to build the most exhaustive fossil occurrence database ever produced for this group, encompassing 59 genera and 136 species. In parallel, we collected dental traits and measurements in order to carry out body mass reconstructions based on recently-published sets of predictive equations, and reconstructed hyposodonty indices based on cheek-teeth crown height. We further analysed chinchilloid diversity and diversification dynamics throughout their entire evolutionary history using state-of-the-art preservation-aware methodological frameworks, and sought for their likely environmental drivers, allowing rate variation across time, body size and crown height categories.
+
+# Materials and Methods
+
+## Fossil occurrence database
+
+We downloaded genus- and species-level fossil occurrences of Chinchilloidea from The Paleobiology Database (https://paleobiodb.org). Each entry was then checked and, if necessary, updated by us. We excluded occurrences with open nomenclature names (*cf.*, *aff.*, *?*). This compilation was further complemented by an extensive literature review. To get an exhaustive and unbiased sampling of the clade's extant diversity, one occurrence of modern age (*i*.*e*., $t_{min}=t_{max}=0$) was added for each of the seven extant chinchilloid species, even for those not represented in the fossil record. This resulted in one species-level database (493 occurrences, 137 species, including 72 singletons) and one genus-level database (709 occurrences, 64 genera, including 20 singletons), spanning the clade's entire lifespan (from latest Eocene to present).
+
+On the basis of their sampling location, occurrences were binned into three spatial domains: Tropical, Extratropical and Caribbean (Figure S1). Due to the immensely parcellar fossil record of the West Indies, the latter domain -- only encompassing 5 species, *Borikenomys praecursor*, *Amblirhiza inundata*, *Elasmodontomys obliquus*, *Clidomys osborni* and *Quemisia gravis* -- was very structured in time, only covering the Quaternary, with the notable exception of a single early Oligocene occurrence (*B. praecursor*).
+
+## Trait data collection
+
+On the basis of body mass reconstructions carried out from dental proxies detailed in @boivin2024, complemented with a literature review, species were classified in six body size categories: XS (\<0.5kg), S (0.5--1kg), M (1--10kg), L (10--100kg), XL (100--200kg) and XXL (\>200kg).
+
+## Palaeodiversity and diversification inference from the fossil record
+
+**Place corsair ESS plots in SI**
+
+Our fossil occurrence database was first analysed using PyRate [@silvestro2014; @silvestro2019]. Genus origination and extinction times (altogether forming the palaeodiversity) and the underlying diversification process (*i*.*e*., origination and extinction rates) were jointly estimated in a Bayesian framework accounting for preservation heterogeneity, and approximated through Reversible-Jump Markov Chain Monte Carlo (RJMCMC). We ran the RJMCMC algorithm for 10 million iterations, sampling every 10,000. We used a time-dependent preservation process allowing for preservation rate shift between geological stages (**Supp. Fig. 1** and **Supp. Tab. 1**). We allowed preservation rates to vary between lineages according to a *Gamma* model. These analyses were replicated 20 times after randomly sampling fossil ages between each occurrence's upper and lower age boundaries. MCMC runs that achieved convergence, *i*,*e*., with effective sample size over 200 ($n=19$, **Supp. Fig. 2**) were further combined. To evaluate the robustness of our analyses, we conducted sensitivity danalyses by either removing singletons from the input occurrence database or subsampling to unique locality-lineage combinations, as done in @buffan2025 (**Supp. Fig. XX** and **YY**). Parameter convergence was monitored using the pymc 5.9.2 python library, and we considered parameters achieved convergence if their Effective Sample Size (ESS) was above 200.
+
+Next, to get another flavour of the temporal patterns in SAM diversity accounting for the incompleteness of the fossil record differently (*i*.*e*., without explicitly modelling it), we used the recently-developed fossil-based palaoediversity reconstruction framework implemented in DeepDive [@cooper2024]. DeepDive uses a spatially-explicit biodiversity simulator coupled with a fossilisation process to simulate fossil occurrences under a wide range of scenarios. Simulation parameters (*e*.*g*., sample size, number of regions, ...) can be user-tuned so simulated scenarios reflect more any empirical case study. Then, a deep-learning model relying on recursive neural networks is trained to predict palaeodiversity from a set of features directly extracted from the simulated occurrence datasets (*e*.*g*., number of singletons, range-through diversity, ...), within a user-defined set of time bins. We are therefore in a case of supervised learning. Once the model achieves a satisfying training level (quantified with a loss function, see **Supp. Tab. 8**), the same features are extracted from the empirical set of fossil occurrences and fed into the trained neural network to get an estimate of palaeodiversity through time.
+
+In practice, we ran DeepDive from configuration files produced with the R package DeepDiveR [@cooper2025]. Below, we provide an overview of our motivations behind some parameter values. Exhaustive details of the values we set for each parameter are available in the configuration files (see *SI Appendix*).
+
+*Simulation.* We generated 150,000 training and 1000 test sets. For each simulated dataset, the number of starting lineages was set between 30 and 150, and we chose to set the number of regions where our taxa occurred to two, reflecting our empirical dichotomy between tropical and extratropical biomes. We set the number of extant taxa in the simulations -- as well as in the predictions -- to 340, reflecting the order of magnitude of the number of South American mammal genera [@burgin2025].
+
+*Model training.* Following @cooper2024, we tested models with variable numbers of bidirectional 'Long Short-Term Memory' (LSTM) layers, including or not additional fully-connected 'dense' layers, and selected the best architectures based on the mean squared error (MSE) between simulated (*i*.*e*., 'true') and predicted diversity of each set of fossil occurrences of our training set (`Evaluation loss`). Our retained network architecture comprised two LSTM layers (64 and 32 nodes) coupled with one dense layer (32 nodes) (**Supp. Fig. 2−3** and **Supp. Tab. 8**).
+
+*Empirical predictions.* We made 100 replicates of age assignment for occurrences in our fossil database.
+
+## Drivers behind macroevolutionary patterns
+
+### Environmental variable selection
+
+To make sense of the macroevolutionary patterns that we reconstructed in terms of environmental process, we incorporated several biotic and abiotic variables in our workflow.
+
+First, as illustrated by many studies, the Andean uplift has often been identified as a key driver for the build-up of South American ecosystems from the Neogene to the present [@hoorn1995; @antonelli2009; @hoorn2010; @tarquini2022; @vallejos-garrido2023; @solórzano2024]. Thus, we incorporated the multi-proxy reconstruction of the pace of the Andean uplift produced by [@boschman2021] -- averaged across the entire continent or more spatially refined. Another abiotic factor frequently retrieved as significantly influencing diversification in a wide array of clades is temperature [*e*.*g*., @condamine2018; @condamine2019; @flannery-sutherland2022; @weppe2023]. So far, studies testing the effect of palaeotemperature on clade diversification have often used global proxy-derived temperature reconstructions [*e*.*g*., @westerhold2020]. The main limitation of this approach is the fact that it does not reflect regional climatic idiosyncrasies. We therefore used the regional South American average temperature reconstructions recently produced by @tardif2025. Also, South America biomes have been highly influenced by hydrographic reorganisations, tightly related to the andean orogeny, but also to eustatism [@hoorn2022; @guayasamin2024]. We therefore incorporated the sea level reconstructions of @miller2020 in our analyses.
+
+Diversity-dependent effects have been illustrated many times as important drivers for changes in macroevolutionary rates [@etienne2011; @condamine2019; @condamine2020], just like temperature, in a wide range of clades. Therefore, we allowed for diversity-dependence in our environment-dependent diversification (EDD) analyses.
+
+### Multivariate Birth-Death (MBD) analyses
+
+At first, we carried out EDD analyses using the Multivariate Birth-Death (MBD) model implemented in PyRate [@lehtonen2017]. Given origination and extinction times inferred by PyRate (see previous part), the MBD model *de novo* estimates origination and extinction rates (resp. $\lambda$ and $\mu$) using a birth-death process where $\lambda$ and $\mu$ are functions of a set of environmental variables. Given a set of environmental correlates of size $n$ (in our case, $n=4$), the model assumes either a linear or an exponential dependency between $\lambda$ (or $\mu$) and the environment correlates -- here, we only tested for exponential dependencies. Therefore, to a given rate, $n$ correlation parameters -- one per environment variable -- are estimated (resp. $G_{\lambda,i}$ or $G_{\mu,i}$), plus a baseline rate. Each $G_{\lambda,i}$ or $G_{\mu,i}$ is assigned a shrinkage weight (resp. $w_{\lambda,i}$ and $w_{\mu,i}$), ranging from 0 to 1, testing for the strength of the relationship between the newly-estimated rate and each environmental variable individually. A correlation coefficient $G_{.,i}$ is considered significant if $median(w_{.,i})>0.5$ and if its 95% Highest Posterior Density interval (HPD) does not overlap with 0.
+
+An MCMC algorithm jointly approximates the posterior distribution of each $G_{.,i}$ and their associated $w_{.,i}$ while controlling for over-parameterisation. We ran each set of MBD analyses across 10 million iterations, with a sampling frequency of 10,000. As evidence for the palynological record suggested three distinct floral strata in South America across our study period, reflecting ecosystem-level changes across the entire continent [@wei2024], we independently analysed data from the 'Early Neogene' (*i*.*e*., 23.04--13.82 Ma), 'Late Neogene' (*i*.*e*., 13.82--2.58 Ma) and Quaternary (last 2.58 Ma).
+
+### Birth-Death Neural Networks (BDNN) analyses
+
+We used the Birth-Death Neural Networks (BDNN) model [@hauffe2024] to complement the EDD analyses carried out with the MBD model. Built upon PyRate, BDNN extends the birth-death process used to reconstruct speciation and extinction rates given the estimated preservation-aware times of origination and extinction for each species by allowing rates to vary not only across time but also across lineages. One of the key advances of BDNN is that it uses an unsupervised neural network to estimate these rates as a function of a user-provided set of external predictors, such as environmental covariates or biological traits. It therefore does not assume any predefined dependency between diversification rates and the variables tested -- contrary to the linear vs. exponential duality offered by classical EDD approaches. Consequently, these dependencies can be complex, going beyond linearity, and can change through time. The so-estimated rates are then directly incorporated in the likelihood function of the birth-death process implemented in PyRate. Noteworthy, BDNN provides the ability to test for the combined effect (*i*.*e*., interaction) of multiple variables, and further ranks the predictors according to their respective contribution to the modelled macroevolutionary pattern by using common explainable AI metrics.
+
+Predictors were scaled prior their incorporation in the model.
+
+### Age-Dependent Extinction model
+
+To investigate the potential effect of species age on their extinction probabilities, we used Age-Dependent Extinction (ADE) model [@hagen2018]. This model uses a Weibull distribution to model the relationship between species age and their probability to go extinct. The shape parameter ($\phi$) of the distribution informs about the direction of such a relationship, with $\phi<1$ indicating decreasing extinction probability decreases with species age, $\phi>1$ increasing extinction probability with species age, and $\phi=1$ no relationship between species age and extinction probability. We fitted the ADE model to our fossil occurrence database, approximating the posterior distribution of the model parameters with an MCMC algorithm that we ran across 40 million MCMC generations, sampling every 40,000. Parameter convergence was assessed using the pymc 5.9.2 library, and we considered parameters achieved convergence if their ESS was above 200.
+
+# Results
+
+## RJMCMC
+
+Are we detecting pulses of mid-late Miocene pulses of diversification that lead to the differenciation of extant lineages postulated from the fossil record ? @vucetich2015
+
+PLOT SPECIES LONGEVITY BY CLADE INCORPORATING INFORMATION ON THEIR BODY MASS !!
+
+## Deepdive
+
+All architectures performed similarly, as long as they comprised at least one dense layer connecting the output of the LSTM layers to the output layer (**Supp. Tab. 8**).
+
+## MBD
+
+Full time facetted:
+
+-   Andes: Late Neogene + Quaternary, negative relationship with extiction rate, of increasing magnitude with decreasing time.
+
+-   Temperature: mid-Pliocene Warming Period (mPWP), confounding effect with GABI?
+
+## BDNN
+
+Our deep learning-based analysis of diversification provided evidence for significant origination and extinction rates variation as compared to a constant-rate birth-death model with the same amount of lineages and root ages as our empirical data (coefficients of rate variation table).
+
+Heterogeneity in lineage-specific diversification rates (example of lineages/groups of taxa).
+
+Migrant taxa (*i*.*e*., belonging to groups that reached South America after North and South America were close enough to allow for biotic interchanges) were found to exhibit an overall extinction rate lower that endemic ones.
+
+Also, tropical lineages appear to have overall lower origination and extinction rates, suggesting enhanced biotic turnover outside the tropics.
+
+Diversity-dependent effects were found to be the most important factor influencing origination rate variations, with decreasing rate values with increasing diversity. Andean uplift and palaeotemperature were respectively ranked at the second and third positions on the predictor importance scale.
+
+Palaeotemperature was retrieved as most significantly influencing extinction rate variations, via a negative relationship -- extinction rate decreases when palaeotemperature increases. Sea level and Andean uplift respectively arrived second and third. At a given palaeotemperature, extinction rate was higher when sea level was higher.
+
+Results robust to different network architectures.
+
+# Discussion
+
+Unlike the evidenced decoupled diversity and disparity patterns evidenced between caviomorph superfamilies [*e*.*g*., @álvarez2017; @carrillo], our results suggest a coordinated behaviour of chinchilloid diversity and disparity, both peaking in the late Miocene and further declining towards the present.
+
+This peak though cannot be excluded to be a reflect of fossil deposits abundancy.
+
+## Macroevolutionary
+
+Turning point in Dinomyid diversification at high latitudes in the Chasicoan (e.g., Arroyo Chasicó locality, La Pampa, Argentina), with the record of a great number of Euhypsodont taxa, meanwhile protohypsodont taxa became scarcer (though still recovered at lower latitudes) @rasia2024
+
+Our results suggest a "waxing-and-waning" diversity pattern for chinchilloid rodents, peaking in the late Miocene (Chasicoan SALMA), with XX reconstructed taxa (fig pyrate) (YY corrected diversity, fig deepdive), and declining thereafter until the 7 extant species. This pattern goes in contradiction with the "stagnating" diversity since the Early Oligocene reconstructed by @carrillo, based on a total-evidence phylogeny. Such a mismatch between phylogeny and occurrence-derived patterns probably comes from the poor representativity of extinct chinchilloid lineages in the phylogenetic reconstruction (31 species) when compared to our occurrence database (13X species).
+
+Caribbean lineages of Quaternary age (*Elasmodontomys*, *Amblyrhiza*, *Quemisia* and *Clidomys*) descend from at least one (but most likely several, see [@macphee2011; @marivaux_early_2020]) earlier colonisation events of the West Indies by ancestral lineages that could not be preserved in the fossil record [@marivaux2022].
+
+### Drivers
+
+Diet !! Evolution towards large to very large body sizes must have implied adaptations in terms of nutrient supply. Did they achieve this by consuming new forms of food? Could landscape opening play a role?
+
+Come back to @vucetich2015 hypotheses regarding large size evolution
+
+Demise of large sizes could also be viewed under the lens of hyperspecialisation, in turn restricting adaptabilities over evolutionary timescales [see @neige2026]
+
+Our results did not provide any support for hypsodonty-dependent diversification. Contrary to the paradigm [@stebbins1974], previous findings illustrated that evolution of hypsodonty was not necessarily linked to grassland spreading in the Americas [@jardine2012; @strömberg2013]
+
+#### Andes
+
+Refugia, limiting extinction (MBD). Effect of increasing magnitude as the mountain chain gets higher. On the other hand, negative effect on origination (BDNN), first driver. "Museum"? Bear in mind that our fossil record is biased westwards, likely exacerbating the prominence of the role of the Andes for Neogene SAM diversification.
+
+Also, late phases of Andean uplift resulted in major changes in hydrographic patterns in Tropical South America (Pebas -\> Acre -\> Amazon), which were shown to have been a significant trigger for extinctions (or wax-and-waning) among endemic lacustrine faunal assemblages [*e*.*g*., @salas-gismondi2015 + mollusks]. Subsequent effects on terrestrial communities?
+
+#### Sea level
+
+Pebas @hoorn2022 + Paranaense sea @homerocamacho1967. Retrieved as second most important predictor for extinction rate variations by our BDNN analyses, likely having to do with hydrographic pattern changes.
+
+#### Self-diversity
+
+Court Jester framework. Autocatalytic effect of the huge amazonian biodiversity on itself
+
+## Methodological
+
+Lack of phylogenetic framework, hence ignoring phylogenetic relatedness, though proven relevant in previous analyses @hauffe2024. Phylogeny unresolved for key nodes though [*e*.*g*., @boivin2019; @marivaux_early_2020; @rasia_comprehensive_2021]
+
+(Mis)matches between BDNN and PyRate/MBD:
+
+-   Diversification rate profiles : raw patterns not that dissimilar with shared periods of positive and negative regimes (plot both net rates together on a same figure)
+
+-   Direction of relationship between drivers and diversification rates
+
+### On the challenge on inferring body sizes of extinct taxa with little extant representatives
+
+Estimates can vary significantly based on the proxy used [@paiva2026].
+
+## Perspectives
+
+Being large implies additional energetic requirements =\> diet. Need for additional studies to quantify diet shifts in large forms using quantitative methods like microwear texture analysis [*e*.*g*., @robinet2020; @hullot2025].
+
+Test for the direct effet of intraspecific interaction in the rate of body mass evolution in a phylogenetic framework [@drury2016; chabrol inch'bouddah]
+
+# Conclusions
+
+# Acknowledgements
+
+Torsten Hauffe.
+
+{{< pagebreak >}}
+
+# References
+
+::: {#refs}
+:::

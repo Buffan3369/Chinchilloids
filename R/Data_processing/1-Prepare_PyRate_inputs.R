@@ -1,0 +1,75 @@
+################################################################################
+# Name: 2-Prepare_PyRate_inputs.R
+# Author: Lucas Buffan
+# E-mail: lucas.l.buffan@gmail.com
+# Description: Prepare PyRate inputs for cleaned Chinchilloidea occurrence data
+################################################################################
+
+library(tidyverse)
+library(readxl)
+source("~/PyRate/pyrate_utilities.r")
+source("./R/useful/helper_functions.R")
+
+chinchi <- read_xlsx("./Data/OccDB_cleaned/ChinchilloideaOccurrences_cleaned.xlsx")
+chinchi$min_ma <- as.numeric(chinchi$min_ma)
+chinchi$max_ma <- as.numeric(chinchi$max_ma)
+
+## Genus-level database --------------------------------------------------------
+chinchi_gen <- chinchi %>%
+  select(genus, gen_lvl_status, min_ma, max_ma) %>%
+  rename(Species = "genus", Status = "gen_lvl_status", min_age = "min_ma", max_age = "max_ma")
+
+# Remove occurrences assigned to open nomenclature elements
+true_gen <- sapply(X = chinchi_gen$Species,
+                   FUN = open_checkR)
+chinchi_gen <- chinchi_gen[true_gen, ]
+
+  # -- 1- Full -- 
+# Save occurrence dataframe
+write.table.lucas(chinchi_gen, "./Data/PyRate_inputs/Genus/1-Chinchilloidea_genus_lvl_occ.txt")
+# Extract ages
+extract.ages("./Data/PyRate_inputs/Genus/1-Chinchilloidea_genus_lvl_occ.txt", replicates = 20)
+
+  # -- 2. Spatially scaled -- 
+loc_na <- which(is.na(chinchi$locality))
+chinchi$locality[loc_na] <- paste0("Placeholder_", 1:length(loc_na))
+
+chinchi_gen_spat_scld <- chinchi %>% 
+  group_by(genus, gen_lvl_status, locality, min_ma, max_ma) %>%
+  distinct(genus) %>%
+  ungroup() %>%
+  select(genus, gen_lvl_status, min_ma, max_ma) %>%
+  rename(Species = "genus", Status = "gen_lvl_status", min_age = "min_ma", max_age = "max_ma")
+# Save occurrence dataframe
+write.table.lucas(chinchi_gen_spat_scld, "./Data/PyRate_inputs/Genus/3-Spatially_scaled_Chinchilloidea_gen.txt")
+# Extract ages
+extract.ages("./Data/PyRate_inputs/Genus/3-Spatially_scaled_Chinchilloidea_gen.txt", replicates = 20)
+
+
+## Species-level database --------------------------------------------------------
+chinchi_sp <- chinchi %>%
+  select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
+  filter(!is.na(sp_lvl_status)) %>% # filter out occurrences at the genus level
+  rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
+
+# Remove occurrences associated with open nomenclature
+true_sp <- sapply(X = chinchi_sp$Species,
+                  FUN = open_checkR)
+chinchi_sp <- chinchi_sp[true_sp, ]
+
+# Save occurrence dataframe
+write.table.lucas(chinchi_sp, "./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt")
+# Extract ages
+extract.ages("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt", replicates = 20)
+
+## No need for species-level spatial scaling as occurrences were compiled accordingly
+
+
+## Removing Caribbean taxa -----------------------------------------------------
+chinchi_sp_NoCar <- chinchi_sp %>% 
+  filter(Species %in% c("Amblyrhiza_inundata", "Elasmodontomys_obliquus",
+                        "Quemisia_gravis", "Clidomys_osborni") == F)
+# Save occurrence dataframe
+write.table.lucas(chinchi_sp_NoCar, "./Data/PyRate_inputs/Species/3-Chinchilloidea_sp_lvl_NoCar.txt")
+# Extract ages
+extract.ages("./Data/PyRate_inputs/Species/3-Chinchilloidea_sp_lvl_NoCar.txt", replicates = 20)
