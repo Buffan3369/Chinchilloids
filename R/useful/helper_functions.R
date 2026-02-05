@@ -47,7 +47,7 @@ theme_lucas <- function(...){
 open_checkR <- function(x){
   a <- TRUE
   spl <- strsplit(x, split = "_")[[1]]
-  if("cf." %in% spl | "aff." %in% spl | "?" %in% spl){
+  if("cf." %in% spl | "aff." %in% spl | "?" %in% strsplit(x, split = "")[[1]]){
     a <- FALSE
   }
   return(a)
