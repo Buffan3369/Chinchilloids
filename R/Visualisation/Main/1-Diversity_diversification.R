@@ -284,7 +284,6 @@ dinomys_img <- get_phylopic(uuid = dinomys_uuid)
 josephoartigasia_uuid <- get_uuid(name = "Josephoartigasia monesi")
 josephoartigasia_img <- get_phylopic(uuid = josephoartigasia_uuid)
 
-
 # Proper plot
 lifespans_plot <- TsTe_tbl %>% 
   mutate(BM_cat = as.character(BM_cat)) %>% 
@@ -349,18 +348,19 @@ lifespans_plot <- TsTe_tbl %>%
             xlim = c(35, 0)) +
   # Theme
   theme(axis.text.x = element_text(size = 10),
-        axis.text.y = element_text(face = "italic", size = 4.5, colour = TsTe_tbl$col_BM_cat),
+        axis.text.y = element_text(face = "italic", size = 4, colour = TsTe_tbl$col_BM_cat),
         axis.title.x = element_text(size = 12),
-        legend.position = "none",
-        # legend.position = "bottom",
-        # legend.key = element_rect(fill="white"),
-        # legend.key.height = unit(5, "mm"),
-        # legend.key.width = unit(7, "mm"),
-        # legend.text = element_text(size = 8, hjust = .5),
+        # legend.position = "none",
+        legend.position = "bottom",
+        legend.key = element_rect(fill="white"),
+        legend.key.height = unit(5, "mm"),
+        legend.key.width = unit(7, "mm"),
+        legend.text = element_text(size = 8, hjust = .5),
         panel.grid.major.x = element_blank(),
         panel.grid.minor.x = element_blank(),
         panel.background = element_rect(fill = "grey97"),
         plot.margin = unit(c(0.5, 2, 0.5, 0.5), "cm"))
 
 ggsave("./Figures/Main/Lifespans/Lifespans_Chinchilloidea.pdf", plot = lifespans_plot, height = 220, width = 180, units = "mm")
+
 
