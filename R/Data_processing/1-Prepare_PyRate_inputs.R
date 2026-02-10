@@ -73,3 +73,20 @@ chinchi_sp_NoCar <- chinchi_sp %>%
 write.table.lucas(chinchi_sp_NoCar, "./Data/PyRate_inputs/Species/3-Chinchilloidea_sp_lvl_NoCar.txt")
 # Extract ages
 extract.ages("./Data/PyRate_inputs/Species/3-Chinchilloidea_sp_lvl_NoCar.txt", replicates = 20)
+
+## Northern immigrants ----------------------------------------------------------
+  # Carnivorans
+Carni <- read_xlsx("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Carnivora/Carnivora-Tarquini_etal_2022.xlsx")
+Carni <- Carni %>% 
+  select(Taxon_name, Status, MinAge, MaxAge) %>% 
+  rename(Species = "Taxon_name", min_age = "MinAge", max_age = "MaxAge")
+write.table.lucas(Carni, "./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Carnivora/Carnivora_species_occ_Tarquini.txt")
+extract.ages("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Carnivora/Carnivora_species_occ_Tarquini.txt", replicates = 10)
+  # Northern Herbivores
+NorthHerb <- read_xlsx("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Northern_herbivores/Northern_Herbivores-Tarquini_etal_2022.xlsx")
+NorthHerb <- NorthHerb %>% 
+  select(Taxon_name, Status, MinAge, MaxAge) %>% 
+  filter(Taxon_name != "Bos_taurus") %>% 
+  rename(Species = "Taxon_name", min_age = "MinAge", max_age = "MaxAge")
+write.table.lucas(NorthHerb, "./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Northern_herbivores/Northern_herbivores_sp_occ_Tarquini.txt")
+extract.ages("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Northern_herbivores/Northern_herbivores_sp_occ_Tarquini.txt", replicates = 10)
