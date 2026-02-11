@@ -311,7 +311,10 @@ lifespans_plot <- TsTe_tbl %>%
   annotate(geom = "rect", xmin = -Inf, xmax = Inf, ymin = MinMax$Dinomyidae[1]-0.5,
            ymax = MinMax$Dinomyidae[2]-0.5, fill = "grey", alpha = 0.3) +
   annotate(geom = "text", x = 31.5, y = MinMax$Dinomyidae[1]+16, 
-           label = "Dinomyidae", size = 2.8, fontface = 2) +
+           label = "Dinomyidae", size = 2.8, fontface = 2) +# annotate(geom = "rect", xmin = 0, xmax = 2.58, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
+  # annotate(geom = "rect", xmin = 5.33, xmax = 11.63, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
+  # annotate(geom = "rect", xmin = 15.97, xmax = 23.03, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
+  # annotate(geom = "rect", xmin = 27.82, xmax = 33.9, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
   add_phylopic(img = dinomys_img, x = 31.5, y = MinMax$Dinomyidae[1]+35, height = 4) +
   add_phylopic(img = josephoartigasia_img, x = 31, y = MinMax$Dinomyidae[1]+25, height = 8) +
   # ?Heptaxodontidae
@@ -364,3 +367,48 @@ lifespans_plot <- TsTe_tbl %>%
 ggsave("./Figures/Main/Lifespans/Lifespans_Chinchilloidea.pdf", plot = lifespans_plot, height = 220, width = 180, units = "mm")
 
 
+
+## -------------------------------------------------------------------------- ##
+#                           Diversity through time                             #
+## -------------------------------------------------------------------------- ##
+
+## Load LTT table --------------------------------------------------------------
+ltt_path <- "./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est_ltt.txt"
+ltt_tbl <- read.table(ltt_path, header = TRUE)
+ltt_tbl <- ltt_tbl %>%
+  rename("Age" = time, "Diversity" = diversity, "min_Diversity" = m_div, "max_Diversity" = M_div)
+
+gsc1$max_age[nrow(gsc1)] <- max(ltt_tbl$Age)
+gsc4$max_age[nrow(gsc4)] <- max(ltt_tbl$Age)
+
+## Plot ------------------------------------------------------------------------
+ltt.plot <- ltt_plot(ltt_tbl,
+                     stage_x_breaks = FALSE,
+                     manual_x_breaks = seq(0, 35, 5),
+                     axes.labelsize = 15,
+                     ticks.labelsize = 12,
+                     x_lab = "Time (Ma)",
+                     y_lab = "Diversity (nb. species)",
+                     y_limits = c(0, max(ltt_tbl$max_Diversity)+5),
+                     y_breaks = seq(0, 30, 5),
+                     display_gts = TRUE,
+                     xlim = c(36, 0),
+                     avg_col = "#006d2c",
+                     ribbon_col = "#74c476",
+                     plot.border = FALSE,
+                     x.axis = TRUE,
+                     several_gts = TRUE,
+                     geoscale = gsc1,
+                     geoscale2 = gsc4,
+                     geoscale_height = unit(1, "line"),
+                     geoscale_labelsize = "auto",
+                     abbr = list(TRUE, FALSE)) +
+  theme(axis.line.y = element_line(colour = "black")) +
+  # Temporal bands
+  annotate(geom = "rect", xmin = 0, xmax = 2.58, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
+  annotate(geom = "rect", xmin = 5.33, xmax = 11.63, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
+  annotate(geom = "rect", xmin = 15.97, xmax = 23.03, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
+  annotate(geom = "rect", xmin = 27.82, xmax = 33.9, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2)
+
+ggsave("../Presentations/Chinchilloidea/point_12-02/LTT_plot_PyRate.png", 
+       plot = ltt.plot, dpi = 600, height = 150, width = 250, units = "mm")

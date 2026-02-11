@@ -16,17 +16,35 @@ names(rate.labs) <- c("Extinction", "Origination")
 
 ## Full-time panels ------------------------------------------------------------
 for(dir in c("./Results/MBD/species/", 
-             "./Results/MBD_scaled/")){
+             "./Results/MBD_scaled/", 
+             "./Results/MBD_scaled_migrants/", 
+             "./Results/MBD_scaled_migrants_restricted/", 
+             "./Results/MBD_scaled_Carni/")){
   scl <- NULL
+  x_b <- 0:3
+  cov_idx <- covar_idx # loaded from MBD_accessory.R
   if(dir == "./Results/MBD_scaled/"){
     scl <- "_scaled"
+  }
+  if(dir == "./Results/MBD_scaled_migrants/"){
+    scl <- "_scaled_migrants"
+    cov_idx <- covar_idx_migrants
+    x_b <- 0:5
+  }
+  if(dir == "./Results/MBD_scaled_migrants_restricted/"){
+    scl <- "_scaled_migrants_restricted"
+    cov_idx <- covar_idx_migrants
+    x_b <- 0:5
+  }
+  if(dir == "./Results/MBD_scaled_Carni/"){
+    scl <- "_scaled_Carnivora"
+    cov_idx <- covar_idx_carni
+    x_b <- 0:4
   }
   int <- NA
   tmp <- out_table_MBD(dir, interval = int)
   plot_df <- tmp[[1]]
   signif_df <- tmp[[2]]
-  x_b <- 0:3
-  cov_idx <- covar_idx # loaded from MBD_accessory.R
   #plot
   MBD_viol <- MBD.plot(PLOT_DF = plot_df,
                        SIGNIF_DF = signif_df,

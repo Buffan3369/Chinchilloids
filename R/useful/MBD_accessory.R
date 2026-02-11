@@ -15,6 +15,19 @@ covar_idx <- hash("0" = "Self-diversity",
                   "2" = "Andes Elevation",
                   "3" = "Sea Level")
 
+covar_idx_carni <- hash("0" = "Self-diversity",
+                        "1" = "Regional Temperature",
+                        "2" = "Andes Elevation",
+                        "3" = "Sea Level",
+                        "4" = "Carnivora diversity")
+
+covar_idx_migrants <- hash("0" = "Self-diversity",
+                           "1" = "Regional Temperature",
+                           "2" = "Andes Elevation",
+                           "3" = "Sea Level",
+                           "4" = "Carnivora diversity",
+                           "5" = "N.A. herbivores diversity")
+
 
 ## Function to get posterior distribution of G and SW
 get_post <- function(dir, param = c("G", "W", "mean_SW")){
