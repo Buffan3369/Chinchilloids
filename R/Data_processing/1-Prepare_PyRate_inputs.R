@@ -64,6 +64,41 @@ extract.ages("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt", rep
 
 ## No need for species-level spatial scaling as occurrences were compiled accordingly
 
+## Tropical --------------------------------------------------------------------
+chinchi_sp_trop <- chinchi %>%
+  filter(loc == "T") %>% 
+  select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
+  filter(!is.na(sp_lvl_status)) %>% # filter out occurrences at the genus level
+  rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
+
+# Remove occurrences associated with open nomenclature
+true_sp_trop <- sapply(X = chinchi_sp_trop$Species,
+                       FUN = open_checkR)
+chinchi_sp_trop <- chinchi_sp_trop[true_sp_trop, ]
+
+# Save occurrence dataframe
+write.table.lucas(chinchi_sp_trop, "./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_TROPICAL.txt")
+# Extract ages
+extract.ages("./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_TROPICAL.txt", replicates = 20)
+
+
+## Extratropical ---------------------------------------------------------------
+chinchi_sp_etrop <- chinchi %>%
+  filter(loc == "E") %>% 
+  select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
+  filter(!is.na(sp_lvl_status)) %>% # filter out occurrences at the genus level
+  rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
+
+# Remove occurrences associated with open nomenclature
+true_sp_etrop <- sapply(X = chinchi_sp_etrop$Species,
+                       FUN = open_checkR)
+chinchi_sp_etrop <- chinchi_sp_etrop[true_sp_etrop, ]
+
+# Save occurrence dataframe
+write.table.lucas(chinchi_sp_etrop, "./Data/PyRate_inputs/Species/5-Chinchilloidea_sp_lvl_occ_EXTRATROPICAL.txt")
+# Extract ages
+extract.ages("./Data/PyRate_inputs/Species/5-Chinchilloidea_sp_lvl_occ_EXTRATROPICAL.txt", replicates = 20)
+
 
 ## Removing Caribbean taxa -----------------------------------------------------
 chinchi_sp_NoCar <- chinchi_sp %>% 
