@@ -84,7 +84,7 @@ extract.ages("./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_TROPICAL.
 
 ## Extratropical ---------------------------------------------------------------
 chinchi_sp_etrop <- chinchi %>%
-  filter(loc == "E") %>% 
+  filter(loc == "C") %>% 
   select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
   filter(!is.na(sp_lvl_status)) %>% # filter out occurrences at the genus level
   rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")

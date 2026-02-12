@@ -1,11 +1,12 @@
 #!/bin/bash
 
 declare -A burnin=([genus/1-Full]=0.01 [genus/2-Singleton]=0.1 [genus/3-Spatially_scaled]=0.25 \
-				   [species/1-Full]=0.01 [species/2-Singleton]=0.01 [species/3-NoCaribbea]=0.01)
+				   [species/1-Full]=0.01 [species/2-Singleton]=0.01 [species/3-NoCaribbea]=0.01 \
+				   [species/4-Tropical]=0.01 [species/5-Extratropical]=0.01)
 
 for ana in species
 do
-	for pth in 1-Full 2-Singleton
+	for pth in 1-Full 2-Singleton 4-Tropical 5-Extratropical
 	do
 		# For each individual retained run
 		for file in ../Results/RJMCMC/$ana/$pth/pyrate_mcmc_logs/*_KEEP_mcmc.log

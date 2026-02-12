@@ -2,7 +2,7 @@
 
 for ana in species
 do
-	for pth in 1-Full 2-Singleton
+	for pth in 1-Full 2-Singleton 4-Tropical 5-Extratropical
 	do
 		python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../Results/RJMCMC/$ana/$pth/pyrate_mcmc_logs
 		Rscript ~/Documents/GitHub/CorsaiR/R/plot_ess.r ../Results/RJMCMC/$ana/$pth/pyrate_mcmc_logs/ESS_summary.txt ../Results/RJMCMC/$ana/$pth/pyrate_mcmc_logs/ESS_plot.png
