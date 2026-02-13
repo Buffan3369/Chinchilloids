@@ -107,7 +107,7 @@ out_table_MBD <- function(dir, #where the MBD log files are stored
   param <- rep(0, nrow(mcmcLog))
   col <- rep(colnames(mcmcLog)[1], nrow(mcmcLog))
   if("l" %in% strsplit(colnames(mcmcLog)[1], "")[[1]]){ #lambda
-    rate <- rep("Origination", length(mcmcLog[, 1]))
+    rate <- rep("Speciation", length(mcmcLog[, 1]))
   }
   if("m" %in% strsplit(colnames(mcmcLog)[1], "")[[1]]){ #mu
     rate <- rep("Extinction", length(mcmcLog[, 1]))
@@ -120,7 +120,7 @@ out_table_MBD <- function(dir, #where the MBD log files are stored
     p <- strsplit(i, split = "_")[[1]][2]
     param <- c(param, rep(as.numeric(p), nrow(mcmcLog)))
     if("l" %in% strsplit(i, "")[[1]]){ #lambda
-      rate <- c(rate, rep("Origination", nrow(mcmcLog)))
+      rate <- c(rate, rep("Speciation", nrow(mcmcLog)))
     }
     else if("m" %in% strsplit(i, "")[[1]]){ #mu
       rate <- c(rate, rep("Extinction", nrow(mcmcLog)))
@@ -163,11 +163,11 @@ out_table_MBD <- function(dir, #where the MBD log files are stored
     else if(type == "Extinction" & signif == "*"){
       return("Ext_signif")
     }
-    else if(type == "Origination" & is.na(signif)){
-      return("Ori_ns")
+    else if(type == "Speciation" & is.na(signif)){
+      return("Sp_ns")
     }
-    else if(type == "Origination" & signif == "*"){
-      return("Ori_signif")
+    else if(type == "Speciation" & signif == "*"){
+      return("Sp_signif")
     }
   }
   sign_col <- sapply(X = 1:nrow(plot_df), FUN = attrib_sign)

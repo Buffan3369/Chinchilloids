@@ -8,7 +8,7 @@ format:
     reference-doc: template.docx
 editor: visual
 bibliography: references.bib
-csl: 
+csl: evolution.csl
 ---
 
 ¹ Institut des Sciences de l’Evolution de Montpellier, Université de Montpellier, CNRS, IRD, Place Eugène Bataillon, 34095 Montpellier cedex 5, France.

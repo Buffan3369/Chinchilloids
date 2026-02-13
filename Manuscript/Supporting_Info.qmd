@@ -83,21 +83,21 @@ We acknowledge the proposition of synonimisation between *Telicomys gigantissimu
 # Supplementary Figures
 
 ```{r, echo=FALSE}
-#| label: figs1
+#| label: fig-s1
 #| fig-cap: "Selection of the preservation model best fitting our occurrence data, based on a maximum likelihood test incorporated in PyRate [@silvestro2019]. HPP, NHPP and TPP respectively stand for Homogeneous, Non-Homogeneous and Time-variable Poisson Processes for modelling preservation in our fossil data. In the case of TPP, we allowed for preservation rate to vary across geological stages (with only one bin for Quaternary). Models on the left of the x axis indexed by numbers are TPP with one removed bin, the lower (*i*.*e*., older) boundary of which corresponds to the aforementioned number. Best model: TPP without the 23.03−15.98 Ma bin (mean $AICc = 21928.78$, **Supp. tab. 1**)."
 
 knitr::include_graphics("../PPTEST/result_boxplot.pdf")
 ```
 
 ```{r, echo=FALSE}
-#| label: figs2
+#| label: fig-s2
 #| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising 3 Long Short Term Memory (LSTM) units (128, 64 and 32 nodes) connected to two dense layers (64 and 32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts icreasing. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
 
 knitr::include_graphics("../Results/DeepDive/Tropical_Extratropical/Neogene_SAM_Tropical_Extratropical_models/simulations_20250313_lstm128_64_32_d64_32_conditional/history_plotsimulations_20250313_lstm128_64_32_d64_32_conditional.pdf")
 ```
 
 ```{r, echo=FALSE}
-#| label: figs3
+#| label: fig-s3
 #| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising 2 LSTM units (64 and 32 nodes) connected to one dense layer (32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts icreasing. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
 
 knitr::include_graphics("../Results/DeepDive/Tropical_Extratropical/Neogene_SAM_Tropical_Extratropical_models/simulations_20250321_lstm64_32_d32_conditional/history_plotsimulations_20250321_lstm64_32_d32_conditional.pdf")
@@ -116,35 +116,12 @@ convert_bold <- function(el){
 }
 ```
 
-```{r, echo=FALSE}
-#| label: tbl1
-#| tbl-cap: "Mean AICc assigned to each preservation model given our occurrence data, across the 20 replicates of age assignment. HPP, NHPP and TPP respectively stand for Homogeneous, Non-Homogeneous and Time-variable Poisson Processes for modelling preservation in our fossil data. In the case of TPP, we allowed for preservation rate to vary across geological stages (with only one bin for Quaternary). Models indexed by numbers are TPP with one removed bin, the lower (*i*.*e*., older) boundary of which corresponds to the aforementioned number. The model best fitting our data (*i*.*e*., having the lowest AICc) is shown in bold."
-
-pptbl <- read.table("../PPTEST/tab.tsv", header = T, quote = "", sep = ";")
-pptbl <- pptbl[,-c(ncol(pptbl))]
-# Compute average
-av_AICc <- apply(X = pptbl[,-c(1)], 
-                 MARGIN = 2, 
-                 FUN = function(x){
-                   avg <- mean(x, na.rm = T)
-                   return(round(avg, digits = 2))
-                 })
-# Remove "X" before numbers in the table headers
-names(av_AICc) <- c("HPP", "NHPP", "TPP", "23.03", "15.98", "11.63", "5.33", "2.58")
-# Turn to dataframe and bolding the lowest AICc
-best_model <- which.min(av_AICc)
-av_AICc_df <- t(data.frame(av_AICc))
-av_AICc_df[, best_model] <- convert_bold(av_AICc_df[, best_model])
-rownames(av_AICc_df) <- "mean AICc"
-# Display
-knitr::kable(av_AICc_df, align = 'c')
-```
 
 ```{r, echo=FALSE}
-#| label: tbl2
-#| tbl-cap: Posterior estimates of the multivariate birth-death correlation parameters with the origination rate ($G_{\lambda}$) for our full early Neogene (23.04--13.82 Ma) dataset, and their associated Shrinkage weights ($w_{\lambda}$). Median estimates are shown along with their 95% Highest Posterior Density (HPD) interval. Significant correlations, *i*.*e*., having a $w_{\lambda}$ larger than 0.5 and of which the 95% HPD of the associated coefficients do not overlap 0 are shown in bold.
+#| label: tbl-2
+#| tbl-cap: Posterior estimates of the multivariate birth-death correlation parameters with the origination rate ($G_{\lambda}$) and their associated Shrinkage weights ($w_{\lambda}$). Median estimates are shown along with their 95% Highest Posterior Density (HPD) interval. Significant correlations, *i*.*e*., having a $w_{\lambda}$ larger than 0.5 and of which the 95% HPD of the associated coefficients do not overlap 0 are shown in bold.
 
-tbl <- read.table("../Figures/MBD_old/recap_tables/Full_Early_Neogene.txt", header = T, sep = "\t")
+tbl <- read.table("../Figures/MBD/MBD_recap_tbl/Species_scaled_hsp0_MBD_recap_tbl.txt", header = T, sep = "\t")
 # Only retain correlations with origination rate
 tbl_orig <- tbl[, 1:5]
 # Turn to bold significant correlations
