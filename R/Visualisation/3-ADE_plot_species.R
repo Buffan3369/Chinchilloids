@@ -1,5 +1,5 @@
 ################################################################################
-# Name: 12-Violin_ADE.R
+# Name: 3-ADE_plot_species.R
 # Author: Lucas Buffan
 # Contact: lucas.l.buffan@gmail.com
 # Aim: Violin plot for the Weibull shape parameter

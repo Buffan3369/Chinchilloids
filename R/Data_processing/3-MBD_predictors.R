@@ -10,7 +10,7 @@ library(tidyverse)
 source("./R/useful/helper_functions.R")
 
 
-## Regional South American temperature (Tardif et al. 2025) -------------------
+## Regional South American temperature (Tardif et al. 2025) --------------------
 temp <- read.table("./Data/MBD_predictors/SA_regional_temperatures_Tardif_2025.txt", header = T)
 # Downscale to a 0.5My time step
 selected_indices <- sapply(X = seq(0, 38, 0.5), FUN = select_closer, age_vect = temp$Time)
@@ -21,6 +21,14 @@ write.table.lucas(temp500k, "./Data/MBD_predictors/1-Palaeotemperature_500ky_ste
 # Scale
 temp500k <- temp500k %>% mutate(Temperature = scale(Temperature))
 write.table.lucas(temp500k, "./Data/MBD_predictors_Scaled/1-Palaeotemperature_500ky_step_Tardif_SCALED.txt")
+# Time stratify
+  # Early
+temp500k_early <- temp500k %>% filter(Time > 6)
+write.table.lucas(temp500k_early, "./Data/MBD_predictors_Scaled/early/1-Palaeotemperature_500ky_step_Tardif_SCALED_early.txt")
+  # Late
+temp500k_late <- temp500k %>% filter(Time <= 6)
+write.table.lucas(temp500k_late, "./Data/MBD_predictors_Scaled/late/1-Palaeotemperature_500ky_step_Tardif_SCALED_late.txt")
+
 
 ## Andean uplift (Boschman & Condamine 2022) -----------------------------------
 andes <- read.table("../Chapter_1/data_2023/MBD/raw_environment_correlates/andean_uplift/Andes_mean_elevations_no_basins_ALL.txt",
@@ -53,7 +61,15 @@ write.table.lucas(new_uplift, "./Data/MBD_predictors/2-Average_Andean_uplift_500
 # Scale
 new_uplift <- new_uplift %>% mutate(elev = scale(elev))
 write.table.lucas(new_uplift, "./Data/MBD_predictors_Scaled/2-Average_Andean_uplift_500ky_step-SCALED.txt")
-  
+# Time-stratify
+  # Early
+new_uplift_early <- new_uplift %>% filter(Age > 6)
+write.table.lucas(new_uplift_early, "./Data/MBD_predictors_Scaled/early/2-Average_Andean_uplift_500ky_step-SCALED_early.txt")
+  # Late
+new_uplift_late <- new_uplift %>% filter(Age <= 6)
+write.table.lucas(new_uplift_late, "./Data/MBD_predictors_Scaled/late/2-Average_Andean_uplift_500ky_step-SCALED_late.txt")
+
+
 ## Global sea level (from Miller et al. 2020) ----------------------------------
 sea_lvl <- read.table("../Chapter_1/data_2023/MBD/raw_environment_correlates/sea_level/Miller_2020_sea_level_data.txt",
                       sep = "\t",
@@ -69,37 +85,11 @@ write.table.lucas(x = slvl, file = "./Data/MBD_predictors/3-Sea_level_500ky_step
 # Scale
 slvl <- slvl %>% mutate(Sea_level = scale(Sea_level))
 write.table.lucas(x = slvl, file = "./Data/MBD_predictors_Scaled/3-Sea_level_500ky_step_SCALED.txt")
+# Time stratify
+  # Early
+slvl_early <- slvl %>% filter(Age > 6)
+write.table.lucas(x = slvl_early, file = "./Data/MBD_predictors_Scaled/early/3-Sea_level_500ky_step_SCALED_early.txt")
+  # Late
+slvl_late <- slvl %>% filter(Age <= 6)
+write.table.lucas(x = slvl_late, file = "./Data/MBD_predictors_Scaled/late/3-Sea_level_500ky_step_SCALED_late.txt")
 
-## Diversity of Carnivorans (estimated with PyRate from occurrences compiled by Tarquini et al. 2022)
-CarniDiv <- read.table("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Carnivora/LTT/Carnivora_species_occ_Tarquini_10_Grj_KEEP_se_est_ltt.txt", header = T)
-# Downscale so it matches the timescale (last 38 Myrs with a 0.5Myr step)
-selected_div <- sapply(X = seq(0, 9.5, 0.5), FUN = select_closer, age_vect = CarniDiv$time)
-CarniDiv_down <- CarniDiv[selected_div, ] %>% 
-  select(time, diversity)
-CarniDiv_down$time <- seq(0, 9.5, 0.5) # standardise
-# Extend until 38 Ma
-#Missing <- data.frame(time = seq(10, 38, 0.5),
-#                      diversity = rep(0, 57))
-#CarniDiv_down <- rbind(CarniDiv_down, Missing)
-# Scale
-CarniDiv_down$diversity <- scale(CarniDiv_down$diversity)
-# Save
-#write.table.lucas(CarniDiv_down, "./Data/MBD_predictors_Scaled/4-Carnivora_diversity.txt")
-write.table.lucas(CarniDiv_down, "./Data/MBD_predictors_Scaled/4-Carnivora_diversity_unstandardised.txt") # without extending time frame until 38 Ma
-
-## Diversity of North American herbivores (same as before) ---------------------
-NorHerbDiv <- read.table("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Northern_herbivores/LTT/Northern_herbivores_sp_occ_Tarquini_10_Grj_KEEP_se_est_ltt.txt", header = T)
-# Downscale so it matches the timescale (last 38 Myrs with a 0.5Myr step)
-selected_div <- sapply(X = seq(0, 4.5, 0.5), FUN = select_closer, age_vect = NorHerbDiv$time)
-NorHerbDiv_down <- NorHerbDiv[selected_div, ] %>% 
-  select(time, diversity)
-NorHerbDiv_down$time <- seq(0, 4.5, 0.5) # standardise
-# Extend until 38 Ma
-#Missing <- data.frame(time = seq(5, 38, 0.5),
-#                      diversity = rep(0, 67))
-#NorHerbDiv_down <- rbind(NorHerbDiv_down, Missing)
-# Scale
-NorHerbDiv_down$diversity <- scale(NorHerbDiv_down$diversity)
-# Save
-#write.table.lucas(NorHerbDiv_down, "./Data/MBD_predictors_Scaled/5-Northern_herbivores_diversity.txt")
-write.table.lucas(NorHerbDiv_down, "./Data/MBD_predictors_Scaled/5-Northern_herbivores_diversity_unstandardised.txt")
