@@ -18,10 +18,10 @@ source("./R/useful/helper_functions.R")
 source("./R/useful/load_GTS.R")
 
 ## -------------------------------------------------------------------------- ##
-#                       Rates through time (rjMCMC/BDNN)                       #
+#                     Rates through time (rjMCMC/BDNN/MBD)                     #
 ## -------------------------------------------------------------------------- ##
 
-## RJMCMC RTT
+## RJMCMC RTT ------------------------------------------------------------------
 path_to_rj_RTT <- "./Results/RJMCMC/species/1-Full/combined_logs/RTT_plots.r"
 rtt_rj <- extract_rtt(path_to_rj_RTT, ana = "RJMCMC")
 
@@ -70,7 +70,7 @@ ex_rj <- rtt_plot(rtt_rj, type = "ex",
                   panel_border_lwd = 0.1) +
   annotate(geom = "text", label = "*", x = 6, y = 2, size = 6, colour = "#e34a33")
 
-## BDNN RTT
+## BDNN RTT --------------------------------------------------------------------
 path_to_BDNN <- "./Results/BDNN/BM_6cat/combined_20KEEP_RTT.r"
 rtt_bdnn <- extract_rtt(path_to_BDNN, ana = "BDNN")
 rtt_bdnn$time[which(rtt_bdnn$time == 
@@ -115,10 +115,54 @@ ex_bd <- rtt_plot(rtt_bdnn, type = "ex",
                   geoscale_lwd = 0.1,
                   panel_border_lwd = 0.1)
 
+## MBD RTT ---------------------------------------------------------------------
+path_to_mbd_RTT <- "./Results/MBD/species/MBD_scaled_hsp0/combined_18_KEEP_RTT.r"
+rtt_mbd <- extract_rtt(path_to_mbd_RTT, ana = "MBD")
+# harmonise timescale with the two others
+rtt_mbd <- rtt_mbd %>% filter(time <= max(rtt_rj$time))
 
-full_plot <- ggarrange(plotlist = list(sp_rj, sp_bd, ex_rj, ex_bd), ncol = 2, nrow = 2)
+sp_mbd <- rtt_plot(rtt_mbd, type = "sp",
+                   restrict_y = F,
+                   display_OliNeo = T,
+                   lwd = 0.3,
+                   y_limits = c(0, 5.3),
+                   y_breaks = seq(0, 5, 0.5),
+                   x.axis = F,
+                   display_gts = F,
+                   y_lab = NULL,
+                   main = "MBD",
+                   main.size = 15,
+                   axes.labelsize = 10,
+                   ticks.labelsize = 5,
+                   ticks.lwd = 0.25,
+                   panel_border_lwd = 0.1)
+
+ex_mbd <- rtt_plot(rtt_mbd, type = "ex",
+                   restrict_y = F,
+                   stage_x_breaks = F,
+                   manual_x_breaks = seq(0, 30, 5),
+                   display_OliNeo = T,
+                   lwd = 0.3,
+                   y_limits = c(0, 3.52),
+                   y_breaks = seq(0, 3, 0.5),
+                   several_gts = TRUE,
+                   y_lab = NULL,
+                   geoscale = gsc1,
+                   geoscale2 = gsc4,
+                   geoscale_height = unit(0.5, "line"),
+                   abbr = list(TRUE, FALSE),
+                   axes.labelsize = 10,
+                   ticks.labelsize = 5,
+                   ticks.lwd = 0.25,
+                   geoscale_labelsize = list(1.5, 2),
+                   geoscale_lwd = 0.1,
+                   panel_border_lwd = 0.1) 
+
+## Arrange ---------------------------------------------------------------------
+full_plot <- ggarrange(plotlist = list(sp_rj, sp_bd, sp_mbd, ex_rj, ex_bd, ex_mbd),
+                       ncol = 3, nrow = 2)
 ggsave("./Figures/Main/Diversification_rates.pdf", full_plot,
-       height = 150, width = 150, units = "mm")
+       height = 150, width = 200, units = "mm")
 
 
 ## -------------------------------------------------------------------------- ##
@@ -412,3 +456,6 @@ ltt.plot <- ltt_plot(ltt_tbl,
 
 ggsave("../Presentations/Chinchilloidea/point_12-02/LTT_plot_PyRate.png", 
        plot = ltt.plot, dpi = 600, height = 150, width = 250, units = "mm")
+
+## DeepDive empirical predictions ----------------------------------------------
+empi_pred_path <- "./Results/DeepDive/species/species_models/"
