@@ -16,7 +16,7 @@ source("./R/useful/load_GTS.R")
 
 ## GTS -------------------------------------------------------------------------
 for(lvl in c("genus", "species")){
-  for(ana in c("1-Full", "2-Singleton", "3-Spatially_scaled")){
+  for(ana in c("1-Full", "2-Singleton")){
     if(lvl == "species" & ana == "3-Spatially_scaled"){
       next
     }
@@ -112,7 +112,9 @@ for(lvl in c("genus", "species")){
     
     
     ## Combine all these plots and save the output -------------------------------
-    p <- comb_ltt_rtt(sp_ex_all_in_one, net_div_all_in_one, ltt.plot, Q_plot, n_plots = 4)
+    p <- ggarrange(plotlist = list(sp_ex_all_in_one, net_div_all_in_one, ltt.plot, Q_plot),
+                   nrow = 2, ncol = 2, labels = c("(A)", "(B)", "(C)", "(D)"), font.label = list(size = 22))
+    #p <- comb_ltt_rtt(sp_ex_all_in_one, net_div_all_in_one, ltt.plot, Q_plot, n_plots = 4)
     
     ana_out <- strsplit(ana, split = "-")[[1]][2]
     out_path <- paste0("./Figures/recap_figures_RJMCMC/Chinchilloidea_", lvl, "_", ana_out, "_Recap_figure.pdf")
@@ -137,7 +139,7 @@ for(lvl in c("genus", "species")){
                                      geoscale = gsc1,
                                      geoscale2 = gsc3,
                                      geoscale_height = unit(1, "line"))
-    frs_panel <- ggarrange(plotlist = plot_list_frs, ncol = 2, labels = c("Ori", "Ext"), hjust = 0)
+    frs_panel <- ggarrange(plotlist = plot_list_frs, ncol = 2, labels = c("(A)", "(B)"), hjust = 0)
     out_pah_frs <- ggsave(paste0("./Figures/recap_figures_RJMCMC/Chinchilloidea_", lvl, "_", ana_out, "_frequency_of_rate_shift.pdf"),
                           plot = frs_panel,
                           height = 175,

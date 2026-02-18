@@ -197,3 +197,38 @@ Torsten Hauffe.
 
 ::: {#refs}
 :::
+
+# Figures
+
+```{r, echo=FALSE}
+#| label: fig-lifespans
+#| out-height: 19cm
+#| out-width: 15cm
+#| fig-cap: Bayesian reconstruction of the longevities of the 136 chinchilloid species considered in our dataset. Each segment depicts the longevity of a given species, that is, the interval between species' speciation and extinction times averaged across PyRate runs that achieved convergence. Lines, ticks and taxonomic names were coloured according to the body mass category to which species were assigned. The histogram at the centre of the plot shows the number of species within each body mass class. The first four silhouettes (from top to bottom) are from Phylopic (credits available in Table S2). The last two silhouettes (*Elasmodontomys obliquus* and *Borikenomys praecursor*) were designed by L.M. for a previous work [@marivaux_early_2020].
+
+knitr::include_graphics("../Figures/Main/Lifespans/lifespans_distribs.png")
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: fig-diversity
+#| out-height: 7cm
+#| out-width: 14cm
+#| fig-cap: Comparative occurrence-based chinchilloid diversity reconstructions. Estimates were either produced in a bayesian preservation-aware framework jointly assessing the times of speciation and extinction of each species from the temporal occurrence database (PyRate) **(A)**, or using a simulation-based deep-learning framework incorporating a wide variety of biases to reconstruct the temporal variations of the "true" (*i*.*e*., corrected) diversity (DeepDive) **(B)**. In **(A)**, the full line represents the median diversity estimate across all PyRate runs that achieved convergence and the ribbon shows its associated 95% HPD interval. In **(B)**, the full line shows the mean diversity estimate per 1Myr-bin obtained across the 100 replicates of empirical prediction while the darker and lighter ribbons show the intervals respectively encompassing 50% and 95% of the per-bin diversity distribution across the 100 replicates.
+
+knitr::include_graphics("../Figures/Main/Diversity_through_time.png")
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: fig-diversification
+#| out-height: 11cm
+#| out-width: 15cm
+#| fig-cap: Comparative chinchilloid speciation and extinction rate reconstructions using three Bayesian occurrence-based birth-death models. Speciation and extinction rates are respectively depicted in blue and red. The left column **(A-B)** shows the rates estimated by PyRate, using the rjMCMC algorithm @silvestro2019. Stars indicate significant rate shifts.
+
+knitr::include_graphics("../Figures/Main/Diversification_rates.png")
+```

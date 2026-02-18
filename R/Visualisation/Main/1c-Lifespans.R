@@ -1,173 +1,15 @@
 ################################################################################
-# Name: 1-Diversity_diversification.R
+# Name: 1c-Lifespans.R
 # Author: Lucas Buffan (Lucas.L.Buffan@gmail.com)
-# Aim: Plot diversity and diversification rates through time estimated 
-#      by different models
+# Aim: Plot mean lifespans of each species 
 ################################################################################
 
-library(ggpubr)
 library(tidyverse)
 library(readxl)
 library(rphylopic)
-library(cowplot)
 
-## Source accessory functions for plotting -------------------------------------
-source("~/Documents/GitHub/CorsaiR/R/1-extract_param_from_PyRate_outputs.R")
-source("~/Documents/GitHub/CorsaiR/R/2-plotting_facilities.R")
 source("./R/useful/helper_functions.R")
 source("./R/useful/load_GTS.R")
-
-## -------------------------------------------------------------------------- ##
-#                     Rates through time (rjMCMC/BDNN/MBD)                     #
-## -------------------------------------------------------------------------- ##
-
-## RJMCMC RTT ------------------------------------------------------------------
-path_to_rj_RTT <- "./Results/RJMCMC/species/1-Full/combined_logs/RTT_plots.r"
-rtt_rj <- extract_rtt(path_to_rj_RTT, ana = "RJMCMC")
-
-gsc1$max_age[nrow(gsc1)] <- max(rtt_rj$time)
-gsc1$name[which(gsc1$name == "Eocene")] <- ""
-gsc1$name[which(gsc1$name == "Pliocene")] <- "Plio"
-gsc1$name[which(gsc1$name == "Pleistocene")] <- "Ple"
-gsc4 <- gsc4[-nrow(gsc4), ]
-gsc4$max_age[nrow(gsc4)] <- max(rtt_rj$time)
-sp_rj <- rtt_plot(rtt_rj, type = "sp",
-                  restrict_y = F, 
-                  display_OliNeo = T,
-                  lwd = 0.3,
-                  y_limits = c(0, 5.3),
-                  y_breaks = seq(0, 5, 0.5),
-                  x.axis = F,
-                  display_gts = F,
-                  y_lab = "Speciation rate",
-                  main = "rjMCMC",
-                  main.size = 15,
-                  axes.labelsize = 10,
-                  ticks.labelsize = 5,
-                  ticks.lwd = 0.25,
-                  panel_border_lwd = 0.1) +
-  annotate(geom = "text", label = "*", x = 2, y = 4.5, size = 6, colour = "#4c4cec")
-
-ex_rj <- rtt_plot(rtt_rj, type = "ex",
-                  restrict_y = F,
-                  stage_x_breaks = F, 
-                  manual_x_breaks = seq(0, 30, 5),
-                  display_OliNeo = T,
-                  lwd = 0.3,
-                  y_limits = c(0, 3.52),
-                  y_breaks = seq(0, 3, 0.5),
-                  several_gts = TRUE,
-                  y_lab = "Extinction rate",
-                  geoscale = gsc1,
-                  geoscale2 = gsc4,
-                  geoscale_height = unit(0.5, "line"),
-                  abbr = list(TRUE, FALSE),
-                  axes.labelsize = 10,
-                  ticks.labelsize = 5,
-                  ticks.lwd = 0.25,
-                  geoscale_labelsize = list(1.5, 2),
-                  geoscale_lwd = 0.1,
-                  panel_border_lwd = 0.1) +
-  annotate(geom = "text", label = "*", x = 6, y = 2, size = 6, colour = "#e34a33")
-
-## BDNN RTT --------------------------------------------------------------------
-path_to_BDNN <- "./Results/BDNN/BM_6cat/combined_20KEEP_RTT.r"
-rtt_bdnn <- extract_rtt(path_to_BDNN, ana = "BDNN")
-rtt_bdnn$time[which(rtt_bdnn$time == 
-                      max(rtt_bdnn$time))] <- max(rtt_rj$time) # harmonise x scale
-
-sp_bd <- rtt_plot(rtt_bdnn, type = "sp",
-                  restrict_y = F, 
-                  plot_bdnn = T,
-                  display_OliNeo = T,
-                  lwd = 0.3,
-                  y_limits = c(0, 5.3),
-                  y_breaks = seq(0, 5, 0.5),
-                  x.axis = F,
-                  display_gts = F,
-                  y_lab = NULL,
-                  main = "BDNN",
-                  main.size = 15,
-                  axes.labelsize = 10,
-                  ticks.labelsize = 5,
-                  ticks.lwd = 0.25,
-                  panel_border_lwd = 0.1)
-
-ex_bd <- rtt_plot(rtt_bdnn, type = "ex",
-                  restrict_y = F, 
-                  plot_bdnn = T, 
-                  stage_x_breaks = F, 
-                  lwd = 0.3,
-                  manual_x_breaks = seq(0, 30, 5),
-                  display_OliNeo = T,
-                  y_limits = c(0, 3.52),
-                  y_breaks = seq(0, 3, 0.5),
-                  several_gts = TRUE,
-                  geoscale = gsc1,
-                  geoscale2 = gsc4,
-                  geoscale_height = unit(0.5, "line"),
-                  abbr = list(TRUE, FALSE),
-                  y_lab = NULL,
-                  axes.labelsize = 10,
-                  ticks.labelsize = 5,
-                  ticks.lwd = 0.25,
-                  geoscale_labelsize = list(1.5, 2),
-                  geoscale_lwd = 0.1,
-                  panel_border_lwd = 0.1)
-
-## MBD RTT ---------------------------------------------------------------------
-path_to_mbd_RTT <- "./Results/MBD/species/MBD_scaled_hsp0/combined_18_KEEP_RTT.r"
-rtt_mbd <- extract_rtt(path_to_mbd_RTT, ana = "MBD")
-# harmonise timescale with the two others
-rtt_mbd <- rtt_mbd %>% filter(time <= max(rtt_rj$time))
-
-sp_mbd <- rtt_plot(rtt_mbd, type = "sp",
-                   restrict_y = F,
-                   display_OliNeo = T,
-                   lwd = 0.3,
-                   y_limits = c(0, 5.3),
-                   y_breaks = seq(0, 5, 0.5),
-                   x.axis = F,
-                   display_gts = F,
-                   y_lab = NULL,
-                   main = "MBD",
-                   main.size = 15,
-                   axes.labelsize = 10,
-                   ticks.labelsize = 5,
-                   ticks.lwd = 0.25,
-                   panel_border_lwd = 0.1)
-
-ex_mbd <- rtt_plot(rtt_mbd, type = "ex",
-                   restrict_y = F,
-                   stage_x_breaks = F,
-                   manual_x_breaks = seq(0, 30, 5),
-                   display_OliNeo = T,
-                   lwd = 0.3,
-                   y_limits = c(0, 3.52),
-                   y_breaks = seq(0, 3, 0.5),
-                   several_gts = TRUE,
-                   y_lab = NULL,
-                   geoscale = gsc1,
-                   geoscale2 = gsc4,
-                   geoscale_height = unit(0.5, "line"),
-                   abbr = list(TRUE, FALSE),
-                   axes.labelsize = 10,
-                   ticks.labelsize = 5,
-                   ticks.lwd = 0.25,
-                   geoscale_labelsize = list(1.5, 2),
-                   geoscale_lwd = 0.1,
-                   panel_border_lwd = 0.1) 
-
-## Arrange ---------------------------------------------------------------------
-full_plot <- ggarrange(plotlist = list(sp_rj, sp_bd, sp_mbd, ex_rj, ex_bd, ex_mbd),
-                       ncol = 3, nrow = 2)
-ggsave("./Figures/Main/Diversification_rates.pdf", full_plot,
-       height = 150, width = 200, units = "mm")
-
-
-## -------------------------------------------------------------------------- ##
-#                     Species lifespans (PyRate sensu largo)                   #
-## -------------------------------------------------------------------------- ##
 
 ## Assign species names and family to TsTe estimates ---------------------------
 TaxonList <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_TaxonList.txt", header = T)
@@ -201,7 +43,7 @@ TsTe_tbl <- TsTe_tbl %>%
 rm(Ts_ttl, Te_ttl)
 # Remove the only genus-level taxon (my bad)
 TsTe_tbl$Family[which(TsTe_tbl$Species %in% c("Microscleromys_cribriphilus", 
-                                                "Microscleromys_paradoxalis"))] <- "NA" # truandage
+                                              "Microscleromys_paradoxalis"))] <- "NA" # truandage
 TsTe_tbl$Family <- factor(TsTe_tbl$Family, levels = rev(c("Chinchillidae", "Neoepiblemidae", "Dinomyidae", 
                                                           "?Heptaxodontidae", "\"Cephalomyidae\"", "NA", "Stem Chinchilloidea")))
 # Rearrange
@@ -213,7 +55,7 @@ MinMax <- data.frame("Stem Chinchilloidea" = c(0, which.max(which(TsTe_tbl$Famil
 for(fam in unique(TsTe_tbl$Family)[-1]){
   corr_idx <- which(TsTe_tbl$Family == fam)
   MinMax <- MinMax %>% add_column(fam = c(corr_idx[which.min(corr_idx)],
-                                         corr_idx[which.max(corr_idx)]+1))
+                                          corr_idx[which.max(corr_idx)]+1))
 }
 colnames(MinMax) <- unique(TsTe_tbl$Family)
 TsTe_tbl$Family[which(TsTe_tbl$Species %in% c("Microscleromys_cribriphilus", 
@@ -289,21 +131,21 @@ ggsave("./Figures/Main/Lifespans/barplot_distrib_BM.pdf", plot = count_plt, heig
 BM$`BodyMass estimation (g)` <- as.numeric(BM$`BodyMass estimation (g)`)
 TsTe_tbl1 <- TsTe_tbl %>%
   mutate(BM_kg = sapply(X = Species_name, 
-                         FUN = function(x){
-                           if(x %in% BM$Species){
-                             bm <- BM$`BodyMass estimation (g)`[which(BM$Species == x)]
-                             if(is.na(bm) == F){
-                               return(bm/1000)
-                             }
-                             else{
-                               return(NA)
-                             }
-                           }
-                           else{
-                             return(NA)
-                           }
-                         }))
-  
+                        FUN = function(x){
+                          if(x %in% BM$Species){
+                            bm <- BM$`BodyMass estimation (g)`[which(BM$Species == x)]
+                            if(is.na(bm) == F){
+                              return(bm/1000)
+                            }
+                            else{
+                              return(NA)
+                            }
+                          }
+                          else{
+                            return(NA)
+                          }
+                        }))
+
 # Save TsTe table with BM cat
 saveRDS(TsTe_tbl1, "./Data/Traits/TsTe_tbl_with_BMs.RDS")
 
@@ -411,51 +253,3 @@ lifespans_plot <- TsTe_tbl %>%
 ggsave("./Figures/Main/Lifespans/Lifespans_Chinchilloidea.pdf", plot = lifespans_plot, height = 220, width = 180, units = "mm")
 
 
-
-## -------------------------------------------------------------------------- ##
-#                           Diversity through time                             #
-## -------------------------------------------------------------------------- ##
-
-## Load LTT table --------------------------------------------------------------
-ltt_path <- "./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est_ltt.txt"
-ltt_tbl <- read.table(ltt_path, header = TRUE)
-ltt_tbl <- ltt_tbl %>%
-  rename("Age" = time, "Diversity" = diversity, "min_Diversity" = m_div, "max_Diversity" = M_div)
-
-gsc1$max_age[nrow(gsc1)] <- max(ltt_tbl$Age)
-gsc4$max_age[nrow(gsc4)] <- max(ltt_tbl$Age)
-
-## Plot ------------------------------------------------------------------------
-ltt.plot <- ltt_plot(ltt_tbl,
-                     stage_x_breaks = FALSE,
-                     manual_x_breaks = seq(0, 35, 5),
-                     axes.labelsize = 15,
-                     ticks.labelsize = 12,
-                     x_lab = "Time (Ma)",
-                     y_lab = "Diversity (nb. species)",
-                     y_limits = c(0, max(ltt_tbl$max_Diversity)+5),
-                     y_breaks = seq(0, 30, 5),
-                     display_gts = TRUE,
-                     xlim = c(36, 0),
-                     avg_col = "#006d2c",
-                     ribbon_col = "#74c476",
-                     plot.border = FALSE,
-                     x.axis = TRUE,
-                     several_gts = TRUE,
-                     geoscale = gsc1,
-                     geoscale2 = gsc4,
-                     geoscale_height = unit(1, "line"),
-                     geoscale_labelsize = "auto",
-                     abbr = list(TRUE, FALSE)) +
-  theme(axis.line.y = element_line(colour = "black")) +
-  # Temporal bands
-  annotate(geom = "rect", xmin = 0, xmax = 2.58, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
-  annotate(geom = "rect", xmin = 5.33, xmax = 11.63, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
-  annotate(geom = "rect", xmin = 15.97, xmax = 23.03, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
-  annotate(geom = "rect", xmin = 27.82, xmax = 33.9, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2)
-
-ggsave("../Presentations/Chinchilloidea/point_12-02/LTT_plot_PyRate.png", 
-       plot = ltt.plot, dpi = 600, height = 150, width = 250, units = "mm")
-
-## DeepDive empirical predictions ----------------------------------------------
-empi_pred_path <- "./Results/DeepDive/species/species_models/"

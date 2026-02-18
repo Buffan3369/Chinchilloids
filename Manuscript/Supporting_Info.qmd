@@ -1,7 +1,7 @@
 ---
 title: "Supporting Information for : A matter of size: what underpinned the emergence and demise of the largest rodents that ever lived?"
 author:  
-  - Lucas Buffan¹*, Myriam Boivin²*, Alicia Álvarez², Fabien L. Condamine¹, Laurent Marivaux¹
+  - Lucas Buffan¹\*, Myriam Boivin²\*, Alicia Álvarez², Fabien L. Condamine¹, Laurent Marivaux¹
 format:
   pdf:
     documentclass: article
@@ -18,8 +18,24 @@ editor: visual
 bibliography: supp_references.bib
 csl: evolution.csl
 crossref:
-  fig-title: "Figure S"
-  tbl-title: "Table S"
+  fig-title: "Figure&nbsp;S"
+  fig-prefix: "Figure&nbsp;S"
+  tbl-title: "Table&nbsp;S"
+  tbl-prefix: "Table&nbsp;S"
+  custom: 
+    - key: fig
+      kind: float
+      space-before-numbering: false
+      caption-prefix: "Figure&nbsp;S"
+      reference-prefix: "Figure&nbsp;S"
+      latex-env: suppfigure
+      
+    - key: tbl
+      kind: float
+      space-before-numbering: false
+      caption-prefix: "Table&nbsp;S"
+      reference-prefix: "Table&nbsp;S"
+      latex-env: supptbl
   title-delim: "."
 fontsize: "9pt"
 fig-cap-location: bottom
@@ -43,17 +59,13 @@ This file contains:
 | 
 
 Other Supplementary Materials may be found at `<placeholder>`.\
-Codes are available at: <https://github.com/Buffan3369/PostPal_SAM.git>
+Codes are available at: <https://github.com/Buffan3369/Chinchilloids.git>
 
 \newpage
 
-# Supplementary text: about occurrence data cleaning
+# Supplementary text
 
-## Foreword
-
-As done in Buffan et al. (in press), we proceeded to an intense cleaning of the genus-level occurrence primarily downloaded from *The Paleobiology Database*. Occurrences of uncertain affinity, presenting elements of open nomenclature such as *cf.*, *aff.* or *?* were removed from the database. In addition, taxa associated to an inappropriate paper (*i*.*e*., that made no clear mention of it) were removed from the database. Below, we present the great lines of our cleaning procedure, taxonomic subdivision per taxonomic subdivision. For tracability reasons, each occurrence that was not linked to a systematics paper describing it -- or clearly referring to a such a paper -- were removed from our dataset.
-
-## Chinchilloidea occurrence cleaning *per se*
+## Some details regarding our occurrence data cleaning
 
 Age ranges of the Miocene occurrences from the Río Santa Cruz (Santacrucian SALMA) were sharpened based on their assigned locality [@arnal2019]. Hence, occurrence from Barrancas Blancas were respectively assigned the 16.3--17.21 and 15.3--16.47 Ma intervals.
 
@@ -63,11 +75,11 @@ Uncertain age of the Ituzáingo formation was set to Huayquerian (Late Miocene),
 
 Age range of occurrences from @bucher2021 were set to the one of the original publication: 14.86--12.75 Ma when coming from the "Cruces Infinitos" and "Los Yeguarizos localities", 12.75--12 Ma when coming from the "La Gloria" and "La Hoyada" localities.
 
-Based on @brandoni2016, the age range of the occurrences from the Pinturas fauna (*e*.*g*., [@kramarz2002; @kramarz2004; @kramarz2006]), Burdigalian, were set between 20 and 16.8 Ma.
+Based on @brandoni2016, the age range of the occurrences from the Pinturas fauna (*e*.*g*., [@kramarz2002; -@kramarz2004; -@kramarz2006]), Burdigalian, were set between 20 and 16.8 Ma.
 
 According to [@esteban2014; @esteban2019], the age range of the occurrences belonging to the Andalhualá formation was set to Huayquerian--Chapadmalalan (*c*. 7.14--3.66 Ma).
 
-*Perimys perpinguis* and *Perimys impactus* lumped in *Perimys onostus* according to @mcgrath2022.
+*Perimys perpinguis* and *Perimys impactus* were lumped in *Perimys onostus* according to @mcgrath2022.
 
 Age range of the occurrence belonging to the Sierra Baguales (Santa Cruz formation, Magallanes, Chile) were set to 19--17.8 Ma according to the isotopic constraints provided in @bostelmann2013.
 
@@ -82,13 +94,63 @@ We acknowledge the proposition of synonimisation between *Telicomys gigantissimu
 # Supplementary Figures
 
 ```{r, echo=FALSE}
-#| label: fig-s1
+#| label: fig-preservation_rate
+#| out-height: 7.5cm
+#| out-width: 7.5cm
+#| fig-cap: Estimate of the preservation rate through time in our species-level dataset. The solid line represents the mean posterior estimate and the shaded area the 95% HPD interval.
+
+knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Full_preservation_rate.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-RecapSpRJSing
+#| fig-cap: Speciation and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model after removing singletons.
+
+knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Singleton_Recap_figure.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-RecapGenRJ
+#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our genus-level occurrence dataset with the rjMCMC model.
+
+knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_Recap_figure.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-FreqRateShiftSp
+#| out-height: 8.75cm
+#| out-width: 15cm
+#| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
+
+knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Full_frequency_of_rate_shift.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-FreqRateShiftSpSing
+#| out-height: 8.75cm
+#| out-width: 15cm
+#| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model after removing singletons. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
+
+knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Singleton_frequency_of_rate_shift.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-FreqRateShiftGen
+#| out-height: 8.75cm
+#| out-width: 15cm
+#| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our genus-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
+
+knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_frequency_of_rate_shift.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-ddHistPlot
 #| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising 2 LSTM units (64 and 32 nodes) connected to two dense layers (64 and 32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts increasing, indicative of overfitting. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
 
 knitr::include_graphics("../Results/DeepDive/species/species_models/simulation_species_ET_20251217_lstm64_32_d64_32_conditional/history_plotsimulation_species_ET_20251217_lstm64_32_d64_32_conditional.pdf")
 ```
 
-\newpage
+{{< pagebreak >}}
 
 # Supplementary Tables
 
@@ -106,18 +168,35 @@ convert_bold <- function(el){
 
 ```{r, echo=FALSE}
 #| label: tbl-1
-#| tbl-cap: "Performance of the different network architectures tested in our DeepDive analyses. `LSTM Layers` and `Fully-connected` are respectively the number of Long Short Term Memory and Fully-connected units of the network (3: 128, 64 and 32 nodes; 2: 64 and 32 nodes; 1: 32 nodes). `Dropout` represents the Monte-Carlo dropout fraction, that is, the proportion of connections between neurons randomly toggled off between two learning epochs -- one epoch being characterised by a complete pass through the entire training dataset −, preventing from overfitting. `Nb. training epochs` is the optimal number of training epochs. `Training loss` and `Validation loss` are the values of the Mean Squared Error (MSE) estimated between the 'true' diversity of each simulated dataset (resp. from the training or the validation set), and the predicted diversity made by the network after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs. `Evaluation loss` represent the MSE between each true and its associated predicted diversity trajectory from the test datset, once the is trained (*i*.*e*., after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs). The optimal number of epochs is determined when the `Validation loss` starts increasing (see *Supp. Fig. 1 and 2*). Architectures resulting in the smallest evaluation loss values, *i*.*e*., which we believe to generate the most accurate predictions, are depicted in bold."
+#| tbl-cap: "Performance of the different network architectures tested in our DeepDive analyses. `LSTM Layers` and `Fully-connected` are respectively the number of Long Short Term Memory and Fully-connected units of the network (3: 128, 64 and 32 nodes; 2: 64 and 32 nodes; 1: 32 nodes). `Dropout` represents the Monte-Carlo dropout fraction, that is, the proportion of connections between neurons randomly toggled off between two learning epochs -- one epoch being characterised by a complete pass through the entire training dataset −, preventing from overfitting. `Nb. training epochs` is the optimal number of training epochs. `Training loss` and `Validation loss` are the values of the Mean Squared Error (MSE) estimated between the 'true' diversity of each simulated dataset (resp. from the training or the validation set), and the predicted diversity made by the network after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs. `Evaluation loss` represent the MSE between each true and its associated predicted diversity trajectory from the test datset, once the is trained (*i*.*e*., after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs). The optimal number of epochs is determined when the `Validation loss` starts increasing (see @fig-ddHistPlot). Architectures resulting in the smallest evaluation loss values, *i*.*e*., which we believe to generate the most accurate predictions, are depicted in bold."
 
 tbl_dd <- read.csv("../Data/supp_tbl/dd_network_perf.csv")
-colnames(tbl_dd) <- c("LSTM layers", "Fully-connected", "Dropout", "Nb. training epochs", "Training loss", "Validation loss",
-                   "Evaluation loss")
+colnames(tbl_dd) <- c("LSTM layers", "Fully-connected", "Dropout", "Nb. training epochs", "Training loss", "Validation loss", "Evaluation loss")
 # Turn to bold best architectures
 tbl_dd[3,] <- sapply(tbl_dd[3,], FUN = convert_bold)
 # Display
 knitr::kable(tbl_dd, align = 'c')
 ```
 
-\newpage
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl-Refsilhouettes
+#| tbl-cap: References of the silhouettes used in Figure 1, from [Phylopic](https://www.phylopic.org/).
+
+library(readxl)
+tbl <- read_xlsx("../Data/supp_tbl/phylopic_ID_table.xlsx")
+# Italicise species names
+tbl$Silhouette <- sapply(X = tbl$Silhouette, FUN = function(x){paste0("*", x, "*")})
+# Header in bold
+colnames(tbl) <- sapply(X = colnames(tbl), FUN = function(x){paste0("**", x, "**")})
+
+# Display
+knitr::kable(tbl, align = "c")
+```
+
+{{< pagebreak >}}
 
 # Supplementary references
 
