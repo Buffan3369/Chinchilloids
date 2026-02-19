@@ -57,10 +57,17 @@ true_sp <- sapply(X = chinchi_sp$Species,
                   FUN = open_checkR)
 chinchi_sp <- chinchi_sp[true_sp, ]
 
+# Add simulated occurrences of extant taxa (see `1c-extant_Ts_sampling.R`)
+extant_chinchi <- read.table("./Data/OccDB_cleaned/extant_taxa_with_no_fossils.txt", 
+                             header = T)
+
+chinchi_sp <- rbind(chinchi_sp, extant_chinchi)
+
 # Save occurrence dataframe
-write.table.lucas(chinchi_sp, "./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt")
+#write.table.lucas(chinchi_sp, "./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt")
+write.table.lucas(chinchi_sp, "./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED.txt")
 # Extract ages
-extract.ages("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt", replicates = 20)
+extract.ages("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED.txt", replicates = 20)
 
 ## No need for species-level spatial scaling as occurrences were compiled accordingly
 
