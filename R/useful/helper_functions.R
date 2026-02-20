@@ -150,3 +150,16 @@ hypso_reclass <- function(x){
   }
 }
 
+## Extract values stored inside an R vectored opened as a text file ------------
+split_vector <- function(str_vec){ #str_vec has to be a stringged vector, i.e "c(...)"
+  coma_split <- strsplit(str_vec, split = ",")[[1]]
+  #left parenthesis
+  coma_split[1] <- strsplit(coma_split[1], 
+                            split = "\\(")[[1]][2]
+  #right parenthesis
+  coma_split[length(coma_split)] <- strsplit(coma_split[length(coma_split)],
+                                             split = "\\)")[[1]][1]
+  #convert to numeric
+  vec_num <- as.numeric(coma_split)
+  return(vec_num)
+}

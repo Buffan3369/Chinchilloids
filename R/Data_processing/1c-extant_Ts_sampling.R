@@ -35,6 +35,8 @@ dict_hpd <- hash("Chinchilla_chinchilla" = chinchilla_hpd,
                  "Lagidium_viscacia" = viscacia_hpd,
                  "Lagidium_wolffsohni" = viscacia_hpd)
 
+## /?\ ## Dinomys ## /?\ ## 
+
 ## Sampling scheme using truncated exponential distributions -------------------
 # Rate of an exponential distribution with a given proportion of the distribution (`thr`) lying between 0 and Ts
 sampling_rate <- function(thr = 0.95, Ts){

@@ -60,7 +60,6 @@ chinchi_sp <- chinchi_sp[true_sp, ]
 # Add simulated occurrences of extant taxa (see `1c-extant_Ts_sampling.R`)
 extant_chinchi <- read.table("./Data/OccDB_cleaned/extant_taxa_with_no_fossils.txt", 
                              header = T)
-
 chinchi_sp <- rbind(chinchi_sp, extant_chinchi)
 
 # Save occurrence dataframe
@@ -68,6 +67,16 @@ chinchi_sp <- rbind(chinchi_sp, extant_chinchi)
 write.table.lucas(chinchi_sp, "./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED.txt")
 # Extract ages
 extract.ages("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED.txt", replicates = 20)
+
+## Removing Caribbean taxa -----------------------------------------------------
+chinchi_sp_NoCar <- chinchi_sp %>% 
+  filter(Species %in% c("Amblyrhiza_inundata", "Elasmodontomys_obliquus",
+                        "Quemisia_gravis", "Clidomys_osborni", "Borikenomys_praecursor") == F)
+# Save occurrence dataframe
+write.table.lucas(chinchi_sp_NoCar, "./Data/PyRate_inputs/Species/3-Chinchilloidea_sp_lvl_NoCar.txt")
+# Extract ages
+extract.ages("./Data/PyRate_inputs/Species/3-Chinchilloidea_sp_lvl_NoCar.txt", replicates = 20)
+
 
 ## No need for species-level spatial scaling as occurrences were compiled accordingly
 
@@ -106,15 +115,6 @@ write.table.lucas(chinchi_sp_etrop, "./Data/PyRate_inputs/Species/5-Chinchilloid
 # Extract ages
 extract.ages("./Data/PyRate_inputs/Species/5-Chinchilloidea_sp_lvl_occ_EXTRATROPICAL.txt", replicates = 20)
 
-
-## Removing Caribbean taxa -----------------------------------------------------
-chinchi_sp_NoCar <- chinchi_sp %>% 
-  filter(Species %in% c("Amblyrhiza_inundata", "Elasmodontomys_obliquus",
-                        "Quemisia_gravis", "Clidomys_osborni") == F)
-# Save occurrence dataframe
-write.table.lucas(chinchi_sp_NoCar, "./Data/PyRate_inputs/Species/3-Chinchilloidea_sp_lvl_NoCar.txt")
-# Extract ages
-extract.ages("./Data/PyRate_inputs/Species/3-Chinchilloidea_sp_lvl_NoCar.txt", replicates = 20)
 
 ## Northern immigrants ----------------------------------------------------------
   # Carnivorans

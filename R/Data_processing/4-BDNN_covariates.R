@@ -190,6 +190,11 @@ chinchi_WithTraits <- chinchi %>%
   select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
   rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
 
-write.table.lucas(chinchi_WithTraits, "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits.txt")
+## Merge with simulated occurrences of extant species (we have traits for all of them) (see `1c-extant_Ts_sampling.R`)
+extant_chinchi <- read.table("./Data/OccDB_cleaned/extant_taxa_with_no_fossils.txt", 
+                             header = T)
+chinchi_sp <- rbind(chinchi_sp, extant_chinchi)
+
+write.table.lucas(chinchi_WithTraits, "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT.txt")
 source("~/PyRate/pyrate_utilities.r")
-extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits.txt", replicates = 20)
+extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT.txt", replicates = 20)
