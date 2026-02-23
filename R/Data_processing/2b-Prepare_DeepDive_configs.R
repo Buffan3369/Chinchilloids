@@ -13,7 +13,7 @@ library(hash)
 bins <- seq(from = 39, to = 0, by = -1)
 
 
-for(lvl in c("genus", "species")){
+for(lvl in c("genus", "species", "species_extant_extended")){
   ############################# SIMULATOR #############################
   # Initialise config file
   config_sim <- create_config(
@@ -21,7 +21,7 @@ for(lvl in c("genus", "species")){
     data_file = paste0(lvl, "/data/Chinchilloidea_", lvl, "_level_DD_input.csv"), #useless here
     bins = bins,
     n_regions = as.integer(3),
-    present_diversity = ifelse(lvl == "genus", 4, 6),
+    present_diversity = ifelse(lvl == "genus", 4, 8),
     simulate = TRUE,
     model_training = FALSE,
     empirical_predictions = FALSE)

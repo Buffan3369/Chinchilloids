@@ -50,6 +50,46 @@ prep_dd_input(
   output_file = "./Results/DeepDive/species/data/Chinchilloidea_species_level_DD_input.csv"
 )
 
+################################################
+## Species-level with extant species extended ##
+################################################
+
+# Open extended extant species simulated occurrence dataset
+extant_sp <- read.table("./Data/OccDB_cleaned/extant_taxa_with_no_fossils.txt", header = T)
+
+# Create artificial localities for these occ and merge datasets
+extant_sp$loc <- seq(from = max(chinchi$loc_id)+1,
+                     to = max(chinchi$loc_id)+nrow(extant_sp),
+                     by = 1)
+extant_sp <- extant_sp %>% 
+  mutate(Region = sapply(X = extant_sp$Species,
+                         FUN = function(x){
+                           if(x %in% c("Chinchilla_chinchilla", "Chinchilla_lanigera", "Lagidium_wolffsohni", "Lagidium_viscacia")){
+                             return("E")
+                           }
+                           else{
+                             return("T")
+                           }
+                         })) %>% 
+  rename(Taxon = "Species", MinAge = "min_age", MaxAge = "max_age", Locality = "loc") %>% 
+  select(!(Status))
+extant_sp <- extant_sp %>% arrange(Taxon, Region, MinAge, MaxAge, Locality)
+
+chinchi_sp_extant_ext <- rbind(chinchi_sp, extant_sp)
+
+# Save
+write.table.lucas(chinchi_sp_extant_ext, "./Results/DeepDive/species_extant_extended/data/Chinchilloidea_species_level.txt")
+
+# Time bins considered
+bins <- seq(39, 0, -1)
+
+# Generate DeepDive input
+prep_dd_input(
+  dat = chinchi_sp,
+  bins = bins,
+  r = 100,
+  output_file = "./Results/DeepDive/species/data/Chinchilloidea_species_level_DD_input.csv"
+)
 
 ########################################
 ## -------- Genus-level data -------- ##

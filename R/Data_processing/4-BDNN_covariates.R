@@ -190,11 +190,35 @@ chinchi_WithTraits <- chinchi %>%
   select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
   rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
 
+write.table.lucas(chinchi_WithTraits, "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits.txt")
+source("~/PyRate/pyrate_utilities.r")
+extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits.txt", replicates = 20)
+
+
 ## Merge with simulated occurrences of extant species (we have traits for all of them) (see `1c-extant_Ts_sampling.R`)
 extant_chinchi <- read.table("./Data/OccDB_cleaned/extant_taxa_with_no_fossils.txt", 
                              header = T)
-chinchi_sp <- rbind(chinchi_sp, extant_chinchi)
+chinchi_WithTraits_EXT <- rbind(chinchi_WithTraits, extant_chinchi)
 
-write.table.lucas(chinchi_WithTraits, "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT.txt")
-source("~/PyRate/pyrate_utilities.r")
-extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT.txt", replicates = 20)
+write.table.lucas(chinchi_WithTraits_EXT, 
+                  "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT.txt")
+extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT.txt", 
+             replicates = 20)
+
+## Remove Caribbean taxa
+
+# First remove "caribbean" state from categorical predictor table
+categorical_traits_WithData_NoCar <- categorical_traits_WithData %>% 
+  select(!(Caribbean)) %>% 
+  filter(!(Species %in% c("Amblyrhiza_inundata", "Elasmodontomys_obliquus", 
+                          "Quemisia_gravis", "Clidomys_osborni", "Borikenomys_praecursor")))
+write.table.lucas(categorical_traits_WithData_NoCar, "./Data/BDNN_features/Categorical_traits_NoNA_NOCAR.txt")
+# Remove occurrences
+chinchi_WithTraits_EXT_NOCAR <- chinchi_WithTraits_EXT %>% 
+  filter(!(Species %in% c("Amblyrhiza_inundata", "Elasmodontomys_obliquus", 
+                          "Quemisia_gravis", "Clidomys_osborni", "Borikenomys_praecursor")))
+
+write.table.lucas(chinchi_WithTraits_EXT_NOCAR, 
+                  "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT_NOCAR.txt")
+extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT_NOCAR.txt",
+             replicates = 20)
