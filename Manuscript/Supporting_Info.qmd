@@ -17,6 +17,7 @@ format:
 editor: visual
 bibliography: supp_references.bib
 csl: evolution.csl
+tbl-cap-location: top
 crossref:
   fig-title: "Figure&nbsp;S"
   fig-prefix: "Figure&nbsp;S"
@@ -37,6 +38,9 @@ crossref:
       reference-prefix: "Table&nbsp;S"
       latex-env: supptbl
   title-delim: "."
+knitr:
+  opts_chunk:
+    fig.pos: "H"
 fontsize: "9pt"
 fig-cap-location: bottom
 ---
@@ -92,6 +96,14 @@ We acknowledge the proposition of synonimisation between *Telicomys gigantissimu
 \newpage
 
 # Supplementary Figures
+
+```{r, echo=FALSE}
+#| label: fig-ExtSampl
+#| fig-cap: Visual representation of the occurrence sampling scheme that we implemented for extant species lacking fossil record. We approximated the posterior distribution of the divergence times leading to a given extant species $i$ (denoted $T_{d,i}$) with a gaussian of mean and variance determined by the lower and upper boundaries of the empirical 95% HPD of $T_{d,i}$ (resp. $T_{d,i}^{2.5\%}$ and $T_{d,i}^{97.5\%}$) (**A**). Then, we randomly drew a value $T_{d,i}^{\star}$ from this distribution, serving as a lower boundary for the species' origination time (**B**). We then drew simulated occurrence's minimum and maximum ages (resp. 'MinAge' and 'MaxAge') from a truncated exponential distribution ($^{tr}\epsilon$) of rate $\gamma$ determined so that a proportion $\alpha$ of the non-truncated distribution lies between $0$ and $T_{d,i}^{\star}$ (**C--D**). Steps **B--D** were repeated $n$ times, so we finally ended up with $n$ simulated occurrences per extant species lacking fossil record. In practise, we set $\alpha=0.5$ and $n=10$. *Chinchilla chinchilla* silhouette is from [Phylopic](https://www.phylopic.org/), see @tbl-Refsilhouettes for additional information.
+
+knitr::include_graphics("../Figures/Supp/extant_sampling/extant_sampling.pdf")
+```
+
 
 ```{r, echo=FALSE}
 #| label: fig-preservation_rate
