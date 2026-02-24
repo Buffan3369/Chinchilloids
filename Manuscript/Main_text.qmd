@@ -37,7 +37,7 @@ Besides, questions are also raised by chinchilloid taxonomic and morphological d
 
 Despite all this, major gaps remain in our understanding of the evolutionary dynamics of Chinchilloidea. In particular, many of the hypotheses raised above have poorly considered the interplay between the latter and biological diversification. Previous works relying on a phylogenetic framework illustrated that the dynamics of chinchilloid diversity and body mass evolution were decoupled [@álvarez2017; @carrillo]. However, many extinct taxa lack DNA or sufficient morphological material to be accurately replaced in a phylogenetic framework, leading to their exclusion from subsequent macroevolutionary analyses relying on phylogenies. Thus, there is much to gain by relaxing phylogenetic assumptions and fully taking advantage of the rich fossil record of the group to reconstruct its macroevolutionary history. In addition, the factors that underpinned the clade diversification remain elusive despite the major palaeoenvironmental upheavals that took place in South America since the late Eocene (e.g., Andean orogeny, marine introgressions, river network changes, onset of the dry diagonal).
 
-Here, we investigate the evolutionary history of Chinchilloidea and highlight its environmental correlates, with an emphasis on phenotypic evolution. To do so, we compiled and revised 715 chinchilloid fossil occurrences from the literature to build the most exhaustive temporal occurrence database ever produced for this group, encompassing 63 genera and 136 species. In parallel, we collected dental traits and measurements in order to carry out body mass reconstructions based on recently-published sets of predictive equations, and reconstructed hyposodonty indices based on crown heights of cheek teeth. We further analysed chinchilloid diversity and diversification dynamics throughout their entire evolutionary history using state-of-the-art preservation-aware methodological frameworks, and sought for their likely environmental drivers, allowing rate variation across time, body size and crown height categories. We hypothesise that (i) (ii) (iii)
+Here, we investigate the evolutionary history of Chinchilloidea and highlight its environmental correlates, with an emphasis on phenotypic evolution. To do so, we compiled and revised 710 chinchilloid fossil occurrences from the literature to build the most exhaustive temporal occurrence database ever produced for this group, encompassing 63 genera and 136 species. In parallel, we collected dental traits and measurements in order to carry out body mass reconstructions based on recently-published sets of predictive equations, and reconstructed hyposodonty indices based on crown heights of cheek teeth. We further analysed chinchilloid diversity and diversification dynamics throughout their entire evolutionary history using state-of-the-art preservation-aware methodological frameworks, and sought for their likely environmental drivers, allowing rate variation across time, body size and crown height categories. We hypothesise that (i) (ii) (iii)
 
 # Materials and Methods
 
@@ -195,7 +195,10 @@ Challenge to infer body sizes of extinct taxa with little extant representatives
 
 Being large implies additional energetic requirements =\> diet. Need for additional studies to quantify diet shifts in large forms using quantitative methods like microwear texture analysis [*e*.*g*., @robinet2020; @hullot2025].
 
-Test for the direct effet of intraspecific interaction in the rate of body mass evolution in a phylogenetic framework [@drury2016; chabrol inch'bouddah]
+Phylogenetic framework:
+
+* Test for the direct effet of intraspecific interaction in the rate of body mass evolution [@drury2016; chabrol inch'bouddah]
+* Assess whether larger (or larger-crowned) species have different pace of diversification (SSE model) 
 
 # Conclusions
 

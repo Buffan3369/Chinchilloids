@@ -104,6 +104,32 @@ categorical_traits <- categorical_traits %>%
 ### Tropicality (+ pertenency to West Indies, see MacPhee 2011) ###
 chinchi <- read_xlsx("./Data/OccDB_cleaned/ChinchilloideaOccurrences_cleaned.xlsx")
 
+chinchi <- chinchi %>%
+  filter(!is.na(sp_lvl_status)) %>% 
+  select(accepted_name, sp_lvl_status, min_ma, max_ma, loc) %>% 
+  mutate(min_ma = as.numeric(min_ma), max_ma = as.numeric(max_ma)) %>% 
+  rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
+
+# Remove occurrences associated with open nomenclature
+true_sp <- sapply(X = chinchi$Species,
+                  FUN = open_checkR)
+chinchi <- chinchi[true_sp, ]
+
+## Merge with simulated occurrences of extant species (we have traits for all of them) (see `1c-extant_Ts_sampling.R`)
+extant_chinchi <- read.table("./Data/OccDB_cleaned/extant_taxa_with_no_fossils.txt", 
+                             header = T)
+extant_chinchi <- extant_chinchi %>% 
+  mutate(loc = sapply(X = Species,
+                      FUN = function(x){
+                        if(x %in% c("Chinchilla_chinchilla", "Chinchilla_lanigera", "Lagidium_wolffsohni", "Lagidium_viscacia")){
+                          return("E")
+                        }
+                        else{
+                          return("T")
+                        }
+                      }))
+chinchi_ext <- rbind(chinchi, extant_chinchi)
+
 # Carribean taxa
 caribbea <- c("Amblyrhiza_inundata", "Borikenomys_praecursor", 
               "Clidomys_osborni","Elasmodontomys_obliquus", "Quemisia_gravis")
@@ -112,7 +138,7 @@ caribbea <- c("Amblyrhiza_inundata", "Borikenomys_praecursor",
 categorical_traits <- categorical_traits %>% 
   mutate(Tropical = sapply(X = Species,
                            FUN = function(x){
-                             loc <- chinchi$loc[which(chinchi$accepted_name == x)]
+                             loc <- chinchi_ext$loc[which(chinchi_ext$Species == x)]
                              if("T" %in% loc){
                                if(x %in% caribbea){
                                  return(0)
@@ -127,7 +153,7 @@ categorical_traits <- categorical_traits %>%
                            }),
          Extratropical = sapply(X = Species,
                            FUN = function(x){
-                             loc <- chinchi$loc[which(chinchi$accepted_name == x)]
+                             loc <- chinchi_ext$loc[which(chinchi_ext$Species == x)]
                              if("E" %in% loc){
                                if(x %in% caribbea){
                                  return(0)
@@ -190,15 +216,7 @@ chinchi_WithTraits <- chinchi %>%
   select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
   rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
 
-write.table.lucas(chinchi_WithTraits, "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits.txt")
-source("~/PyRate/pyrate_utilities.r")
-extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits.txt", replicates = 20)
 
-
-## Merge with simulated occurrences of extant species (we have traits for all of them) (see `1c-extant_Ts_sampling.R`)
-extant_chinchi <- read.table("./Data/OccDB_cleaned/extant_taxa_with_no_fossils.txt", 
-                             header = T)
-chinchi_WithTraits_EXT <- rbind(chinchi_WithTraits, extant_chinchi)
 
 write.table.lucas(chinchi_WithTraits_EXT, 
                   "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT.txt")

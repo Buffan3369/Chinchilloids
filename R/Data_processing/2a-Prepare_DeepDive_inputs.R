@@ -31,8 +31,17 @@ for(i in 1:length(UnLoc)){
 ## -------- Species-level data -------- ##
 ##########################################
 
+# Filter out occurrences above the species level
+chinchi_sp <- chinchi %>%
+  filter(!is.na(sp_lvl_status))
+
+# Remove occurrences associated with open nomenclature
+true_sp <- sapply(X = chinchi_sp$accepted_name,
+                  FUN = open_checkR)
+chinchi_sp <- chinchi_sp[true_sp, ]
+
 # Preprocess
-chinchi_sp <- chinchi %>% 
+chinchi_sp <- chinchi_sp %>% 
   select(accepted_name, loc, min_ma, max_ma, loc_id) %>% 
   rename(Taxon = "accepted_name", Region = "loc", MinAge = "min_ma", MaxAge = "max_ma", Locality = "loc_id")
 
@@ -78,17 +87,14 @@ extant_sp <- extant_sp %>% arrange(Taxon, Region, MinAge, MaxAge, Locality)
 chinchi_sp_extant_ext <- rbind(chinchi_sp, extant_sp)
 
 # Save
-write.table.lucas(chinchi_sp_extant_ext, "./Results/DeepDive/species_extant_extended/data/Chinchilloidea_species_level.txt")
-
-# Time bins considered
-bins <- seq(39, 0, -1)
+write.table.lucas(chinchi_sp_extant_ext, "./Results/DeepDive/species_extant_extended/data/Chinchilloidea_species_extant_extended_level.txt")
 
 # Generate DeepDive input
 prep_dd_input(
   dat = chinchi_sp,
   bins = bins,
   r = 100,
-  output_file = "./Results/DeepDive/species/data/Chinchilloidea_species_level_DD_input.csv"
+  output_file = "./Results/DeepDive/species_extant_extended/data/Chinchilloidea_species_extant_extended_level_DD_input.csv"
 )
 
 ########################################
