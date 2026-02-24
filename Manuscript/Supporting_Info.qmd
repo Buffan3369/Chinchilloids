@@ -75,6 +75,8 @@ Age ranges of the Miocene occurrences from the Río Santa Cruz (Santacrucian SAL
 
 Given that *Lagostomus (Lagostomopsis)* is a subgenus [@rasia2012], we set the `genus` column of each *Lagostomus (Lagostomopsis)* occurrence to *Lagostomus*, and switched their `genus_level_status` from `extinct` to `extant`.
 
+All specimens referred to as *Lagostomus minimus*, *L. cavifrons* and *L. heterogenidens* were synonymised with *Lagostomus debilis*, following @ubilla2016.
+
 Uncertain age of the Ituzáingo formation was set to Huayquerian (Late Miocene), *ca*. 5--8 Ma.
 
 Age range of occurrences from @bucher2021 were set to the one of the original publication: 14.86--12.75 Ma when coming from the "Cruces Infinitos" and "Los Yeguarizos localities", 12.75--12 Ma when coming from the "La Gloria" and "La Hoyada" localities.
@@ -103,7 +105,6 @@ We acknowledge the proposition of synonimisation between *Telicomys gigantissimu
 
 knitr::include_graphics("../Figures/Supp/extant_sampling/extant_sampling.pdf")
 ```
-
 
 ```{r, echo=FALSE}
 #| label: fig-preservation_rate
