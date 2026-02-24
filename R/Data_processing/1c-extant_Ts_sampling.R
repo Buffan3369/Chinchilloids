@@ -62,14 +62,14 @@ trunc_exp <- function(n, lambda, Ts){
 occtbl_exp <- data.frame(Species = c(rep("Dinomys_branickii", 10),
                                      rep("Chinchilla_chinchilla", 10),
                                      rep("Chinchilla_lanigera", 10),
+                                     rep("Lagidium_ahuacaense", 10),
                                      rep("Lagidium_viscacia", 10),
                                      rep("Lagidium_wolffsohni", 10)),
                          Status = "extant",
                          min_age = NA,
                          max_age = NA)
 
-for(sp in c("Dinomys_branickii", "Chinchilla_chinchilla", "Chinchilla_lanigera", 
-            "Lagidium_viscacia", "Lagidium_wolffsohni")){
+for(sp in keys(dict_hpd)){
   # Initialise min and max_age vectors
   min_ages <- c()
   max_ages <- c()
