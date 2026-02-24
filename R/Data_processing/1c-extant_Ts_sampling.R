@@ -24,18 +24,18 @@ chinchi_sp <- c("Chinchilla_chinchilla", "Chinchilla_lanigera", "Lagidium_peruan
 chinchi_tree <- keep.tip(cavio_tree, tip = chinchi_sp)
 
 # Get the boundaries of the 95%HPD of Ts distribs for species lacking fossil record
+dinomys_hpd <- chinchi_tree@data$CAheight_0.95_HPD[[9]]
 chinchilla_hpd <- chinchi_tree@data$CAheight_0.95_HPD[[12]]
 ahuacaense_hpd <- chinchi_tree@data$CAheight_0.95_HPD[[13]]
 viscacia_hpd <- chinchi_tree@data$CAheight_0.95_HPD[[15]]
 
 # Create dictionnary
-dict_hpd <- hash("Chinchilla_chinchilla" = chinchilla_hpd,
+dict_hpd <- hash("Dinomys_branickii" = dinomys_hpd,
+                 "Chinchilla_chinchilla" = chinchilla_hpd,
                  "Chinchilla_lanigera" = chinchilla_hpd,
                  "Lagidium_ahuacaense" = ahuacaense_hpd,
                  "Lagidium_viscacia" = viscacia_hpd,
                  "Lagidium_wolffsohni" = viscacia_hpd)
-
-## /?\ ## Dinomys ## /?\ ## 
 
 ## Sampling scheme using truncated exponential distributions -------------------
 # Rate of an exponential distribution with a given proportion of the distribution (`thr`) lying between 0 and Ts
@@ -59,15 +59,16 @@ trunc_exp <- function(n, lambda, Ts){
   return(truc_exp_vect)
 }
 
-occtbl_exp <- data.frame(Species = c(rep("Chinchilla_chinchilla", 10),
-                                 rep("Chinchilla_lanigera", 10),
-                                 rep("Lagidium_viscacia", 10),
-                                 rep("Lagidium_wolffsohni", 10)),
+occtbl_exp <- data.frame(Species = c(rep("Dinomys_branickii", 10),
+                                     rep("Chinchilla_chinchilla", 10),
+                                     rep("Chinchilla_lanigera", 10),
+                                     rep("Lagidium_viscacia", 10),
+                                     rep("Lagidium_wolffsohni", 10)),
                          Status = "extant",
                          min_age = NA,
                          max_age = NA)
 
-for(sp in c("Chinchilla_chinchilla", "Chinchilla_lanigera", 
+for(sp in c("Dinomys_branickii", "Chinchilla_chinchilla", "Chinchilla_lanigera", 
             "Lagidium_viscacia", "Lagidium_wolffsohni")){
   # Initialise min and max_age vectors
   min_ages <- c()
@@ -78,11 +79,13 @@ for(sp in c("Chinchilla_chinchilla", "Chinchilla_lanigera",
   # The 95% HPD will be approximated to a (symmetrical) N(mu, sigma²)
   mu <- (max_HPD + min_HPD)/2
   sigma <- sqrt((max_HPD - mu)/1.96) # = sqrt((max_HPD - min_HPD)/2*1.96)
+  # Assign proportion of truc_expo within [Ts, 0]
+  alpha <- ifelse(sp == "Dinomys_branickii", 0.999, 0.5)
   for(i in 1:10){
     # Sampling a Ts value
     Ts <- rnorm(n = 1, mean = mu, sd = sigma)
     # Sampling an occurrence min and max_age from a truncated exponential distribution
-    lamb <- sampling_rate(thr = 0.5, Ts = Ts)
+    lamb <- sampling_rate(thr = alpha, Ts = Ts)
     ages <- trunc_exp(n = 2, lambda = lamb, Ts = Ts)
     min_ages <- c(min_ages, ages[which.min(ages)])
     max_ages <- c(max_ages, ages[which.max(ages)])
