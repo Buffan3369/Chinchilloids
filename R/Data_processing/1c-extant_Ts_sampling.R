@@ -27,6 +27,7 @@ chinchi_tree <- keep.tip(cavio_tree, tip = chinchi_sp)
 dinomys_hpd <- chinchi_tree@data$CAheight_0.95_HPD[[9]]
 chinchilla_hpd <- chinchi_tree@data$CAheight_0.95_HPD[[12]]
 ahuacaense_hpd <- chinchi_tree@data$CAheight_0.95_HPD[[13]]
+peruanum_hpd <- chinchi_tree@data$CAheight_0.95_HPD[[14]]
 viscacia_hpd <- chinchi_tree@data$CAheight_0.95_HPD[[15]]
 
 # Create dictionnary
@@ -34,6 +35,7 @@ dict_hpd <- hash("Dinomys_branickii" = dinomys_hpd,
                  "Chinchilla_chinchilla" = chinchilla_hpd,
                  "Chinchilla_lanigera" = chinchilla_hpd,
                  "Lagidium_ahuacaense" = ahuacaense_hpd,
+                 "Lagidium_peruanum" = peruanum_hpd,
                  "Lagidium_viscacia" = viscacia_hpd,
                  "Lagidium_wolffsohni" = viscacia_hpd)
 
@@ -63,6 +65,7 @@ occtbl_exp <- data.frame(Species = c(rep("Dinomys_branickii", 10),
                                      rep("Chinchilla_chinchilla", 10),
                                      rep("Chinchilla_lanigera", 10),
                                      rep("Lagidium_ahuacaense", 10),
+                                     rep("Lagidium_peruanum", 10),
                                      rep("Lagidium_viscacia", 10),
                                      rep("Lagidium_wolffsohni", 10)),
                          Status = "extant",

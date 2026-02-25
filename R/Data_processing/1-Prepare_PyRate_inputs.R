@@ -81,54 +81,54 @@ extract.ages("./Data/PyRate_inputs/Species/3-Chinchilloidea_sp_lvl_NoCar.txt", r
 ## No need for species-level spatial scaling as occurrences were compiled accordingly
 
 ## Tropical --------------------------------------------------------------------
-chinchi_sp_trop <- chinchi %>%
-  filter(loc == "T") %>% 
-  select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
-  filter(!is.na(sp_lvl_status)) %>% # filter out occurrences at the genus level
-  rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
-
-# Remove occurrences associated with open nomenclature
-true_sp_trop <- sapply(X = chinchi_sp_trop$Species,
-                       FUN = open_checkR)
-chinchi_sp_trop <- chinchi_sp_trop[true_sp_trop, ]
-
-# Save occurrence dataframe
-write.table.lucas(chinchi_sp_trop, "./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_TROPICAL.txt")
-# Extract ages
-extract.ages("./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_TROPICAL.txt", replicates = 20)
+# chinchi_sp_trop <- chinchi %>%
+#   filter(loc == "T") %>% 
+#   select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
+#   filter(!is.na(sp_lvl_status)) %>% # filter out occurrences at the genus level
+#   rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
+# 
+# # Remove occurrences associated with open nomenclature
+# true_sp_trop <- sapply(X = chinchi_sp_trop$Species,
+#                        FUN = open_checkR)
+# chinchi_sp_trop <- chinchi_sp_trop[true_sp_trop, ]
+# 
+# # Save occurrence dataframe
+# write.table.lucas(chinchi_sp_trop, "./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_TROPICAL.txt")
+# # Extract ages
+# extract.ages("./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_TROPICAL.txt", replicates = 20)
 
 
 ## Extratropical ---------------------------------------------------------------
-chinchi_sp_etrop <- chinchi %>%
-  filter(loc == "C") %>% 
-  select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
-  filter(!is.na(sp_lvl_status)) %>% # filter out occurrences at the genus level
-  rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
-
-# Remove occurrences associated with open nomenclature
-true_sp_etrop <- sapply(X = chinchi_sp_etrop$Species,
-                       FUN = open_checkR)
-chinchi_sp_etrop <- chinchi_sp_etrop[true_sp_etrop, ]
-
-# Save occurrence dataframe
-write.table.lucas(chinchi_sp_etrop, "./Data/PyRate_inputs/Species/5-Chinchilloidea_sp_lvl_occ_EXTRATROPICAL.txt")
-# Extract ages
-extract.ages("./Data/PyRate_inputs/Species/5-Chinchilloidea_sp_lvl_occ_EXTRATROPICAL.txt", replicates = 20)
+# chinchi_sp_etrop <- chinchi %>%
+#   filter(loc == "C") %>% 
+#   select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
+#   filter(!is.na(sp_lvl_status)) %>% # filter out occurrences at the genus level
+#   rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
+# 
+# # Remove occurrences associated with open nomenclature
+# true_sp_etrop <- sapply(X = chinchi_sp_etrop$Species,
+#                        FUN = open_checkR)
+# chinchi_sp_etrop <- chinchi_sp_etrop[true_sp_etrop, ]
+# 
+# # Save occurrence dataframe
+# write.table.lucas(chinchi_sp_etrop, "./Data/PyRate_inputs/Species/5-Chinchilloidea_sp_lvl_occ_EXTRATROPICAL.txt")
+# # Extract ages
+# extract.ages("./Data/PyRate_inputs/Species/5-Chinchilloidea_sp_lvl_occ_EXTRATROPICAL.txt", replicates = 20)
 
 
 ## Northern immigrants ----------------------------------------------------------
   # Carnivorans
-Carni <- read_xlsx("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Carnivora/Carnivora-Tarquini_etal_2022.xlsx")
-Carni <- Carni %>% 
-  select(Taxon_name, Status, MinAge, MaxAge) %>% 
-  rename(Species = "Taxon_name", min_age = "MinAge", max_age = "MaxAge")
-write.table.lucas(Carni, "./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Carnivora/Carnivora_species_occ_Tarquini.txt")
-extract.ages("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Carnivora/Carnivora_species_occ_Tarquini.txt", replicates = 10)
-  # Northern Herbivores
-NorthHerb <- read_xlsx("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Northern_herbivores/Northern_Herbivores-Tarquini_etal_2022.xlsx")
-NorthHerb <- NorthHerb %>% 
-  select(Taxon_name, Status, MinAge, MaxAge) %>% 
-  filter(Taxon_name != "Bos_taurus") %>% 
-  rename(Species = "Taxon_name", min_age = "MinAge", max_age = "MaxAge")
-write.table.lucas(NorthHerb, "./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Northern_herbivores/Northern_herbivores_sp_occ_Tarquini.txt")
-extract.ages("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Northern_herbivores/Northern_herbivores_sp_occ_Tarquini.txt", replicates = 10)
+# Carni <- read_xlsx("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Carnivora/Carnivora-Tarquini_etal_2022.xlsx")
+# Carni <- Carni %>% 
+#   select(Taxon_name, Status, MinAge, MaxAge) %>% 
+#   rename(Species = "Taxon_name", min_age = "MinAge", max_age = "MaxAge")
+# write.table.lucas(Carni, "./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Carnivora/Carnivora_species_occ_Tarquini.txt")
+# extract.ages("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Carnivora/Carnivora_species_occ_Tarquini.txt", replicates = 10)
+#   # Northern Herbivores
+# NorthHerb <- read_xlsx("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Northern_herbivores/Northern_Herbivores-Tarquini_etal_2022.xlsx")
+# NorthHerb <- NorthHerb %>% 
+#   select(Taxon_name, Status, MinAge, MaxAge) %>% 
+#   filter(Taxon_name != "Bos_taurus") %>% 
+#   rename(Species = "Taxon_name", min_age = "MinAge", max_age = "MaxAge")
+# write.table.lucas(NorthHerb, "./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Northern_herbivores/Northern_herbivores_sp_occ_Tarquini.txt")
+# extract.ages("./Data/MBD_predictors/Tarquini_Carni_Herbi_North_Am/Northern_herbivores/Northern_herbivores_sp_occ_Tarquini.txt", replicates = 10)
