@@ -50,7 +50,8 @@ transf_features_tbl$Sea_level <- c(mean_slv, sd_slv)
 covar_scaled <- covar_scaled %>% mutate(Sea_level = (slv$Sea_level - mean_slv)/sd_slv)
 
 ### Self-diversity (specific) ###
-SelfDiv <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est_ltt.txt", header = T)
+SelfDiv <- read.table("./Results/RJMCMC/species_extant_extended/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est_ltt.txt",
+                      header = T)
   # Downscale so it matches the timescale (last 38 Myrs with a 0.5Myr step)
 selected_div <- sapply(X = seq(0, 38, 0.5), FUN = select_closer, age_vect = SelfDiv$time)
 SelfDiv_down <- SelfDiv[selected_div, ] %>% 
@@ -64,7 +65,7 @@ transf_features_tbl$Self_diversity <- c(mean_div, sd_div)
 covar_scaled <- covar_scaled %>% mutate(Self_diversity = (SelfDiv_down$diversity - mean_div)/sd_div)
 
 ### Save time-continuous correlate table ###
-write.table.lucas(covar_scaled, "./Data/BDNN_features/Continuous_correlates.txt")
+write.table.lucas(covar_scaled, "./Data/BDNN_features_extended/Continuous_correlates.txt")
 
 
 
@@ -179,46 +180,16 @@ categorical_traits <- categorical_traits %>%
 ### Save species-specific categorical traits as well as transform feature table for species we could have traits for ###
 categorical_traits_WithData <- categorical_traits %>% 
   filter(!(is.na(Body_mass) | is.na(Hypsodonty))) # will filter out 16 taxa
-write.table.lucas(categorical_traits_WithData, "./Data/BDNN_features/Categorical_traits_NoNA.txt")
-write.table.lucas(transf_features_tbl, "./Data/BDNN_features/Backscale_NoNA.txt")
+write.table.lucas(categorical_traits_WithData, "./Data/BDNN_features_extended/Categorical_traits_NoNA.txt")
+write.table.lucas(transf_features_tbl, "./Data/BDNN_features_extended/Backscale_NoNA.txt")
 
-
-### Apply broader body mass categories
-
-# Create composite BM column
-BM <- BM %>% 
-  mutate(wide_BM_class = sapply(X = `BodyMass category`,
-                                FUN = function(x){
-                                  if(is.na(x) == F){
-                                    if(x == 1){return(x)}            # XS -> S
-                                    else if(x %in% 2:5){return(x-1)}
-                                    else if(x == 6){return(x-2)}     # XXL -> XL
-                                  }
-                                  else{return(NA)}
-                                }))
-
-
-median_bm_class_red <- median(BM$wide_BM_class, na.rm = T)
-transf_features_tbl$Body_mass <- c(median_bm_class_red, 1) # sd = 1 as discrete categories
-#Scale
-BM <- BM %>% mutate(wide_BM_class_scld = (wide_BM_class - median_bm_class_red))
-# Store BM cat
-categorical_traits$Body_mass <- BM$wide_BM_class_scld
-# Save both datasets again
-categorical_traits_WithData <- categorical_traits %>% 
-  filter(!(is.na(Body_mass) | is.na(Hypsodonty))) # will filter out 16 taxa
-write.table.lucas(categorical_traits_WithData, "./Data/BDNN_features/Categorical_traits_NoNA_broad_BM.txt")
-write.table.lucas(transf_features_tbl, "./Data/BDNN_features/Backscale_NoNA_broad_BM.txt")
 
 ## Subset occurrences of only taxa we could have traits for
 chinchi_WithTraits <- chinchi %>% 
-  filter(accepted_name %in% categorical_traits_WithData$Species) %>% 
-  select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
-  rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
+  filter(Species %in% categorical_traits_WithData$Species) %>% 
+  select(!(loc))
 
-
-
-write.table.lucas(chinchi_WithTraits_EXT, 
+write.table.lucas(chinchi_WithTraits, 
                   "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT.txt")
 extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT.txt", 
              replicates = 20)
@@ -226,17 +197,17 @@ extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EX
 ## Remove Caribbean taxa
 
 # First remove "caribbean" state from categorical predictor table
-categorical_traits_WithData_NoCar <- categorical_traits_WithData %>% 
-  select(!(Caribbean)) %>% 
-  filter(!(Species %in% c("Amblyrhiza_inundata", "Elasmodontomys_obliquus", 
-                          "Quemisia_gravis", "Clidomys_osborni", "Borikenomys_praecursor")))
-write.table.lucas(categorical_traits_WithData_NoCar, "./Data/BDNN_features/Categorical_traits_NoNA_NOCAR.txt")
+# categorical_traits_WithData_NoCar <- categorical_traits_WithData %>% 
+#   select(!(Caribbean)) %>% 
+#   filter(!(Species %in% c("Amblyrhiza_inundata", "Elasmodontomys_obliquus", 
+#                           "Quemisia_gravis", "Clidomys_osborni", "Borikenomys_praecursor")))
+# write.table.lucas(categorical_traits_WithData_NoCar, "./Data/BDNN_features/Categorical_traits_NoNA_NOCAR.txt")
 # Remove occurrences
-chinchi_WithTraits_EXT_NOCAR <- chinchi_WithTraits_EXT %>% 
-  filter(!(Species %in% c("Amblyrhiza_inundata", "Elasmodontomys_obliquus", 
-                          "Quemisia_gravis", "Clidomys_osborni", "Borikenomys_praecursor")))
-
-write.table.lucas(chinchi_WithTraits_EXT_NOCAR, 
-                  "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT_NOCAR.txt")
-extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT_NOCAR.txt",
-             replicates = 20)
+# chinchi_WithTraits_EXT_NOCAR <- chinchi_WithTraits_EXT %>% 
+#   filter(!(Species %in% c("Amblyrhiza_inundata", "Elasmodontomys_obliquus", 
+#                           "Quemisia_gravis", "Clidomys_osborni", "Borikenomys_praecursor")))
+# 
+# write.table.lucas(chinchi_WithTraits_EXT_NOCAR, 
+#                   "./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT_NOCAR.txt")
+# extract.ages("./Data/PyRate_inputs/Chinchilloidea_cleaned_WithTraits_EXTENDED_EXTANT_NOCAR.txt",
+#              replicates = 20)
