@@ -25,7 +25,7 @@ TaxonList <- TaxonList %>%
                              fam <- "Dinomyidae"
                            }
                            if(x %in% c("Chinchilla_chinchilla", "Chinchilla_lanigera", "Lagidium_ahuacaense",
-                                       "Lagidium_viscacia", "Lagidium_wolffsohni")){
+                                       "Lagidium_peruanum", "Lagidium_viscacia", "Lagidium_wolffsohni")){
                              fam <- "Chinchillidae"
                            }
                            return(fam)
