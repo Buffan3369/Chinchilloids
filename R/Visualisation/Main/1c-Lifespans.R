@@ -12,20 +12,29 @@ source("./R/useful/helper_functions.R")
 source("./R/useful/load_GTS.R")
 
 ## Assign species names and family to TsTe estimates ---------------------------
-TaxonList <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_TaxonList.txt", header = T)
+TaxonList <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED_TaxonList.txt", header = T)
 occdb <- read_xlsx("./Data/OccDB_cleaned/ChinchilloideaOccurrences_cleaned.xlsx")
 
 TaxonList <- TaxonList %>% 
   mutate(Family = sapply(X = Species, 
                          FUN = function(x){
-                           fam <- unique(occdb$family[which(occdb$accepted_name == x)])
+                           if(x %in% occdb$accepted_name){
+                             fam <- unique(occdb$family[which(occdb$accepted_name == x)])
+                           }
+                           if(x =="Dinomys_branickii"){
+                             fam <- "Dinomyidae"
+                           }
+                           if(x %in% c("Chinchilla_chinchilla", "Chinchilla_lanigera", "Lagidium_ahuacaense",
+                                       "Lagidium_viscacia", "Lagidium_wolffsohni")){
+                             fam <- "Chinchillidae"
+                           }
                            return(fam)
                          }))
-TaxonList$Family[1] <- "Dinomyidae" # "Telicomys"_amazonensis (quote issue)
 TaxonList$Family[which(is.na(TaxonList$Family))] <- "Stem Chinchilloidea"
 TaxonList$Family <- unlist(TaxonList$Family)
 
-TsTe_tbl <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est.txt", header = T)
+TsTe_tbl <- read.table("./Results/RJMCMC/species_extant_extended/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est.txt",
+                       header = T)
 TsTe_tbl <- TsTe_tbl %>%
   mutate(Family = TaxonList$Family,
          Species_name = TaxonList$Species)
@@ -97,8 +106,6 @@ TsTe_tbl <- TsTe_tbl %>%
                                  return("grey50")
                                }
                              }))
-TsTe_tbl$BM_cat[which(TsTe_tbl$Species_name == "\"Telicomys\"_amazonensis")] <- 4
-TsTe_tbl$col_BM_cat[which(TsTe_tbl$Species_name == "\"Telicomys\"_amazonensis")] <- BM_palette[4]
 
 # Barplot of distribution among categories
 CountCat <- TsTe_tbl %>%
@@ -250,6 +257,6 @@ lifespans_plot <- TsTe_tbl %>%
         panel.background = element_rect(fill = "grey97"),
         plot.margin = unit(c(0.5, 2, 0.5, 0.5), "cm"))
 
-ggsave("./Figures/Main/Lifespans/Lifespans_Chinchilloidea.pdf", plot = lifespans_plot, height = 220, width = 180, units = "mm")
+ggsave("./Figures/Main/Lifespans/Lifespans_Chinchilloidea.pdf", plot = lifespans_plot, height = 230, width = 180, units = "mm")
 
 

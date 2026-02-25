@@ -1,7 +1,8 @@
 ################################################################################
-# Name: 1-Diversity.R
+# Name: 1b-Diversity.R
 # Author: Lucas Buffan (Lucas.L.Buffan@gmail.com)
 # Aim: Plot diversity through time estimated by PyRate & DeepDive
+#      + preservation rate
 ################################################################################
 
 library(ggpubr)
@@ -20,7 +21,7 @@ gsc1$name[nrow(gsc1)] <- "E"
 
 
 ## DeepDive empirical predictions ----------------------------------------------
-empi_pred_path <- "./Results/DeepDive/species/species_models/simulation_species_ET_20251217_lstm128_64_32_d64_32_conditional"
+empi_pred_path <- "./Results/DeepDive/species_extant_extended/species_extant_extended_models/simulation_species_extant_extended_ET_20260224_lstm64_32_d64_32_conditional/"
 dd_pred_table <- extract_DD_pred(empi_pred_path)
 dd_pred_table$time[nrow(dd_pred_table)] <- 38.2 # cut
 
@@ -33,7 +34,7 @@ dd_div <- dd_pred_plot(dd_pred_tbl = dd_pred_table,
                        main = "DeepDive",
                        main.size = 15,
                        y_limits = c(0, max(dd_pred_table$maj_M)+5),
-                       y_breaks = seq(0, max(dd_pred_table$maj_M), 20),
+                       y_breaks = seq(0, max(dd_pred_table$maj_M), 10),
                        lwd = 0.5,
                        display_gts = TRUE,
                        plot.border = FALSE,
@@ -52,7 +53,7 @@ dd_div <- dd_pred_plot(dd_pred_tbl = dd_pred_table,
   annotate(geom = "rect", xmin = 27.82, xmax = 33.9, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2)
 
 ## Load LTT table & plot -------------------------------------------------------
-ltt_path <- "./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est_ltt.txt"
+ltt_path <- "./Results/RJMCMC/species_extant_extended/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est_ltt.txt"
 ltt_tbl <- read.table(ltt_path, header = TRUE)
 ltt_tbl <- ltt_tbl %>%
   rename("Age" = time, "Diversity" = diversity, "min_Diversity" = m_div, "max_Diversity" = M_div)
@@ -101,9 +102,9 @@ ggsave("./Figures/Main/Diversity_through_time.pdf", div_plots,
        height = 100, width = 200, units = "mm")
 ggsave("./Figures/Main/Diversity_through_time.png", div_plots,
        height = 100, width = 200, units = "mm", dpi = 600)
-  
+
 ## Preservation rate -----------------------------------------------------------
-path_to_q <- "./Results/RJMCMC/species/1-Full/Q_SHIFTS/Parsed_Q_rates.txt"
+path_to_q <- "./Results/RJMCMC/species_extant_extended/1-Full/Q_SHIFTS/Parsed_Q_rates.txt"
 q.table <- read.table(path_to_q, header = TRUE)
 q.table <- q.table[-c(nrow(q.table)),] # remove Holocene preservation rates
 
@@ -122,10 +123,12 @@ Q_plot <- q_plot(q.table,
                  abbr = list(TRUE, FALSE),
                  geoscale_height = unit(1, "line"),
                  geoscale_labelsize = list(2.5, 3.5)) +
-   annotate(geom = "rect", xmin = 27.82, xmax = 33.9, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
+  annotate(geom = "rect", xmin = 27.82, xmax = 33.9, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
   annotate(geom = "rect", xmin = 15.97, xmax = 23.03, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
   annotate(geom = "rect", xmin = 11.63, xmax = 5.33, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
   annotate(geom = "rect", xmin = 0, xmax = 2.58, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0)
 
-ggsave("./Figures/recap_figures_RJMCMC/Chinchilloidea_species_Full_preservation_rate.pdf",
+ggsave("./Figures/Supp/Preservation_through_time.pdf",
        plot = Q_plot, height = 150, width = 150, units = "mm")
+ggsave("./Figures/Supp/Preservation_through_time.png",
+       dpi = 600, plot = Q_plot, height = 150, width = 150, units = "mm")
