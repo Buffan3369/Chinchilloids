@@ -57,33 +57,135 @@ get_post <- function(dir, param = c("G", "W", "mean_SW")){
 
 ## Function to get plotting dataset --------------------------------------------
 out_table_MBD <- function(dir, #where the MBD log files are stored 
-                          interval #time interval covered
+                          interval, #time interval covered
+                          consider_w=T # if set to FALSE, will not consider shrikage weight to assess 
+                                       # the significance of a correlation (i.e., when correlations were assessed with a gamma prior)
 ){
+  if(consider_w){
+    mcmcLog <- get_post(dir, param = "G")
+    mean_SW <- get_post(dir, param = "mean_SW")
+    ## 1) get column names of the SW > 0.5 ---------------------------------------
+    ns_names <- colnames(mean_SW)[which(mean_SW[nrow(mean_SW), ] < 0.5)] #remember that the last one is the total
+    mean_SW_sign <- mean_SW[, !(colnames(mean_SW) %in% ns_names)]
+    #go back to the corresponding variable
+    end_nm <- function(name){
+      spl <- strsplit(name, split = "")[[1]]
+      spl <- spl[(length(spl)-3):length(spl)]
+      return(paste0("G", spl[1], spl[2], spl[3], spl[4])) #the "G" stands for the corr
+    }
+    corr_vbl <- sapply(X = colnames(mean_SW_sign),
+                       FUN = end_nm)
+    #subset
+    if(length(corr_vbl) == 0){ # if no variable found with SW > 0.5, don't go further
+      cat("\nNo significant correlation coefficient found.\n")
+    }
+    if(length(corr_vbl) > 0){
+      mcmcLog_sign <- mcmcLog %>% select(all_of(corr_vbl))
+      # 2) check if zero is in the 95% HPD
+      zeros <- c()
+      for(G in colnames(mcmcLog_sign)){
+        #2.5 and 975.% quantiles of the distribution
+        Q <- as.numeric(quantile(mcmcLog_sign[, G], probs = c(0.025, 0.975)))
+        if(length(unique(sign(Q))) > 1){ #if these boundaries have different signs, i.e. 0 is in 95% HPD
+          small_abs <- min(abs(Q))
+          #in case the distribution is skewed and only a TINY part of the 95% HPD includes 0
+          if(small_abs >= 0.01){ #we consider small_abs small enough if smaller than 1e-2
+            zeros <- c(zeros, G)
+          }
+        }
+      }
+      #remove variables including zero in their 95% HPD from the list of the significant variables
+      if(length(zeros) > 0){
+        zeros <- str_replace(zeros, "Mean_W", "G") #otherwise names don't match
+        corr_vbl <- corr_vbl[-which(corr_vbl %in% zeros)]
+        if(length(corr_vbl) == 0){
+          cat("\nNo significant correlation coefficient found.\n")
+        }
+      }
+    }
+    
+    # 3) reformat dataset for plotting
+    value <- mcmcLog[, 1]
+    param <- rep(0, nrow(mcmcLog))
+    col <- rep(colnames(mcmcLog)[1], nrow(mcmcLog))
+    if("l" %in% strsplit(colnames(mcmcLog)[1], "")[[1]]){ #lambda
+      rate <- rep("Speciation", length(mcmcLog[, 1]))
+    }
+    if("m" %in% strsplit(colnames(mcmcLog)[1], "")[[1]]){ #mu
+      rate <- rep("Extinction", length(mcmcLog[, 1]))
+    }
+    
+    #specify whether parameter associated to origination or extinction rate
+    for(i in colnames(mcmcLog)[-1]){
+      col <- c(col, rep(i, nrow(mcmcLog)))
+      value <- c(value, mcmcLog[, i])
+      p <- strsplit(i, split = "_")[[1]][2]
+      param <- c(param, rep(as.numeric(p), nrow(mcmcLog)))
+      if("l" %in% strsplit(i, "")[[1]]){ #lambda
+        rate <- c(rate, rep("Speciation", nrow(mcmcLog)))
+      }
+      else if("m" %in% strsplit(i, "")[[1]]){ #mu
+        rate <- c(rate, rep("Extinction", nrow(mcmcLog)))
+      }
+    }
+    plot_df <- data.frame(param = param, rate = rate, col = col, value = value)
+    #significance dataframe
+    if(length(corr_vbl) > 0){ #if we have significant correlation coefficients
+      signif_df <- plot_df %>% 
+        mutate(col = ifelse(col %in% corr_vbl, "*", NA)) %>% #if the correlation coefficient was found significant, we add a star
+        group_by(param, rate, col) %>%
+        summarise(max_val = max(density(value)[[1]]),
+                  min_val = min(density(value)[[1]])) %>% 
+        #adjust star position
+        mutate(star_pos = ifelse(abs(max_val) >= abs(min_val), 
+                                 max_val + sign(max_val)*0.5,
+                                 min_val + sign(min_val)*0.5))
+    }
+    if(length(corr_vbl) == 0){ #if no coefficient was found significant
+      signif_df <- plot_df %>% 
+        mutate(col = NA) %>% #if the correlation coefficient was found significant, we add a star
+        group_by(param, rate, col) %>%
+        summarise(max_val = max(density(value)[[1]]),
+                  min_val = min(density(value)[[1]])) %>% 
+        mutate(star_pos = ifelse(abs(max_val) >= abs(min_val), 
+                                 max_val + sign(max_val),
+                                 min_val + sign(min_val)))
+      
+    }
+    signif_df <- signif_df %>% add_column(interval = rep(interval, nrow(signif_df)))
+    # Create a column indicating (or not) significance of each coefficient (for colour attribution)
+    attrib_sign <- function(idx){
+      corr_idx <- which(signif_df$rate == plot_df$rate[idx] &
+                          signif_df$param == plot_df$param[idx])
+      type <- signif_df$rate[corr_idx] # Extinction or Origination
+      signif <- signif_df$col[corr_idx] # "*" or NA
+      if(type == "Extinction" & is.na(signif)){
+        return("Ext_ns")
+      }
+      else if(type == "Extinction" & signif == "*"){
+        return("Ext_signif")
+      }
+      else if(type == "Speciation" & is.na(signif)){
+        return("Sp_ns")
+      }
+      else if(type == "Speciation" & signif == "*"){
+        return("Sp_signif")
+      }
+    }
+    sign_col <- sapply(X = 1:nrow(plot_df), FUN = attrib_sign)
+    plot_df <- plot_df %>% add_column(signif_col = sign_col, 
+                                      interval = rep(interval, nrow(plot_df)),
+                                      .after = "col")
+    return(list(plot_df, signif_df))
+  }
   
-  mcmcLog <- get_post(dir, param = "G")
-  mean_SW <- get_post(dir, param = "mean_SW")
-  ## 1) get column names of the SW > 0.5 ---------------------------------------
-  ns_names <- colnames(mean_SW)[which(mean_SW[nrow(mean_SW), ] < 0.5)] #remember that the last one is the total
-  mean_SW_sign <- mean_SW[, !(colnames(mean_SW) %in% ns_names)]
-  #go back to the corresponding variable
-  end_nm <- function(name){
-    spl <- strsplit(name, split = "")[[1]]
-    spl <- spl[(length(spl)-3):length(spl)]
-    return(paste0("G", spl[1], spl[2], spl[3], spl[4])) #the "G" stands for the corr
-  }
-  corr_vbl <- sapply(X = colnames(mean_SW_sign),
-                     FUN = end_nm)
-  #subset
-  if(length(corr_vbl) == 0){ # if no variable found with SW > 0.5, don't go further
-    cat("\nNo significant correlation coefficient found.\n")
-  }
-  if(length(corr_vbl) > 0){
-    mcmcLog_sign <- mcmcLog %>% select(all_of(corr_vbl))
-    # 2) check if zero is in the 95% HPD
+  else{
+    mcmcLog <- get_post(dir, param = "G")
+    # 1) check if zero is in the 95% HPD
     zeros <- c()
-    for(G in colnames(mcmcLog_sign)){
+    for(G in colnames(mcmcLog)){
       #2.5 and 975.% quantiles of the distribution
-      Q <- as.numeric(quantile(mcmcLog_sign[, G], probs = c(0.025, 0.975)))
+      Q <- as.numeric(quantile(mcmcLog[, G], probs = c(0.025, 0.975)))
       if(length(unique(sign(Q))) > 1){ #if these boundaries have different signs, i.e. 0 is in 95% HPD
         small_abs <- min(abs(Q))
         #in case the distribution is skewed and only a TINY part of the 95% HPD includes 0
@@ -92,89 +194,90 @@ out_table_MBD <- function(dir, #where the MBD log files are stored
         }
       }
     }
-    #remove variables including zero in their 95% HPD from the list of the significant variables
+    # Remove variables including zero in their 95% HPD from the list of the significant variables
+    corr_vbl <- colnames(mcmcLog)
     if(length(zeros) > 0){
-      zeros <- str_replace(zeros, "Mean_W", "G") #otherwise names don't match
       corr_vbl <- corr_vbl[-which(corr_vbl %in% zeros)]
       if(length(corr_vbl) == 0){
         cat("\nNo significant correlation coefficient found.\n")
       }
     }
-  }
-  
-  # 3) reformat dataset for plotting
-  value <- mcmcLog[, 1]
-  param <- rep(0, nrow(mcmcLog))
-  col <- rep(colnames(mcmcLog)[1], nrow(mcmcLog))
-  if("l" %in% strsplit(colnames(mcmcLog)[1], "")[[1]]){ #lambda
-    rate <- rep("Speciation", length(mcmcLog[, 1]))
-  }
-  if("m" %in% strsplit(colnames(mcmcLog)[1], "")[[1]]){ #mu
-    rate <- rep("Extinction", length(mcmcLog[, 1]))
-  }
-  
-  #specify whether parameter associated to origination or extinction rate
-  for(i in colnames(mcmcLog)[-1]){
-    col <- c(col, rep(i, nrow(mcmcLog)))
-    value <- c(value, mcmcLog[, i])
-    p <- strsplit(i, split = "_")[[1]][2]
-    param <- c(param, rep(as.numeric(p), nrow(mcmcLog)))
-    if("l" %in% strsplit(i, "")[[1]]){ #lambda
-      rate <- c(rate, rep("Speciation", nrow(mcmcLog)))
-    }
-    else if("m" %in% strsplit(i, "")[[1]]){ #mu
-      rate <- c(rate, rep("Extinction", nrow(mcmcLog)))
-    }
-  }
-  plot_df <- data.frame(param = param, rate = rate, col = col, value = value)
-  #significance dataframe
-  if(length(corr_vbl) > 0){ #if we have significant correlation coefficients
-    signif_df <- plot_df %>% 
-      mutate(col = ifelse(col %in% corr_vbl, "*", NA)) %>% #if the correlation coefficient was found significant, we add a star
-      group_by(param, rate, col) %>%
-      summarise(max_val = max(density(value)[[1]]),
-                min_val = min(density(value)[[1]])) %>% 
-      #adjust star position
-      mutate(star_pos = ifelse(abs(max_val) >= abs(min_val), 
-                               max_val + sign(max_val)*0.5,
-                               min_val + sign(min_val)*0.5))
-  }
-  if(length(corr_vbl) == 0){ #if no coefficient was found significant
-    signif_df <- plot_df %>% 
-      mutate(col = NA) %>% #if the correlation coefficient was found significant, we add a star
-      group_by(param, rate, col) %>%
-      summarise(max_val = max(density(value)[[1]]),
-                min_val = min(density(value)[[1]])) %>% 
-      mutate(star_pos = ifelse(abs(max_val) >= abs(min_val), 
-                               max_val + sign(max_val),
-                               min_val + sign(min_val)))
     
+    # 2) reformat dataset for plotting
+    # Specify whether parameter associated to origination or extinction rate
+    # Initialisation
+    value <- mcmcLog[, 1]
+    param <- rep(0, nrow(mcmcLog))
+    col <- rep(colnames(mcmcLog)[1], nrow(mcmcLog))
+    if("l" %in% strsplit(colnames(mcmcLog)[1], "")[[1]]){ #lambda
+      rate <- rep("Speciation", length(mcmcLog[, 1]))
+    }
+    if("m" %in% strsplit(colnames(mcmcLog)[1], "")[[1]]){ #mu
+      rate <- rep("Extinction", length(mcmcLog[, 1]))
+    }
+    # Iteration
+    for(i in colnames(mcmcLog)[-1]){
+      col <- c(col, rep(i, nrow(mcmcLog)))
+      value <- c(value, mcmcLog[, i])
+      p <- strsplit(i, split = "_")[[1]][2]
+      param <- c(param, rep(as.numeric(p), nrow(mcmcLog)))
+      if("l" %in% strsplit(i, "")[[1]]){ #lambda
+        rate <- c(rate, rep("Speciation", nrow(mcmcLog)))
+      }
+      else if("m" %in% strsplit(i, "")[[1]]){ #mu
+        rate <- c(rate, rep("Extinction", nrow(mcmcLog)))
+      }
+    }
+    plot_df <- data.frame(param = param, rate = rate, col = col, value = value)
+    #significance dataframe
+    if(length(corr_vbl) > 0){ #if we have significant correlation coefficients
+      signif_df <- plot_df %>% 
+        mutate(col = ifelse(col %in% corr_vbl, "*", NA)) %>% #if the correlation coefficient was found significant, we add a star
+        group_by(param, rate, col) %>%
+        summarise(max_val = max(density(value)[[1]]),
+                  min_val = min(density(value)[[1]])) %>% 
+        #adjust star position
+        mutate(star_pos = ifelse(abs(max_val) >= abs(min_val), 
+                                 max_val + sign(max_val)*0.5,
+                                 min_val + sign(min_val)*0.5))
+    }
+    if(length(corr_vbl) == 0){ #if no coefficient was found significant
+      signif_df <- plot_df %>% 
+        mutate(col = NA) %>% #if the correlation coefficient was found significant, we add a star
+        group_by(param, rate, col) %>%
+        summarise(max_val = max(density(value)[[1]]),
+                  min_val = min(density(value)[[1]])) %>% 
+        mutate(star_pos = ifelse(abs(max_val) >= abs(min_val), 
+                                 max_val + sign(max_val),
+                                 min_val + sign(min_val)))
+      
+    }
+    signif_df <- signif_df %>% add_column(interval = rep(interval, nrow(signif_df)))
+    # Create a column indicating (or not) significance of each coefficient (for colour attribution)
+    attrib_sign <- function(idx){
+      corr_idx <- which(signif_df$rate == plot_df$rate[idx] &
+                          signif_df$param == plot_df$param[idx])
+      type <- signif_df$rate[corr_idx] # Extinction or Origination
+      signif <- signif_df$col[corr_idx] # "*" or NA
+      if(type == "Extinction" & is.na(signif)){
+        return("Ext_ns")
+      }
+      else if(type == "Extinction" & signif == "*"){
+        return("Ext_signif")
+      }
+      else if(type == "Speciation" & is.na(signif)){
+        return("Sp_ns")
+      }
+      else if(type == "Speciation" & signif == "*"){
+        return("Sp_signif")
+      }
+    }
+    sign_col <- sapply(X = 1:nrow(plot_df), FUN = attrib_sign)
+    plot_df <- plot_df %>% add_column(signif_col = sign_col, 
+                                      interval = rep(interval, nrow(plot_df)),
+                                      .after = "col")
+    return(list(plot_df, signif_df))
   }
-  signif_df <- signif_df %>% add_column(interval = rep(interval, nrow(signif_df)))
-  # Create a column indicating (or not) significance of each coefficient (for colour attribution)
-  attrib_sign <- function(idx){
-    corr_idx <- which(signif_df$rate == plot_df$rate[idx] &
-                        signif_df$param == plot_df$param[idx])
-    type <- signif_df$rate[corr_idx] # Extinction or Origination
-    signif <- signif_df$col[corr_idx] # "*" or NA
-    if(type == "Extinction" & is.na(signif)){
-      return("Ext_ns")
-    }
-    else if(type == "Extinction" & signif == "*"){
-      return("Ext_signif")
-    }
-    else if(type == "Speciation" & is.na(signif)){
-      return("Sp_ns")
-    }
-    else if(type == "Speciation" & signif == "*"){
-      return("Sp_signif")
-    }
-  }
-  sign_col <- sapply(X = 1:nrow(plot_df), FUN = attrib_sign)
-  plot_df <- plot_df %>% add_column(signif_col = sign_col, 
-                                    interval = rep(interval, nrow(plot_df)),
-                                    .after = "col")
-  return(list(plot_df, signif_df))
 }
 
 ## Plotting function -----------------------------------------------------------
