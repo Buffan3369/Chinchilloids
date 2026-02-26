@@ -29,3 +29,5 @@
 #python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../../Results/MBD/species/MBD_scaled_hsp0/early -ana "MBD"
 #python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../../Results/MBD/species/MBD_scaled_hsp0/late -ana "MBD"
 
+# Species extant extended (gamma prior)
+python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../../Results/MBD/species_extant_extended -ana "MBD"

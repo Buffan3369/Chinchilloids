@@ -1,5 +1,5 @@
 ################################################################################
-# Name: MBD_plots.r
+# Name: 2-MBD_plots_former.r
 # Author: Lucas Buffan
 # Contact: lucas.l.buffan@gmail.com
 # Aim: Script for MBD plots (time-stratified)
@@ -64,7 +64,7 @@ for(dir in c("./Results/MBD/species/Classical/",
                        x_labels = c(values(cov_idx)),
                        rate.labs = rate.labs,
                        time_facetting = FALSE)
-  ggsave(paste0("./Figures/MBD/species_complete", scl, ".pdf"),
+  ggsave(paste0("./Figures/Supp/MBD/species_complete", scl, ".pdf"),
          plot = MBD_viol,
          height = 150,
          width = 350,
@@ -99,7 +99,7 @@ for(ana in c("_scaled", "_scaled_hsp0")){
                        x_labels = c(values(covar_idx)),
                        rate.labs = rate.labs,
                        int.labs = c("t < 6Ma", "38Ma > t > 6Ma"))
-  ggsave(paste0("./Figures/MBD/species_time_stratified", ana, ".pdf"),
+  ggsave(paste0("./Figures/Supp/MBD/species_time_stratified", ana, ".pdf"),
          plot = MBD_viol,
          height = 300,
          width = 400,
