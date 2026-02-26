@@ -39,6 +39,10 @@ dict_hpd <- hash("Dinomys_branickii" = dinomys_hpd,
                  "Lagidium_viscacia" = viscacia_hpd,
                  "Lagidium_wolffsohni" = viscacia_hpd)
 
+# Save 95% HPD table
+df_hpd <- data.frame(values(dict_hpd))
+write.table.lucas(df_hpd, "./Data/supp_tbl/95pct_HPD_tbl.txt")
+
 ## Sampling scheme using truncated exponential distributions -------------------
 # Rate of an exponential distribution with a given proportion of the distribution (`thr`) lying between 0 and Ts
 sampling_rate <- function(thr = 0.95, Ts){
