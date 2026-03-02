@@ -16,7 +16,7 @@ t_df$species_name <- row.names(t_df)
 TL <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED_TaxonList.txt",
                  header = T)
 
-TsTe_tbl <- read.table("./Results/RJMCMC/species_extant_extended/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est.txt",
+TsTe_tbl <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_species_lvl_occ_10_Grj_KEEP_se_est.txt",
                        header = T)
 TsTe_target <- TsTe_tbl %>% 
   mutate(species_name = TL$Species) %>% 
@@ -51,12 +51,13 @@ corr_plot <- PLOT_DF %>%
             linetype = 2) +
   # Add error bars and scatters
   geom_errorbar(aes(ymin = y_min, ymax = y_max)) +
-  geom_errorbarh(orientation = "y", aes(xmin = x_min, xmax = x_max)) + 
+  geom_errorbar(orientation = "y", aes(xmin = x_min, xmax = x_max)) + 
   geom_point(aes(fill = species_name), size = 1.5, shape = 21, colour = "black") +
   # Customise aesthetics
   scale_x_continuous(expand = c(0,0)) +
   scale_y_continuous(expand = c(0,0)) +
   labs(x = "Ts Phylogeny (Ma)", y = "Ts PyRate (Ma)", fill = "Species name") +
-  theme_lucas()
+  theme_lucas(legend.title = element_text(size = 9),
+              legend.text = element_text(size = 7))
 
-ggsave("./Figures/Supp/corr_Ts_phylo_PyRate.pdf", plot = corr_plot, height = 10, width = 15, units = "cm")
+ggsave("./Figures/Supp/corr_Ts_phylo_PyRate.pdf", plot = corr_plot, height = 9.5, width = 14, units = "cm")

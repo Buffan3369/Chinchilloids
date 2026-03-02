@@ -87,7 +87,7 @@ for(sp in keys(dict_hpd)){
   mu <- (max_HPD + min_HPD)/2
   sigma <- sqrt((max_HPD - mu)/1.96) # = sqrt((max_HPD - min_HPD)/2*1.96)
   # Assign proportion of truc_expo within [Ts, 0]
-  alpha <- ifelse(sp == "Dinomys_branickii", 0.999, 0.5)
+  alpha <- ifelse(sp == "Dinomys_branickii", 0.999, 0.95)
   for(i in 1:10){
     # Sampling a Ts value
     Ts <- rnorm(n = 1, mean = mu, sd = sigma)
