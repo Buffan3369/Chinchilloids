@@ -1,30 +1,23 @@
 #!/bin/bash
 
-# for ana in species
-# do
-# 	for pth in 1-Full 2-Singleton 4-Tropical 5-Extratropical
-# 	do
-# 		python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../Results/RJMCMC/$ana/$pth/pyrate_mcmc_logs
-# 		Rscript ~/Documents/GitHub/CorsaiR/R/plot_ess.r ../Results/RJMCMC/$ana/$pth/pyrate_mcmc_logs/ESS_summary.txt ../Results/RJMCMC/$ana/$pth/pyrate_mcmc_logs/ESS_plot.png
-# 	done
-# done
+#########################################################
+## ------------------ Species-level ------------------ ##
+#########################################################
 
-## Genus Spatially Scaled ##
-#python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../Results/RJMCMC/genus/3-Spatially_scaled/pyrate_mcmc_logs
-#Rscript ~/Documents/GitHub/CorsaiR/R/plot_ess.r ../Results/RJMCMC/genus/3-Spatially_scaled/pyrate_mcmc_logs/ESS_summary.txt ../Results/RJMCMC/genus/3-Spatially_scaled/pyrate_mcmc_logs/ESS_plot.png
+## Standard analyses
+for pth in 1-Full 2-Singleton 3-NoCaribbea
+do
+    python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../Results/RJMCMC/species/$pth/pyrate_mcmc_logs
+    Rscript ~/Documents/GitHub/CorsaiR/R/plot_ess.r ../Results/RJMCMC/species/$pth/pyrate_mcmc_logs/ESS_summary.txt ../Results/RJMCMC/species/$pth/pyrate_mcmc_logs/ESS_plot.png
+done
 
-## Species without Caribbean taxa ##
-# python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../Results/RJMCMC/species/3-NoCaribbea/pyrate_mcmc_logs
-# Rscript ~/Documents/GitHub/CorsaiR/R/plot_ess.r ../Results/RJMCMC/species/3-NoCaribbea/pyrate_mcmc_logs/ESS_summary.txt ../Results/RJMCMC/species/3-NoCaribbea/pyrate_mcmc_logs/ESS_plot.png
 
-## Species with extended occurrences for extant taxa
-python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../Results/RJMCMC/species_extant_extended/1-Full/pyrate_mcmc_logs
-Rscript ~/Documents/GitHub/CorsaiR/R/plot_ess.r ../Results/RJMCMC/species_extant_extended/1-Full/pyrate_mcmc_logs/ESS_summary.txt ../Results/RJMCMC/species_extant_extended/1-Full/pyrate_mcmc_logs/ESS_plot.png
+#######################################################
+## ------------------ Genus-level ------------------ ##
+#######################################################
 
-## Species with extended occurrences for extant taxa without singletons
-# python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../Results/RJMCMC/species_extant_extended/2-Singleton/pyrate_mcmc_logs
-# Rscript ~/Documents/GitHub/CorsaiR/R/plot_ess.r ../Results/RJMCMC/species_extant_extended/2-Singleton/pyrate_mcmc_logs/ESS_summary.txt ../Results/RJMCMC/species_extant_extended/2-Singleton/pyrate_mcmc_logs/ESS_plot.png
-
-## Species with extended occurrences for extant taxa without Caribbean
-# python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../Results/RJMCMC/species_extant_extended/3-NoCar/pyrate_mcmc_logs
-# Rscript ~/Documents/GitHub/CorsaiR/R/plot_ess.r ../Results/RJMCMC/species_extant_extended/3-NoCar/pyrate_mcmc_logs/ESS_summary.txt ../Results/RJMCMC/species_extant_extended/3-NoCar/pyrate_mcmc_logs/ESS_plot.png
+for pth in 1-Full 2-Singleton 3-Spatially_scaled
+do
+    python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../Results/RJMCMC/genus/$pth/pyrate_mcmc_logs
+    Rscript ~/Documents/GitHub/CorsaiR/R/plot_ess.r ../Results/RJMCMC/genus/$pth/pyrate_mcmc_logs/ESS_summary.txt ../Results/RJMCMC/genus/$pth/pyrate_mcmc_logs/ESS_plot.png
+done
