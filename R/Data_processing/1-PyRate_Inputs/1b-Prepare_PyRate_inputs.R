@@ -1,5 +1,5 @@
 ################################################################################
-# Name: 2-Prepare_PyRate_inputs.R
+# Name: 1b-Prepare_PyRate_inputs.R
 # Author: Lucas Buffan
 # E-mail: lucas.l.buffan@gmail.com
 # Description: Prepare PyRate inputs for cleaned Chinchilloidea occurrence data
@@ -10,9 +10,14 @@ library(readxl)
 source("~/PyRate/pyrate_utilities.r")
 source("./R/useful/helper_functions.R")
 
+## Open databases --------------------------------------------------------------
+  # Fossil occurrences
 chinchi <- read_xlsx("./Data/OccDB_cleaned/ChinchilloideaOccurrences_cleaned.xlsx")
 chinchi$min_ma <- as.numeric(chinchi$min_ma)
 chinchi$max_ma <- as.numeric(chinchi$max_ma)
+  # Extant species lacking fossil record
+extant_chinchi <- read.table("./Data/OccDB_cleaned/extant_taxa_with_no_fossils.txt",
+                             header = T)
 
 ## Genus-level database --------------------------------------------------------
 chinchi_gen <- chinchi %>%
@@ -23,6 +28,12 @@ chinchi_gen <- chinchi %>%
 true_gen <- sapply(X = chinchi_gen$Species,
                    FUN = open_checkR)
 chinchi_gen <- chinchi_gen[true_gen, ]
+
+# Add extant genera
+extant_gen <- extant_chinchi %>% 
+  mutate(Species = sapply(X = Species,
+                          FUN = function(x){strsplit(x, "_")[[1]][1]}))
+chinchi_gen <- rbind(chinchi_gen, extant_gen)
 
   # -- 1- Full -- 
 # Save occurrence dataframe
@@ -58,8 +69,6 @@ true_sp <- sapply(X = chinchi_sp$Species,
 chinchi_sp <- chinchi_sp[true_sp, ]
 
 # Add simulated occurrences of extant taxa (see `1c-extant_Ts_sampling.R`)
-extant_chinchi <- read.table("./Data/OccDB_cleaned/extant_taxa_with_no_fossils.txt", 
-                             header = T)
 chinchi_sp <- rbind(chinchi_sp, extant_chinchi)
 
 # Save occurrence dataframe
@@ -77,44 +86,7 @@ write.table.lucas(chinchi_sp_NoCar, "./Data/PyRate_inputs/Species/3-Chinchilloid
 # Extract ages
 extract.ages("./Data/PyRate_inputs/Species/3-Chinchilloidea_sp_lvl_NoCar.txt", replicates = 20)
 
-
 ## No need for species-level spatial scaling as occurrences were compiled accordingly
-
-## Tropical --------------------------------------------------------------------
-# chinchi_sp_trop <- chinchi %>%
-#   filter(loc == "T") %>% 
-#   select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
-#   filter(!is.na(sp_lvl_status)) %>% # filter out occurrences at the genus level
-#   rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
-# 
-# # Remove occurrences associated with open nomenclature
-# true_sp_trop <- sapply(X = chinchi_sp_trop$Species,
-#                        FUN = open_checkR)
-# chinchi_sp_trop <- chinchi_sp_trop[true_sp_trop, ]
-# 
-# # Save occurrence dataframe
-# write.table.lucas(chinchi_sp_trop, "./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_TROPICAL.txt")
-# # Extract ages
-# extract.ages("./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_TROPICAL.txt", replicates = 20)
-
-
-## Extratropical ---------------------------------------------------------------
-# chinchi_sp_etrop <- chinchi %>%
-#   filter(loc == "C") %>% 
-#   select(accepted_name, sp_lvl_status, min_ma, max_ma) %>%
-#   filter(!is.na(sp_lvl_status)) %>% # filter out occurrences at the genus level
-#   rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
-# 
-# # Remove occurrences associated with open nomenclature
-# true_sp_etrop <- sapply(X = chinchi_sp_etrop$Species,
-#                        FUN = open_checkR)
-# chinchi_sp_etrop <- chinchi_sp_etrop[true_sp_etrop, ]
-# 
-# # Save occurrence dataframe
-# write.table.lucas(chinchi_sp_etrop, "./Data/PyRate_inputs/Species/5-Chinchilloidea_sp_lvl_occ_EXTRATROPICAL.txt")
-# # Extract ages
-# extract.ages("./Data/PyRate_inputs/Species/5-Chinchilloidea_sp_lvl_occ_EXTRATROPICAL.txt", replicates = 20)
-
 
 ## Northern immigrants ----------------------------------------------------------
   # Carnivorans

@@ -69,15 +69,17 @@ Codes are available at: <https://github.com/Buffan3369/Chinchilloids.git>
 
 # Supplementary text
 
-## Some details regarding our occurrence data cleaning
+## Some details regarding decisions we took during our occurrence data cleaning
 
 Age ranges of the Miocene occurrences from the Río Santa Cruz (Santacrucian SALMA) were sharpened based on their assigned locality [@arnal2019]. Hence, occurrence from Barrancas Blancas were respectively assigned the 16.3--17.21 and 15.3--16.47 Ma intervals.
 
 Given that *Lagostomus (Lagostomopsis)* is a subgenus [@rasia2012], we set the `genus` column of each *Lagostomus (Lagostomopsis)* occurrence to *Lagostomus*, and switched their `genus_level_status` from `extinct` to `extant`.
 
-All specimens referred to as *Lagostomus minimus*, *L. cavifrons* and *L. heterogenidens* were synonymised with *Lagostomus debilis*, following @ubilla2016.
+All specimens referred to as *Lagostomus minimus*, *L. cavifrons*, *L. heterogenidens*, *L. debilis* and *L. egenus* were synonymised with *Lagostomus maximus*, following [@ubilla2016; @rasia_vizcacha_2024].
 
-Uncertain age of the Ituzáingo formation was set to Huayquerian (Late Miocene), *ca*. 5--8 Ma.
+The single occurrence assigned to *Lagostomus striatus* was removed as considered *nomen nodum* by @rasia2016.
+
+Uncertain age of the Ituzáingo formation was set to Huayquerian SALMA (Late Miocene), *ca*. 5--8 Ma.
 
 Age range of occurrences from @bucher2021 were set to the one of the original publication: 14.86--12.75 Ma when coming from the "Cruces Infinitos" and "Los Yeguarizos localities", 12.75--12 Ma when coming from the "La Gloria" and "La Hoyada" localities.
 
@@ -95,16 +97,11 @@ Added two occurrences of *Saremmys ligcura* from the two localities of Bryn Gwyn
 
 We acknowledge the proposition of synonimisation between *Telicomys gigantissimus* and *Telicomys giganteus* made by @rasia2025. However, in the light of phylogenetic analyses that are currently in progress, we decided not to account for it, therefore treating *T. gigantissimus* and *T. giganteus* as two distinct taxa.
 
+Additional details are provided in the `Remark` column of *Dataset S1*..
+
 \newpage
 
 # Supplementary Figures
-
-```{r, echo=FALSE}
-#| label: fig-ExtSampl
-#| fig-cap: Visual representation of the occurrence sampling scheme that we implemented for extant species lacking fossil record. We approximated the posterior distribution of the divergence times leading to a given extant species $i$ (denoted $T_{d,i}$) with a gaussian of mean and variance determined by the lower and upper boundaries of the empirical 95% HPD of $T_{d,i}$ (resp. $T_{d,i}^{2.5\%}$ and $T_{d,i}^{97.5\%}$) (**A**). Then, we randomly drew a value $T_{d,i}^{\star}$ from this distribution, serving as a lower boundary for the species' origination time (**B**). We then drew simulated occurrence's minimum and maximum ages (resp. 'MinAge' and 'MaxAge') from a truncated exponential distribution ($^{tr}\epsilon$) of rate $\gamma$ determined so that a proportion $\alpha$ of the non-truncated distribution lies between $0$ and $T_{d,i}^{\star}$ (**C--D**). Steps **B--D** were repeated $n$ times, so we finally ended up with $n$ simulated occurrences per extant species lacking fossil record. In practise, we set $n=10$ and $\alpha=0.5$, except for *Dinomys branickii*, for which we set $\alpha=0.999$. *Chinchilla chinchilla* silhouette is from [Phylopic](https://www.phylopic.org/), see @tbl-Refsilhouettes for additional information.
-
-knitr::include_graphics("../Figures/Supp/extant_sampling/extant_sampling.pdf")
-```
 
 ```{r, echo=FALSE}
 #| label: fig-preservation_rate
@@ -115,6 +112,23 @@ knitr::include_graphics("../Figures/Supp/extant_sampling/extant_sampling.pdf")
 knitr::include_graphics("../Figures/Supp/Preservation_through_time.pdf")
 ```
 
+```{r, echo=F}
+#| label: fig-ESSplot
+#| out-height: 15cm
+#| out-width: 15cm
+#| fig-cap: Convergence of the PyRate runs for the analysis of the species-level temporal occurrence database. The plot (A) the ESS of the model posterior probability for all the 20 replicates we ran. ESS greater than 200 (first-scale indicator of a run that converged, $n=20$ in that case) are displayed in green. The proportion of origination and extinction times (resp. $T_S$ and $T_E$) that converged (i.e., with $ESS > 200$) are shown in (B), for each of our 20 replicates. The plot (C) shows the posterior estimates of the mean root age of our group, together with their lower and upper boundaries of the 95% HPD interval, across the 20 replicates.
+
+knitr::include_graphics("../Results/RJMCMC/species/1-Full/pyrate_mcmc_logs/ESS_plot.png")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-RecapGenRJ
+#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our genus-level occurrence dataset with the rjMCMC model.
+
+knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_Recap_figure.pdf")
+```
+
 ```{r, echo=FALSE}
 #| label: fig-RecapSpRJSing
 #| fig-cap: Speciation and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model after removing singletons.
@@ -123,10 +137,10 @@ knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-RecapGenRJ
-#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our genus-level occurrence dataset with the rjMCMC model.
+#| label: fig-RTTperBM
+#| fig-cap: Speciation (**A**) and extinction (**B**) rates through time per body mass class as inferred by the RJMCMC model.
 
-knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_Recap_figure.pdf")
+knitr::include_graphics("../Figures/Supp/RTT_per_BM/RTT_plot_per_BM.pdf")
 ```
 
 ```{r, echo=FALSE}
@@ -139,6 +153,15 @@ knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_
 ```
 
 ```{r, echo=FALSE}
+#| label: fig-FreqRateShiftGen
+#| out-height: 8.75cm
+#| out-width: 15cm
+#| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our genus-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
+
+knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_frequency_of_rate_shift.pdf")
+```
+
+```{r, echo=FALSE}
 #| label: fig-FreqRateShiftSpSing
 #| out-height: 8.75cm
 #| out-width: 15cm
@@ -148,12 +171,10 @@ knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-FreqRateShiftGen
-#| out-height: 8.75cm
-#| out-width: 15cm
-#| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our genus-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
+#| label: fig-FreqRateShiftBM
+#| fig-cap: "Frequency of speciation and extinction rate shifts per body size class as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
 
-knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_frequency_of_rate_shift.pdf")
+knitr::include_graphics("../Figures/Supp/RTT_per_BM/freq_rate_shift_per_BM.pdf")
 ```
 
 ```{r, echo=FALSE}
@@ -168,6 +189,14 @@ knitr::include_graphics("../Results/DeepDive/species_extant_extended/species_ext
 #| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising three LSTM units (128, 64 and 32 nodes) connected to two dense layers (64 and 32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts increasing, indicative of overfitting. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
 
 knitr::include_graphics("../Results/DeepDive/species_extant_extended/species_extant_extended_models/simulation_species_extant_extended_ET_20260224_lstm64_32_d64_32_conditional/history_plotsimulation_species_extant_extended_ET_20260224_lstm64_32_d64_32_conditional.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-TsPhyloPyRate
+#| fig-cap: Correspondance between divergence times leading to extant species estimated from our phylogeny ('Ts Phylo') and the times of species origination de novo estimated ('Ts PyRate') after implementing our sampling scheme for extant species absent from the fossil record (*Main text*, Fig. 1). Dots show mean estimates and error bars the associated 95% HPD. Dashed line shows the line with equation $y=x$.
+
+knitr::include_graphics("../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
+
 ```
 
 {{< pagebreak >}}
@@ -188,7 +217,7 @@ convert_bold <- function(el){
 
 ```{r, echo=FALSE}
 #| label: tbl-1
-#| tbl-cap: "Performance of the different network architectures tested in our DeepDive analyses. `LSTM Layers` and `Fully-connected` are respectively the number of Long Short Term Memory and Fully-connected units of the network (3: 128, 64 and 32 nodes; 2: 64 and 32 nodes; 1: 32 nodes). `Dropout` represents the Monte-Carlo dropout fraction, that is, the proportion of connections between neurons randomly toggled off between two learning epochs -- one epoch being characterised by a complete pass through the entire training dataset −, preventing from overfitting. `Nb. training epochs` is the optimal number of training epochs. `Training loss` and `Validation loss` are the values of the Mean Squared Error (MSE) estimated between the 'true' diversity of each simulated dataset (resp. from the training or the validation set), and the predicted diversity made by the network after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs. `Evaluation loss` represent the MSE between each true and its associated predicted diversity trajectory from the test datset, once the is trained (*i*.*e*., after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs). The optimal number of epochs is determined when the `Validation loss` starts increasing (see @fig-ddHistPlot). Architectures resulting in the smallest evaluation loss values, *i*.*e*., generating the most accurate predictions, are depicted in bold."
+#| tbl-cap: "Performance of the different network architectures tested in our DeepDive analyses. `LSTM Layers` and `Fully-connected` are respectively the number of Long Short Term Memory and Fully-connected units of the network (3: 128, 64 and 32 nodes; 2: 64 and 32 nodes; 1: 32 nodes). `Dropout` represents the Monte-Carlo dropout fraction, that is, the proportion of connections between neurons randomly toggled off between two learning epochs -- one epoch being characterised by a complete pass through the entire training dataset −, preventing from overfitting. `Nb. training epochs` is the optimal number of training epochs. `Training loss` and `Validation loss` are the values of the Mean Squared Error (MSE) estimated between the 'true' diversity of each simulated dataset (resp. from the training or the validation set), and the predicted diversity made by the network after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs. `Evaluation loss` represent the MSE between each true and its associated predicted diversity trajectory from the test datset, once the is trained (*i*.*e*., after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs). The optimal number of epochs is determined when the `Validation loss` starts increasing (see @fig-ddHistPlotL2D2). Architectures resulting in the smallest evaluation loss values, *i*.*e*., generating the most accurate predictions, are depicted in bold."
 
 tbl_dd <- read.csv("../Data/supp_tbl/dd_network_perf.csv")
 colnames(tbl_dd) <- c("LSTM layers", "Fully-connected", "Dropout", "Nb. training epochs", "Training loss", "Validation loss", "Evaluation loss")
@@ -197,6 +226,31 @@ tbl_dd[1,] <- sapply(tbl_dd[1,], FUN = convert_bold)
 tbl_dd[3,] <- sapply(tbl_dd[3,], FUN = convert_bold)
 # Display
 knitr::kable(tbl_dd, align = 'c')
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl_PhyloHPD
+#| tbl-cap: Table representing the lower and upper bounds of the 95% HPD (resp. 'q_2.5%' and 'q_97.5%') of the distribution of the divergence ages leading to all the extant chinchilloid species absent from the fossil record -- *i*.*e*., all species but *Lagostomus maximus*. Ages are expressed in Ma.
+
+tbl <- read.table("../Data/supp_tbl/95pct_HPD_tbl.txt", header = T)
+# Add space and italicise species names
+colnames(tbl) <- sapply(X = colnames(tbl),
+                        FUN = function(x){
+                          gensp <- gsub(x, pattern = "_", replacement = " ")
+                          return(paste0("*", gensp, "*"))
+                          })
+# Round values
+tbl <- apply(X = tbl,
+             FUN = round,
+             MARGIN = c(1,2),
+             digits = 2)
+# Indicate row names
+rownames(tbl) <- c("q_2.5%", "q_97.5%")
+# Display
+knitr::kable(tbl, align = "c")
 ```
 
 | 

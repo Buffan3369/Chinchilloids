@@ -33,7 +33,7 @@ TaxonList <- TaxonList %>%
 TaxonList$Family[which(is.na(TaxonList$Family))] <- "Stem Chinchilloidea"
 TaxonList$Family <- unlist(TaxonList$Family)
 
-TsTe_tbl <- read.table("./Results/RJMCMC/species_extant_extended/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est.txt",
+TsTe_tbl <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est.txt",
                        header = T)
 TsTe_tbl <- TsTe_tbl %>%
   mutate(Family = TaxonList$Family,
@@ -78,8 +78,8 @@ BM_palette <- c("#a6cee3", "#1f78b4", "#ff7f00", "#33a02c", "#fb9a99", "#e31a1c"
 TsTe_tbl <- TsTe_tbl %>% 
   mutate(BM_cat = sapply(X = Species_name, 
                          FUN = function(x){
-                           if(x %in% BM$Species){
-                             cat <- BM$`BodyMass category`[which(BM$Species == x)]
+                           if(x %in% BM$name){
+                             cat <- BM$`BodyMass category`[which(BM$name == x)]
                              if(is.na(cat) == F){
                                return(cat)
                              }
@@ -93,8 +93,8 @@ TsTe_tbl <- TsTe_tbl %>%
                          }),
          col_BM_cat = sapply(X = Species_name, 
                              FUN = function(x){
-                               if(x %in% BM$Species){
-                                 cat <- BM$`BodyMass category`[which(BM$Species == x)]
+                               if(x %in% BM$name){
+                                 cat <- BM$`BodyMass category`[which(BM$name == x)]
                                  if(is.na(cat) == F){
                                    return(BM_palette[cat])
                                  }
@@ -139,8 +139,8 @@ BM$`BodyMass estimation (g)` <- as.numeric(BM$`BodyMass estimation (g)`)
 TsTe_tbl1 <- TsTe_tbl %>%
   mutate(BM_kg = sapply(X = Species_name, 
                         FUN = function(x){
-                          if(x %in% BM$Species){
-                            bm <- BM$`BodyMass estimation (g)`[which(BM$Species == x)]
+                          if(x %in% BM$name){
+                            bm <- BM$`BodyMass estimation (g)`[which(BM$name == x)]
                             if(is.na(bm) == F){
                               return(bm/1000)
                             }
@@ -191,10 +191,10 @@ lifespans_plot <- TsTe_tbl %>%
   # Chinchillidae
   annotate(geom = "rect", xmin = -Inf, xmax = Inf, ymin = MinMax$Chinchillidae[1]-0.5,
            ymax = MinMax$Chinchillidae[2], fill = "grey", alpha = 0.3) +
-  annotate(geom = "text", x = 31.5, y = MinMax$Chinchillidae[1]+3, 
+  annotate(geom = "text", x = 31.5, y = MinMax$Chinchillidae[1]+2, 
            label = "Chinchillidae", size = 2.8, fontface = 2) +
-  add_phylopic(img = chinchilla_img, x = 32, y = MinMax$Chinchillidae[1]+20, height = 5) +
-  add_phylopic(img = lagidium_img, x = 31.5, y = MinMax$Chinchillidae[1]+10, height = 7) +
+  add_phylopic(img = chinchilla_img, x = 32, y = MinMax$Chinchillidae[1]+16, height = 5) +
+  add_phylopic(img = lagidium_img, x = 31.5, y = MinMax$Chinchillidae[1]+8, height = 7) +
   # Neoepiblemidae
   # annotate(geom = "rect", xmin = -Inf, xmax = Inf, ymin = MinMax$Neoepiblemidae[1]-0.5,
   #          ymax = MinMax$Neoepiblemidae[2]-0.5, fill = "#beaed4", alpha = 0.3) +

@@ -1,5 +1,5 @@
 ################################################################################
-# Name: 1c-extant_Ts_sampling.R
+# Name: 1a-extant_Ts_sampling.R
 # Author: Lucas Buffan
 # E-mail: lucas.l.buffan@gmail.com
 # Description: Simulate occurrences of extant species with little to no fossil 

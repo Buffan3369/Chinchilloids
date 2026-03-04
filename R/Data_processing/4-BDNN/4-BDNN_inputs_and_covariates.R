@@ -1,8 +1,9 @@
 ################################################################################
-# Title: 6-BDNN_covariates.R
+# Title: 4-BDNN_inputs_and_covariates.R
 # Author: Lucas Buffan
 # E-mail: lucas.l.buffan@gmail.com
-# Description: Preprocess covariates that will be fed into BDNN.
+# Description: Preprocess covariates that will be fed into BDNN + update fossil
+#              occurrence input to only retain taxa having trait information.
 ################################################################################
 
 library(tidyverse)
@@ -50,7 +51,7 @@ transf_features_tbl$Sea_level <- c(mean_slv, sd_slv)
 covar_scaled <- covar_scaled %>% mutate(Sea_level = (slv$Sea_level - mean_slv)/sd_slv)
 
 ### Self-diversity (specific) ###
-SelfDiv <- read.table("./Results/RJMCMC/species_extant_extended/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est_ltt.txt",
+SelfDiv <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_species_lvl_occ_10_Grj_KEEP_se_est_ltt.txt",
                       header = T)
   # Downscale so it matches the timescale (last 38 Myrs with a 0.5Myr step)
 selected_div <- sapply(X = seq(0, 38, 0.5), FUN = select_closer, age_vect = SelfDiv$time)
@@ -65,7 +66,7 @@ transf_features_tbl$Self_diversity <- c(mean_div, sd_div)
 covar_scaled <- covar_scaled %>% mutate(Self_diversity = (SelfDiv_down$diversity - mean_div)/sd_div)
 
 ### Save time-continuous correlate table ###
-write.table.lucas(covar_scaled, "./Data/BDNN_features_extended/Continuous_correlates.txt")
+write.table.lucas(covar_scaled, "./Data/BDNN_features/Continuous_correlates.txt")
 
 
 
@@ -80,7 +81,7 @@ transf_features_tbl$Body_mass <- c(median_bm_class, 1) # sd = 1 as discrete cate
   #Scale
 BM <- BM %>% mutate(BM_class_scld = (`BodyMass category` - median_bm_class))
   # Store BM cat
-categorical_traits <- data.frame(Species = BM$Species,
+categorical_traits <- data.frame(Species = BM$name,
                                  Body_mass = BM$BM_class_scld)
 
 
@@ -179,12 +180,12 @@ categorical_traits <- categorical_traits %>%
 
 ### Save species-specific categorical traits as well as transform feature table for species we could have traits for ###
 categorical_traits_WithData <- categorical_traits %>% 
-  filter(!(is.na(Body_mass) | is.na(Hypsodonty))) # will filter out 16 taxa
-write.table.lucas(categorical_traits_WithData, "./Data/BDNN_features_extended/Categorical_traits_NoNA.txt")
-write.table.lucas(transf_features_tbl, "./Data/BDNN_features_extended/Backscale_NoNA.txt")
+  filter(!(is.na(Body_mass) | is.na(Hypsodonty))) # will filter out 10 taxa
+write.table.lucas(categorical_traits_WithData, "./Data/BDNN_features/Categorical_traits_NoNA.txt")
+write.table.lucas(transf_features_tbl, "./Data/BDNN_features/Backscale_NoNA.txt")
 
 
-## Subset occurrences of only taxa we could have traits for
+## Only subset occurrences of taxa we could have traits for
 chinchi_WithTraits <- chinchi %>% 
   filter(Species %in% categorical_traits_WithData$Species) %>% 
   select(!(loc))

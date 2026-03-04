@@ -53,7 +53,7 @@ dd_div <- dd_pred_plot(dd_pred_tbl = dd_pred_table,
   annotate(geom = "rect", xmin = 27.82, xmax = 33.9, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2)
 
 ## Load LTT table & plot -------------------------------------------------------
-ltt_path <- "./Results/RJMCMC/species_extant_extended/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est_ltt.txt"
+ltt_path <- "./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est_ltt.txt"
 ltt_tbl <- read.table(ltt_path, header = TRUE)
 ltt_tbl <- ltt_tbl %>%
   rename("Age" = time, "Diversity" = diversity, "min_Diversity" = m_div, "max_Diversity" = M_div)
@@ -104,7 +104,7 @@ ggsave("./Figures/Main/Diversity_through_time.png", div_plots,
        height = 100, width = 200, units = "mm", dpi = 600)
 
 ## Preservation rate -----------------------------------------------------------
-path_to_q <- "./Results/RJMCMC/species_extant_extended/1-Full/Q_SHIFTS/Parsed_Q_rates.txt"
+path_to_q <- "./Results/RJMCMC/species/1-Full/Q_SHIFTS/Parsed_Q_rates.txt"
 q.table <- read.table(path_to_q, header = TRUE)
 q.table <- q.table[-c(nrow(q.table)),] # remove Holocene preservation rates
 
@@ -114,7 +114,8 @@ Q_plot <- q_plot(q.table,
                  stage_x_breaks = FALSE,
                  manual_x_breaks = seq(0, 35, 5),
                  y_breaks = seq(from = 0, 
-                                to = round(max(q.table$max_HPD)), round(max(q.table$max_HPD))/4),
+                                to = round(max(q.table$max_HPD)), 
+                                as.integer(round(max(q.table$max_HPD))/4)),
                  axes.labelsize = 15,
                  ticks.labelsize = 12,
                  several_gts = TRUE,

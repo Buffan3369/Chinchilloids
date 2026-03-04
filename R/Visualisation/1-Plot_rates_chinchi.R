@@ -14,10 +14,19 @@ source("~/Documents/GitHub/CorsaiR/R/1-extract_param_from_PyRate_outputs.R")
 source("~/Documents/GitHub/CorsaiR/R/2-plotting_facilities.R")
 source("./R/useful/load_GTS.R")
 
-## GTS -------------------------------------------------------------------------
+gsc1$max_age[which.max(gsc1$max_age)] <- 36.2
+gsc1$abbr[which(gsc1$abbr == "Eo")] <- "E"
+gsc1$abbr[which(gsc1$abbr == "Ol")] <- "Oligocene"
+gsc1$abbr[which(gsc1$abbr == "Mio")] <- "Miocene"
+
+gsc4$max_age[which.max(gsc4$max_age)] <- 36.2
+
 for(lvl in c("genus", "species")){
-  for(ana in c("1-Full", "2-Singleton")){
+  for(ana in c("1-Full", "2-Singleton", "3-NoCaribbea", "3-Spatially_scaled")){
     if(lvl == "species" & ana == "3-Spatially_scaled"){
+      next
+    }
+    if(lvl == "genus" & ana == "3-NoCaribbea"){
       next
     }
     ## Diversification rates -----------------------------------------------------
@@ -25,7 +34,7 @@ for(lvl in c("genus", "species")){
     path_to_rtt <- paste0("./Results/RJMCMC/", lvl, "/", ana, "/combined_logs/RTT_plots.r")
     rtt_all_in_one <- extract_rtt(path_to_rtt, ana = "RJMCMC")
     # Extend for plotting issue
-    rtt_all_in_one[nrow(rtt_all_in_one)+1, ] <- c(38.2, rep(NA, 9))
+    rtt_all_in_one[nrow(rtt_all_in_one)+1, ] <- c(36.2, rtt_all_in_one[nrow(rtt_all_in_one), c(2:ncol(rtt_all_in_one))])
     # Origination and Extinction rates plot
     sp_ex_all_in_one <- rtt_plot(data = rtt_all_in_one,
                                  type = "SpEx",
@@ -33,14 +42,13 @@ for(lvl in c("genus", "species")){
                                  manual_x_breaks = seq(0, 35, 5),
                                  x_lab = NULL,
                                  restrict_y = TRUE,
-                                 restrict_thr = 3,
-                                 y_limits = c(0, 3),
-                                 y_breaks = seq(0, 2.5, 0.5),
+                                 restrict_thr = 0.9,
+                                 y_limits=c(0, 0.9),
+                                 y_breaks = seq(0, 0.8, 0.2),
                                  several_gts = TRUE,
                                  geoscale = gsc1,
-                                 geoscale2 = gsc3,
+                                 geoscale2 = gsc4,
                                  geoscale_height=unit(1, "line")) +
-      annotate(geom = "rect", xmin = 37.71, xmax = Inf, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 27.82, xmax = 33.9, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 15.97, xmax = 23.03, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 11.63, xmax = 5.33, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
@@ -53,14 +61,13 @@ for(lvl in c("genus", "species")){
                                    stage_x_breaks = FALSE,
                                    manual_x_breaks = seq(0, 35, 5),
                                    restrict_y = TRUE,
-                                   restrict_thr = 3,
-                                   y_limits = c(-2.2, 3),
-                                   y_breaks = seq(-2, 2.5, 0.5),
+                                   restrict_thr = 0.9,
+                                   y_limits=c(-0.9, 0.9),
+                                   y_breaks = seq(-0.4, 0.8, 0.2),
                                    several_gts = TRUE,
                                    geoscale = gsc1,
-                                   geoscale2 = gsc3,
+                                   geoscale2 = gsc4,
                                    geoscale_height=unit(1, "line")) +
-      annotate(geom = "rect", xmin = 37.71, xmax = Inf, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 27.82, xmax = 33.9, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 15.97, xmax = 23.03, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 11.63, xmax = 5.33, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
@@ -72,7 +79,7 @@ for(lvl in c("genus", "species")){
     ltt_df <- read.table(path_to_ltt, header = TRUE)
     ltt_df <- ltt_df %>%
       rename("Age" = time, "Diversity" = diversity, "min_Diversity" = m_div, "max_Diversity" = M_div)
-    ltt_df[nrow(ltt_df)+1, ] <- c(38.2, rep(NA, 3)) # for plotting
+    ltt_df[nrow(ltt_df)+1, ] <- c(36.2, rep(NA, 3)) # for plotting
     # LTT plot
     ltt.plot <- ltt_plot(ltt_df,
                          y_breaks = seq(0,(round(max(ltt_df$Diversity, na.rm = T), -1) + 5), 5),
@@ -81,9 +88,8 @@ for(lvl in c("genus", "species")){
                          manual_x_breaks = seq(0, 35, 5),
                          several_gts = TRUE,
                          geoscale = gsc1,
-                         geoscale2 = gsc3,
+                         geoscale2 = gsc4,
                          geoscale_height=unit(1, "line")) +
-      annotate(geom = "rect", xmin = 37.71, xmax = Inf, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 27.82, xmax = 33.9, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 15.97, xmax = 23.03, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 11.63, xmax = 5.33, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
@@ -99,12 +105,11 @@ for(lvl in c("genus", "species")){
                      ltt_df,
                      stage_x_breaks = FALSE,
                      manual_x_breaks = seq(0, 35, 5),
-                     y_breaks = seq(from = 0, to = round(max(q.table$max_HPD)), round(max(q.table$max_HPD))/4),
+                     y_breaks = seq(from = 0, to = round(max(q.table$max_HPD)), as.integer(round(max(q.table$max_HPD))/4)),
                      several_gts = TRUE,
                      geoscale = gsc1,
-                     geoscale2 = gsc3,
+                     geoscale2 = gsc4,
                      geoscale_height = unit(1, "line")) +
-      annotate(geom = "rect", xmin = 37.71, xmax = Inf, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 27.82, xmax = 33.9, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 15.97, xmax = 23.03, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 11.63, xmax = 5.33, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
@@ -130,20 +135,25 @@ for(lvl in c("genus", "species")){
     plot_list_frs <- freq_rate_shift(data = frs_tbl[[1]],
                                      bf2 = frs_tbl[[2]],
                                      bf6 = frs_tbl[[3]],
-                                     x_annots = 15,
-                                     y_annot_bf2 = 0.04,
-                                     y_annot_bf6 = 0.195,
+                                     x_annots = 25,
+                                     y_annot_bf2 = frs_tbl[[2]]+0.005,
+                                     y_annot_bf6 = frs_tbl[[3]]+0.005,
+                                     y_lab_sp = "Freq. of rate shift",
+                                     y_lab_ex = NULL,
                                      x_breaks = seq(35, 5, -5),
-                                     x_limits = c(38.2, 0),
+                                     x_limits = c(36.2, 0),
+                                     y_limits = c(0, max(c(frs_tbl[[3]]+0.02,
+                                                           max(frs_tbl[[1]][,1]+0.02), # max freq rate shift for speciation
+                                                           max(frs_tbl[[1]][,2]+0.02)))), # same for extinction
                                      several_gts = TRUE,
                                      geoscale = gsc1,
-                                     geoscale2 = gsc3,
-                                     geoscale_height = unit(1, "line"))
-    frs_panel <- ggarrange(plotlist = plot_list_frs, ncol = 2, labels = c("(A)", "(B)"), hjust = 0)
+                                     geoscale2 = gsc4,
+                                     geoscale_height = unit(.75, "line"))
+    frs_panel <- ggarrange(plotlist = plot_list_frs, ncol = 2, labels = c("(A)", "(B)"), widths = c(20.25/40, 19.75/40))
     out_pah_frs <- ggsave(paste0("./Figures/recap_figures_RJMCMC/Chinchilloidea_", lvl, "_", ana_out, "_frequency_of_rate_shift.pdf"),
                           plot = frs_panel,
-                          height = 175,
-                          width = 300,
+                          height = 140,
+                          width = 250,
                           units = "mm")
   }
 }
