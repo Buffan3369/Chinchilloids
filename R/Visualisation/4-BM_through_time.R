@@ -47,14 +47,19 @@ plot <- ds %>%
   annotate(geom = "segment", x = 0, xend = 0, y = 0, yend = med_BM_extant, colour = "red", linewidth = 1) +
   annotate(geom = "point", x = 0, y = med_BM_extant, shape = 19, colour = "black", size = 2)
 
+breaks <- sapply(X = c(0.1, 0.5, 1, 3, 5, 10, 20, 30, 35),
+                 FUN = function(x){return(log10(x))})
+
 logplot <- ds %>% 
   ggplot(aes(x = time, y = log(BM, base = 10), width = bin_length)) +
   geom_bar(stat = "identity", fill = "white", colour = "black") +
   scale_x_reverse() +
-  labs(x = "Time (Ma)", y = "Log10(Median body mass)") +
+  scale_y_continuous(breaks = breaks,
+                     labels = c(0.1, 0.5, 1, 3, 5, 10, 20, 30, 35)) +
+  labs(x = "Time (Ma)", y = "Median body mass (kg)") +
   annotate(geom = "segment", x = 0, xend = 0, y = 0, yend = log(med_BM_extant, base = 10), colour = "red", linewidth = 1) +
   annotate(geom = "point", x = 0, y = log(med_BM_extant, base = 10), shape = 19, colour = "black", size = 2)
 
 
-p <- ggarrange(plot, logplot, ncol = 2, labels = c("(A)", "(B)"), hjust = -0.3)
+p <- ggarrange(plot, logplot, ncol = 2, labels = c("(A)", "(B)"), hjust = -0.1)
 ggsave("./Figures/Supp/median_BM_through_time.pdf", plot=p, height = 100, width = 200, units = "mm")
