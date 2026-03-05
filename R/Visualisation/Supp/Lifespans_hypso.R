@@ -16,20 +16,27 @@ source("./R/useful/helper_functions.R")
 source("./R/useful/load_GTS.R")
 
 ## Assign species names and family to TsTe estimates ---------------------------
-TaxonList <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_TaxonList.txt", header = T)
+TaxonList <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED_TaxonList.txt", header = T)
 occdb <- read_xlsx("./Data/OccDB_cleaned/ChinchilloideaOccurrences_cleaned.xlsx")
 
 TaxonList <- TaxonList %>% 
   mutate(Family = sapply(X = Species, 
                          FUN = function(x){
-                           fam <- unique(occdb$family[which(occdb$accepted_name == x)])
+                           if(x %in% occdb$accepted_name){
+                             fam <- unique(occdb$family[which(occdb$accepted_name == x)])
+                           }
+                           if(x =="Dinomys_branickii"){
+                             fam <- "Dinomyidae"
+                           }
+                           if(x %in% c("Chinchilla_chinchilla", "Chinchilla_lanigera", "Lagidium_ahuacaense",
+                                       "Lagidium_peruanum", "Lagidium_viscacia", "Lagidium_wolffsohni")){
+                             fam <- "Chinchillidae"
+                           }
                            return(fam)
                          }))
-TaxonList$Family[1] <- "Dinomyidae" # "Telicomys"_amazonensis (quote issue)
 TaxonList$Family[which(is.na(TaxonList$Family))] <- "Stem Chinchilloidea"
-TaxonList$Family <- unlist(TaxonList$Family)
 
-TsTe_tbl <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est.txt", header = T)
+TsTe_tbl <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est.txt", header = T)
 TsTe_tbl <- TsTe_tbl %>%
   mutate(Family = TaxonList$Family,
          Species_name = TaxonList$Species)
@@ -46,10 +53,8 @@ TsTe_tbl <- TsTe_tbl %>%
   rename(ts = "mean_ts", te = "mean_te")
 rm(Ts_ttl, Te_ttl)
 # Remove the only genus-level taxon (my bad)
-TsTe_tbl$Family[which(TsTe_tbl$Species %in% c("Microscleromys_cribriphilus", 
-                                              "Microscleromys_paradoxalis"))] <- "NA" # truandage
 TsTe_tbl$Family <- factor(TsTe_tbl$Family, levels = rev(c("Chinchillidae", "Neoepiblemidae", "Dinomyidae", 
-                                                          "?Heptaxodontidae", "\"Cephalomyidae\"", "NA", "Stem Chinchilloidea")))
+                                                          "?Heptaxodontidae", "\"Cephalomyidae\"", "Stem Chinchilloidea")))
 # Rearrange
 TsTe_tbl <- TsTe_tbl %>% arrange(Family, ts)
 
