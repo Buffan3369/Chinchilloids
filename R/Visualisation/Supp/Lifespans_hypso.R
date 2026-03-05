@@ -222,7 +222,7 @@ lifespans_plot <- TsTe_tbl %>%
             xlim = c(35, 0)) +
   # Theme
   theme(axis.text.x = element_text(size = 10),
-        axis.text.y = element_text(face = "italic", size = 4.5, colour = TsTe_tbl$col_HI_cat),
+        axis.text.y = element_text(face = "italic", size = 4, colour = TsTe_tbl$col_HI_cat),
         axis.title.x = element_text(size = 12),
         legend.position = "bottom",
         legend.key = element_rect(fill="white"),
