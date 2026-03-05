@@ -24,9 +24,17 @@ csl: evolution.csl
 # Introduction
 
 
+large size/gigantism, cope's rule
 
-How taxonomic diversity and morphological disparity covary through evolutionary timescales has been a central aim of macroevolutionary research. Seminal works highlighted that clades could experience coordinated or decoupled diversity and disparity trajectories linked to biological diversification -- *i*.*e*., speciation and extinction, the processes generating diversity [@foote1993; @foote1997]. Far from a one-fits-them-all rule, the diversity-disparity interplay was rather shown to be complex and case-dependent, with speciation and extinction either acting as opposing forces or reinforcing one another in the contraction/expansion of the morphospace through evolutionary times [@simpson1944; @foote1993; @foote1997; @balseiro2025; @esteve2025]. Two classes of factors are usually invoked to explain the long-term dynamics of biological diversity, either taxonomic or phenotypic. On one hand, the classical 'Red Queen' hypothesis [@vanvalen1973] posits that evolutionary changes primarily result from biotic interactions. On the other hand, a wealth of hypotheses summarised under the 'Court Jester' model [@barnosky2001] rather placed the emphasis on abiotic factors as a primary source of evolutionary changes [*e*.*g*., @stenseth_coevolution_1984; @vrba1993; @vrba1995].
+evolutionary decline, coordinated behaviour of taxonomic diversification and phenotypic evolution (waxing-and-waning) 
 
+Macroevolutionary drivers behind diversification patterns
+
+
+
+How taxonomic diversity and morphological disparity covary through evolutionary timescales has long puzzled evolutionary biologists [@simpson1944]. In the animal realm, fossil evidence attest that giant forms were living in the past [*e*.*g*., @sander2011; @bianucci2023], raising the two-sided question of what drove the emergence and the subsequent demise of such extreme phenotypes [papiers KPg dinos?]. 
+
+Seminal works highlighted that clades could experience coordinated or decoupled diversity and disparity trajectories linked to biological diversification -- *i*.*e*., speciation and extinction, the processes generating diversity [@foote1993; @foote1997]. Far from a one-fits-them-all rule, the diversity-disparity interplay was rather shown to be complex and case-dependent, with speciation and extinction either acting as opposing forces or reinforcing one another in the contraction/expansion of the morphospace through evolutionary times [@foote1993; @foote1997; @balseiro2025; @esteve2025]. Two classes of factors are usually invoked to explain the long-term dynamics of biological diversity, either taxonomic or phenotypic. On one hand, the classical 'Red Queen' hypothesis [@vanvalen1973] posits that evolutionary changes primarily result from biotic interactions. On the other hand, a wealth of hypotheses summarised under the 'Court Jester' model [@barnosky2001] rather placed the emphasis on abiotic factors as a primary source of evolutionary changes [*e*.*g*., @stenseth_coevolution_1984; @vrba1993; @vrba1995].
 
 During most of the Cenozoic, the isolation of South America constrained the landmass' mammalian fauna to evolve in a vacuum, leading to a vast array of endemic radiations [*e*.*g*., @simpson1980]. Among the most emblematic are the impressively disparate New World hystricognath rodents (Hystricognathi: Caviomorpha), accounting for *c.* 10% of the global extant rodent diversity [@database]. The astonishing disparity within Caviomorpha is greatly exemplified by their body size range, going far beyond what is usually found in the Rodentia, from 50--80 g (*Tympanoctomys kirchnerorum* Teta, 2014) to 50 kg (*Hydrochoerus hydrochaeris* Linnaeus, 1766, the largest living rodent) [@patton2015]. In fact, hystricognaths, and particularly caviomorphs, evolved the largest body sizes found in the Rodentia. Whether this unique trajectory stems from intrinsic developmental capability, ecological opportunity or a combination of both remains an open question [@vucetich2015].
 
@@ -108,9 +116,11 @@ To investigate the potential effect of species age on their extinction probabili
 
 ## The waxing-and-waning diversity of chinchilloid rodents
 
-## A body-mass selective sea-level and diversity-dependent recent evolutionary decline
+## A body-mass selective sea-level and diversity-dependent evolutionary decline
 
 Evidence for Cope's rule
+
+Speciation rate significantly differs across body size classes, with larger taxa achieving higher values (Fig. X and S5). According to the BDNN model, body size stands out as the first predictor explaining variations in speciation rate within Chinchilloidea, with a *ca*. 2.5-fold change obtained between our two extrema (*i*.*e*., XS and XXL =\> **indicate on the violin plot**).
 
 ## Side notes
 
@@ -188,8 +198,7 @@ Why did chinchilloid follow Cope's rule whereas octodontoids did not?
 
 ## Limitations and perspectives
 
-
-### Taxonomic uncertainties 
+### Taxonomic uncertainties
 
 In the framework of Chinchilloidea, taxonomic uncertainties regarding key taxa (or faunas) surely hampers our appreciation of their evolutionary history.
 
@@ -209,7 +218,6 @@ On the other hand, the trend towards general size increase could also come from 
 Challenge to infer body sizes of extinct taxa with little extant representatives =\> Estimates can vary significantly based on the proxy or the modelling system used [@boivin2024; @paiva2026].
 
 Being large implies additional energetic requirements =\> diet. Need for additional studies to quantify diet shifts in large forms using quantitative methods like microwear texture analysis [*e*.*g*., @robinet2020; @hullot2025].
-
 
 # Conclusions
 
@@ -235,8 +243,8 @@ Torsten Hauffe for his advice regarding the use of BDNN. Rebecca B. Cooper and B
 knitr::include_graphics("../Figures/Main/extant_sampling/extant_sampling.png")
 ```
 
-|
-|
+| 
+| 
 
 ```{r, echo=FALSE}
 #| label: fig-lifespans
@@ -252,11 +260,11 @@ knitr::include_graphics("../Figures/Main/Lifespans/lifespans_distribs.png")
 
 ```{r, echo=FALSE}
 #| label: fig-diversity
-#| out-height: 7cm
-#| out-width: 14cm
-#| fig-cap: Comparative occurrence-based chinchilloid diversity reconstructions. Estimates were either produced in a bayesian preservation-aware framework jointly assessing the times of speciation and extinction of each species from the temporal occurrence database (PyRate) **(A)**, or using a simulation-based deep-learning framework incorporating a wide variety of biases to reconstruct the temporal variations of the "true" (*i*.*e*., corrected) diversity (DeepDive) **(B)**. In **(A)**, the full line represents the median diversity estimate across all PyRate runs that achieved convergence and the ribbon shows its associated 95% HPD interval. In **(B)**, the full line shows the mean diversity estimate per 1Myr-bin obtained across the 100 replicates of empirical prediction while the darker and lighter ribbons show the intervals respectively encompassing 50% and 95% of the per-bin diversity distribution across the 100 replicates.
+#| out-height: 20cm
+#| out-width: 7cm
+#| fig-cap: The joint diversity and clade-wise body size dynamics of Chinchilloidea. Occurrence-based diversity reconstructions were either produced in a bayesian preservation-aware framework jointly assessing the times of speciation and extinction of each species from the temporal occurrence database (PyRate) **(A)**, or using a simulation-based deep-learning framework incorporating a wide variety of biases to reconstruct the temporal variations of the "true" (*i*.*e*., corrected) diversity in 1-Myr time bins (DeepDive) **(B)**. Body mass through time reconstructions (**C**, log scale) were produced after binning our the body mass estimates of each species in 1-Myr time bins. The body mass of a taxon was included within a given bin if its reconstructed lifepan overlapped with it. The black dot at the right of the plot shows the median body mass of the extant chinchilloids, and the red line shows its range. In all cases, full lines represent median estimates and the lightest ribbon either shows their associated 95% HPD interval **(A** and **B)** or the total range of values **(C)**. In **(B)**, the darker ribbon depicts the interval encompassing 50% of the per-bin diversity distribution across the 100 DeepDive replicates.
 
-knitr::include_graphics("../Figures/Main/Diversity_through_time.png")
+knitr::include_graphics("../Figures/Main/Diversity_and_BM_through_time.png")
 ```
 
 | 
