@@ -50,13 +50,14 @@ ltt.plot <- ltt_plot(ltt_tbl,
                      ticks.labelsize = 6,
                      x_lab = NULL,
                      y_lab = "# species",
-                     main = "Diversity (PyRate)",
+                     main = "Sampled Diversity (PyRate)",
                      main.size = 11,
                      y_limits = c(0, max(ltt_tbl$max_Diversity)+5),
                      y_breaks = seq(0, 30, 5),
+                     show_culotte = TRUE,
                      lwd = 0.5,
                      display_gts = FALSE,
-                     xlim = c(36, 0),
+                     xlim = c(34.5, 0),
                      avg_col = "#006d2c",
                      ribbon_col = "#74c476",
                      plot.border = FALSE,
@@ -84,7 +85,8 @@ dd_div <- dd_pred_plot(dd_pred_tbl = dd_pred_table,
                        x.axis = FALSE,
                        x_lab = NULL,
                        y_lab = "# species",
-                       main = "'Corrected' diversity (DeepDive)",
+                       main = "Corrected Diversity (DeepDive)",
+                       show_culotte = TRUE,
                        main.size = 11,
                        y_limits = c(0, max(dd_pred_table$maj_M)+5),
                        y_breaks = seq(0, max(dd_pred_table$maj_M), 10),
@@ -144,8 +146,16 @@ ds$time[1] <- 0.25 # for plotting
 
 step_plot <- ds %>% 
   ggplot(aes(x = time, y = log10(BM*1000))) +
+  # Lolo's segments
+  annotate(geom = "segment", x = 27.82, xend = 27.82, y = 1.99, yend = Inf, linetype = "dashed", linewidth = 0.2, colour = "grey80") +
+  annotate(geom = "segment", x = 23.04, xend = 23.04, y = 1.99, yend = Inf, linetype = "dashed", linewidth = 0.2, colour = "grey80") +
+  annotate(geom = "segment", x = 15.97, xend = 15.97, y = 1.99, yend = Inf, linetype = "dashed", linewidth = 0.2, colour = "grey80") +
+  annotate(geom = "segment", x = 11.63, xend = 11.63, y = 1.99, yend = Inf, linetype = "dashed", linewidth = 0.2, colour = "grey80") +
+  annotate(geom = "segment", x = 5.33, xend = 5.33, y = 1.99, yend = Inf, linetype = "dashed", linewidth = 0.2, colour = "grey80") +
+  annotate(geom = "segment", x = 2.58, xend = 2.58, y = 1.99, yend = Inf, linetype = "dashed", linewidth = 0.2, colour = "grey80") +
+  # Actual plot
   geom_stepribbon(aes(ymin = log10(minBM*1000), ymax = log10(maxBM*1000)), fill="purple", alpha = 0.2) +
-  geom_step() +
+  geom_step(colour = "#980043") +
   annotate(geom = "segment", x = 0, y = log10(min_BM_extant*1000), yend = log10(max_BM_extant*1000), colour = "red") +
   annotate(geom = "point", x = 0, y = log10(med_BM_extant*1000), shape = 19, colour = "black", size = 2) +
   scale_x_reverse(breaks = seq(0, 30, 5), expand = c(0, 0)) +
