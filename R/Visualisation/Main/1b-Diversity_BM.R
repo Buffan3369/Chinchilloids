@@ -36,13 +36,6 @@ ltt_tbl <- ltt_tbl %>%
   filter(Age <= 34.5)
 ltt_tbl$Age[which.max(ltt_tbl$Age)] <- 34.5
 
-# Lagidium silhouette
-lagidium_uuid <- get_uuid(name = "Lagidium peruanum")
-lagidium_img <- get_phylopic(uuid = lagidium_uuid)
-# Josephoartigasia silhouette
-josephoartigasia_uuid <- get_uuid(name = "Josephoartigasia monesi")
-josephoartigasia_img <- get_phylopic(uuid = josephoartigasia_uuid)
-
 ltt.plot <- ltt_plot(ltt_tbl,
                      stage_x_breaks = FALSE,
                      manual_x_breaks = seq(0, 35, 5),
@@ -52,8 +45,8 @@ ltt.plot <- ltt_plot(ltt_tbl,
                      y_lab = "# species",
                      main = "Sampled Diversity (PyRate)",
                      main.size = 11,
-                     y_limits = c(0, max(ltt_tbl$max_Diversity)+5),
-                     y_breaks = seq(0, 30, 5),
+                     y_limits = c(0, 3),
+                     y_breaks = seq(0, 25, 5),
                      show_culotte = TRUE,
                      lwd = 0.5,
                      display_gts = FALSE,
@@ -67,10 +60,7 @@ ltt.plot <- ltt_plot(ltt_tbl,
   annotate(geom = "rect", xmin = 0, xmax = 2.58, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
   annotate(geom = "rect", xmin = 5.33, xmax = 11.63, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
   annotate(geom = "rect", xmin = 15.97, xmax = 23.03, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
-  annotate(geom = "rect", xmin = 27.82, xmax = 33.9, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
-  # Add silhouettes
-  add_phylopic(img = lagidium_img, x = 31, y = 30, height = 5) +
-  add_phylopic(img = josephoartigasia_img, x = 28, y = 24, height = 5) 
+  annotate(geom = "rect", xmin = 27.82, xmax = 33.9, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2)
 
 ## DeepDive empirical predictions ----------------------------------------------
 empi_pred_path <- "./Results/DeepDive/species_extant_extended/species_extant_extended_models/simulation_species_extant_extended_ET_20260224_lstm64_32_d64_32_conditional/"
