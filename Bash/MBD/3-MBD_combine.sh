@@ -30,4 +30,13 @@
 #python  ~/PyRate/PyRate.py -combLog ../../Results/MBD/species/MBD_scaled_hsp0/late -tag _KEEP -resample 100 -b 10
 
 # Species extant extended (gamma prior)
-python  ~/PyRate/PyRate.py -combLog ../../Results/MBD/species_extant_extended -tag _KEEP -resample 100 -b 10
+#python  ~/PyRate/PyRate.py -combLog ../../Results/MBD/species_extant_extended -tag _KEEP -resample 100 -b 10
+
+# Species extant extended (gamma prior) − unphased predictors
+#python  ~/PyRate/PyRate.py -combLog ../../Results/MBD/unphased/MBD_scaled_unphased_hsp0 -tag _KEEP -resample 100 -b 10
+
+# Species extant extended − unphased predictors
+#python  ~/PyRate/PyRate.py -combLog ../../Results/MBD/unphased/MBD_scaled_unphased -tag _KEEP -resample 100 -b 10
+
+# Species extant extended − unphased predictors
+python  ~/PyRate/PyRate.py -combLog ../../Results/MBD/species_rmDD -tag _KEEP -resample 100 -b 10
