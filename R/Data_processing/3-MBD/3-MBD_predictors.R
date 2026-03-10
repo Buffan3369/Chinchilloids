@@ -9,13 +9,16 @@
 library(tidyverse)
 source("./R/useful/helper_functions.R")
 
+################################################################################
+############################# 0.5 My time step #################################
+################################################################################
 
 ## Regional South American temperature (Tardif et al. 2025) --------------------
 temp <- read.table("./Data/MBD_predictors/SA_regional_temperatures_Tardif_2025.txt", header = T)
 # Downscale to a 0.5My time step
-selected_indices <- sapply(X = seq(0, 38, 0.5), FUN = select_closer, age_vect = temp$Time)
+selected_indices <- sapply(X = seq(0, 36, 0.5), FUN = select_closer, age_vect = temp$Time)
 temp500k <- temp[selected_indices, c(1, 2)] # only retain MAT
-temp500k$Time <- seq(0, 38, 0.5) # Harmonise time vector
+temp500k$Time <- seq(0, 36, 0.5) # Harmonise time vector
 colnames(temp500k) <- c("Time", "Temperature")
 write.table.lucas(temp500k, "./Data/MBD_predictors/1-Palaeotemperature_500ky_step_Tardif.txt")
 # Scale
@@ -56,7 +59,7 @@ new_uplift <- data.frame(Age = new_age[1:(length(new_age)-2)],
 # dev.off()
 # # OK
 
-new_uplift <- new_uplift %>% filter(Age <= 38)
+new_uplift <- new_uplift %>% filter(Age <= 36)
 write.table.lucas(new_uplift, "./Data/MBD_predictors/2-Average_Andean_uplift_500ky_step.txt")
 # Scale
 new_uplift <- new_uplift %>% mutate(elev = scale(elev))
@@ -77,9 +80,9 @@ sea_lvl <- read.table("../Chapter_1/data_2023/MBD/raw_environment_correlates/sea
 sea_lvl <- sea_lvl %>% 
   mutate(age_calkaBP = sapply(X = sea_lvl$age_calkaBP, FUN = function(x){x/1000})) %>% 
   rename(age_MaBP = "age_calkaBP")
-selected_indices <- sapply(X = seq(from = 0, to = 38, by = 0.5), FUN = select_closer, age_vect = sea_lvl$age_MaBP)
+selected_indices <- sapply(X = seq(from = 0, to = 36, by = 0.5), FUN = select_closer, age_vect = sea_lvl$age_MaBP)
 # dataframe
-slvl <- data.frame(Age = seq(from = 0, to = 38, by = 0.5),
+slvl <- data.frame(Age = seq(from = 0, to = 36, by = 0.5),
                    Sea_level = sea_lvl$sealevel[selected_indices])
 write.table.lucas(x = slvl, file = "./Data/MBD_predictors/3-Sea_level_500ky_step.txt")
 # Scale
@@ -93,3 +96,45 @@ write.table.lucas(x = slvl_early, file = "./Data/MBD_predictors_Scaled/early/3-S
 slvl_late <- slvl %>% filter(Age <= 6)
 write.table.lucas(x = slvl_late, file = "./Data/MBD_predictors_Scaled/late/3-Sea_level_500ky_step_SCALED_late.txt")
 
+
+################################################################################
+############################ Natural time scale ################################
+################################################################################
+
+## Regional South American temperature (Tardif et al. 2025) --------------------
+temp <- read.table("./Data/MBD_predictors/SA_regional_temperatures_Tardif_2025.txt", header = T)
+# Filter out time frame and scale
+temp_processed <- temp %>% 
+  filter(Time <= 36) %>% 
+  rename(Age = "Time", Temperature = "SAMMAT") %>% 
+  mutate(Temperature = as.numeric(scale(Temperature))) %>% 
+  select(all_of(c("Age", "Temperature")))
+write.table.lucas(temp_processed, "./Data/MBD_predictors_scaled_unphased/1-Palaeotemperature_Tardif_SCALED.txt")
+
+## Andean uplift (Boschman & Condamine 2022) -----------------------------------
+andes <- read.table("../Chapter_1/data_2023/MBD/raw_environment_correlates/andean_uplift/Andes_mean_elevations_no_basins_ALL.txt",
+                    header = T)
+andes_av <- data.frame(Age = unique(andes$Age),
+                       Mean_elev = sapply(X = unique(andes$Age),
+                                          FUN = function(age){
+                                            elev_age <- andes$Altitude[which(andes$Age == age)]
+                                            return(mean(elev_age))
+                                          })
+)
+upl <- andes_av %>% 
+  filter(Age <= 36) %>% 
+  mutate(Mean_elev = as.numeric(scale(Mean_elev)))
+write.table.lucas(upl, "./Data/MBD_predictors_scaled_unphased/2-Average_Andean_uplift_SCALED.txt")
+
+## Global sea level (from Miller et al. 2020) ----------------------------------
+sea_lvl <- read.table("../Chapter_1/data_2023/MBD/raw_environment_correlates/sea_level/Miller_2020_sea_level_data.txt",
+                      sep = "\t",
+                      header = TRUE)
+sea_lvl <- sea_lvl %>% 
+  mutate(age_calkaBP = sapply(X = sea_lvl$age_calkaBP, FUN = function(x){x/1000})) %>% 
+  rename(Age = "age_calkaBP") %>% 
+  filter(Age <= 36) %>% 
+  mutate(sealevel = as.numeric(scale(sealevel))) %>% 
+  select(all_of(c("Age", "sealevel")))
+# dataframe
+write.table.lucas(x = sea_lvl, file = "./Data/MBD_predictors_scaled_unphased/3-Sea_level_SCALED.txt")
