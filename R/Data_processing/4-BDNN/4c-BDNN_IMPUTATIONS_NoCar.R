@@ -1,9 +1,10 @@
 ################################################################################
-# Title: 4-4b-BDNN_IMPUTATIONS.R
+# Title: 4c-BDNN_IMPUTATIONS_NoCar.R
 # Author: Lucas Buffan
 # E-mail: lucas.l.buffan@gmail.com
 # Description: Preprocess covariates that will be fed into BDNN + impute missing
 #              for fossil taxa lacking trait values and repeat 10 times imputation
+#              leaving apart Caribbean taxa.
 ################################################################################
 
 library(tidyverse)
@@ -23,9 +24,9 @@ transf_features_tbl <- data.frame(Temperature = c(NA, NA),
 ### Regional South American temperature (Tardif et al. 2025) ###
 temp <- read.table("./Data/MBD_predictors/SA_regional_temperatures_Tardif_2025.txt", header = T)
 # Downscale to a 0.5My time step
-selected_indices <- sapply(X = seq(0, 38, 0.5), FUN = select_closer, age_vect = temp$Time)
+selected_indices <- sapply(X = seq(0, 36, 0.5), FUN = select_closer, age_vect = temp$Time)
 temp500k <- temp[selected_indices, c(1, 2)] # only retain MAT
-temp500k$Time <- seq(0, 38, 0.5) # Harmonise time vector
+temp500k$Time <- seq(0, 36, 0.5) # Harmonise time vector
 colnames(temp500k) <- c("Time", "Temperature")
 # Save mean and sd in tf table
 mean_Temp <- mean(temp500k$Temperature, na.rm = T)
@@ -55,8 +56,8 @@ covar_scaled <- covar_scaled %>% mutate(Sea_level = (slv$Sea_level - mean_slv)/s
 ### Self-diversity (specific) ###
 SelfDiv <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est_ltt.txt",
                       header = T)
-# Downscale so it matches the timescale (last 38 Myrs with a 0.5Myr step)
-selected_div <- sapply(X = seq(0, 38, 0.5), FUN = select_closer, age_vect = SelfDiv$time)
+# Downscale so it matches the timescale (last 36 Myrs with a 0.5Myr step)
+selected_div <- sapply(X = seq(0, 36, 0.5), FUN = select_closer, age_vect = SelfDiv$time)
 SelfDiv_down <- SelfDiv[selected_div, ] %>% 
   select(time, diversity) %>% 
   mutate(time = sapply(time, FUN = round, digits = 1)) # the last time is 37.9, we'll approximate to 38
@@ -69,7 +70,7 @@ covar_scaled <- covar_scaled %>% mutate(Self_diversity = (SelfDiv_down$diversity
 
 ### Save time-continuous correlate table ###
 for(i in 1:10){
-  write.table.lucas(covar_scaled, paste0("./Data/BDNN_imputation/Features/Replicate_", i, 
+  write.table.lucas(covar_scaled, paste0("./Data/BDNN_imputation_NoCar/Features/Replicate_", i, 
                                          "/Continuous_correlates.txt"))
 }
 
@@ -78,8 +79,14 @@ for(i in 1:10){
 ### Tropicality (+ pertenency to West Indies, see MacPhee 2011) ###
 chinchi <- read_xlsx("./Data/OccDB_cleaned/ChinchilloideaOccurrences_cleaned.xlsx")
 
+# Carribean taxa
+caribbea <- c("Amblyrhiza_inundata", "Borikenomys_praecursor", 
+              "Clidomys_osborni","Elasmodontomys_obliquus", "Quemisia_gravis")
+
 chinchi <- chinchi %>%
-  filter(!is.na(sp_lvl_status)) %>% 
+  filter(!is.na(sp_lvl_status) & 
+          # Filter out caribbean taxa
+          !(accepted_name %in% caribbea)) %>% 
   select(accepted_name, sp_lvl_status, min_ma, max_ma, loc) %>% 
   mutate(min_ma = as.numeric(min_ma), max_ma = as.numeric(max_ma)) %>% 
   rename(Species = "accepted_name", Status = "sp_lvl_status", min_age = "min_ma", max_age = "max_ma")
@@ -104,15 +111,10 @@ extant_chinchi <- extant_chinchi %>%
                       }))
 chinchi_ext <- rbind(chinchi, extant_chinchi)
 
-# Carribean taxa
-caribbea <- c("Amblyrhiza_inundata", "Borikenomys_praecursor", 
-              "Clidomys_osborni","Elasmodontomys_obliquus", "Quemisia_gravis")
-
 # One-hot encoding for taxa both found under tropical and extratropical latitudes
 categorical_traits <- data.frame(Species = sort(unique(chinchi_ext$Species)),
                                  Tropical = NA,
-                                 Extratropical = NA,
-                                 Caribbean = NA)
+                                 Extratropical = NA)
 categorical_traits <- categorical_traits %>% 
   mutate(Tropical = sapply(X = Species,
                            FUN = function(x){
@@ -143,25 +145,19 @@ categorical_traits <- categorical_traits %>%
                                   else{
                                     return(0)
                                   }
-                                }),
-         Caribbean = sapply(X = Species,
-                            FUN = function(x){
-                              if(x %in% caribbea){
-                                return(1)
-                              }
-                              else{
-                                return(0)
-                              }
-                            }))
+                                }))
 # Remove `loc` column for input generation
 chinchi_ext <- chinchi_ext %>% 
   select(!(loc))
 
 ## Other traits ----------------------------------------------------------------
 BM <- read_xlsx("./Data/Traits/Species_Lists/Chinchilloidea_BodyMass_SpeciesList.xlsx")
+BM <- BM %>% filter(!(name %in% caribbea)) # Filter out caribbean taxa
 BM$`BodyMass category` <- as.numeric(BM$`BodyMass category`)
 na_BM <- which(is.na(BM$`BodyMass category`)) # taxa with missing body mass estimate
+
 hypso <- read_xlsx("./Data/Traits/Species_Lists/Chinchilloidea_Hypsodonty_SpeciesList.xlsx")
+hypso <- hypso %>% filter(!(name %in% caribbea)) # Filter out caribbean taxa
 hypso$Hypsodonty_category <- as.numeric(hypso$Hypsodonty_category)
 na_HI <- which(is.na(hypso$Hypsodonty_category)) # taxa with missing body mass estimate
 
@@ -179,7 +175,7 @@ for(i in 1:10){
   categorical_traits <- categorical_traits %>% 
     mutate(Body_mass = sapply(X = categorical_traits$Species,
                               FUN = function(x){return(BM$BM_class_scld[which(BM$name == x)])}
-                              )
+    )
     )
   
   ### Hypsodonty Index
@@ -188,11 +184,11 @@ for(i in 1:10){
   hypso$Hypsodonty_category[na_HI] <- 
     sapply(X = 1:length(na_HI),
            FUN = function(x){
-            r <- runif(1)
-            vect <- sapply(X = r, FUN = function(a){ifelse(a<=0.4, 3, 4)})
-            return(vect)
-            }
-           )
+             r <- runif(1)
+             vect <- sapply(X = r, FUN = function(a){ifelse(a<=0.4, 3, 4)})
+             return(vect)
+           }
+    )
   # Save the median
   med_hyp <- median(hypso$Hypsodonty_category, na.rm = T)
   transf_features_tbl$Hypsodonty <- c(med_hyp, 1)
@@ -209,17 +205,17 @@ for(i in 1:10){
     )
   
   ### Save species-specific categorical traits as well as transform feature table ###
-  write.table.lucas(categorical_traits, paste0("./Data/BDNN_imputation/Features/Replicate_", i,
+  write.table.lucas(categorical_traits, paste0("./Data/BDNN_imputation_NoCar/Features/Replicate_", i,
                                                "/Categorical_traits_Replicate_", i, ".txt"))
-  write.table.lucas(transf_features_tbl, paste0("./Data/BDNN_imputation/Features/Replicate_", i,
+  write.table.lucas(transf_features_tbl, paste0("./Data/BDNN_imputation_NoCar/Features/Replicate_", i,
                                                 "/Backscale_Replicate_", i, ".txt"))
   
   
   ## Generate occurrence data for each replicate
   write.table.lucas(chinchi_ext, 
-                    paste0("./Data/BDNN_imputation/Input/Replicate_", i, 
+                    paste0("./Data/BDNN_imputation_NoCar/Input/Replicate_", i, 
                            "/Chinchilloidea_species_occdb_Replicate_", i, ".txt"))
-  extract.ages(paste0("./Data/BDNN_imputation/Input/Replicate_", i, 
+  extract.ages(paste0("./Data/BDNN_imputation_NoCar/Input/Replicate_", i, 
                       "/Chinchilloidea_species_occdb_Replicate_", i, ".txt"), 
                replicates = 10)
 }
