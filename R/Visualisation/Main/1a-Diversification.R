@@ -1,5 +1,5 @@
 ################################################################################
-# Name: 1-Diversification.R
+# Name: 1a-Diversification.R
 # Author: Lucas Buffan (Lucas.L.Buffan@gmail.com)
 # Aim: Plot diversification rates through time estimated by different models
 ################################################################################
