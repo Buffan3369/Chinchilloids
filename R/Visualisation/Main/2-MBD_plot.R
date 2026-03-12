@@ -12,7 +12,7 @@ source("./R/useful/MBD_accessory.R")
 rate.labs <- c("Extinction rate", "Speciation rate")
 names(rate.labs) <- c("Extinction", "Speciation")
 
-dir <- "./Results/MBD/species_extant_extended/"
+dir <- "./Results/MBD/species/"
 int <- NA
 tmp <- out_table_MBD(dir, interval = int, consider_w = F)
 plot_df <- tmp[[1]]
