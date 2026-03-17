@@ -25,7 +25,7 @@ chinchi_sp <- chinchi_sp %>%
                       })) %>% 
   distinct(Species, FAD, LAD, Study)
 
-database_Carrillo <- read_xlsx("~/Téléchargements/Data_from_Carrillo_et_al_Caviomorphs/Data from Carrillo et al Caviomorphs/Dataset S5 - Diversity through time/DeepDive diversity estimates/Chinchilloidea_dd.xlsx")
+database_Carrillo <- read_xlsx("./Data/Data_from_Carrillo_et_al_Caviomorphs/Dataset S5 - Diversity through time/DeepDive diversity estimates/Chinchilloidea_dd.xlsx")
 database_Carrillo <- database_Carrillo %>%
   mutate(FAD = sapply(X = database_Carrillo$species,
                       FUN = function(x){
@@ -84,7 +84,7 @@ rough_plot <- MERGE_DB %>%
         panel.background = element_rect(fill = "grey97"),
         plot.margin = unit(c(0.5, 2, 0.5, 0.5), "cm"))
 
-ggsave("./Data/comparing_with_Carrillo/comparative_LAD_FAD.pdf", height = 200, 
+ggsave("./Results/comparing_with_Carrillo/comparative_LAD_FAD.pdf", height = 200, 
        width = 250, plot = rough_plot, units = "mm")
 
 # Persistence violin
@@ -101,5 +101,5 @@ persistence_plot <- MERGE_DB %>%
   scale_fill_manual(values = c("#F8766D", "#619CFF")) +
   geom_point()
 
-ggsave("./Data/comparing_with_Carrillo/persistence_violin.pdf", height = 150, 
+ggsave("./Results/comparing_with_Carrillo/persistence_violin.pdf", height = 150, 
        width = 150, plot = persistence_plot, units = "mm")

@@ -97,7 +97,7 @@ Added two occurrences of *Saremmys ligcura* from the two localities of Bryn Gwyn
 
 We acknowledge the proposition of synonimisation between *Telicomys gigantissimus* and *Telicomys giganteus* made by @rasia2025. However, in the light of phylogenetic analyses that are currently in progress, we decided not to account for it, therefore treating *T. gigantissimus* and *T. giganteus* as two distinct taxa.
 
-Additional details are provided in the `Remark` column of *Dataset S1*..
+Additional details are provided in the `Remark` column of *Dataset S1*.
 
 \newpage
 
@@ -178,6 +178,20 @@ knitr::include_graphics("../Figures/Supp/RTT_per_BM/freq_rate_shift_per_BM.pdf")
 ```
 
 ```{r, echo=FALSE}
+#| label: fig-RTT_BDNN_NoCar15
+#| fig-cap: Marginal chinchilloid speciation (blue) and extinction (red) rates through time as estimated by our BDNN analyses of the datasets with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$). Caribbean taxa were excluded. Full lines show median rate estimates and ribbons their associated 95% Highest Posterior Density (HPD) interval, assessed acrossed the 10 independent BDNN runs randomising fossil ages under a uniform law made for each trait imputation. This panel only depicts the rates through time from replicate 1 to 5.
+
+knitr::include_graphics("../Figures/Supp/RTT_imputation/RTT_imput_full_NoCar15.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-RTT_BDNN_NoCar610
+#| fig-cap: Marginal chinchilloid speciation (blue) and extinction (red) rates through time as estimated by our BDNN analyses of the datasets with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$). Caribbean taxa were excluded. Full lines show median rate estimates and ribbons their associated 95% Highest Posterior Density (HPD) interval, assessed acrossed the 10 independent BDNN runs randomising fossil ages under a uniform law made for each trait imputation. This panel only depicts the rates through time from replicate 1 to 5.
+
+knitr::include_graphics("../Figures/Supp/RTT_imputation/RTT_imput_full_NoCar610.pdf")
+```
+
+```{r, echo=FALSE}
 #| label: fig-ddHistPlotL2D2
 #| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising two LSTM units (64 and 32 nodes) connected to two dense layers (64 and 32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts increasing, indicative of overfitting. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
 
@@ -210,13 +224,16 @@ library(kableExtra)
 convert_bold <- function(el){
   return(paste0("**", el, "**"))
 }
+# Load additional libraries
+library(readxl)
+library(dplyr, warn.conflicts = FALSE)
 ```
 
 | 
 | 
 
 ```{r, echo=FALSE}
-#| label: tbl-1
+#| label: tbl-DDperf
 #| tbl-cap: "Performance of the different network architectures tested in our DeepDive analyses. `LSTM Layers` and `Fully-connected` are respectively the number of Long Short Term Memory and Fully-connected units of the network (3: 128, 64 and 32 nodes; 2: 64 and 32 nodes; 1: 32 nodes). `Dropout` represents the Monte-Carlo dropout fraction, that is, the proportion of connections between neurons randomly toggled off between two learning epochs -- one epoch being characterised by a complete pass through the entire training dataset −, preventing from overfitting. `Nb. training epochs` is the optimal number of training epochs. `Training loss` and `Validation loss` are the values of the Mean Squared Error (MSE) estimated between the 'true' diversity of each simulated dataset (resp. from the training or the validation set), and the predicted diversity made by the network after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs. `Evaluation loss` represent the MSE between each true and its associated predicted diversity trajectory from the test datset, once the is trained (*i*.*e*., after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs). The optimal number of epochs is determined when the `Validation loss` starts increasing (see @fig-ddHistPlotL2D2). Architectures resulting in the smallest evaluation loss values, *i*.*e*., generating the most accurate predictions, are depicted in bold."
 
 tbl_dd <- read.csv("../Data/supp_tbl/dd_network_perf.csv")
@@ -260,7 +277,7 @@ knitr::kable(tbl, align = "c")
 #| label: tbl-Refsilhouettes
 #| tbl-cap: References of the silhouettes used in Figure 1, from [Phylopic](https://www.phylopic.org/).
 
-library(readxl)
+
 tbl <- read_xlsx("../Data/supp_tbl/phylopic_ID_table.xlsx")
 # Italicise species names
 tbl$Silhouette <- sapply(X = tbl$Silhouette, FUN = function(x){paste0("*", x, "*")})
@@ -269,6 +286,86 @@ colnames(tbl) <- sapply(X = colnames(tbl), FUN = function(x){paste0("**", x, "**
 
 # Display
 knitr::kable(tbl, align = "c")
+```
+
+
+```{r, echo=FALSE}
+#| label: tbl-cv_sp
+#| tbl-cap: Coefficient of speciation rate variation across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$), excluding caribbean taxa. Simulated values (`cv_simulated`) were obtained from the analysis of 100 simulated datasets matching the empirical datasets in terms of number of traits, clade age and (approximately) number of extant species, generated under a constant-rate birth-death model. Empirical values (`cv_empirical`) were obtained from the analysis of the empirical dataset.
+
+# Load and adapt table
+cv_tbl_sp <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/coeff_speciation_rate_variation_across_replicates_NoCar.RDS")
+cv_tbl_sp <- cv_tbl_sp %>% 
+  mutate(cv_empirical = as.numeric(cv_empirical), cv_expected = as.numeric(cv_expected)) %>% 
+  mutate(cv_empirical = sapply(X = cv_empirical, FUN = round, digits = 2)) %>% 
+  mutate(cv_expected = sapply(X = cv_expected, FUN = round, digits = 2))
+cv_tbl_sp[nrow(cv_tbl_sp), ] <- sapply(X = cv_tbl_sp[nrow(cv_tbl_sp), ],
+                                       FUN = convert_bold)
+
+# Display
+knitr::kable(cv_tbl_sp, align = "c")
+```
+
+|
+|
+
+```{r, echo=FALSE}
+#| label: tbl-cv_ex
+#| tbl-cap: Coefficient of extinction rate variation across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$), excluding caribbean taxa.
+
+# Load and adapt table
+cv_tbl_ex <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/coeff_extinction_rate_variation_across_replicates_NoCar.RDS")
+cv_tbl_ex <- cv_tbl_ex %>% 
+  mutate(cv_empirical = as.numeric(cv_empirical), cv_expected = as.numeric(cv_expected)) %>% 
+  mutate(cv_empirical = sapply(X = cv_empirical, FUN = round, digits = 2)) %>% 
+  mutate(cv_expected = sapply(X = cv_expected, FUN = round, digits = 2))
+cv_tbl_ex[nrow(cv_tbl_ex), ] <- sapply(X = cv_tbl_ex[nrow(cv_tbl_ex), ],
+                                       FUN = convert_bold)
+# Display
+knitr::kable(cv_tbl_ex, align = "c")
+
+```
+
+
+{{< pagebreak >}}
+
+```{r, echo=FALSE}
+#| label: tbl-pred_imp_sp
+#| tbl-cap: Predictor importance on speciation rate across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$) after excluding caribbean taxa. `R.i` stands for replicate i, for i in [1,10]. The `SumRank` column indicates, for a given predictor, the sum of the ranks of this predictors across replicates. The `Rank` column represents the overall rank of the predictor (*i*.*e*., sorting sum of the ranks by increasing order), with higher ranks (*i*.*e*., closer to 1) indicating greater contribution to speciation rate variation across species.
+
+# Load
+pred_imp_tbl_sp <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/BDNN_predictor_importance_sp_rate_NoCar.RDS")
+pred_imp_tbl_sp <- pred_imp_tbl_sp[order(pred_imp_tbl_sp$OverallRank), ]
+rownames(pred_imp_tbl_sp) <- 1:nrow(pred_imp_tbl_sp)
+# Make it clearer
+colnames(pred_imp_tbl_sp) <- gsub("^Replicate_", "R. ", colnames(pred_imp_tbl_sp))
+pred_imp_tbl_sp <- pred_imp_tbl_sp %>% rename(Rank = "OverallRank")
+# Highlight the podium
+pred_imp_tbl_sp[1:3, c("Predictor", "Rank")] <- apply(X = pred_imp_tbl_sp[1:3, c("Predictor", "Rank")],
+                                                             FUN = convert_bold,
+                                                             MARGIN = c(1,2))
+# Display
+knitr::kable(pred_imp_tbl_sp, align = "c")
+```
+
+
+```{r, echo=FALSE}
+#| label: tbl-pred_imp_ex
+#| tbl-cap: Predictor importance on extinction rate across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$) after excluding caribbean taxa. `R.i` stands for replicate i, for i in [1,10]. The `SumRank` column indicates, for a given predictor, the sum of the ranks of this predictors across replicates. The `Rank` column represents the overall rank of the predictor (*i*.*e*., sorting sum of the ranks by increasing order), with higher ranks (*i*.*e*., closer to 1) indicating greater contribution to speciation rate variation across species.
+
+# Load
+pred_imp_tbl_ex <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/BDNN_predictor_importance_ex_rate_NoCar.RDS")
+pred_imp_tbl_ex <- pred_imp_tbl_ex[order(pred_imp_tbl_ex$OverallRank), ]
+rownames(pred_imp_tbl_ex) <- 1:nrow(pred_imp_tbl_ex)
+# Make it clearer
+colnames(pred_imp_tbl_ex) <- gsub("^Replicate_", "R. ", colnames(pred_imp_tbl_ex))
+pred_imp_tbl_ex <- pred_imp_tbl_ex %>% rename(Rank = "OverallRank")
+# Highlight the podium
+pred_imp_tbl_ex[1:3, c("Predictor", "Rank")] <- apply(X = pred_imp_tbl_ex[1:3, c("Predictor", "Rank")],
+                                                             FUN = convert_bold,
+                                                             MARGIN = c(1,2))
+# Diexlay
+knitr::kable(pred_imp_tbl_ex, align = "c")
 ```
 
 {{< pagebreak >}}
