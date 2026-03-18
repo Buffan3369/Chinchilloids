@@ -46,7 +46,6 @@ recap_tbl[2,] <- c("Species Late", round(quantile(df_late_sp$w_shape, probs=(0.5
 write.table(recap_tbl, "./Figures/ADE/recap_tbl_w_shape_species.txt", row.names = F, sep = "\t", quote = F)
 
 ## Assemble and plot -----------------------------------------------------------
-  # Species
 full_sp <- rbind(df_early_sp[, 2:3], df_late_sp[, 2:3])
 full_sp$x <- "w_shape"
 
@@ -56,14 +55,12 @@ violin_ADE_sp <- full_sp %>%
   scale_fill_manual(values = c("#006d2c", "#0868ac")) +
   scale_y_continuous(breaks = c(-2, 0, 1, 2, 4)) +
   geom_hline(yintercept = 1, linetype = "dashed", colour = "grey") +
-  ggtitle("Species") +
   labs(y = "Weibull shape") +
   theme(axis.title.x = element_blank(),
         axis.ticks.x = element_blank(),
         axis.text.x = element_blank(),
         axis.title.y = element_text(size = 18),
         axis.text.y = element_text(size = 15),
-        plot.title = element_text(size = 18, hjust = 0.5),
         panel.background = element_blank(),
         panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5))
 
