@@ -61,6 +61,8 @@ On the basis of body mass reconstructions carried out from cranial and dental pr
 
 We scored the tooth growth types of the upper molars mainly based on the hypsodonty index (HI), which corresponds to the crown height of a maximum unworn tooth / its anteroposterior length or labiolingual width [@vanvalen1960; @janis1988; Supp. XXX]. We recognized four categories: brachydont (HI $<$ 0.9, rooted), mesodont (0.9 $<$ HI $<$ 1.1, rooted), protohypsodont (HI $>$ 1.1, rooted), and euhypsodont [HI $>$ 1.1, unrooted; @mones1982; @pérez_new_2010]. The category scoring is derived from literature sources, observations and unpublished measurements made by the authors.
 
+In the end, body mass and HI estimates were obtained for nearly all species represented in our dataset (resp. 94% and 96%). Thus, this work presents the most exhaustive trait compilation so far assembled for the Chinchilloidea.
+
 ## Palaeodiversity and diversification inference from the fossil record
 
 Our occurrence database was first analysed using PyRate v3.1.3 [@silvestro2014; @silvestro2019]. Genus origination and extinction times (altogether forming the palaeodiversity) and the underlying diversification process (*i*.*e*., origination and extinction rates) were jointly estimated in a Bayesian framework accounting for preservation heterogeneity, and approximated through Reversible-Jump Markov Chain Monte Carlo (RJMCMC). We ran the RJMCMC algorithm for 10 million iterations, sampling every 10,000. We used a time-dependent preservation process allowing for preservation rate shift between geological stages (Figure S2). We allowed preservation rates to vary between lineages according to a *Gamma* model. These analyses were replicated 20 times after randomly sampling fossil ages between each occurrence's upper and lower age boundaries. MCMC runs that achieved convergence, *i*,*e*., with Effective Sample Size (ESS) over 200 ($n=20$, Figure S3) were further combined. To evaluate the robustness of our analyses, we conducted sensitivity analyses by either removing singletons from the input occurrence database or subsampling to unique locality-lineage combinations, as done in @buffan2025 (**Supp. Fig. XX** and **YY**). Parameter convergence was monitored using the pymc 5.9.2 python library, and we considered parameters achieved convergence following the same criterion as before ($ESS > 200$).
@@ -103,9 +105,9 @@ To investigate the potential effect of species age on their extinction probabili
 
 ## The waxing-and-waning diversity and body size evolution of chinchilloid rodents
 
-Either relying on a Bayesian preservation-aware framework (PyRate) or supervised neural networks (DeepDive), our macroevolutionary modelling of the fossil record evidenced a Late Miocene increase in chinchilloid diversity followed by a sharp decline from *ca*. 6.5 Ma [@fig-diversityBM A--B]. At their maximum, median sampled and corrected diversity exhibit a 3-fold difference, respectively peaking at 22 and 62. Four additional -- though more attenuated -- peaks may be reported from the sampled diversity curve : one in the late Oligocene (Deseadan SALMA), two in the Early Miocene (Colhuehuapian and Santacrucian SALMAs) and one in the late Middle Miocene (Laventan SALMA) [@fig-diversityBM A]. These peaks are barely recovered from the corrected diversity curve, potentially excepted for the Colhuehuapian and Santacrucian ones [@fig-diversityBM B].
+Either relying on a Bayesian preservation-aware framework (PyRate) or supervised neural networks (DeepDive), macroevolutionary modelling of the fossil record evidenced a Late Miocene increase in chinchilloid diversity followed by a sharp decline from *ca*. 6.5 Ma [@fig-diversityBM A--B]. At their maximum, median sampled and corrected diversity exhibit a 3-fold difference between each other, respectively peaking at 22 and 62. Four additional -- though more attenuated -- peaks may be reported from the sampled diversity curve (PyRate) : one in the late Oligocene (Deseadan SALMA), two in the Early Miocene (Colhuehuapian and Santacrucian SALMAs) and one in the late Middle Miocene (Laventan SALMA) [@fig-diversityBM A]. These peaks are barely recovered from the corrected diversity curve [@fig-diversityBM B].
 
-This diversity pattern elegantly matches with the dynamics of body size evolution across the history of the clade [@fig-diversityBM]. According to our estimates,
+This diversity pattern elegantly matches the temporal dynamics of body size across the history of the clade made from the body mass estimations that we obtained for nearly all species (94%) represented in our occurrence dataset [@fig-diversityBM C]. Indeed, median chinchilloid body size was slightly above 100 g at the beginning of the evolutionary history of the clade (latest Eocene--earliest Oligocene), peaked around 35 \[1.90, 233\] kg in the late Miocene and further declined until the present (1.9 \[0.45, 12.6\] kg). Overlaying body mass estimates with species-specific origination and extinction times reconstructed with PyRate clearly highlights a coordinated temporal trend towards body size increase among several chinchilloid lineages [@fig-lifespans]. Small sizes (\< 1kg) are mostly found among basal forms restricted to the Palaeogene--Early Miocene, with the notable exception of the extant *Chinchilla* species.
 
 Positive net diversification rate until *ca*. 6 Ma, decline and increase in extinction rate (cite figures accordingly).
 
@@ -115,11 +117,9 @@ The coefficients of rate variations obtained for BDNN (resp. XX and XX) exceeded
 
 ## A body-mass selective XXX XXX evolutionary decline
 
-Evidence for Cope's rule
-
 Speciation rate significantly differs across body size classes, with larger taxa achieving higher values (Fig. X and S5). According to the BDNN model, body size stands out as the first predictor explaining variations in speciation rate within Chinchilloidea, with a *ca*. 2.5-fold change obtained between our two extrema (*i*.*e*., XS and XXL =\> **indicate on the violin plot**).
 
-In our BDNN analyses, time is always ranked as the least important predictor, suggesting our environmental and trait variable effectively capture signal of rate variation.
+In our BDNN analyses, time is always ranked as the least important predictor, suggesting our environmental and trait variable effectively capture signals of rate variation.
 
 ## Side notes
 
@@ -252,24 +252,24 @@ knitr::include_graphics("../Figures/Main/extant_sampling/extant_sampling.png")
 | 
 
 ```{r, echo=FALSE}
-#| label: fig-lifespans
-#| out-height: 19cm
-#| out-width: 15cm
-#| fig-cap: Bayesian reconstruction of the longevities of the 129 chinchilloid species considered in our dataset. Each segment depicts the longevity of a given species, that is, the interval between species' speciation and extinction times averaged across PyRate runs that achieved convergence. Lines, ticks and taxonomic names were coloured according to the body mass category to which species were assigned. The histogram at the centre of the plot shows the number of species within each body mass class. The first four silhouettes (from top to bottom) are from Phylopic (credits available in Table S2). The last two silhouettes (*Elasmodontomys obliquus* and *Borikenomys praecursor*) were designed by L.M. for a previous work [@marivaux_early_2020].
+#| label: fig-diversityBM
+#| out-height: 20cm
+#| out-width: 7cm
+#| fig-cap: The joint temporal trends in diversity and clade-wise body size evolution of Chinchilloidea. Occurrence-based diversity reconstructions were either produced in a bayesian preservation-aware framework jointly assessing the times of speciation and extinction of each species (@fig-lifespans) from the temporal occurrence database (PyRate) (*i*.*e*., sampled diversity, **A**), or using a simulation-based deep-learning framework incorporating a wide variety of biases to reconstruct the temporal variations of the 'true' (*i*.*e*., corrected) diversity in 1-Myr time bins (DeepDive) **(B)**. Body mass through time reconstructions (**C**, log scale) were produced after binning our body mass estimates of each species in 1-Myr time bins. The body mass of a taxon was included within a given bin if its reconstructed lifepan overlapped with it. The black dot at the right of the plot shows the median body mass of the extant chinchilloids, and the red line shows its range. In all cases, full lines represent median estimates. In **(A)**, the ribbon shows the 95% HPD interval of the dievrsity estimate across MCMC iterations. In **(B)**, the lighter and darker ribbons respectively encompass 95% and 50% of the per-bin diversity distribution across the 100 DeepDive prediction replicates. In **(C)**, the ribbon depicts the total range of values.
 
-knitr::include_graphics("../Figures/Main/Lifespans/lifespans_distribs.png")
+knitr::include_graphics("../Figures/Main/Diversity_and_BM_through_time.png")
 ```
 
 | 
 | 
 
 ```{r, echo=FALSE}
-#| label: fig-diversityBM
-#| out-height: 20cm
-#| out-width: 7cm
-#| fig-cap: The joint diversity and clade-wise body size dynamics of Chinchilloidea. Occurrence-based diversity reconstructions were either produced in a bayesian preservation-aware framework jointly assessing the times of speciation and extinction of each species [@fig-lifespans] from the temporal occurrence database (PyRate) (*i*.*e*., sampled diversity, **A**), or using a simulation-based deep-learning framework incorporating a wide variety of biases to reconstruct the temporal variations of the 'true' (*i*.*e*., corrected) diversity in 1-Myr time bins (DeepDive) **(B)**. Body mass through time reconstructions (**C**, log scale) were produced after binning our body mass estimates of each species in 1-Myr time bins. The body mass of a taxon was included within a given bin if its reconstructed lifepan overlapped with it. The black dot at the right of the plot shows the median body mass of the extant chinchilloids, and the red line shows its range. In all cases, full lines represent median estimates and the lightest ribbon either shows their associated 95% HPD interval **(A** and **B)** or the total range of values **(C)**. In **(B)**, the darker ribbon depicts the interval encompassing 50% of the per-bin diversity distribution across the 100 DeepDive replicates. *Lagidium peruanum* and *Josephoartigasia monesi* silhouettes are from Phylopic (credits available in Tab. S2).
+#| label: fig-lifespans
+#| out-height: 19cm
+#| out-width: 15cm
+#| fig-cap: Bayesian reconstruction of the longevities of the 129 chinchilloid species considered in our dataset. Each segment depicts the longevity of a given species, that is, the interval between species' speciation and extinction times averaged across PyRate runs that achieved convergence. Segments and taxonomic names were coloured according to the body mass category to which species were assigned. The histogram at the centre of the plot shows the number of species within each body mass class. The 8 extant species names are highlighted in bold with a star at the end. The first four silhouettes (from top to bottom) are from Phylopic (credits available in Table S2). The last two silhouettes (*Elasmodontomys obliquus* and *Borikenomys praecursor*) were designed by L.M. for a previous work [@marivaux_early_2020].
 
-knitr::include_graphics("../Figures/Main/Diversity_and_BM_through_time.png")
+knitr::include_graphics("../Figures/Main/Lifespans/lifespans_distribs.png")
 ```
 
 | 
@@ -279,7 +279,7 @@ knitr::include_graphics("../Figures/Main/Diversity_and_BM_through_time.png")
 #| label: fig-diversification
 #| out-height: 11cm
 #| out-width: 15cm
-#| fig-cap: Comparative chinchilloid speciation and extinction rates reconstructed using three Bayesian occurrence-based birth-death models. Speciation and extinction rates are respectively depicted in blue and red. The left column **(A-B)** shows the rates estimated by PyRate, using the rjMCMC algorithm [@silvestro2019]. Stars indicate significant rate shifts.
+#| fig-cap: Comparative chinchilloid speciation and extinction rates reconstructed using three Bayesian occurrence-based birth-death models. Speciation and extinction rates are respectively depicted in blue and red. The left column **(A-B)** shows the rates estimated by PyRate, using the rjMCMC algorithm [@silvestro2019]. Stars indicate significant rate shifts. The middle column **(C-D)** shows the marginal rates estimated with BDNN. These were obtained after imputing missing values for taxa with missing trait estimate. As this procedure was repeated 10 times randomly (see *Methods*), the rates presented here come from an arbitrarily chosen replicate (*i*.*e*., replicate 8), but marginal rates through time did not differ across replicates (Fig. SX). The right column **(E-F)** shows the rates through time estimated with the MBD model. 
 
 knitr::include_graphics("../Figures/Main/Diversification_rates.png")
 ```

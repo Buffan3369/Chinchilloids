@@ -104,12 +104,17 @@ Additional details are provided in the `Remark` column of *Dataset S1*.
 # Supplementary Figures
 
 ```{r, echo=FALSE}
+library(knitr)
+```
+
+
+```{r, echo=FALSE}
 #| label: fig-preservation_rate
 #| out-height: 7.5cm
 #| out-width: 7.5cm
 #| fig-cap: Estimate of the preservation rate through time in our species-level dataset. The solid line represents the mean posterior estimate and the shaded area the 95% HPD interval.
 
-knitr::include_graphics("../Figures/Supp/Preservation_through_time.pdf")
+include_graphics("../Figures/Supp/Preservation_through_time.pdf")
 ```
 
 ```{r, echo=F}
@@ -118,7 +123,7 @@ knitr::include_graphics("../Figures/Supp/Preservation_through_time.pdf")
 #| out-width: 15cm
 #| fig-cap: Convergence of the PyRate runs for the analysis of the species-level temporal occurrence database. The plot (A) the ESS of the model posterior probability for all the 20 replicates we ran. ESS greater than 200 (first-scale indicator of a run that converged, $n=20$ in that case) are displayed in green. The proportion of origination and extinction times (resp. $T_S$ and $T_E$) that converged (i.e., with $ESS > 200$) are shown in (B), for each of our 20 replicates. The plot (C) shows the posterior estimates of the mean root age of our group, together with their lower and upper boundaries of the 95% HPD interval, across the 20 replicates.
 
-knitr::include_graphics("../Results/RJMCMC/species/1-Full/pyrate_mcmc_logs/ESS_plot.png")
+include_graphics("../Results/RJMCMC/species/1-Full/pyrate_mcmc_logs/ESS_plot.png")
 
 ```
 
@@ -126,21 +131,21 @@ knitr::include_graphics("../Results/RJMCMC/species/1-Full/pyrate_mcmc_logs/ESS_p
 #| label: fig-RecapGenRJ
 #| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our genus-level occurrence dataset with the rjMCMC model.
 
-knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_Recap_figure.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_Recap_figure.pdf")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-RecapSpRJSing
 #| fig-cap: Speciation and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model after removing singletons.
 
-knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Singleton_Recap_figure.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Singleton_Recap_figure.pdf")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-RTTperBM
 #| fig-cap: Speciation (**A**) and extinction (**B**) rates through time per body mass class as inferred by the RJMCMC model.
 
-knitr::include_graphics("../Figures/Supp/RTT_per_BM/RTT_plot_per_BM.pdf")
+include_graphics("../Figures/Supp/RTT_per_BM/RTT_plot_per_BM.pdf")
 ```
 
 ```{r, echo=FALSE}
@@ -149,7 +154,7 @@ knitr::include_graphics("../Figures/Supp/RTT_per_BM/RTT_plot_per_BM.pdf")
 #| out-width: 15cm
 #| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
 
-knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Full_frequency_of_rate_shift.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Full_frequency_of_rate_shift.pdf")
 ```
 
 ```{r, echo=FALSE}
@@ -158,7 +163,7 @@ knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_
 #| out-width: 15cm
 #| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our genus-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
 
-knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_frequency_of_rate_shift.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_frequency_of_rate_shift.pdf")
 ```
 
 ```{r, echo=FALSE}
@@ -167,51 +172,61 @@ knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Fu
 #| out-width: 15cm
 #| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model after removing singletons. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
 
-knitr::include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Singleton_frequency_of_rate_shift.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Singleton_frequency_of_rate_shift.pdf")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-FreqRateShiftBM
 #| fig-cap: "Frequency of speciation and extinction rate shifts per body size class as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
 
-knitr::include_graphics("../Figures/Supp/RTT_per_BM/freq_rate_shift_per_BM.pdf")
+include_graphics("../Figures/Supp/RTT_per_BM/freq_rate_shift_per_BM.pdf")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-RTT_BDNN_NoCar15
 #| fig-cap: Marginal chinchilloid speciation (blue) and extinction (red) rates through time as estimated by our BDNN analyses of the datasets with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$). Caribbean taxa were excluded. Full lines show median rate estimates and ribbons their associated 95% Highest Posterior Density (HPD) interval, assessed acrossed the 10 independent BDNN runs randomising fossil ages under a uniform law made for each trait imputation. This panel only depicts the rates through time from replicate 1 to 5.
 
-knitr::include_graphics("../Figures/Supp/RTT_imputation/RTT_imput_full_NoCar15.pdf")
+include_graphics("../Figures/Supp/RTT_imputation/RTT_imput_full_NoCar15.pdf")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-RTT_BDNN_NoCar610
 #| fig-cap: Marginal chinchilloid speciation (blue) and extinction (red) rates through time as estimated by our BDNN analyses of the datasets with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$). Caribbean taxa were excluded. Full lines show median rate estimates and ribbons their associated 95% Highest Posterior Density (HPD) interval, assessed acrossed the 10 independent BDNN runs randomising fossil ages under a uniform law made for each trait imputation. This panel only depicts the rates through time from replicate 1 to 5.
 
-knitr::include_graphics("../Figures/Supp/RTT_imputation/RTT_imput_full_NoCar610.pdf")
+include_graphics("../Figures/Supp/RTT_imputation/RTT_imput_full_NoCar610.pdf")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-ddHistPlotL2D2
 #| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising two LSTM units (64 and 32 nodes) connected to two dense layers (64 and 32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts increasing, indicative of overfitting. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
 
-knitr::include_graphics("../Results/DeepDive/species_extant_extended/species_extant_extended_models/simulation_species_extant_extended_ET_20260224_lstm128_64_32_d64_32_conditional/history_plotsimulation_species_extant_extended_ET_20260224_lstm128_64_32_d64_32_conditional.pdf")
+include_graphics("../Results/DeepDive/species_extant_extended/species_extant_extended_models/simulation_species_extant_extended_ET_20260224_lstm128_64_32_d64_32_conditional/history_plotsimulation_species_extant_extended_ET_20260224_lstm128_64_32_d64_32_conditional.pdf")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-ddHistPlotL3D2
 #| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising three LSTM units (128, 64 and 32 nodes) connected to two dense layers (64 and 32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts increasing, indicative of overfitting. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
 
-knitr::include_graphics("../Results/DeepDive/species_extant_extended/species_extant_extended_models/simulation_species_extant_extended_ET_20260224_lstm64_32_d64_32_conditional/history_plotsimulation_species_extant_extended_ET_20260224_lstm64_32_d64_32_conditional.pdf")
+include_graphics("../Results/DeepDive/species_extant_extended/species_extant_extended_models/simulation_species_extant_extended_ET_20260224_lstm64_32_d64_32_conditional/history_plotsimulation_species_extant_extended_ET_20260224_lstm64_32_d64_32_conditional.pdf")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-TsPhyloPyRate
 #| fig-cap: Correspondance between divergence times leading to extant species estimated from our phylogeny ('Ts Phylo') and the times of species origination de novo estimated ('Ts PyRate') after implementing our sampling scheme for extant species absent from the fossil record (*Main text*, Fig. 1). Dots show mean estimates and error bars the associated 95% HPD. Dashed line shows the line with equation $y=x$.
 
-knitr::include_graphics("../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
+include_graphics("../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
 
 ```
+
+```{r, echo = FALSE}
+#| label: fig-violinADE
+#| out-height: 8.75cm
+#| out-width: 15cm
+#| fig-cap: Posterior estimate of the shape parameter of the Weibull distribution for the ADE analyses of the 'Early' (> 6 Ma) and 'Late' (< 6 Ma) occurrence datasets, each with constant extinction rate (@fig-FreqRateShiftSp). 2.5%, 50% and 97.5% quantiles are indicated in the distribution of each parameter by black horizontal lines, respectively from bottom to top.
+
+include_graphics("../Figures/ADE/Weibull_shape_species.png")
+```
+
 
 {{< pagebreak >}}
 
@@ -242,7 +257,7 @@ colnames(tbl_dd) <- c("LSTM layers", "Fully-connected", "Dropout", "Nb. training
 tbl_dd[1,] <- sapply(tbl_dd[1,], FUN = convert_bold)
 tbl_dd[3,] <- sapply(tbl_dd[3,], FUN = convert_bold)
 # Display
-knitr::kable(tbl_dd, align = 'c')
+kable(tbl_dd, align = 'c')
 ```
 
 | 
@@ -267,7 +282,7 @@ tbl <- apply(X = tbl,
 # Indicate row names
 rownames(tbl) <- c("q_2.5%", "q_97.5%")
 # Display
-knitr::kable(tbl, align = "c")
+kable(tbl, align = "c")
 ```
 
 | 
@@ -285,7 +300,7 @@ tbl$Silhouette <- sapply(X = tbl$Silhouette, FUN = function(x){paste0("*", x, "*
 colnames(tbl) <- sapply(X = colnames(tbl), FUN = function(x){paste0("**", x, "**")})
 
 # Display
-knitr::kable(tbl, align = "c")
+kable(tbl, align = "c")
 ```
 
 
@@ -303,7 +318,7 @@ cv_tbl_sp[nrow(cv_tbl_sp), ] <- sapply(X = cv_tbl_sp[nrow(cv_tbl_sp), ],
                                        FUN = convert_bold)
 
 # Display
-knitr::kable(cv_tbl_sp, align = "c")
+kable(cv_tbl_sp, align = "c")
 ```
 
 |
@@ -322,7 +337,7 @@ cv_tbl_ex <- cv_tbl_ex %>%
 cv_tbl_ex[nrow(cv_tbl_ex), ] <- sapply(X = cv_tbl_ex[nrow(cv_tbl_ex), ],
                                        FUN = convert_bold)
 # Display
-knitr::kable(cv_tbl_ex, align = "c")
+kable(cv_tbl_ex, align = "c")
 
 ```
 
@@ -345,7 +360,7 @@ pred_imp_tbl_sp[1:3, c("Predictor", "Rank")] <- apply(X = pred_imp_tbl_sp[1:3, c
                                                              FUN = convert_bold,
                                                              MARGIN = c(1,2))
 # Display
-knitr::kable(pred_imp_tbl_sp, align = "c")
+kable(pred_imp_tbl_sp, align = "c")
 ```
 
 
@@ -365,7 +380,7 @@ pred_imp_tbl_ex[1:3, c("Predictor", "Rank")] <- apply(X = pred_imp_tbl_ex[1:3, c
                                                              FUN = convert_bold,
                                                              MARGIN = c(1,2))
 # Diexlay
-knitr::kable(pred_imp_tbl_ex, align = "c")
+kable(pred_imp_tbl_ex, align = "c")
 ```
 
 {{< pagebreak >}}
