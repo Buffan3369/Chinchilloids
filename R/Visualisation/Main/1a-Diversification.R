@@ -28,8 +28,8 @@ sp_rj <- rtt_plot(rtt_rj, type = "sp",
                   restrict_y = F, 
                   display_OliNeo = T,
                   lwd = 0.3,
-                  y_limits = c(0, 5.3),
-                  y_breaks = seq(0, 5, 0.5),
+                  y_limits = c(0, 1.5),
+                  y_breaks = seq(0, 1.2, 0.3),
                   x.axis = F,
                   display_gts = F,
                   y_lab = "Speciation rate",
@@ -38,8 +38,7 @@ sp_rj <- rtt_plot(rtt_rj, type = "sp",
                   axes.labelsize = 10,
                   ticks.labelsize = 6,
                   ticks.lwd = 0.25,
-                  panel_border_lwd = 0.1) +
-  annotate(geom = "text", label = "*", x = 2, y = 4.5, size = 6, colour = "#4c4cec")
+                  panel_border_lwd = 0.1)
 
 ex_rj <- rtt_plot(rtt_rj, type = "ex",
                   restrict_y = F,
@@ -47,8 +46,8 @@ ex_rj <- rtt_plot(rtt_rj, type = "ex",
                   manual_x_breaks = seq(0, 30, 5),
                   display_OliNeo = T,
                   lwd = 0.3,
-                  y_limits = c(0, 3.52),
-                  y_breaks = seq(0, 3, 0.5),
+                  y_limits = c(0, 1.5),
+                  y_breaks = seq(0, 1.2, 0.3),
                   several_gts = TRUE,
                   y_lab = "Extinction rate",
                   geoscale = gsc1,
@@ -61,10 +60,10 @@ ex_rj <- rtt_plot(rtt_rj, type = "ex",
                   geoscale_labelsize = list(1, 2),
                   geoscale_lwd = 0.1,
                   panel_border_lwd = 0.1) +
-  annotate(geom = "text", label = "*", x = 6, y = 2, size = 6, colour = "#e34a33")
+  annotate(geom = "text", label = "*", x = 6, y = 1.3, size = 8, colour = "#e34a33")
 
-## BDNN RTT --------------------------------------------------------------------
-path_to_BDNN <- "./Results/BDNN/BM_6cat/combined_20KEEP_RTT.r"
+## BDNN RTT (one replicate randomly chosen) ------------------------------------
+path_to_BDNN <- "./Results/BDNN/BDNN_imputation_NoCar/Replicate_8/combined_logs/combined_10KEEP_RTT.r"
 rtt_bdnn <- extract_rtt(path_to_BDNN, ana = "BDNN")
 rtt_bdnn$time[which(rtt_bdnn$time == 
                       max(rtt_bdnn$time))] <- max(rtt_rj$time) # harmonise x scale
@@ -74,8 +73,8 @@ sp_bd <- rtt_plot(rtt_bdnn, type = "sp",
                   plot_bdnn = T,
                   display_OliNeo = T,
                   lwd = 0.3,
-                  y_limits = c(0, 5.3),
-                  y_breaks = seq(0, 5, 0.5),
+                  y_limits = c(0, 1.5),
+                  y_breaks = seq(0, 1.2, 0.3),
                   x.axis = F,
                   display_gts = F,
                   y_lab = "",
@@ -93,8 +92,8 @@ ex_bd <- rtt_plot(rtt_bdnn, type = "ex",
                   lwd = 0.3,
                   manual_x_breaks = seq(0, 30, 5),
                   display_OliNeo = T,
-                  y_limits = c(0, 3.52),
-                  y_breaks = seq(0, 3, 0.5),
+                  y_limits = c(0, 1.5),
+                  y_breaks = seq(0, 1.2, 0.3),
                   several_gts = TRUE,
                   geoscale = gsc1,
                   geoscale2 = gsc4,
@@ -109,7 +108,7 @@ ex_bd <- rtt_plot(rtt_bdnn, type = "ex",
                   panel_border_lwd = 0.1)
 
 ## MBD RTT ---------------------------------------------------------------------
-path_to_mbd_RTT <- "./Results/MBD/species/MBD_scaled_hsp0/combined_18_KEEP_RTT.r"
+path_to_mbd_RTT <- "./Results/MBD/species/combined_20_KEEP_RTT.r"
 rtt_mbd <- extract_rtt(path_to_mbd_RTT, ana = "MBD")
 # harmonise timescale with the two others
 rtt_mbd <- rtt_mbd %>% filter(time <= max(rtt_rj$time))
@@ -118,9 +117,9 @@ sp_mbd <- rtt_plot(rtt_mbd, type = "sp",
                    restrict_y = F,
                    display_OliNeo = T,
                    lwd = 0.3,
-                   y_limits = c(0, 5.3),
+                   y_limits = c(0, 1.5),
                    y_lab = "",
-                   y_breaks = seq(0, 5, 0.5),
+                   y_breaks = seq(0, 1.2, 0.3),
                    x.axis = F,
                    display_gts = F,
                    main = "MBD",
@@ -136,8 +135,8 @@ ex_mbd <- rtt_plot(rtt_mbd, type = "ex",
                    manual_x_breaks = seq(0, 30, 5),
                    display_OliNeo = T,
                    lwd = 0.3,
-                   y_limits = c(0, 3.52),
-                   y_breaks = seq(0, 3, 0.5),
+                   y_limits = c(0, 1.5),
+                   y_breaks = seq(0, 1.2, 0.3),
                    several_gts = TRUE,
                    y_lab = "",
                    geoscale = gsc1,
