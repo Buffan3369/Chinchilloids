@@ -185,7 +185,7 @@ for(i in 1:10){
     sapply(X = 1:length(na_HI),
            FUN = function(x){
              r <- runif(1)
-             vect <- sapply(X = r, FUN = function(a){ifelse(a<=0.4, 3, 4)})
+             vect <- sapply(X = r, FUN = function(a){ifelse(a<=0.4, 2, 3)})
              return(vect)
            }
     )
