@@ -1,7 +1,7 @@
 library(tidyverse)
 
 ################################################################################
-############################# 1-Ranked predictors ##############################
+############################ 1. Ranked predictors ##############################
 ################################################################################
 ## Initialise dfs --------------------------------------------------------------
 path_to_tbl <- list.files(paste0("./Results/BDNN/BDNN_imputation_NoCar/Replicate_1/combined_logs"),
@@ -53,7 +53,7 @@ saveRDS(ex_pred_infl,
         "./Data/supp_tbl/BDNN_imputation_NoCar/BDNN_predictor_importance_ex_rate_NoCar.RDS")
 
 ################################################################################
-###################### 2- Coefficients of rate variation #######################
+###################### 2. Coefficients of rate variation #######################
 ################################################################################
 
 CV <- read.csv("./Results/BDNN/BDNN_imputation_NoCar/Replicate_1/combined_logs/combined_10KEEP_coefficient_of_rate_variation.csv",
@@ -81,3 +81,52 @@ CV_ex <- CV %>%
   select(all_of(c("cv_empirical", "cv_expected", "replicate")))
 CV_ex[nrow(CV_ex)+1, ] <- c(mean(CV_ex$cv_empirical), mean(CV_ex$cv_expected), "Total")
 saveRDS(CV_ex, "./Data/supp_tbl/BDNN_imputation_NoCar/coeff_extinction_rate_variation_across_replicates_NoCar.RDS")
+
+
+################################################################################
+###### 3. Magnitude in extinction rate change across BM classes and lat  #######
+################################################################################
+
+FC_BM16 <- c() # Fold change between the two extreme body size classes
+FC_BM16_upr <- c() # Upper Credible Interval of the latter FC
+FC_BM16_lwr <- c() # Lower CI
+
+FC_ET <- c() # Same between tropical & extratropical
+FC_ET_upr <- c()
+FC_ET_lwr <- c()
+
+for(i in 1:10){
+  path_to_ex <- list.files(paste0("./Results/BDNN/BDNN_imputation_NoCar/Replicate_", i,
+                                  "/combined_logs"), 
+                           pattern = "ex_predictor_influence.csv",
+                           full.names = T)
+  ex_tbl <- read.csv(path_to_ex[[1]], header = T)
+  # Increment BM Fold Change vectors
+  FC_BM16 <- c(FC_BM16, ex_tbl$fold_change[which(ex_tbl$feature1 == "Body_mass" &
+                                                   ex_tbl$feature1_state == "1_6")]) 
+  FC_BM16_upr <- c(FC_BM16_upr, ex_tbl$fold_change_upr_CI[which(ex_tbl$feature1 == "Body_mass" &
+                                                                ex_tbl$feature1_state == "1_6")]) 
+  FC_BM16_lwr <- c(FC_BM16_lwr, ex_tbl$fold_change_lwr_CI[which(ex_tbl$feature1 == "Body_mass" &
+                                                                ex_tbl$feature1_state == "1_6")]) 
+  # Same for lat vectors
+  FC_ET <- c(FC_ET, ex_tbl$fold_change[which(ex_tbl$feature1_state == "Tropical_Extratropical")])
+  FC_ET_upr <- c(FC_ET_upr, ex_tbl$fold_change_upr_CI[which(ex_tbl$feature1_state == "Tropical_Extratropical")])
+  FC_ET_lwr <- c(FC_ET_lwr, ex_tbl$fold_change_lwr_CI[which(ex_tbl$feature1_state == "Tropical_Extratropical")])
+}
+# Make data frames
+FC_tbl_BM <- data.frame(Replicate = 1:10,
+                        Fold_Change = as.numeric(FC_BM16),
+                        Fold_Change_UprCI = as.numeric(FC_BM16_upr),
+                        Fold_Change_LwrCI = as.numeric(FC_BM16_lwr))
+FC_tbl_BM[nrow(FC_tbl_BM)+1, ] <- 
+  c("Total", apply(X = FC_tbl_BM[, 2:ncol(FC_tbl_BM)], FUN = mean, MARGIN = 2))
+
+FC_tbl_Lat <- data.frame(Replicate = 1:10, 
+                         Fold_Change = as.numeric(FC_ET),
+                         Fold_Change_UprCI = as.numeric(FC_ET_upr),
+                         Fold_Change_LwrCI = as.numeric(FC_ET_lwr))
+FC_tbl_Lat[nrow(FC_tbl_Lat)+1, ] <- 
+  c("Total", apply(X = FC_tbl_Lat[, 2:ncol(FC_tbl_Lat)], FUN = mean, MARGIN = 2))
+# Save
+saveRDS(FC_tbl_BM, "./Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_XS_XL_across_replicates.RDS")
+saveRDS(FC_tbl_Lat, "./Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_Trop_Etrop_across_replicates.RDS")

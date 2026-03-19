@@ -163,3 +163,13 @@ split_vector <- function(str_vec){ #str_vec has to be a stringged vector, i.e "c
   vec_num <- as.numeric(coma_split)
   return(vec_num)
 }
+
+## Custom function (median, 95% distrib) ---------------------------------------
+sum_violin <- function(x){
+  m <- median(x, na.rm = T)
+  ym <- quantile(x, probs=0.025, na.rm = T)
+  yM <- quantile(x, probs=0.975, na.rm = T)
+  rtn <- c(y=m, ymin=ym, ymax=yM)
+  names(rtn) <- c("y", "ymin", "ymax")
+  return(rtn)
+}

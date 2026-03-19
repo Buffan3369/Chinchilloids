@@ -105,9 +105,16 @@ To investigate the potential effect of species age on their extinction probabili
 
 ## The waxing-and-waning diversity and body size evolution of chinchilloid rodents
 
-Either relying on a Bayesian preservation-aware framework (PyRate) or supervised neural networks (DeepDive), macroevolutionary modelling of the fossil record evidenced a Late Miocene increase in chinchilloid diversity followed by a sharp decline from *ca*. 6.5 Ma [@fig-diversityBM A--B]. At their maximum, median sampled and corrected diversity exhibit a 3-fold difference between each other, respectively peaking at 22 and 62. Four additional -- though more attenuated -- peaks may be reported from the sampled diversity curve (PyRate) : one in the late Oligocene (Deseadan SALMA), two in the Early Miocene (Colhuehuapian and Santacrucian SALMAs) and one in the late Middle Miocene (Laventan SALMA) [@fig-diversityBM A]. These peaks are barely recovered from the corrected diversity curve [@fig-diversityBM B].
+Either relying on a Bayesian preservation-aware framework (PyRate) or supervised neural networks (DeepDive), macroevolutionary modelling of the fossil record evidenced a Late Miocene increase in chinchilloid diversity followed by a sharp decline from *ca*. 6.5 Ma (@fig-diversityBM A--B). At their maximum, median sampled and corrected diversity exhibit a 3-fold difference between each other, respectively peaking at 22 and 62. Four additional -- though more attenuated -- peaks may be reported from the sampled diversity curve (PyRate) : one in the late Oligocene (Deseadan SALMA), two in the Early Miocene (Colhuehuapian and Santacrucian SALMAs) and one in the late Middle Miocene (Laventan SALMA) (@fig-diversityBM A). These peaks are barely recovered from the corrected diversity curve (@fig-diversityBM B). 
 
-This diversity pattern elegantly matches the temporal dynamics of body size across the history of the clade made from the body mass estimations that we obtained for nearly all species (94%) represented in our occurrence dataset [@fig-diversityBM C]. Indeed, median chinchilloid body size was slightly above 100 g at the beginning of the evolutionary history of the clade (latest Eocene--earliest Oligocene), peaked around 35 \[1.90, 233\] kg in the late Miocene and further declined until the present (1.9 \[0.45, 12.6\] kg). Overlaying body mass estimates with species-specific origination and extinction times reconstructed with PyRate clearly highlights a coordinated temporal trend towards body size increase among several chinchilloid lineages [@fig-lifespans]. Small sizes (\< 1kg) are mostly found among basal forms restricted to the Palaeogene--Early Miocene, with the notable exception of the extant *Chinchilla* species.
+This diversity pattern elegantly matches the temporal dynamics of body size across the history of the clade made from the body mass estimations that we obtained for nearly all species (94%) represented in our occurrence dataset (@fig-diversityBM C). Indeed, median chinchilloid body size was slightly above 100 g at the beginning of the evolutionary history of the clade (latest Eocene--earliest Oligocene), peaked around 35 \[1.90, 233\] kg in the late Miocene and further declined until the present (1.9 \[0.45, 12.6\] kg). Overlaying body mass estimates with species-specific origination and extinction times reconstructed with PyRate clearly highlights a coordinated temporal trend towards body size increase among several chinchilloid lineages (@fig-lifespans). Small sizes (\< 1kg) are mostly found among basal forms restricted to the Palaeogene--Early Miocene, with the notable exception of the extant *Chinchilla* species. Then, from the early Middle to the latest Miocene, a gradual increase in body size is to be reported, mostly within the two families $\dagger$Neoepiblemidae and Dinomyidae. Then, in continental South America, most of the giant taxa that were flourishing in the Miocene disappeared at *ca*. 6.5 Ma, and only persisted the lineages that gave birth to the extant moderate-sized representatives of the group. In the West Indies, Quaternary deposits yielded remains of large-sized taxa (grouped into the likely paraphyletic family $\dagger$*?Heptaxodontidae*), that went extinct very recently, thus well after the decline starting *ca*. 6.5 Ma.
+
+Thus, we highlight the synchronous character of body size evolution and diversity dynamics throughout the evolutionary history of Chinchilloidea.
+
+## Heterogeneous extinction selectivity across body size classes and between tropical and non-tropical taxa, likely enhanced by the Andean uplift, shaped the decline of Chinchilloidea
+
+Our findings revealed that the aforementioned changes in diversity were due to changes in extinction, not speciation rate during the history of the clade. Indeed, the joint estimation of the diversification process (together with species origination and extinction times, altogether forming the sampled diversity) made with PyRate using the rjMCMC algorithm did not evidence any significant speciation rate shift during the evolutionary history of the clade (@fig-diversification A, Figure S6 A). Rather, according to this model, speciation rate remained constant, nearing 0.6 events/lineage/Myr over the entire study period (@fig-diversification A). This result aligns with the output of the MBD model, where speciation rate estimated with exponential correlations with environmental variables also remained equal to 0.6 across the evolutionary history of the group (@fig-diversification E), and was not found significantly associated with any of the variables (**Figure Drivers**). Conversely, the analyses conducted with the BDNN yielded a slightly different conclusion, as it provided evidence for significant speciation rate variation across lineages (Table S4). 
+
 
 Positive net diversification rate until *ca*. 6 Ma, decline and increase in extinction rate (cite figures accordingly).
 
@@ -115,11 +122,15 @@ All DD architectures performed similarly, as long as they comprised at least one
 
 The coefficients of rate variations obtained for BDNN (resp. XX and XX) exceeded the thresholds inferred from analyses of 100 simulated datasets generated under a constant-rate birth-death model, matching our empirical data in terms of trait number, age of the clade and (approximately) number of species (resp. XX and XX). This therefore provides evidence for significant rate variations throughout the evolutionary history of Chinchilloidea.
 
-## A body-mass selective XXX XXX evolutionary decline
-
 Speciation rate significantly differs across body size classes, with larger taxa achieving higher values (Fig. X and S5). According to the BDNN model, body size stands out as the first predictor explaining variations in speciation rate within Chinchilloidea, with a *ca*. 2.5-fold change obtained between our two extrema (*i*.*e*., XS and XXL =\> **indicate on the violin plot**).
 
 In our BDNN analyses, time is always ranked as the least important predictor, suggesting our environmental and trait variable effectively capture signals of rate variation.
+
+Higher extinction rates outside the tropics
+
+ADE
+
+
 
 ## Side notes
 
@@ -156,6 +167,8 @@ How about an implication of the GABI in the Pliocene extinction rate increase?
 The question of what governs clade-wise diversity dynamics remains hotly debated [see @quintero_loss_2025 and literature therein], and gains an additional layer of complexity when incorporating the dynamics of morphological disparity. Seminal works highlighted that clades could experience coordinated or decoupled diversity and disparity trajectories linked to biological diversification [@foote1993; @foote1997]. Far from a one-fits-them-all rule, the diversity-disparity interplay was rather shown to be complex and case-dependent, with speciation and extinction either acting as opposing forces or reinforcing one another in the contraction/expansion of the morphospace through evolutionary times [@foote1993; @foote1997; @balseiro2025; @esteve2025]. Here, our clade offers an example of coupled dynamics of disparity and diversity [@fig-diversityBM].
 
 Conspicuousness of the waxing-and-waning diversity pattern [*e*.*g*., @foote2007; @hohmann2019; @billaud2020; @quintero_loss_2025] $\rightarrow$ **read [@foote2007; @hohmann2019]**
+
+Could the phylogenetic scale affect our perception of coupling/decoupling between diversity and disparity? Intra super-family: coupled. Inter-superfamilies: decoupled [@carrillo2026]
 
 Whether this unique trajectory stems from intrinsic developmental capability, ecological opportunity or a combination of both remains an open question [@vucetich2015]
 
@@ -267,7 +280,7 @@ knitr::include_graphics("../Figures/Main/Diversity_and_BM_through_time.png")
 #| label: fig-lifespans
 #| out-height: 19cm
 #| out-width: 15cm
-#| fig-cap: Bayesian reconstruction of the longevities of the 129 chinchilloid species considered in our dataset. Each segment depicts the longevity of a given species, that is, the interval between species' speciation and extinction times averaged across PyRate runs that achieved convergence. Segments and taxonomic names were coloured according to the body mass category to which species were assigned. The histogram at the centre of the plot shows the number of species within each body mass class. The 8 extant species names are highlighted in bold with a star at the end. The first four silhouettes (from top to bottom) are from Phylopic (credits available in Table S2). The last two silhouettes (*Elasmodontomys obliquus* and *Borikenomys praecursor*) were designed by L.M. for a previous work [@marivaux_early_2020].
+#| fig-cap: Bayesian reconstruction of the longevities of the 129 chinchilloid species considered in our dataset. Each segment depicts the longevity of a given species, that is, the interval between species' speciation and extinction times averaged across PyRate runs that achieved convergence. Segments and taxonomic names were coloured according to the body mass category to which species were assigned. The histogram at the centre of the plot shows the number of species within each body mass class. The 8 extant species names are highlighted in bold with a star at the end. Except *Lagostomus maximus*, these taxa had almost no fossil record. Consequently, their age of origination was estimated with the method presented in @fig-ExtSampl. The first four silhouettes (from top to bottom) are from Phylopic (credits available in Table S3). The last two silhouettes (*Elasmodontomys obliquus* and *Borikenomys praecursor*) were designed by L.M. for a previous work [@marivaux_early_2020].
 
 knitr::include_graphics("../Figures/Main/Lifespans/lifespans_distribs.png")
 ```
@@ -279,7 +292,7 @@ knitr::include_graphics("../Figures/Main/Lifespans/lifespans_distribs.png")
 #| label: fig-diversification
 #| out-height: 11cm
 #| out-width: 15cm
-#| fig-cap: Comparative chinchilloid speciation and extinction rates reconstructed using three Bayesian occurrence-based birth-death models. Speciation and extinction rates are respectively depicted in blue and red. The left column **(A-B)** shows the rates estimated by PyRate, using the rjMCMC algorithm [@silvestro2019]. Stars indicate significant rate shifts. The middle column **(C-D)** shows the marginal rates estimated with BDNN. These were obtained after imputing missing values for taxa with missing trait estimate. As this procedure was repeated 10 times randomly (see *Methods*), the rates presented here come from an arbitrarily chosen replicate (*i*.*e*., replicate 8), but marginal rates through time did not differ across replicates (Fig. SX). The right column **(E-F)** shows the rates through time estimated with the MBD model. 
+#| fig-cap: Comparative chinchilloid speciation and extinction rates reconstructed using three Bayesian occurrence-based birth-death models. Speciation and extinction rates are respectively depicted in blue and red. The left column **(A-B)** shows the rates estimated by PyRate, using the rjMCMC algorithm [@silvestro2019]. The star indicates a significant rate shifts. The middle column **(C-D)** shows the marginal rates estimated with BDNN. These were obtained after imputing missing values for taxa with missing trait estimate. As this procedure was repeated 10 times randomly (see *Methods*), the rates presented here come from a replicate chosen arbitrarily (replicate 8), but marginal rates through time did not differ across replicates (Fig. S10-11). The right column **(E-F)** shows the rates through time estimated with the MBD model. 
 
 knitr::include_graphics("../Figures/Main/Diversification_rates.png")
 ```

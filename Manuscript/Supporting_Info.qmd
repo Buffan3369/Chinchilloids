@@ -107,12 +107,11 @@ Additional details are provided in the `Remark` column of *Dataset S1*.
 library(knitr)
 ```
 
-
 ```{r, echo=FALSE}
 #| label: fig-preservation_rate
 #| out-height: 7.5cm
 #| out-width: 7.5cm
-#| fig-cap: Estimate of the preservation rate through time in our species-level dataset. The solid line represents the mean posterior estimate and the shaded area the 95% HPD interval.
+#| fig-cap: Preservation rate through time in our species-level dataset estimated with PyRate. The solid line represents the mean posterior estimate and the shaded area the associated 95% HPD interval.
 
 include_graphics("../Figures/Supp/Preservation_through_time.pdf")
 ```
@@ -227,7 +226,6 @@ include_graphics("../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
 include_graphics("../Figures/ADE/Weibull_shape_species.png")
 ```
 
-
 {{< pagebreak >}}
 
 # Supplementary Tables
@@ -249,7 +247,7 @@ library(dplyr, warn.conflicts = FALSE)
 
 ```{r, echo=FALSE}
 #| label: tbl-DDperf
-#| tbl-cap: "Performance of the different network architectures tested in our DeepDive analyses. `LSTM Layers` and `Fully-connected` are respectively the number of Long Short Term Memory and Fully-connected units of the network (3: 128, 64 and 32 nodes; 2: 64 and 32 nodes; 1: 32 nodes). `Dropout` represents the Monte-Carlo dropout fraction, that is, the proportion of connections between neurons randomly toggled off between two learning epochs -- one epoch being characterised by a complete pass through the entire training dataset −, preventing from overfitting. `Nb. training epochs` is the optimal number of training epochs. `Training loss` and `Validation loss` are the values of the Mean Squared Error (MSE) estimated between the 'true' diversity of each simulated dataset (resp. from the training or the validation set), and the predicted diversity made by the network after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs. `Evaluation loss` represent the MSE between each true and its associated predicted diversity trajectory from the test datset, once the is trained (*i*.*e*., after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs). The optimal number of epochs is determined when the `Validation loss` starts increasing (see @fig-ddHistPlotL2D2). Architectures resulting in the smallest evaluation loss values, *i*.*e*., generating the most accurate predictions, are depicted in bold."
+#| tbl-cap: "Performance of the different network architectures tested in our DeepDive analyses. `LSTM Layers` and `Fully-connected` are respectively the number of Long Short Term Memory and Fully-connected units of the network (3: 128, 64 and 32 nodes; 2: 64 and 32 nodes; 1: 32 nodes). `Dropout` represents the Monte-Carlo dropout fraction, that is, the proportion of connections between neurons randomly toggled off between two learning epochs -- one epoch being characterised by a complete pass through the entire training dataset −, preventing from overfitting. `Nb. training epochs` is the optimal number of training epochs. `Training loss` and `Validation loss` are the values of the Mean Squared Error (MSE) estimated between the 'true' diversity of each simulated dataset (resp. from the training or the validation set), and the predicted diversity made by the network after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs. `Evaluation loss` represent the MSE between each true and its associated predicted diversity trajectory from the test datset, once the is trained (*i*.*e*., after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs). The optimal number of epochs is determined when the `Validation loss` starts increasing (see @fig-ddHistPlotL2D2 and @fig-ddHistPlotL3D2). Architectures resulting in the smallest evaluation loss values, *i*.*e*., generating the most accurate predictions, are depicted in bold."
 
 tbl_dd <- read.csv("../Data/supp_tbl/dd_network_perf.csv")
 colnames(tbl_dd) <- c("LSTM layers", "Fully-connected", "Dropout", "Nb. training epochs", "Training loss", "Validation loss", "Evaluation loss")
@@ -303,7 +301,6 @@ colnames(tbl) <- sapply(X = colnames(tbl), FUN = function(x){paste0("**", x, "**
 kable(tbl, align = "c")
 ```
 
-
 ```{r, echo=FALSE}
 #| label: tbl-cv_sp
 #| tbl-cap: Coefficient of speciation rate variation across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$), excluding caribbean taxa. Simulated values (`cv_simulated`) were obtained from the analysis of 100 simulated datasets matching the empirical datasets in terms of number of traits, clade age and (approximately) number of extant species, generated under a constant-rate birth-death model. Empirical values (`cv_empirical`) were obtained from the analysis of the empirical dataset.
@@ -321,8 +318,8 @@ cv_tbl_sp[nrow(cv_tbl_sp), ] <- sapply(X = cv_tbl_sp[nrow(cv_tbl_sp), ],
 kable(cv_tbl_sp, align = "c")
 ```
 
-|
-|
+| 
+| 
 
 ```{r, echo=FALSE}
 #| label: tbl-cv_ex
@@ -340,7 +337,6 @@ cv_tbl_ex[nrow(cv_tbl_ex), ] <- sapply(X = cv_tbl_ex[nrow(cv_tbl_ex), ],
 kable(cv_tbl_ex, align = "c")
 
 ```
-
 
 {{< pagebreak >}}
 
@@ -363,7 +359,6 @@ pred_imp_tbl_sp[1:3, c("Predictor", "Rank")] <- apply(X = pred_imp_tbl_sp[1:3, c
 kable(pred_imp_tbl_sp, align = "c")
 ```
 
-
 ```{r, echo=FALSE}
 #| label: tbl-pred_imp_ex
 #| tbl-cap: Predictor importance on extinction rate across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$) after excluding caribbean taxa. `R.i` stands for replicate i, for i in [1,10]. The `SumRank` column indicates, for a given predictor, the sum of the ranks of this predictors across replicates. The `Rank` column represents the overall rank of the predictor (*i*.*e*., sorting sum of the ranks by increasing order), with higher ranks (*i*.*e*., closer to 1) indicating greater contribution to speciation rate variation across species.
@@ -377,11 +372,47 @@ colnames(pred_imp_tbl_ex) <- gsub("^Replicate_", "R. ", colnames(pred_imp_tbl_ex
 pred_imp_tbl_ex <- pred_imp_tbl_ex %>% rename(Rank = "OverallRank")
 # Highlight the podium
 pred_imp_tbl_ex[1:3, c("Predictor", "Rank")] <- apply(X = pred_imp_tbl_ex[1:3, c("Predictor", "Rank")],
-                                                             FUN = convert_bold,
-                                                             MARGIN = c(1,2))
-# Diexlay
+                                                      FUN = convert_bold,
+                                                      MARGIN = c(1,2))
+# Display
 kable(pred_imp_tbl_ex, align = "c")
 ```
+
+
+```{r, echo=FALSE}
+#| label: tbl-FC_BM
+#| tbl-cap: Magnitude of the change in extinction rate (*i*.*e*., `Fold Change`) between the two extreme body size classes (XS and XXL) across the 10 trait-imputed replicates without Caribbean taxa. `Upper CI` and `Lower CI` respectively show the uppper and lower boundaries of the associated 95% HPD interval. The 'Total' row shows the averaged values across the 10 replicates.
+
+tbl <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_XS_XL_across_replicates.RDS")
+# Change column names
+colnames(tbl) <- c("Replicate", "Fold Change", "Upper CI", "Lower CI")
+# Numericise
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = as.numeric)
+# Round
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = round, digits = 2)
+# Highlight last row ('total')
+tbl[nrow(tbl), ] <- sapply(X = tbl[nrow(tbl), ], FUN = convert_bold)
+# Display
+kable(tbl, align = "c")
+```
+
+```{r, echo=FALSE}
+#| label: tbl-FC_ET
+#| tbl-cap: Magnitude of the change in extinction rate (*i*.*e*., fold change) between tropical and extratropical taxa across the 10 trait-imputated replicates without Caribbean taxa. `Upper CI` and `Lower CI` respectively show the uppper and lower boundaries of the associated 95% HPD interval. The 'Total' row shows the averaged values across the 10 replicates.
+
+tbl <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_Trop_Etrop_across_replicates.RDS")
+# Change column names
+colnames(tbl) <- c("Replicate", "Fold Change", "Upper CI", "Lower CI")
+# Numericise
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = as.numeric)
+# Round
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = round, digits = 2)
+# Highlight last row ('total')
+tbl[nrow(tbl), ] <- sapply(X = tbl[nrow(tbl), ], FUN = convert_bold)
+# Display
+kable(tbl, align = "c")
+```
+
 
 {{< pagebreak >}}
 
