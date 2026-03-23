@@ -145,11 +145,13 @@ for(lvl in c("genus", "species")){
                                      y_limits = c(0, max(c(frs_tbl[[3]]+0.02,
                                                            max(frs_tbl[[1]][,1]+0.02), # max freq rate shift for speciation
                                                            max(frs_tbl[[1]][,2]+0.02)))), # same for extinction
+                                     y_breaks = seq(0, 0.15, 0.05),
                                      several_gts = TRUE,
                                      geoscale = gsc1,
                                      geoscale2 = gsc4,
                                      geoscale_height = unit(.75, "line"))
-    frs_panel <- ggarrange(plotlist = plot_list_frs, ncol = 2, labels = c("(A)", "(B)"), widths = c(20.25/40, 19.75/40))
+    frs_panel <- ggarrange(plotlist = plot_list_frs, ncol = 2, labels = c("(A)", "(B)"), 
+                           widths = c(20.25/40, 19.75/40), hjust = c(-1, -0.2))
     out_pah_frs <- ggsave(paste0("./Figures/recap_figures_RJMCMC/Chinchilloidea_", lvl, "_", ana_out, "_frequency_of_rate_shift.pdf"),
                           plot = frs_panel,
                           height = 140,
