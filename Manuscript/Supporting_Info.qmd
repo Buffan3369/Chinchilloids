@@ -1,7 +1,7 @@
 ---
 title: "Supporting Information for : A matter of size: what underpinned the emergence and demise of the largest rodents that ever lived?"
 author:  
-  - Lucas Buffan¹\*, Myriam Boivin²\*, Alicia Álvarez², Fabien L. Condamine¹, Laurent Marivaux¹
+  - Lucas Buffan¹\*, Myriam Boivin$^{2,3,4}$\*, Alicia Álvarez$^{2,3,4}$, Fabien L. Condamine¹, Laurent Marivaux¹
 format:
   pdf:
     documentclass: article
@@ -47,8 +47,11 @@ fig-cap-location: bottom
 
 Affiliations:\
 ¹ Institut des Sciences de l’Evolution de Montpellier, Université de Montpellier, CNRS, IRD, Place Eugène Bataillon, 34095 Montpellier cedex 5, France.\
-² Instituto de Ecorregiones Andinas (INECOA), Universidad Nacional de Jujuy, CONICET, IdGyM, Avenida Bolivia 1661, 4600 San Salvador de Jujuy, Jujuy, Argentina.\
-³ IANIGLA, CCT–CONICET–Mendoza, Avenida Ruiz Leal s/n, Parque General San Martín, 5500 Mendoza, Argentina.
+² Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET), Godoy Cruz 2290, CP 1425 Ciudad Autónoma de Buenos Aires, Argentina.\
+³ Grupo de Paleontología de Vertebrados, Instituto de Ecorregiones Andinas (INECOA), CONICET – Universidad Nacional de Jujuy. Av. Bolivia 1661, CP 4600 San Salvador de Jujuy, Argentina\
+$^4$ Instituto de Geología y Minería (IdGyM), Universidad Nacional de Jujuy. Av. Bolivia 1661, CP 4600 San Salvador de Jujuy, Argentina
+
+\* corresponding authors: lucas.l.buffan\@gmail.com, mboivin\@idgym.unju.edu.ar
 
 | 
 | 
@@ -117,31 +120,60 @@ include_graphics("../Figures/Supp/Preservation_through_time.pdf")
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-FreqRateShiftSp
-#| out-height: 8cm
-#| out-width: 15cm
-#| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
-
-include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Full_frequency_of_rate_shift.pdf")
-```
-
-```{r, echo=F}
 #| label: fig-ESSplot
 #| out-height: 15cm
 #| out-width: 15cm
 #| fig-cap: Convergence of the PyRate runs for the analysis of the species-level temporal occurrence database. The plot (A) the ESS of the model posterior probability for all the 20 replicates we ran. ESS greater than 200 (first-scale indicator of a run that converged, $n=20$ in that case) are displayed in green. The proportion of origination and extinction times (resp. $T_S$ and $T_E$) that converged (i.e., with $ESS > 200$) are shown in (B), for each of our 20 replicates. The plot (C) shows the posterior estimates of the mean root age of our group, together with their lower and upper boundaries of the 95% HPD interval, across the 20 replicates.
 
-include_graphics("../Results/RJMCMC/species/1-Full/pyrate_mcmc_logs/ESS_plot.png")
+include_graphics("../Results/RJMCMC/AMD-45/species/1-Full/pyrate_mcmc_logs/ESS_plot.png")
 
+```
+
+```{r, echo=FALSE}
+#| label: fig-RecapSpRJ
+#| out-height: 10.5cm
+#| out-width: 20cm
+#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model.
+
+include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_species_Full_Recap_figure-AMD45.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-FreqRateShiftSp
+#| out-height: 8cm
+#| out-width: 15cm
+#| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
+
+include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_species_Full_frequency_of_rate_shift-AMD45.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-RecapSpRJnoAMD
+#| out-height: 10.5cm
+#| out-width: 20cm
+#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model without incorporating taxa from the AMD-45 locality [@arnal2026].
+
+include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Full_Recap_figure.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-FreqRateShiftSpNoAMD
+#| out-height: 8cm
+#| out-width: 15cm
+#| fig-cap: Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model, without incorporating taxa from the AMD-45 locality [@arnal2026]. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts.
+
+include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Full_frequency_of_rate_shift.pdf")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-RecapGenRJ
 #| out-height: 10.5cm
 #| out-width: 20cm
-#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our genus-level occurrence dataset with the rjMCMC model.
+#| fig-cap: Origination and extinction **(A)**, net diversification **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our genus-level occurrence dataset with the rjMCMC model.
 
-include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_Recap_figure.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_genus_Full_Recap_figure-AMD45.pdf")
 ```
 
 ```{r, echo=FALSE}
@@ -150,14 +182,14 @@ include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_Reca
 #| out-width: 15cm
 #| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our genus-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
 
-include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_genus_Full_frequency_of_rate_shift.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_genus_Full_frequency_of_rate_shift-AMD45.pdf")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-RecapSpRJSing
 #| out-height: 10.5cm
 #| out-width: 20cm
-#| fig-cap: Speciation and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model after removing singletons.
+#| fig-cap: Speciation and extinction **(A)**, net diversification **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model after removing singletons.
 
 include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Singleton_Recap_figure.pdf")
 ```
@@ -180,9 +212,9 @@ include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Singlet
 include_graphics("../Figures/ADE/Weibull_shape_species.png")
 ```
 
-|
-|
-|
+| 
+| 
+| 
 
 ```{r, echo=FALSE}
 #| label: fig-RTTperBM
