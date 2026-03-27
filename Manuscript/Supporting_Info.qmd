@@ -100,6 +100,10 @@ Added two occurrences of *Saremmys ligcura* from the two localities of Bryn Gwyn
 
 We acknowledge the proposition of synonimisation between *Telicomys gigantissimus* and *Telicomys giganteus* made by @rasia2025. However, in the light of phylogenetic analyses that are currently in progress, we decided not to account for it, therefore treating *T. gigantissimus* and *T. giganteus* as two distinct taxa.
 
+We incorporated four occurrences -- corresponding to four different taxa -- from the AMD-45 locality (18.9--17.1 Ma) published by @arnal2026: *Maquiamys praecursor*, *Manumys materdei*, *Marianamys altadens* and *Peruchinchilla prima*.
+
+We followed the latest taxonomic revisions proposed by @rasia2026 regarding the hyperdiverse dinomyid fauna from the Ituzaingó Formation (Late Miocene).
+
 Additional details are provided in the `Remark` column of *Dataset S1*.
 
 \newpage
