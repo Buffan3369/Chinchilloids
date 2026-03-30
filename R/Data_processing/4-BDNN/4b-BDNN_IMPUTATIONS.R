@@ -23,9 +23,9 @@ transf_features_tbl <- data.frame(Temperature = c(NA, NA),
 ### Regional South American temperature (Tardif et al. 2025) ###
 temp <- read.table("./Data/MBD_predictors/SA_regional_temperatures_Tardif_2025.txt", header = T)
 # Downscale to a 0.5My time step
-selected_indices <- sapply(X = seq(0, 38, 0.5), FUN = select_closer, age_vect = temp$Time)
+selected_indices <- sapply(X = seq(0, 36, 0.5), FUN = select_closer, age_vect = temp$Time)
 temp500k <- temp[selected_indices, c(1, 2)] # only retain MAT
-temp500k$Time <- seq(0, 38, 0.5) # Harmonise time vector
+temp500k$Time <- seq(0, 36, 0.5) # Harmonise time vector
 colnames(temp500k) <- c("Time", "Temperature")
 # Save mean and sd in tf table
 mean_Temp <- mean(temp500k$Temperature, na.rm = T)
@@ -53,10 +53,10 @@ transf_features_tbl$Sea_level <- c(mean_slv, sd_slv)
 covar_scaled <- covar_scaled %>% mutate(Sea_level = (slv$Sea_level - mean_slv)/sd_slv)
 
 ### Self-diversity (specific) ###
-SelfDiv <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est_ltt.txt",
+SelfDiv <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est_ltt.txt",
                       header = T)
 # Downscale so it matches the timescale (last 38 Myrs with a 0.5Myr step)
-selected_div <- sapply(X = seq(0, 38, 0.5), FUN = select_closer, age_vect = SelfDiv$time)
+selected_div <- sapply(X = seq(0, 36, 0.5), FUN = select_closer, age_vect = SelfDiv$time)
 SelfDiv_down <- SelfDiv[selected_div, ] %>% 
   select(time, diversity) %>% 
   mutate(time = sapply(time, FUN = round, digits = 1)) # the last time is 37.9, we'll approximate to 38

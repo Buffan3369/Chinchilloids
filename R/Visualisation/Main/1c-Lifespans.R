@@ -12,7 +12,7 @@ source("./R/useful/helper_functions.R")
 source("./R/useful/load_GTS.R")
 
 ## Assign species names and family to TsTe estimates ---------------------------
-TaxonList <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED_TaxonList.txt", header = T)
+TaxonList <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_TaxonList.txt", header = T)
 occdb <- read_xlsx("./Data/OccDB_cleaned/ChinchilloideaOccurrences_cleaned.xlsx")
 
 TaxonList <- TaxonList %>% 
@@ -33,7 +33,7 @@ TaxonList <- TaxonList %>%
 TaxonList$Family[which(is.na(TaxonList$Family))] <- "Stem Chinchilloidea"
 TaxonList$Family <- unlist(TaxonList$Family)
 
-TsTe_tbl <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est.txt",
+TsTe_tbl <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est.txt",
                        header = T)
 TsTe_tbl <- TsTe_tbl %>%
   mutate(Family = TaxonList$Family,
@@ -50,9 +50,9 @@ TsTe_tbl <- TsTe_tbl %>%
   select(Family, Species_name, mean_ts, mean_te) %>%
   rename(ts = "mean_ts", te = "mean_te")
 rm(Ts_ttl, Te_ttl)
-# Remove the only genus-level taxon (my bad)
+
 TsTe_tbl$Family[which(TsTe_tbl$Species %in% c("Microscleromys_cribriphilus", 
-                                              "Microscleromys_paradoxalis"))] <- "NA" # truandage
+                                              "Microscleromys_paradoxalis"))] <- "NA" # Pour faire apparaître microscleromys en haut des stem
 TsTe_tbl$Family <- factor(TsTe_tbl$Family, levels = rev(c("Chinchillidae", "Neoepiblemidae", "Dinomyidae", 
                                                           "?Heptaxodontidae", "\"Cephalomyidae\"", "NA", "Stem Chinchilloidea")))
 # Rearrange
@@ -181,11 +181,6 @@ josephoartigasia_img <- get_phylopic(uuid = josephoartigasia_uuid)
 lifespans_plot <- TsTe_tbl %>% 
   mutate(BM_cat = as.character(BM_cat)) %>% 
   ggplot(aes(y = fct_inorder(Species_name), yend = fct_inorder(Species_name))) +
-  # Grey ribbons for geological sub-epochs
-  # annotate(geom = "rect", xmin = 0, xmax = 2.58, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
-  # annotate(geom = "rect", xmin = 5.33, xmax = 11.63, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
-  # annotate(geom = "rect", xmin = 15.97, xmax = 23.03, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
-  # annotate(geom = "rect", xmin = 27.82, xmax = 33.9, ymin = 0, ymax = Inf, fill = "grey", alpha = 0.2) +
   scale_y_discrete(position = "right") +
   labs(x = "Time (Ma)", y = NULL, color = NULL) +
   # Chinchillidae

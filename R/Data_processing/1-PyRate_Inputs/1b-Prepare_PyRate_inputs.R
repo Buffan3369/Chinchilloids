@@ -78,6 +78,16 @@ write.table.lucas(chinchi_sp, "./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_
 # Extract ages
 extract.ages("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt", replicates = 20)
 
+
+## Display descriptive stats on occ db -----------------------------------------
+ct_sp <- chinchi_sp %>% count(Species)
+ct_gen <- chinchi_gen %>% count(Species)
+cat(paste0("The complete species-level database comprises ", nrow(chinchi_sp), " occurrences for ",
+           nrow(ct_sp), " species, including ", length(which(ct_sp$n == 1)), " singletons.\n",
+           "The complete genus-level database comprises ", nrow(chinchi_gen), " occurrences for ",
+           nrow(ct_gen), " genera, including ", length(which(ct_gen$n == 1)), " singletons.\n"))
+
+
 ## Removing Caribbean taxa -----------------------------------------------------
 chinchi_sp_NoCar <- chinchi_sp %>% 
   filter(Species %in% c("Amblyrhiza_inundata", "Elasmodontomys_obliquus",

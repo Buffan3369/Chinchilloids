@@ -54,7 +54,7 @@ transf_features_tbl$Sea_level <- c(mean_slv, sd_slv)
 covar_scaled <- covar_scaled %>% mutate(Sea_level = (slv$Sea_level - mean_slv)/sd_slv)
 
 ### Self-diversity (specific) ###
-SelfDiv <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est_ltt.txt",
+SelfDiv <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est_ltt.txt",
                       header = T)
 # Downscale so it matches the timescale (last 36 Myrs with a 0.5Myr step)
 selected_div <- sapply(X = seq(0, 36, 0.5), FUN = select_closer, age_vect = SelfDiv$time)
@@ -76,7 +76,7 @@ for(i in 1:10){
 
 
 ## Species-specific traits -----------------------------------------------------
-### Tropicality (+ pertenency to West Indies, see MacPhee 2011) ###
+### Tropicality ###
 chinchi <- read_xlsx("./Data/OccDB_cleaned/ChinchilloideaOccurrences_cleaned.xlsx")
 
 # Carribean taxa
