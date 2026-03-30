@@ -134,77 +134,77 @@ include_graphics("../Results/RJMCMC/AMD-45/species/1-Full/pyrate_mcmc_logs/ESS_p
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-RecapSpRJ
-#| out-height: 10.5cm
+#| label: fig-RecapSpRJ45
+#| out-height: 10cm
 #| out-width: 20cm
-#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model.
+#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level chinchilloid occurrence dataset without incorporating the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model.
 
 include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_species_Full_Recap_figure-AMD45.pdf")
 
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-FreqRateShiftSp
+#| label: fig-FreqRateShiftSp45
 #| out-height: 8cm
 #| out-width: 15cm
-#| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
+#| fig-cap: Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset without incorporating the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts.
 
 include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_species_Full_frequency_of_rate_shift-AMD45.pdf")
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-RecapSpRJnoAMD
-#| out-height: 10.5cm
+#| label: fig-RecapSpRJold
+#| out-height: 9cm
 #| out-width: 20cm
-#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model without incorporating taxa from the AMD-45 locality [@arnal2026].
+#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model without incorporating taxa from the AMD-45 locality [@arnal2026] and the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model.
 
-include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Full_Recap_figure.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/Old/Chinchilloidea_species_Full_Recap_figure.pdf")
 
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-FreqRateShiftSpNoAMD
-#| out-height: 8cm
+#| label: fig-FreqRateShiftSpOld
+#| out-height: 7cm
 #| out-width: 15cm
-#| fig-cap: Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model, without incorporating taxa from the AMD-45 locality [@arnal2026]. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts.
+#| fig-cap: Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model, without incorporating taxa from the AMD-45 locality [@arnal2026] and the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026]. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts.
 
-include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Full_frequency_of_rate_shift.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/Old/Chinchilloidea_species_Full_frequency_of_rate_shift.pdf")
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-RecapGenRJ
-#| out-height: 10.5cm
+#| label: fig-RecapGenRJ45
+#| out-height: 10cm
 #| out-width: 20cm
-#| fig-cap: Origination and extinction **(A)**, net diversification **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our genus-level occurrence dataset with the rjMCMC model.
+#| fig-cap: Origination and extinction **(A)**, net diversification **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our genus-level occurrence dataset without incorporating the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model.
 
 include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_genus_Full_Recap_figure-AMD45.pdf")
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-FreqRateShiftGen
+#| label: fig-FreqRateShiftGen45
 #| out-height: 8cm
 #| out-width: 15cm
-#| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our genus-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
+#| fig-cap: Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our genus-level chinchilloid occurrence dataset without incorporating the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts.
 
 include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_genus_Full_frequency_of_rate_shift-AMD45.pdf")
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-RecapSpRJSing
-#| out-height: 10.5cm
+#| label: fig-RecapSpRJSingOld
+#| out-height: 9cm
 #| out-width: 20cm
-#| fig-cap: Speciation and extinction **(A)**, net diversification **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model after removing singletons.
+#| fig-cap: Speciation and extinction **(A)**, net diversification **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset without incorporating taxa from the AMD-45 locality [@arnal2026] and the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model after removing singletons.
 
-include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Singleton_Recap_figure.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/Old/Chinchilloidea_species_Singleton_Recap_figure.pdf")
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-FreqRateShiftSpSing
+#| label: fig-FreqRateShiftSpSingOld
 #| out-height: 8cm
 #| out-width: 15cm
-#| fig-cap: "Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model after removing singletons. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
+#| fig-cap: Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset without incorporating taxa from the AMD-45 locality [@arnal2026] and the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model after removing singletons. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts.
 
-include_graphics("../Figures/recap_figures_RJMCMC/Chinchilloidea_species_Singleton_frequency_of_rate_shift.pdf")
+include_graphics("../Figures/recap_figures_RJMCMC/Old/Chinchilloidea_species_Singleton_frequency_of_rate_shift.pdf")
 ```
 
 ```{r, echo = FALSE}
