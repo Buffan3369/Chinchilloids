@@ -1,3 +1,9 @@
+################################################################################
+# Raw occurrence count through time
+################################################################################
+
+chinchi <- read_xlsx("./Data/OccDB_cleaned/ChinchilloideaOccurrences_cleaned.xlsx")
+occdb <- occdb %>% mutate(min_ma = as.numeric(min_ma), max_ma = as.numeric(max_ma))
 
 ## Function to plot occs through time ------------------------------------------
 occ_through_time <- function(data, what="occ"){ 
