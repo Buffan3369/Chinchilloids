@@ -23,9 +23,19 @@ chinchi_sp <- c("Chinchilla_chinchilla", "Chinchilla_lanigera", "Lagidium_peruan
 chinchi_tree <- keep.tip(cavio_tree, tip = chinchi_sp)
 
 # Plot & save
-pdf("./Figures/Main/Figure_set_the_scene/Chinchilloidea_consensus_tree.pdf", height = 8, width = 9)
-plot(chinchi_tree@phylo)
-dev.off()
+# pdf("./Figures/Main/Figure_set_the_scene/Chinchilloidea_consensus_tree.pdf", height = 8, width = 9)
+# plot(chinchi_tree@phylo)
+# dev.off()
+
+tree_plt <- chinchi_tree %>% ggtree() +
+  geom_tiplab(size = 2) +
+  # Add 95% HPD on node age
+  geom_range("height_0.95_HPD", linewidth = 1.3, alpha = 0.6, color = "purple") +
+  # artificially extend x axis to display tip labels
+  annotate(geom = "rect", xmin = 24.8, xmax = 28.8, ymin = 0, ymax = 8, fill = "transparent")
+
+ggsave("./Figures/Main/Figure_set_the_scene/Chinchilloidea_consensus_tree.pdf", plot = tree_plt,
+       height = 80, width = 100, units = "mm")
 
 ## Load GTS --------------------------------------------------------------------
 source("./R/useful/load_GTS.R")
