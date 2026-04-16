@@ -391,25 +391,6 @@ kable(cv_tbl_ex, align = "c")
 {{< pagebreak >}}
 
 ```{r, echo=FALSE}
-#| label: tbl-pred_imp_sp
-#| tbl-cap: Predictor importance on speciation rate across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$) after excluding caribbean taxa. `R.i` stands for replicate i, for i in [1,10]. The `SumRank` column indicates, for a given predictor, the sum of the ranks of this predictors across replicates. The `Rank` column represents the overall rank of the predictor (*i*.*e*., sorting sum of the ranks by increasing order), with higher ranks (*i*.*e*., closer to 1) indicating greater contribution to speciation rate variation across species. We highlighted in bold the three factors that contribute the most to variations in speciation rates across species.
-
-# Load
-pred_imp_tbl_sp <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/BDNN_predictor_importance_sp_rate_NoCar.RDS")
-pred_imp_tbl_sp <- pred_imp_tbl_sp[order(pred_imp_tbl_sp$OverallRank), ]
-rownames(pred_imp_tbl_sp) <- 1:nrow(pred_imp_tbl_sp)
-# Make it clearer
-colnames(pred_imp_tbl_sp) <- gsub("^Replicate_", "R. ", colnames(pred_imp_tbl_sp))
-pred_imp_tbl_sp <- pred_imp_tbl_sp %>% rename(Rank = "OverallRank")
-# Highlight the podium
-pred_imp_tbl_sp[1:3, c("Predictor", "Rank")] <- apply(X = pred_imp_tbl_sp[1:3, c("Predictor", "Rank")],
-                                                             FUN = convert_bold,
-                                                             MARGIN = c(1,2))
-# Display
-kable(pred_imp_tbl_sp, align = "c")
-```
-
-```{r, echo=FALSE}
 #| label: tbl-pred_imp_ex
 #| tbl-cap: Predictor importance on extinction rate across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$) after excluding caribbean taxa. We highlighted in bold the three factors that contribute the most to variations in extinction rates across species.
 
