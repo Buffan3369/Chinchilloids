@@ -112,7 +112,7 @@ This diversity pattern elegantly matched the temporal dynamics of body size acro
 
 ## Heterogeneous extinction selectivity across body size classes and between tropical and non-tropical taxa, likely enhanced by the Andean uplift shaped the decline of Chinchilloidea
 
-Our findings revealed that the aforementioned changes in diversity were due to changes in extinction, not speciation rate during the history of the clade. 
+Our findings revealed that the aforementioned changes in diversity were due to changes in extinction, not speciation rate during the history of the clade.
 
 Indeed, the joint estimation of the diversification process made with PyRate using the rjMCMC algorithm did not evidence any significant speciation rate shift during the evolutionary history of the clade (@fig-diversification A, Figure S2 A). According to this model, speciation rate remained constant, nearing 0.6 events/lineage/Myr over the entire study period (@fig-diversification A). This result aligns with the output of the MBD model, where speciation rate estimated with exponential correlations with environmental variables also remained equal to 0.6 across the evolutionary history of the group (@fig-diversification E), and was not found significantly associated with any of the variables (**Figure Drivers in SI**). The results obtained with the BDNN model also corroborate this conclusion. Indeed, when plotted against time, BDNN-inferred margnial speciation rate does not exhibit striking variation (@fig-diversification C). Also, the coefficient of rate variation across the ten imputation replicates, not significantly exceeding what would be expected under a constant-rate birth-death model (0.25 vs. 0.23, Table S4), suggested an absence of significant speciation rate variation across lineages.
 
@@ -210,11 +210,13 @@ Do large species diversify at a different pace? @liow2008
 
 Why did chinchilloid follow Cope's rule whereas octodontoids did not?
 
+Traits influence extinction selectivity, a trend visible in the deep time as well as in the shallow time @birskis-barros2026
+
 ## Limitations and perspectives
 
 ### Taxonomic uncertainties
 
-In the framework of Chinchilloidea, taxonomic uncertainties regarding key taxa (or faunas) surely hampers our appreciation of their evolutionary history. As most of the taxa considered in this study were described on the basis of morphological characters, biases such as cryptic diversity or intra-specific variation 
+In the framework of Chinchilloidea, taxonomic uncertainties regarding key taxa (or faunas) surely hampers our appreciation of their evolutionary history. As most of the taxa considered in this study were described on the basis of morphological characters, biases such as cryptic diversity or intra-specific variation
 
 'Mesopotamiense' fauna [@candela2005; @candela2013-] is mostly made of singletons. Large endemism, as discussed by @candela2013, but our extinction rate inflation pattern greatly relies on it (**Figure SX**)
 
