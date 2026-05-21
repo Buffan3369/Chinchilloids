@@ -125,93 +125,27 @@ include_graphics("../Figures/Supp/Preservation_through_time.pdf")
 
 ```{r, echo=FALSE}
 #| label: fig-ESSplot
-#| out-height: 15cm
-#| out-width: 15cm
+#| out-height: 10cm
 #| fig-cap: Convergence of the PyRate runs for the analysis of the species-level temporal occurrence database. The plot (A) the ESS of the model posterior probability for all the 20 replicates we ran. ESS greater than 200 (first-scale indicator of a run that converged, $n=20$ in that case) are displayed in green. The proportion of origination and extinction times (resp. $T_S$ and $T_E$) that converged (i.e., with $ESS > 200$) are shown in (B), for each of our 20 replicates. The plot (C) shows the posterior estimates of the mean root age of our group, together with their lower and upper boundaries of the 95% HPD interval, across the 20 replicates.
 
-include_graphics("../Results/RJMCMC/AMD-45/species/1-Full/pyrate_mcmc_logs/ESS_plot.png")
+include_graphics("../Results/RJMCMC/species/1-Full/pyrate_mcmc_logs/ESS_plot.png")
 
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-RecapSpRJ45
-#| out-height: 10cm
-#| out-width: 20cm
-#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level chinchilloid occurrence dataset without incorporating the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model.
+#| label: fig-RasiaEffect
+#| out-height: 20cm
+#| fig-cap: Impact of incorporating the taxonomic revision of @Rasia2026 about the dinomyid fauna of the Ituzaingó formation (Entre Ríos province, Argentina) on the estimation of the temporal dynamics of chinchilloid extinction rate. (**A**) Lifespans of species making up the fauna before (*left*) and after (*right*) the taxonomic revision. Removed taxa were coloured in red. (**B**) Chinchilloid extinction rates estimated from our temporal occurrence database with non-revised (*left*) and revied (*right*) dinomyids from the Ituzaingó formation. The histogram in background shows the frequency of rate shift estimated by the rjMCMC model, that is, for a given time frame (by default set to 1My), how likely it is to consider that the reconstructed extinction rate experienced a shift. The dashed lines labelled (\*) and (\*\*\*) respectively indicate significant and strongly supported rate shift.
 
-include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_species_Full_Recap_figure-AMD45.pdf")
-
+include_graphics("../Figures/Supp/Effect_Rasia2026/rasia_effect.pdf")
 ```
 
-```{r, echo=FALSE}
-#| label: fig-FreqRateShiftSp45
-#| out-height: 8cm
-#| out-width: 15cm
-#| fig-cap: Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset without incorporating the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts.
-
-include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_species_Full_frequency_of_rate_shift-AMD45.pdf")
-```
-
-```{r, echo=FALSE}
-#| label: fig-RecapSpRJold
-#| out-height: 9cm
-#| out-width: 20cm
-#| fig-cap: Origination and extinction **(A)**, net diversification (= origination - extinction) **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset with the rjMCMC model without incorporating taxa from the AMD-45 locality [@arnal2026] and the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model.
-
-include_graphics("../Figures/recap_figures_RJMCMC/Old/Chinchilloidea_species_Full_Recap_figure.pdf")
-
-```
-
-```{r, echo=FALSE}
-#| label: fig-FreqRateShiftSpOld
-#| out-height: 7cm
-#| out-width: 15cm
-#| fig-cap: Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model, without incorporating taxa from the AMD-45 locality [@arnal2026] and the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026]. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts.
-
-include_graphics("../Figures/recap_figures_RJMCMC/Old/Chinchilloidea_species_Full_frequency_of_rate_shift.pdf")
-```
-
-```{r, echo=FALSE}
-#| label: fig-RecapGenRJ45
-#| out-height: 10cm
-#| out-width: 20cm
-#| fig-cap: Origination and extinction **(A)**, net diversification **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our genus-level occurrence dataset without incorporating the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model.
-
-include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_genus_Full_Recap_figure-AMD45.pdf")
-```
-
-```{r, echo=FALSE}
-#| label: fig-FreqRateShiftGen45
-#| out-height: 8cm
-#| out-width: 15cm
-#| fig-cap: Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our genus-level chinchilloid occurrence dataset without incorporating the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts.
-
-include_graphics("../Figures/recap_figures_RJMCMC/AMD-45/Chinchilloidea_genus_Full_frequency_of_rate_shift-AMD45.pdf")
-```
-
-```{r, echo=FALSE}
-#| label: fig-RecapSpRJSingOld
-#| out-height: 9cm
-#| out-width: 20cm
-#| fig-cap: Speciation and extinction **(A)**, net diversification **(B)** rates, diversity **(C)** and preservation rate **(D)** through time as estimated by the analysis of our species-level occurrence dataset without incorporating taxa from the AMD-45 locality [@arnal2026] and the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model after removing singletons.
-
-include_graphics("../Figures/recap_figures_RJMCMC/Old/Chinchilloidea_species_Singleton_Recap_figure.pdf")
-```
-
-```{r, echo=FALSE}
-#| label: fig-FreqRateShiftSpSingOld
-#| out-height: 8cm
-#| out-width: 15cm
-#| fig-cap: Frequency of speciation **(A)** and extinction **(B)** rate shifts as estimated by the analysis of our species-level chinchilloid occurrence dataset without incorporating taxa from the AMD-45 locality [@arnal2026] and the systematic revision of the Late Miocene dinomyids from Ituzaingó Fm. [@rasia2026] with the rjMCMC model after removing singletons. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts.
-
-include_graphics("../Figures/recap_figures_RJMCMC/Old/Chinchilloidea_species_Singleton_frequency_of_rate_shift.pdf")
-```
 
 ```{r, echo = FALSE}
 #| label: fig-violinADE
 #| out-height: 7.5cm
 #| out-width: 15cm
-#| fig-cap: Posterior estimate of the shape parameter of the Weibull distribution for the ADE analyses of the 'Early' (> 6 Ma) and 'Late' (< 6 Ma) occurrence datasets, each with constant extinction rate (@fig-FreqRateShiftSp). 2.5%, 50% and 97.5% quantiles are indicated in the distribution of each parameter by black horizontal lines, respectively from bottom to top.
+#| fig-cap: Posterior estimate of the shape parameter of the Weibull distribution for the ADE analyses of the 'Early' (> 6 Ma) and 'Late' (< 6 Ma) occurrence datasets, each with constant extinction rate (@fig-FreqRateShift). 2.5%, 50% and 97.5% quantiles are indicated in the distribution of each parameter by black horizontal lines, respectively from bottom to top.
 
 include_graphics("../Figures/ADE/Weibull_shape_species.png")
 ```

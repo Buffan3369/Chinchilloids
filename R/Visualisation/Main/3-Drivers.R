@@ -57,8 +57,8 @@ bm_ext <- ex_rate_distrib_df %>%
   geom_violin(aes(fill = BM_category), width = .8) +
   scale_fill_manual(values = c("#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d")) +
   stat_summary(fun.data = sum_violin, size = 0.3) + # `sum_violin` loaded from helper_functions.R
-  annotate(geom = "segment", linetype = "dashed", x = 1, xend = 6, y = 1.65, yend = 1.65) +
-  annotate(geom = "text", x = 3.5, y = 1.73, label = "FC=2.65") +
+  annotate(geom = "segment", linetype = "dashed", x = 1, xend = 6, y = 1.1, yend = 1.1) +
+  annotate(geom = "text", x = 3.5, y = 1.14, label = "FC=2.65") +
   labs(x = NULL, y = "Extinction rate") +
   theme(axis.line.y = element_line(colour = "black"), 
         panel.background = element_blank(),
@@ -125,31 +125,8 @@ upl_plt <- ex_upl_df %>%
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank())
   
-## Self Diversity --------------------------------------------------------------
-line_div_ex <- which(grepl(x = script,
-                           pattern = "xlab = 'Self_diversity', ylab = 'extinction'"))[1]
-script_div <- script[1:line_div_ex]
-
-div <- script_div[grepl(x = script_div, pattern = "tr=c")]
-div <- split_vector(div[length(div)]) # only retain last element 
-
-ex_rate_div_tot <- script_div[grepl(x = script_div, pattern = "r=c")]
-ex_rate_div <- split_vector(ex_rate_div_tot[length(ex_rate_div_tot)-2]) # 3rd-to-last element 
-ex_rate_div_lwr <- split_vector(ex_rate_div_tot[length(ex_rate_div_tot)-1]) # second-to-last element
-ex_rate_div_upr <- split_vector(ex_rate_div_tot[length(ex_rate_div_tot)]) # last element
-
-ex_div_df <- data.frame(diversity = div, ex_rate = ex_rate_div, 
-                        ex_rate_lwr = ex_rate_div_lwr, ex_rate_upr = ex_rate_div_upr)
-div_plt <- ex_div_df %>% 
-  ggplot(aes(x = diversity, y = ex_rate)) +
-  geom_ribbon(aes(ymin = ex_rate_lwr, ymax = ex_rate_upr), fill = "#cb181d", alpha = 0.2) +
-  geom_line(colour = "#cb181d") +
-  scale_y_continuous(breaks = seq(0, 1, 0.2)) +
-  labs(x = "Self diversity", y = NULL) +
-  theme(axis.line = element_line(colour = "black"), 
-        panel.background = element_blank())
-
-totplt <- ggarrange(plotlist = list(bm_ext, lat_ext, upl_plt, div_plt),
-                    labels = c("(A)", "(B)", "(C)", "(D)"), hjust = c(-0.5, 0.2, -0.5, 0.2))
+totplt <- ggarrange(plotlist = list(bm_ext, lat_ext, upl_plt),
+                    ncol = 1, nrow = 3,
+                    labels = c("(A)", "(B)", "(C)"), hjust = c(-0.3, 0, -0.3))
 ggsave("./Figures/Main/Drivers/BDNN_extinction_correlates.pdf", 
-       plot = totplt, height = 200, width = 200, units = "mm")
+       plot = totplt, height = 220, width = 80, units = "mm")
