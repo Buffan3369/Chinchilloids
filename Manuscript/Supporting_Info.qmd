@@ -1,7 +1,7 @@
 ---
 title: "Supporting Information for : A matter of size: what underpinned the emergence and demise of the largest rodents that ever lived?"
 author:  
-  - Lucas Buffan¹\*, Myriam Boivin$^{2,3,4}$\*, Alicia Álvarez$^{2,3,4}$, Fabien L. Condamine¹, Laurent Marivaux¹
+  - Lucas Buffan¹\*, Myriam Boivin$^{2,3*}$, Alicia Álvarez², Fabien L. Condamine¹, Laurent Marivaux¹
 format:
   pdf:
     documentclass: article
@@ -45,22 +45,17 @@ fontsize: "9pt"
 fig-cap-location: bottom
 ---
 
-Affiliations:\
-¹ Institut des Sciences de l’Evolution de Montpellier, Université de Montpellier, CNRS, IRD, Place Eugène Bataillon, 34095 Montpellier cedex 5, France.\
-² Consejo Nacional de Investigaciones Científicas y Técnicas (CONICET), Godoy Cruz 2290, CP 1425 Ciudad Autónoma de Buenos Aires, Argentina.\
-³ Grupo de Paleontología de Vertebrados, Instituto de Ecorregiones Andinas (INECOA), CONICET – Universidad Nacional de Jujuy. Av. Bolivia 1661, CP 4600 San Salvador de Jujuy, Argentina\
-$^4$ Instituto de Geología y Minería (IdGyM), Universidad Nacional de Jujuy. Av. Bolivia 1661, CP 4600 San Salvador de Jujuy, Argentina
+¹ Institut des Sciences de l’Évolution de Montpellier, Université de Montpellier, CNRS, IRD, Place Eugène Bataillon, 34095 Montpellier cedex 5, France.\
+² Instituto de Ecorregiones Andinas (INECOA), CONICET -- Universidad Nacional de Jujuy, Avenida Bolivia 1661, 4600 San Salvador de Jujuy, Jujuy, Argentina.\
+³ Instituto de Geología y Minería (IdGyM), Universidad Nacional de Jujuy, Avenida Bolivia 1661, 4600 San Salvador de Jujuy, Jujuy, Argentina
 
 \* corresponding authors: lucas.l.buffan\@gmail.com, mboivin\@idgym.unju.edu.ar
 
-| 
-| 
-
 This file contains:
 
--   Supplementary text
--   Supplementary figures
--   Supplementary tables
+- Supplementary text
+- Supplementary figures
+- Supplementary tables
 
 | 
 | 
@@ -115,9 +110,24 @@ library(knitr)
 ```
 
 ```{r, echo=FALSE}
+#| label: fig-EffectSamplingRTT
+#| out-height: 16cm
+#| fig-cap: Impact of the sampling scheme of extant species lacking fossil record on the estimation of speciation and extinction rates. Rates were estimated with PyRate using the rjMCMC algorithm, either from a dataset in which extant taxa were included by means of an occurrence with origination and extinction ages ($T_e$ and $T_e$) set to 0 Ma (**A** and **C**) or with our newly-introduced pipeline relying on ages extracted from dated phylogenies (**B** and **D**). Full lines indicate median rate estimation (blue for speciation, red for extinction), and ribbons their associated 95% HPD interval. Grey histograms in the background depict the frequency of rate shift per 1-My time bins. The two horizontal lines labelled \* and \*\*\* respectively indicate significant and strongly supported rate shift. Note that, in the two cases, the datasets used did not incorporate the taxonomic updates of the dinomyid fauna from the Ituzaingó Fm. made by @rasia2026 (see @fig-RasiaEffect).
+
+include_graphics("../Figures/Supp/Age_combination_effect/age_comb_effect_RTT.png")
+```
+
+```{r, echo=FALSE}
+#| label: fig-TsPhyloPyRate
+#| fig-cap: Correspondance between divergence times leading to extant species estimated from our phylogeny ('Ts Phylo') and the times of species origination de novo estimated ('Ts PyRate') after implementing our sampling scheme for extant species absent from the fossil record (*Main text*, Figure 2). For each species, we set $\alpha=0.95$, except for *D. branickii*, for which we set $\alpha=0.999$. Dots show median estimates and error bars the associated 95% HPD. Dashed line shows the line with equation $y=x$.
+
+include_graphics("../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
+
+```
+
+```{r, echo=FALSE}
 #| label: fig-preservation_rate
-#| out-height: 7.5cm
-#| out-width: 7.5cm
+#| out-height: 7cm
 #| fig-cap: Preservation rate through time in our species-level dataset estimated with PyRate. The solid line represents the mean posterior estimate and the shaded area the associated 95% HPD interval.
 
 include_graphics("../Figures/Supp/Preservation_through_time.pdf")
@@ -125,7 +135,7 @@ include_graphics("../Figures/Supp/Preservation_through_time.pdf")
 
 ```{r, echo=FALSE}
 #| label: fig-ESSplot
-#| out-height: 10cm
+#| out-height: 8cm
 #| fig-cap: Convergence of the PyRate runs for the analysis of the species-level temporal occurrence database. The plot (A) the ESS of the model posterior probability for all the 20 replicates we ran. ESS greater than 200 (first-scale indicator of a run that converged, $n=20$ in that case) are displayed in green. The proportion of origination and extinction times (resp. $T_S$ and $T_E$) that converged (i.e., with $ESS > 200$) are shown in (B), for each of our 20 replicates. The plot (C) shows the posterior estimates of the mean root age of our group, together with their lower and upper boundaries of the 95% HPD interval, across the 20 replicates.
 
 include_graphics("../Results/RJMCMC/species/1-Full/pyrate_mcmc_logs/ESS_plot.png")
@@ -133,13 +143,66 @@ include_graphics("../Results/RJMCMC/species/1-Full/pyrate_mcmc_logs/ESS_plot.png
 ```
 
 ```{r, echo=FALSE}
+#| label: fig-FreqRateShift
+#| out-height: 8cm
+#| fig-cap: Histogram showing the frequency of speciation (**A**) and extinction (**B**) rate shifts in our species-level chinchilloid dataset estimated by PyRate (rjMCMC algorithm). This quantity indicates, within 1My time bins, the support given to a model with rate shift compared to a model with constant rates. The two dashed lines respectively labelled $2log(BF)>2$ and $2log(BF)>6$ respectively indicate significant and strongly supported rate shift.
+
+include_graphics("../Figures/recap_figures_RJMCMC/New/Chinchilloidea_species_Full_frequency_of_rate_shift.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-LifespanHypso
+#| out-height: 18cm
+#| fig-cap: "Bayesian reconstruction of the longevities of the 124 chinchilloid species considered in our dataset. Each segment depicts the longevity of a given species, that is, the interval between species' speciation and extinction times averaged across PyRate runs that achieved convergence. Segments and taxonomic names were coloured according to the crown height category to which species were assigned. The histogram at the centre of the plot shows the number of species within each crown height class. The first four silhouettes (from top to bottom) are from Phylopic (credits available in Table S3). The last two silhouettes (*Elasmodontomys obliquus* and *Borikenomys praecursor*) were designed by L.M. for a previous work [@marivaux_early_2020]." 
+
+include_graphics("../Figures/Supp/Lifespans_hypso/Lifespans_HI_Chinchi.png")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-RecapSingletonRTT
+#| out-height: 10cm
+#| fig-cap: Joint estimation of origination (blue) and extinction (red) rates (**A**), net diversification rate (**B**), diversity through time (**C**) and preservation rates (**D**) from our species-level chinchilloid database made my PyRate (rjMCMC algorithm) after removing singletons.
+
+include_graphics("../Figures/recap_figures_RJMCMC/New/Chinchilloidea_species_Singleton_Recap_figure.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-SingletonFRS
+#| out-height: 8cm
+#| fig-cap: Frequency of origination (**A**) and extinction (**B**) rates estimated by the rjMCMC analysis of our species-level database after removing singletons.
+
+include_graphics("../Figures/recap_figures_RJMCMC/New/Chinchilloidea_species_Singleton_frequency_of_rate_shift.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-RecapGenRTT
+#| out-height: 10cm
+#| fig-cap: Joint estimation of origination (blue) and extinction (red) rates (**A**), net diversification rate (**B**), diversity through time (**C**) and preservation rates (**D**) from the genus-level chinchilloid database made my PyRate (rjMCMC algorithm).
+
+include_graphics("../Figures/recap_figures_RJMCMC/New/Chinchilloidea_genus_Full_Recap_figure.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-FRSGen
+#| out-height: 8cm
+#| fig-cap: Frequency of origination (**A**) and extinction (**B**) rates estimated by the rjMCMC analysis of our genus-level database.
+
+include_graphics("../Figures/recap_figures_RJMCMC/New/Chinchilloidea_genus_Full_frequency_of_rate_shift.pdf")
+
+```
+
+```{r, echo=FALSE}
 #| label: fig-RasiaEffect
-#| out-height: 20cm
-#| fig-cap: Impact of incorporating the taxonomic revision of @Rasia2026 about the dinomyid fauna of the Ituzaingó formation (Entre Ríos province, Argentina) on the estimation of the temporal dynamics of chinchilloid extinction rate. (**A**) Lifespans of species making up the fauna before (*left*) and after (*right*) the taxonomic revision. Removed taxa were coloured in red. (**B**) Chinchilloid extinction rates estimated from our temporal occurrence database with non-revised (*left*) and revied (*right*) dinomyids from the Ituzaingó formation. The histogram in background shows the frequency of rate shift estimated by the rjMCMC model, that is, for a given time frame (by default set to 1My), how likely it is to consider that the reconstructed extinction rate experienced a shift. The dashed lines labelled (\*) and (\*\*\*) respectively indicate significant and strongly supported rate shift.
+#| out-height: 19cm
+#| fig-cap: Impact of occounting for the revision of the dinomyid fauna of the Ituzaingó formation (Entre Ríos province, Argentina) on the estimation of the temporal dynamics of chinchilloid extinction rate [@rasia2026]. (**A**) Lifespans of species making up the 'Mesopotamiense' fauna (Ituzaingó Fm.) before (*left*) and after (*right*) the taxonomic revision. Removed taxa were coloured in red (five taxa lost). (**B**) Chinchilloid extinction rates estimated from our temporal occurrence database before (*left*) and after (*right*) incorporating the aforementioned revision. The histogram in background shows the frequency of rate shift estimated by the rjMCMC model, that is, for a given time frame (by default set to 1My), how likely it is to consider that the reconstructed extinction rate experienced a shift. The dashed lines labelled (\*) and (\*\*\*) respectively indicate significant and strongly supported rate shift.
 
 include_graphics("../Figures/Supp/Effect_Rasia2026/rasia_effect.pdf")
 ```
-
 
 ```{r, echo = FALSE}
 #| label: fig-violinADE
@@ -156,7 +219,7 @@ include_graphics("../Figures/ADE/Weibull_shape_species.png")
 
 ```{r, echo=FALSE}
 #| label: fig-RTTperBM
-#| fig-cap: Speciation (**A**) and extinction (**B**) rates through time per body mass class as inferred by the RJMCMC model.
+#| fig-cap: Speciation (**A**) and extinction (**B**) rates through time per body mass class as inferred by the rjMCMC model.
 
 include_graphics("../Figures/Supp/RTT_per_BM/RTT_plot_per_BM.pdf")
 ```
@@ -201,11 +264,10 @@ include_graphics("../Results/DeepDive/species_extant_extended/species_extant_ext
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-TsPhyloPyRate
-#| fig-cap: Correspondance between divergence times leading to extant species estimated from our phylogeny ('Ts Phylo') and the times of species origination de novo estimated ('Ts PyRate') after implementing our sampling scheme for extant species absent from the fossil record (*Main text*, Fig. 1). Dots show mean estimates and error bars the associated 95% HPD. Dashed line shows the line with equation $y=x$.
+#| label: fig-MBDcorrelations
+#| fig-cap: Bayesian estimation of correlation coefficients of extinction (*left*) and speciation (*right*) rates with a selected set of environmental variable carried out by the MBD model (*see Methods in the main text*). A gamma prior was set to correlation parameters. Light colours (respectively blue for speciation and red for extinction) indicate non-significant correlations, and plain colours indicate significant correlations. A correlation was considered to be significant if 0 was not included in the parameter 95% HPD interval.
 
-include_graphics("../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
-
+include_graphics("../Figures/Main/Drivers/MBD_species_complete_scaled_hsp0.pdf")
 ```
 
 {{< pagebreak >}}
@@ -345,9 +407,9 @@ kable(pred_imp_tbl_ex, align = "c")
 
 ```{r, echo=FALSE}
 #| label: tbl-FC_BM
-#| tbl-cap: Magnitude of the change in extinction rate (*i*.*e*., `Fold Change`) between the two extreme body size classes (XS and XXL) across the 10 trait-imputed replicates without Caribbean taxa. `Upper CI` and `Lower CI` respectively show the uppper and lower boundaries of the associated 95% HPD interval. The 'Total' row shows the averaged values across the 10 replicates.
+#| tbl-cap: Magnitude of the change in extinction rate (*i*.*e*., `Fold Change`) between the two extreme body size classes showing the most pronounced extinction rate variation (S and XL) across the 10 trait-imputed replicates without Caribbean taxa. `Upper CI` and `Lower CI` respectively show the uppper and lower boundaries of the associated 95% HPD interval. The 'Total' row shows the averaged values across the 10 replicates.
 
-tbl <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_XS_XL_across_replicates.RDS")
+tbl <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_S_XL_across_replicates.RDS")
 # Change column names
 colnames(tbl) <- c("Replicate", "Fold Change", "Upper CI", "Lower CI")
 # Numericise

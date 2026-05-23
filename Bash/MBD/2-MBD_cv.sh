@@ -39,4 +39,7 @@
 #python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../../Results/MBD/unphased/MBD_scaled_unphased -ana "MBD"
 
 # Species extant extended hsp0 no Diversity-dependence
-python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../../Results/MBD/species_rmDD -ana "MBD"
+#python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../../Results/MBD/species_rmDD -ana "MBD"
+
+# Species-level new dataset
+python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../../Results/MBD/species_hsp0/ -ana "MBD"

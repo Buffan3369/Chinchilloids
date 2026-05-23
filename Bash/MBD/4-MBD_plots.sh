@@ -21,5 +21,9 @@
 #-var ../../Data/MBD_predictors_scaled_unphased -plot ../../Results/MBD/unphased/MBD_scaled_unphased/combined_17_KEEP.log
 
 # Species-level dataset (extant species extended) gamma prior scaled predictors No diversity-dependence
-python ~/PyRate/PyRateMBD.py -d ../../Results/MBD/species_rmDD/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_se_est.txt \
--var ../../Data/MBD_predictors_Scaled_for_plot -rmDD 1 -plot ../../Results/MBD/species_rmDD/combined_20_KEEP.log
+# python ~/PyRate/PyRateMBD.py -d ../../Results/MBD/species_rmDD/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_se_est.txt \
+# -var ../../Data/MBD_predictors_Scaled_for_plot -rmDD 1 -plot ../../Results/MBD/species_rmDD/combined_20_KEEP.log
+
+# Newest dataset (AMD-45 + Ituzaingó revised)
+python ~/PyRate/PyRateMBD.py -d ../../Results/MBD/species_hsp0/Chinchilloidea_species_Continental.txt \
+-var ../../Data/MBD_predictors_Scaled_for_plot -plot ../../Results/MBD/species_hsp0/combined_18_KEEP.log

@@ -21,7 +21,7 @@ gsc1$abbr[which(gsc1$abbr == "Mio")] <- "Miocene"
 
 gsc4$max_age[which.max(gsc4$max_age)] <- 36.2
 
-for(lvl in c("genus", "species")){
+for(lvl in c("species", "genus")){
   for(ana in c("1-Full", "2-Singleton", "3-NoCaribbea", "3-Spatially_scaled")){
     if(lvl == "species" & ana == "3-Spatially_scaled"){
       next
@@ -41,6 +41,7 @@ for(lvl in c("genus", "species")){
                                  stage_x_breaks = FALSE,
                                  manual_x_breaks = seq(0, 35, 5),
                                  x_lab = NULL,
+                                 axes.labelsize = 16,
                                  restrict_y = TRUE,
                                  restrict_thr = 0.9,
                                  y_limits=c(0, 0.9),
@@ -58,6 +59,7 @@ for(lvl in c("genus", "species")){
     net_div_all_in_one <- rtt_plot(data = rtt_all_in_one,
                                    type = "net",
                                    x_lab = NULL,
+                                   axes.labelsize = 16,
                                    stage_x_breaks = FALSE,
                                    manual_x_breaks = seq(0, 35, 5),
                                    restrict_y = TRUE,
@@ -86,10 +88,12 @@ for(lvl in c("genus", "species")){
                          y_limits = c(0,(round(max(ltt_df$Diversity, na.rm = T), -1) + 7)),
                          stage_x_breaks = FALSE,
                          manual_x_breaks = seq(0, 35, 5),
+                         axes.labelsize = 16,
                          several_gts = TRUE,
                          geoscale = gsc1,
                          geoscale2 = gsc4,
                          geoscale_height=unit(1, "line")) +
+      theme(axis.title = element_text(size = 10)) +
       annotate(geom = "rect", xmin = 27.82, xmax = 33.9, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 15.97, xmax = 23.03, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 11.63, xmax = 5.33, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
@@ -107,9 +111,11 @@ for(lvl in c("genus", "species")){
                      manual_x_breaks = seq(0, 35, 5),
                      y_breaks = seq(from = 0, to = round(max(q.table$max_HPD)), as.integer(round(max(q.table$max_HPD))/4)),
                      several_gts = TRUE,
+                     axes.labelsize = 16,
                      geoscale = gsc1,
                      geoscale2 = gsc4,
                      geoscale_height = unit(1, "line")) +
+      theme(axis.title = element_text(size = 10)) +
       annotate(geom = "rect", xmin = 27.82, xmax = 33.9, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 15.97, xmax = 23.03, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
       annotate(geom = "rect", xmin = 11.63, xmax = 5.33, fill = "grey50", ymin = -Inf, ymax = Inf, alpha = 0.2, linewidth = 0) +
@@ -122,7 +128,7 @@ for(lvl in c("genus", "species")){
     #p <- comb_ltt_rtt(sp_ex_all_in_one, net_div_all_in_one, ltt.plot, Q_plot, n_plots = 4)
     
     ana_out <- strsplit(ana, split = "-")[[1]][2]
-    out_path <- paste0("./Figures/recap_figures_RJMCMC/Chinchilloidea_", lvl, "_", ana_out, "_Recap_figure.pdf")
+    out_path <- paste0("./Figures/recap_figures_RJMCMC/New/Chinchilloidea_", lvl, "_", ana_out, "_Recap_figure.pdf")
     
     ggsave(out_path,
            plot = p,
@@ -152,7 +158,7 @@ for(lvl in c("genus", "species")){
                                      geoscale_height = unit(.75, "line"))
     frs_panel <- ggarrange(plotlist = plot_list_frs, ncol = 2, labels = c("(A)", "(B)"), 
                            widths = c(20.25/40, 19.75/40), hjust = c(-1, -0.2))
-    out_pah_frs <- ggsave(paste0("./Figures/recap_figures_RJMCMC/Chinchilloidea_", lvl, "_", ana_out, "_frequency_of_rate_shift.pdf"),
+    out_pah_frs <- ggsave(paste0("./Figures/recap_figures_RJMCMC/New/Chinchilloidea_", lvl, "_", ana_out, "_frequency_of_rate_shift.pdf"),
                           plot = frs_panel,
                           height = 140,
                           width = 250,

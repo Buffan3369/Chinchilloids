@@ -39,4 +39,7 @@
 #python  ~/PyRate/PyRate.py -combLog ../../Results/MBD/unphased/MBD_scaled_unphased -tag _KEEP -resample 100 -b 10
 
 # Species extant extended − unphased predictors
-python  ~/PyRate/PyRate.py -combLog ../../Results/MBD/species_rmDD -tag _KEEP -resample 100 -b 10
+#python  ~/PyRate/PyRate.py -combLog ../../Results/MBD/species_rmDD -tag _KEEP -resample 100 -b 10
+
+# Newest dataset (AMD-45 + Ituzaingó revised)
+python  ~/PyRate/PyRate.py -combLog ../../Results/MBD/species_hsp0/ -tag _KEEP -resample 100 -b 10

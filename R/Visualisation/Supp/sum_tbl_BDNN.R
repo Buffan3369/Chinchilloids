@@ -87,9 +87,9 @@ saveRDS(CV_ex, "./Data/supp_tbl/BDNN_imputation_NoCar/coeff_extinction_rate_vari
 ###### 3. Magnitude in extinction rate change across BM classes and lat  #######
 ################################################################################
 
-FC_BM16 <- c() # Fold change between the two extreme body size classes
-FC_BM16_upr <- c() # Upper Credible Interval of the latter FC
-FC_BM16_lwr <- c() # Lower CI
+FC_BM25 <- c() # Fold change between S and XL
+FC_BM25_upr <- c() # Upper Credible Interval of the latter FC
+FC_BM25_lwr <- c() # Lower CI
 
 FC_ET <- c() # Same between tropical & extratropical
 FC_ET_upr <- c()
@@ -102,12 +102,12 @@ for(i in 1:10){
                            full.names = T)
   ex_tbl <- read.csv(path_to_ex[[1]], header = T)
   # Increment BM Fold Change vectors
-  FC_BM16 <- c(FC_BM16, ex_tbl$fold_change[which(ex_tbl$feature1 == "Body_mass" &
-                                                   ex_tbl$feature1_state == "1_6")]) 
-  FC_BM16_upr <- c(FC_BM16_upr, ex_tbl$fold_change_upr_CI[which(ex_tbl$feature1 == "Body_mass" &
-                                                                ex_tbl$feature1_state == "1_6")]) 
-  FC_BM16_lwr <- c(FC_BM16_lwr, ex_tbl$fold_change_lwr_CI[which(ex_tbl$feature1 == "Body_mass" &
-                                                                ex_tbl$feature1_state == "1_6")]) 
+  FC_BM25 <- c(FC_BM25, ex_tbl$fold_change[which(ex_tbl$feature1 == "Body_mass" &
+                                                   ex_tbl$feature1_state == "2_5")]) 
+  FC_BM25_upr <- c(FC_BM25_upr, ex_tbl$fold_change_upr_CI[which(ex_tbl$feature1 == "Body_mass" &
+                                                                ex_tbl$feature1_state == "2_5")]) 
+  FC_BM25_lwr <- c(FC_BM25_lwr, ex_tbl$fold_change_lwr_CI[which(ex_tbl$feature1 == "Body_mass" &
+                                                                ex_tbl$feature1_state == "2_5")]) 
   # Same for lat vectors
   FC_ET <- c(FC_ET, ex_tbl$fold_change[which(ex_tbl$feature1_state == "Tropical_Extratropical")])
   FC_ET_upr <- c(FC_ET_upr, ex_tbl$fold_change_upr_CI[which(ex_tbl$feature1_state == "Tropical_Extratropical")])
@@ -115,9 +115,9 @@ for(i in 1:10){
 }
 # Make data frames
 FC_tbl_BM <- data.frame(Replicate = 1:10,
-                        Fold_Change = as.numeric(FC_BM16),
-                        Fold_Change_UprCI = as.numeric(FC_BM16_upr),
-                        Fold_Change_LwrCI = as.numeric(FC_BM16_lwr))
+                        Fold_Change = as.numeric(FC_BM25),
+                        Fold_Change_UprCI = as.numeric(FC_BM25_upr),
+                        Fold_Change_LwrCI = as.numeric(FC_BM25_lwr))
 FC_tbl_BM[nrow(FC_tbl_BM)+1, ] <- 
   c("Total", apply(X = FC_tbl_BM[, 2:ncol(FC_tbl_BM)], FUN = mean, MARGIN = 2))
 
@@ -128,5 +128,5 @@ FC_tbl_Lat <- data.frame(Replicate = 1:10,
 FC_tbl_Lat[nrow(FC_tbl_Lat)+1, ] <- 
   c("Total", apply(X = FC_tbl_Lat[, 2:ncol(FC_tbl_Lat)], FUN = mean, MARGIN = 2))
 # Save
-saveRDS(FC_tbl_BM, "./Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_XS_XL_across_replicates.RDS")
+saveRDS(FC_tbl_BM, "./Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_S_XL_across_replicates.RDS")
 saveRDS(FC_tbl_Lat, "./Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_Trop_Etrop_across_replicates.RDS")

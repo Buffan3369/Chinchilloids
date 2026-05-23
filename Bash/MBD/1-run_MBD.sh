@@ -40,8 +40,11 @@
 ########################################
 
 # Script to run locally
+# echo "python3 ~/PyRate/PyRateMBD.py -d ../../Results/MBD/species_extended/1-Full/*se_est.txt -var ../../Data/MBD_predictors_Scaled_for_plot/ -j \$1 -n 5000000 -s 5000" > tmp_script_MBD.sh
+# parallel -j 20 bash tmp_script_MBD.sh ::: {0..19}
 
-echo "python3 ~/PyRate/PyRateMBD.py -d ../../Results/MBD/species_extended/1-Full/*se_est.txt -var ../../Data/MBD_predictors_Scaled_for_plot/ -j \$1 -n 5000000 -s 5000" > tmp_script_MBD.sh
+# Excluding Caribbean taxa
+echo "python3 ~/PyRate/PyRateMBD.py -d ../../Results/MBD/species_hsp0/Chinchilloidea_species_Continental.txt -var ../../Data/MBD_predictors_Scaled_for_plot/ -hsp 0 -j \$1 -n 5000000 -s 5000" > tmp_script_MBD.sh
 parallel -j 20 bash tmp_script_MBD.sh ::: {0..19}
 
 rm tmp_script_MBD.sh

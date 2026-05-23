@@ -16,7 +16,7 @@ source("./R/useful/helper_functions.R")
 source("./R/useful/load_GTS.R")
 
 ## Assign species names and family to TsTe estimates ---------------------------
-TaxonList <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED_TaxonList.txt", header = T)
+TaxonList <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_TaxonList.txt", header = T)
 occdb <- read_xlsx("./Data/OccDB_cleaned/ChinchilloideaOccurrences_cleaned.xlsx")
 
 TaxonList <- TaxonList %>% 
@@ -36,7 +36,8 @@ TaxonList <- TaxonList %>%
                          }))
 TaxonList$Family[which(is.na(TaxonList$Family))] <- "Stem Chinchilloidea"
 
-TsTe_tbl <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est.txt", header = T)
+TsTe_tbl <- read.table("./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est.txt",
+                       header = T)
 TsTe_tbl <- TsTe_tbl %>%
   mutate(Family = TaxonList$Family,
          Species_name = TaxonList$Species)
@@ -69,7 +70,7 @@ for(fam in unique(TsTe_tbl$Family)[-1]){
 colnames(MinMax) <- unique(TsTe_tbl$Family)
 TsTe_tbl$Family[which(TsTe_tbl$Species %in% c("Microscleromys_cribriphilus", 
                                               "Microscleromys_paradoxalis"))] <- NA
-## Body mass categories --------------------------------------------------------
+## Crown height categories -----------------------------------------------------
 HI <- read_xlsx("./Data/Traits/Species_Lists/Chinchilloidea_Hypsodonty_SpeciesList.xlsx")
 HI$Hypsodonty_category <- as.numeric(HI$Hypsodonty_category)
 
@@ -174,8 +175,8 @@ lifespans_plot <- TsTe_tbl %>%
            ymax = MinMax$Chinchillidae[2], fill = "grey", alpha = 0.3) +
   annotate(geom = "text", x = 31.5, y = MinMax$Chinchillidae[1]+3, 
            label = "Chinchillidae", size = 2.8, fontface = 2) +
-  add_phylopic(img = chinchilla_img, x = 32, y = MinMax$Chinchillidae[1]+20, height = 5) +
-  add_phylopic(img = lagidium_img, x = 31.5, y = MinMax$Chinchillidae[1]+10, height = 7) +
+  add_phylopic(img = chinchilla_img, x = 32, y = MinMax$Chinchillidae[1]+18, height = 5) +
+  add_phylopic(img = lagidium_img, x = 31.5, y = MinMax$Chinchillidae[1]+9, height = 7) +
   # Neoepiblemidae
   # annotate(geom = "rect", xmin = -Inf, xmax = Inf, ymin = MinMax$Neoepiblemidae[1]-0.5,
   #          ymax = MinMax$Neoepiblemidae[2]-0.5, fill = "#beaed4", alpha = 0.3) +

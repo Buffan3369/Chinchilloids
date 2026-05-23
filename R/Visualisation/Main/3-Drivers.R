@@ -57,8 +57,8 @@ bm_ext <- ex_rate_distrib_df %>%
   geom_violin(aes(fill = BM_category), width = .8) +
   scale_fill_manual(values = c("#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d")) +
   stat_summary(fun.data = sum_violin, size = 0.3) + # `sum_violin` loaded from helper_functions.R
-  annotate(geom = "segment", linetype = "dashed", x = 1, xend = 6, y = 1.1, yend = 1.1) +
-  annotate(geom = "text", x = 3.5, y = 1.14, label = "FC=2.65") +
+  annotate(geom = "segment", linetype = "dashed", x = 2, xend = 5, y = 1.08, yend = 1.08) +
+  annotate(geom = "text", x = 3.5, y = 1.14, label = "FC=1.91") +
   labs(x = NULL, y = "Extinction rate") +
   theme(axis.line.y = element_line(colour = "black"), 
         panel.background = element_blank(),
@@ -97,7 +97,7 @@ lat_ext <- ex_rate_distrib_df %>%
   labs(x = NULL, y = NULL) +
   scale_y_continuous(breaks = seq(0, 0.8, 0.2)) +
   annotate(geom = "segment", linetype = "dashed", x = 1, xend = 2, y = 0.8, yend = 0.8) +
-  annotate(geom = "text", x = 1.5, y = 0.84, label = "FC=1.84") +
+  annotate(geom = "text", x = 1.5, y = 0.84, label = "FC=1.52") +
   theme(axis.line.y = element_line(colour = "black"), 
         panel.background = element_blank(),
         legend.position = "none")
@@ -125,8 +125,8 @@ upl_plt <- ex_upl_df %>%
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank())
   
-totplt <- ggarrange(plotlist = list(bm_ext, lat_ext, upl_plt),
+totplt <- ggarrange(plotlist = list(upl_plt, bm_ext, lat_ext),
                     ncol = 1, nrow = 3,
-                    labels = c("(A)", "(B)", "(C)"), hjust = c(-0.3, 0, -0.3))
+                    labels = c("(A)", "(B)", "(C)"), hjust = c(-0.3, -0.3, 0))
 ggsave("./Figures/Main/Drivers/BDNN_extinction_correlates.pdf", 
        plot = totplt, height = 220, width = 80, units = "mm")
