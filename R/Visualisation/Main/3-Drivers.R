@@ -120,13 +120,13 @@ upl_plt <- ex_upl_df %>%
   ggplot(aes(x = uplift, y = ex_rate)) +
   geom_ribbon(aes(ymin = ex_rate_lwr, ymax = ex_rate_upr), fill = "#cb181d", alpha = 0.2) +
   geom_line(colour = "#cb181d") +
-  scale_y_continuous(breaks = seq(0, 0.8, 0.2)) +
+  scale_y_continuous(breaks = seq(0, 1, 0.2)) +
   labs(x = "Andean elevation (m)", y = "Extinction rate") +
   theme(axis.line = element_line(colour = "black"), 
         panel.background = element_blank())
   
-totplt <- ggarrange(plotlist = list(upl_plt, bm_ext, lat_ext),
-                    ncol = 1, nrow = 3,
-                    labels = c("(A)", "(B)", "(C)"), hjust = c(-0.3, -0.3, 0))
+totplt <- ggarrange(plotlist = list(bm_ext, lat_ext, upl_plt),
+                    ncol = 2, nrow = 2,
+                    labels = c("(A)", "(B)", "(C)"), hjust = c(-0.4, 0.1, -0.5))
 ggsave("./Figures/Main/Drivers/BDNN_extinction_correlates.pdf", 
-       plot = totplt, height = 220, width = 80, units = "mm")
+       plot = totplt, height = 170, width = 170, units = "mm")
