@@ -3,6 +3,7 @@ library(tidyverse)
 library(ggpubr)
 source("./R/useful/load_GTS.R")
 
+## GTS processing --------------------------------------------------------------
 gsc1$max_age[nrow(gsc1)] <- 35
 gsc1$name[which(gsc1$name == "Eocene")] <- ""
 gsc1$name[which(gsc1$name == "Pliocene")] <- "Plio"
@@ -10,7 +11,8 @@ gsc1$name[which(gsc1$name == "Pleistocene")] <- "Ple"
 gsc4 <- gsc4[-nrow(gsc4), ]
 gsc4$max_age[nrow(gsc4)] <- 35
 
-chinchi_sp <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED.txt", header = T)
+## Data preprocessing ----------------------------------------------------------
+chinchi_sp <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt", header = T)
 chinchi_sp$Study <- "This study"
 chinchi_sp <- chinchi_sp %>% 
   mutate(FAD = sapply(X = chinchi_sp$Species,
@@ -25,7 +27,8 @@ chinchi_sp <- chinchi_sp %>%
                       })) %>% 
   distinct(Species, FAD, LAD, Study)
 
-database_Carrillo <- read_xlsx("./Data/Data_from_Carrillo_et_al_Caviomorphs/Dataset S5 - Diversity through time/DeepDive diversity estimates/Chinchilloidea_dd.xlsx")
+
+database_Carrillo <- read_xlsx("./Data/Data_from_Carrillo_et_al_Caviomorphs/DeepDive diversity estimates/Chinchilloidea_dd.xlsx")
 database_Carrillo <- database_Carrillo %>%
   mutate(FAD = sapply(X = database_Carrillo$species,
                       FUN = function(x){
@@ -49,7 +52,7 @@ database_Carrillo <- database_Carrillo %>%
 
 MERGE_DB <- rbind.data.frame(chinchi_sp, database_Carrillo)
 
-# Plotting comparative FAD/LADs
+## Plotting comparative FAD/LADs -----------------------------------------------
 rough_plot <- MERGE_DB %>% 
   # Remove underscore for species names
   mutate(Species = sapply(X = Species,
@@ -87,7 +90,7 @@ rough_plot <- MERGE_DB %>%
 ggsave("./Results/comparing_with_Carrillo/comparative_LAD_FAD.pdf", height = 200, 
        width = 250, plot = rough_plot, units = "mm")
 
-# Persistence violin
+## Persistence violin ----------------------------------------------------------
 MERGE_DB <- MERGE_DB %>% mutate(persistence = FAD - LAD)
 
 persistence_plot <- MERGE_DB %>% 

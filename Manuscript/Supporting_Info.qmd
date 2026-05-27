@@ -270,6 +270,31 @@ include_graphics("../Results/DeepDive/species_extant_extended/species_extant_ext
 include_graphics("../Figures/Main/Drivers/MBD_species_complete_scaled_hsp0.pdf")
 ```
 
+```{r, echo=FALSE}
+#| label: fig-Comprative_Persistence
+#| out-height: 10cm
+#| fig-cap: "Comparative persistence (*i*.*e*., FAD minus LAD) of the 84 taxa in common between our database (in blue) and @carrillo2026. Mean persistences between the two studies were compared with a paired Wilcoxon test."
+
+include_graphics("../Results/comparing_with_Carrillo/persistence_violin.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-Comparative_LADFAD
+#| out-height: 25cm
+#| out-width: 20cm
+#| fig-cap: Persistence in the fossil record of the 84 species shared between our database (in blue) and @carrillo2026 (in red). Persistence is assessed as the interval between the First and Last Appearance Data (resp. FAD and LAD) of each taxon.
+
+include_graphics("../Results/comparing_with_Carrillo/comparative_LAD_FAD.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-EnvCorrelates
+#| out-width: 16cm
+#| fig-cap: Abiotic variables used in the environment-dependent diversification analyses carried out over this study. These have been temporally scaled to the same resolution (500ky-step). Andean uplift was from @boschman2021, South American regional temperature was from @tardif2025 and sea-level changes were from @miller2020.
+
+include_graphics("../Figures/Supp/Abiotic_correlates.pdf")
+```
+
 {{< pagebreak >}}
 
 # Supplementary Tables
