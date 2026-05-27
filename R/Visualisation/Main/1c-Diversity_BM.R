@@ -151,7 +151,7 @@ step_plot <- ds %>%
   scale_x_reverse(breaks = seq(0, 30, 5), expand = c(0, 0)) +
   scale_y_continuous(breaks = breaks,
                      labels = c(0.1, 0.5, 1, 2, 3, 5, 10, 20, 30, 50, 100, 200, 300),
-                     limits = c(NA, log10(8e5))) +
+                     limits = c(NA, log10(5e5))) +
   labs(x = "Time (Ma)", y = "Body Mass (kg)") +
   ggtitle(label = "Body Mass through time") +
   # Theme
