@@ -458,7 +458,6 @@ tbl <- readRDS("../Data/supp_tbl/MBD_recap_tbl/MBD_speciation_recap_tbl.RDS")
 kable(tbl, align = "c")
 ```
 
-
 {{< pagebreak >}}
 
 # Supplementary references

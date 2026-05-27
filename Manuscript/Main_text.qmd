@@ -133,6 +133,8 @@ Next, on average, tropical species were found to have 1.52-times lower extinctio
 
 Interestingly, our MBD analyses evidenced that sea level was positively correlated with extinction rate (Figure S19), whereas sea level ranked among the least important predictors by BDNN (Table S6).
 
+the only factor that was found to significantly correlate with extinction rates is the sea level, ranked very low by the BDNN model (Table S6)
+
 Last, we found support for a significant age-dependent extinction pattern after the late Miocene extinction rate shift that we evidenced, with extinction rate decreasing with increasing species age (Weibull shape $\Phi<1$, Figure S8).
 
 # Discussion
@@ -145,7 +147,7 @@ Unlike the evidenced decoupled diversity and disparity patterns evidenced betwee
 
 Turning point in Dinomyid diversification at high latitudes in the Chasicoan (e.g., Arroyo Chasicó locality, La Pampa, Argentina), with the record of a great number of Euhypsodont taxa, meanwhile protohypsodont taxa became scarcer (though still recovered at lower latitudes) @rasia2024
 
-Our results suggest a "waxing-and-waning" diversity pattern for chinchilloid rodents, peaking in the late Miocene (Chasicoan SALMA), with XX reconstructed taxa (fig pyrate) (YY corrected diversity, fig deepdive), and declining thereafter until the 7 extant species. This pattern goes in contradiction with the "stagnating" diversity since the Early Oligocene reconstructed by @carrillo, based on a total-evidence phylogeny. Such a mismatch between phylogeny and occurrence-derived patterns probably comes from the poor representativity of extinct chinchilloid lineages in the phylogenetic reconstruction (31 species) when compared to our occurrence database (13X species).
+Our results suggest a "waxing-and-waning" diversity pattern for chinchilloid rodents, peaking in the late Miocene (Chasicoan SALMA), with XX reconstructed taxa (fig pyrate) (YY corrected diversity, fig deepdive), and declining thereafter until the 7 extant species. This pattern goes in contradiction with the "stagnating" diversity since the Early Oligocene reconstructed by @carrillo2026, based on a total-evidence phylogeny. Such a mismatch between phylogeny and occurrence-derived patterns probably comes from the poor representativity of extinct chinchilloid lineages in the phylogenetic reconstruction (31 species) when compared to our occurrence database (13X species).
 
 Caribbean lineages of Quaternary age (*Elasmodontomys*, *Amblyrhiza*, *Quemisia* and *Clidomys*) descend from at least one (but most likely several, see [@macphee2011; @marivaux_early_2020]) earlier colonisation events of the West Indies by ancestral lineages that could not be preserved in the fossil record [@marivaux2022].
 
@@ -296,17 +298,16 @@ include_graphics("../Figures/Main/Lifespans/lifespans_distribs.png")
 
 ```{r, echo=FALSE}
 #| label: fig-diversification
-#| out-height: 11cm
 #| out-width: 15cm
-#| fig-cap: Comparative chinchilloid speciation and extinction rates reconstructed using three Bayesian fossil-based birth--death models. Speciation and extinction rates are respectively depicted in blue and red. The left column **(A-B)** shows the rates estimated by PyRate, using the rjMCMC algorithm [@silvestro2019]. The star indicates a significant rate shift. The middle column **(C-D)** shows the marginal rates estimated with BDNN. These were obtained after imputing missing values for taxa with missing trait estimate. As this procedure was repeated 10 times randomly (see *Methods*), the rates presented here come from a replicate chosen arbitrarily (replicate 8), but marginal rates through time did not differ across replicates (Figure S10-11). The right column **(E-F)** shows the rates through time estimated by the MBD model. 
+#| fig-cap: Comparative chinchilloid speciation and extinction rates reconstructed using four Bayesian fossil-based birth--death models. Speciation and extinction rates are respectively depicted in blue and red. **(A--B)** show the rates estimated by PyRate, using the rjMCMC algorithm [@silvestro2019]. The star indicates a significant rate shift (see Figure S5). **(C--D)** show the rates estimated with the Birth--Death model with Constrained Shifts (BDCS) [@silvestro_angiosperm_2015]. **(E--F)** show the marginal rates estimated with BDNN. These were obtained after imputing missing values for taxa with missing trait estimate. As this procedure was repeated 10 times randomly (see *Methods*), the rates presented here come from a replicate chosen arbitrarily (replicate 8), but marginal rates through time did not differ across replicates (Figure S15--S13). Last, **(G--H)** show the rates through time estimated by the MBD model as linear combinations of environmental variables. 
 
 include_graphics("../Figures/Main/Diversification_rates.png")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-ExtinctionDrivers
-#| out-height: 16cm
-#| fig-cap: Trait and environmental drivers of chinchilloid extinction rate variations as estimated by the BDNN (**A**--**C**) and the MBD (**D**) models. Extinction rates differed 1.91-fold (Table S7) across body mass categories **(A)**, and 1.52-fold (Table S8) between tropical and extratropical lineages **(B)**. 'FC' means 'Fold Change'. A positive non-linear dependency was found between extinction rate and the Andean elevation **(C)**. With the MBD model (**D**), the only factor that was found to significantly correlate with extinction rates is the sea level, ranked very low by the BDNN model (Table S6)
+#| out-height: 14cm
+#| fig-cap: "Trait and environmental drivers of chinchilloid extinction rate variations across lineages and time. Plots **(A--C)** depict the effects of the three best predictors of extinction rate variations across lineages according to the BDNN model (Table S6). These include body mass **(A)**, latitude (*i*.*e*., tropical *vs*. extratropical) **(B)** and the Andean uplift **(C)**. 'FC' means 'Fold Change'. These findings are shown along with the outcome of the MBD analyses, showing the posterior distributions of correlation coefficients between the temporal variations of extinction rate and four biotic and abiotic variables **(D)**. These four variables (from top to bottom) are: sea level changes [@miller2020], Andean uplift [@boschman2021], regional temperature [@tardif2025] and self-diversity (*i*.*e*., diversity of the group). Significant correlations, *i*.*e*., of which the 95% HPD interval does not significantly overlap with zero, are shown in dark red, and non-significant correlations are shown in light red. Vertical bars show the median correlation coefficient and the boundaries of the associated 95% HPD. Note that Caribbean taxa were excluded from all the analyses presented in this figure."
 
 include_graphics("../Figures/Main/Drivers/Combined_driver_figure.png")
 ```

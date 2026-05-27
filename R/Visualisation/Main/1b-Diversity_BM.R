@@ -29,7 +29,7 @@ gsc4$max_age[which.max(gsc4$max_age)] <- 34.5
 
 
 ## Load LTT table & plot -------------------------------------------------------
-ltt_path <- "./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_EXTENDED_10_Grj_KEEP_se_est_ltt.txt"
+ltt_path <- "./Results/RJMCMC/species/1-Full/LTT/1-Chinchilloidea_sp_lvl_occ_10_Grj_KEEP_se_est_ltt.txt"
 ltt_tbl <- read.table(ltt_path, header = TRUE)
 ltt_tbl <- ltt_tbl %>%
   rename("Age" = time, "Diversity" = diversity, "min_Diversity" = m_div, "max_Diversity" = M_div) %>% 
