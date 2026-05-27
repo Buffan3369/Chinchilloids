@@ -439,6 +439,26 @@ tbl[nrow(tbl), ] <- sapply(X = tbl[nrow(tbl), ], FUN = convert_bold)
 kable(tbl, align = "c")
 ```
 
+```{r, echo=FALSE}
+#| label: tbl-MBDex
+#| tbl-cap: Posterior estimates of the multivariate birth--death (MBD) correlation parameters with the extinction rate ($G_{\mu}$, median), shown along with their 95% Highest Posterior Density (HPD) interval, for each of the four environmental variable tested. The only significant correlation, *i*.*e*., of which the 95% HPD of the associated coefficient does not significantly overlap with 0, is shown in bold.
+
+tbl <- readRDS("../Data/supp_tbl/MBD_recap_tbl/MBD_extinction_recap_tbl.RDS")
+tbl[4,] <- sapply(X = tbl[4,], FUN = convert_bold)
+# Display
+kable(tbl, align = "c")
+```
+
+```{r, echo=FALSE}
+#| label: tbl-MBDsp
+#| tbl-cap: Posterior estimates of the multivariate birth--death (MBD) correlation parameters with the speciation rate ($G_{\mu}$, median), shown along with their 95% Highest Posterior Density (HPD) interval, for each of the four environmental variable tested. As all HPD intervals overlap with zero, no ignificant correlation was highlighted by this analysis.
+
+tbl <- readRDS("../Data/supp_tbl/MBD_recap_tbl/MBD_speciation_recap_tbl.RDS")
+# Display
+kable(tbl, align = "c")
+```
+
+
 {{< pagebreak >}}
 
 # Supplementary references
