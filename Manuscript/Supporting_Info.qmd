@@ -110,6 +110,15 @@ library(knitr)
 ```
 
 ```{r, echo=FALSE}
+#| label: fig-OccMap
+#| out-width: 16cm
+#| fig-cap: Location of the chinchilloid bearing sites that yielded the material used in this study ($N=177$, but note that some localities have been amalgamated for visual purpose).
+
+include_graphics("../Figures/Supp/Occurrence_map_Chinchilloidea.png")
+
+```
+
+```{r, echo=FALSE}
 #| label: fig-EffectSamplingRTT
 #| out-height: 16cm
 #| fig-cap: Impact of the sampling scheme of extant species lacking fossil record on the estimation of speciation and extinction rates. Rates were estimated with PyRate using the rjMCMC algorithm, either from a dataset in which extant taxa were included by means of an occurrence with origination and extinction ages ($T_e$ and $T_e$) set to 0 Ma (**A** and **C**) or with our newly-introduced pipeline relying on ages extracted from dated phylogenies (**B** and **D**). Full lines indicate median rate estimation (blue for speciation, red for extinction), and ribbons their associated 95% HPD interval. Grey histograms in the background depict the frequency of rate shift per 1-My time bins. The two horizontal lines labelled \* and \*\*\* respectively indicate significant and strongly supported rate shift. Note that, in the two cases, these results were obtained prior to the incorporation of the taxonomic revision of the 'Mesopotamian' dinomyid fauna (Ituzaingó Fm.) made by @rasia2026 (see @fig-RasiaEffect for the subsequent effect of incorporating this revision on diversification rate estimation).
@@ -293,6 +302,41 @@ include_graphics("../Results/comparing_with_Carrillo/comparative_LAD_FAD.pdf")
 #| fig-cap: Abiotic variables used in the environment-dependent diversification analyses carried out over this study. These have been temporally scaled to the same resolution (500ky-step). Andean uplift was from @boschman2021, South American regional temperature was from @tardif2025 and sea-level changes were from @miller2020.
 
 include_graphics("../Figures/Supp/Abiotic_correlates.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-UplTrop
+#| out-width: 13cm
+#| fig-cap: Interaction between latitude and Andean uplift in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how the relationship between the Andean uplift and extinction rate changes between tropical and extratropical species.
+
+include_graphics("../Figures/Supp/Drivers_interaction/Upl_Tropicality.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-UplBM
+#| out-width: 13cm
+#| fig-cap: Interaction between body mass and Andean uplift in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how the relationship between the Andean uplift and extinction rate changes between body mass categories.
+
+include_graphics("../Figures/Supp/Drivers_interaction/Upl_BM.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-BMTrop
+#| out-width: 13cm
+#| fig-cap: Interaction between latitude and body mass in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how sentitive to extinction body size classes are with respect to their tropical or extratropical origin.
+
+include_graphics("../Figures/Supp/Drivers_interaction/BM_Tropicality.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-hypso
+#| out-width: 13cm
+#| fig-cap: "How extinction rate varies across crown height categories (0: brachydont, 1: mesodont, 2: protohypsodont and 3: euhypsodont)."
+
+include_graphics("../Figures/Supp/Drivers_interaction/Hypsodonty.pdf")
 ```
 
 {{< pagebreak >}}
@@ -482,6 +526,16 @@ tbl <- readRDS("../Data/supp_tbl/MBD_recap_tbl/MBD_speciation_recap_tbl.RDS")
 # Display
 kable(tbl, align = "c")
 ```
+
+```{r, echo=FALSE}
+#| label: tbl-ADEcoeff
+#| tbl-cap: Median estimate and associated 95% HPD bounds of the shape parameter of the Weibull shape parameter ($\Phi$) of the Age-Dependent Extinction analysis of our species-level chinchilloid temporal occurrence dataset. Since the ADE model should be run on periods of constant extinction rate through time, `Species_Early` and `Species_After` respectively designate the species before and after the  shift in extinction rate occurring *ca*. 6 Ma.
+
+tbl_weibull <- read.table("../Figures/ADE/recap_tbl_w_shape_species.txt", sep = "\t", header = T)
+tbl_weibull <- tbl_weibull[, -c(4)]
+kable(tbl_weibull, align = "c")
+```
+
 
 {{< pagebreak >}}
 

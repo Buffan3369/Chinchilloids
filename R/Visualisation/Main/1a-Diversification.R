@@ -64,7 +64,7 @@ ex_rj <- rtt_plot(rtt_rj, type = "ex",
   annotate(geom = "text", label = "*", x = 6, y = 1.1, size = 8, colour = "#e34a33")
 
 ## BDCS RTT --------------------------------------------------------------------
-bdcs_rtt_pth <- "./Results/BDCS/species/combined_logs/combined_19marginal_rates_RTT.r"
+bdcs_rtt_pth <- "./Results/BDCS_new_bins/species/combined_logs/combined_19KEEP_BDS_marginal_rates_RTT.r"
 bdcs_rtt <- extract_rtt(bdcs_rtt_pth, ana = "BDS")
 # Adjust timing of rate shift
 rate_shift_idx <- c(28, 24, 16, 12, 7, 3)

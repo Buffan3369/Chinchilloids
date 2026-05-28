@@ -12,7 +12,7 @@ burnin <- 10
 
 ## Species dataset ---------------------------------------------------------------
   # Early
-pth_early_sp <- "./Results/ADE/species/early/pyrate_mcmc_logs/"
+pth_early_sp <- "./Results/ADE/early/pyrate_mcmc_logs/"
 log_list_early_sp <- list.files(pth_early_sp, pattern = "ADE_ADE_mcmc.log")
 df_early_sp <- read.table(paste0(pth_early_sp, log_list_early_sp[1]), header = TRUE)
 df_early_sp <- df_early_sp[(burnin+1):nrow(df_early_sp), c("it", "w_shape")]
@@ -22,7 +22,7 @@ for(file in log_list_early_sp[2:length(log_list_early_sp)]){
 }
 df_early_sp$Phase <- "Early"
   # Late
-pth_late_sp <- "./Results/ADE/species/late/pyrate_mcmc_logs/"
+pth_late_sp <- "./Results/ADE/late/pyrate_mcmc_logs/"
 log_list_late_sp <- list.files(pth_late_sp, pattern = "ADE_ADE_mcmc.log")
 df_late_sp <- read.table(paste0(pth_late_sp, log_list_late_sp[1]), header = TRUE)
 df_late_sp <- df_late_sp[(burnin+1):nrow(df_late_sp), c("it", "w_shape")]
@@ -37,12 +37,12 @@ df_late_sp$Phase <- "Late"
 HPD <- function(distrib, lvl=.95){
   alpha = (1-lvl)/2
   q <- as.numeric(quantile(distrib, probs = c(alpha, 1-alpha)))
-  return(paste0("[", round(q[1], digits = 5), "; ", round(q[2], digits = 5), "]"))
+  return(paste0("[", round(q[1], digits = 2), "; ", round(q[2], digits = 2), "]"))
 }
 
 recap_tbl <- data.frame(Phase=NA, Median_estimate=NA, HPD95=NA, HPD90=NA)
-recap_tbl[1,] <- c("Species Early", round(quantile(df_early_sp$w_shape, probs=(0.5)), digits = 5), HPD(df_early_sp$w_shape, lvl = .95), HPD(df_early_sp$w_shape, lvl = .90))
-recap_tbl[2,] <- c("Species Late", round(quantile(df_late_sp$w_shape, probs=(0.5)), digits = 5), HPD(df_late_sp$w_shape, lvl = .95), HPD(df_late_sp$w_shape, lvl = .90))
+recap_tbl[1,] <- c("Species Early", round(quantile(df_early_sp$w_shape, probs=(0.5)), digits = 2), HPD(df_early_sp$w_shape, lvl = .95), HPD(df_early_sp$w_shape, lvl = .90))
+recap_tbl[2,] <- c("Species Late", round(quantile(df_late_sp$w_shape, probs=(0.5)), digits = 2), HPD(df_late_sp$w_shape, lvl = .95), HPD(df_late_sp$w_shape, lvl = .90))
 write.table(recap_tbl, "./Figures/ADE/recap_tbl_w_shape_species.txt", row.names = F, sep = "\t", quote = F)
 
 ## Assemble and plot -----------------------------------------------------------
