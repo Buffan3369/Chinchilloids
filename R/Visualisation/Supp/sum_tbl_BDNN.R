@@ -83,9 +83,9 @@ CV_ex[nrow(CV_ex)+1, ] <- c(mean(CV_ex$cv_empirical), mean(CV_ex$cv_expected), "
 saveRDS(CV_ex, "./Data/supp_tbl/BDNN_imputation_NoCar/coeff_extinction_rate_variation_across_replicates_NoCar.RDS")
 
 
-################################################################################
-###### 3. Magnitude in extinction rate change across BM classes and lat  #######
-################################################################################
+#######################################################################################
+###### 3. Magnitude in extinction rate change across BM, lat and hypso classes  #######
+#######################################################################################
 
 FC_BM25 <- c() # Fold change between S and XL
 FC_BM25_upr <- c() # Upper Credible Interval of the latter FC
@@ -94,6 +94,10 @@ FC_BM25_lwr <- c() # Lower CI
 FC_ET <- c() # Same between tropical & extratropical
 FC_ET_upr <- c()
 FC_ET_lwr <- c()
+
+FC_hyps23 <- c() # Same between protohypsodont & euhypsodont
+FC_hyps23_upr <- c()
+FC_hyps23_lwr <- c()
 
 for(i in 1:10){
   path_to_ex <- list.files(paste0("./Results/BDNN/BDNN_imputation_NoCar/Replicate_", i,
@@ -112,21 +116,37 @@ for(i in 1:10){
   FC_ET <- c(FC_ET, ex_tbl$fold_change[which(ex_tbl$feature1_state == "Tropical_Extratropical")])
   FC_ET_upr <- c(FC_ET_upr, ex_tbl$fold_change_upr_CI[which(ex_tbl$feature1_state == "Tropical_Extratropical")])
   FC_ET_lwr <- c(FC_ET_lwr, ex_tbl$fold_change_lwr_CI[which(ex_tbl$feature1_state == "Tropical_Extratropical")])
+  # Same for hypso class vectors
+  FC_hyps23 <- c(FC_hyps23, ex_tbl$fold_change[which(ex_tbl$feature1 == "Hypsodonty" &
+                                                   ex_tbl$feature1_state == "2_3")]) 
+  FC_hyps23_upr <- c(FC_hyps23_upr, ex_tbl$fold_change_upr_CI[which(ex_tbl$feature1 == "Hypsodonty" &
+                                                                  ex_tbl$feature1_state == "2_3")]) 
+  FC_hyps23_lwr <- c(FC_hyps23_lwr, ex_tbl$fold_change_lwr_CI[which(ex_tbl$feature1 == "Hypsodonty" &
+                                                                  ex_tbl$feature1_state == "2_3")]) 
 }
 # Make data frames
+  # BM
 FC_tbl_BM <- data.frame(Replicate = 1:10,
                         Fold_Change = as.numeric(FC_BM25),
                         Fold_Change_UprCI = as.numeric(FC_BM25_upr),
                         Fold_Change_LwrCI = as.numeric(FC_BM25_lwr))
 FC_tbl_BM[nrow(FC_tbl_BM)+1, ] <- 
   c("Total", apply(X = FC_tbl_BM[, 2:ncol(FC_tbl_BM)], FUN = mean, MARGIN = 2))
-
+  # Latitude
 FC_tbl_Lat <- data.frame(Replicate = 1:10, 
                          Fold_Change = as.numeric(FC_ET),
                          Fold_Change_UprCI = as.numeric(FC_ET_upr),
                          Fold_Change_LwrCI = as.numeric(FC_ET_lwr))
 FC_tbl_Lat[nrow(FC_tbl_Lat)+1, ] <- 
   c("Total", apply(X = FC_tbl_Lat[, 2:ncol(FC_tbl_Lat)], FUN = mean, MARGIN = 2))
+  # Hypsodonty
+FC_tbl_hypso <- data.frame(Replicate = 1:10,
+                           Fold_Change = as.numeric(FC_hyps23),
+                           Fold_Change_UprCI = as.numeric(FC_hyps23_upr),
+                           Fold_Change_LwrCI = as.numeric(FC_hyps23_lwr))
+FC_tbl_hypso[nrow(FC_tbl_hypso)+1, ] <- 
+  c("Total", apply(X = FC_tbl_hypso[, 2:ncol(FC_tbl_hypso)], FUN = mean, MARGIN = 2))
 # Save
 saveRDS(FC_tbl_BM, "./Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_S_XL_across_replicates.RDS")
 saveRDS(FC_tbl_Lat, "./Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_Trop_Etrop_across_replicates.RDS")
+saveRDS(FC_tbl_hypso, "./Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_Proto_Euhypsodont_across_replicates.RDS")

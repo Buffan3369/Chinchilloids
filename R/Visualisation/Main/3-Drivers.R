@@ -21,7 +21,7 @@ BM_classes <- hash("1" = "XS",
                    "5" = "XL",
                    "6" = "XXL")
 
-script <- readLines("./Results/BDNN/BDNN_imputation_NoCar/Replicate_8/combined_logs/combined_10KEEP_PDP.r",
+script <- readLines("./Results/BDNN/BDNN_imputation_NoCar/Replicate_3/combined_logs/combined_10KEEP_PDP.r",
                     n = 5000)
 
 ## Body mass violin ------------------------------------------------------------

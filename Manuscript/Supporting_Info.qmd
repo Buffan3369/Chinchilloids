@@ -1,5 +1,5 @@
 ---
-title: "Supporting Information for : A matter of size: what underpinned the emergence and demise of the largest rodents that ever lived?"
+title: "*Supplementary Materials for* : A matter of size: what underpinned the emergence and demise of the largest rodents that ever lived?"
 author:  
   - Lucas Buffan¹\*, Myriam Boivin$^{2,3*}$, Alicia Álvarez², Fabien L. Condamine¹, Laurent Marivaux¹
 format:
@@ -507,6 +507,24 @@ tbl[nrow(tbl), ] <- sapply(X = tbl[nrow(tbl), ], FUN = convert_bold)
 # Display
 kable(tbl, align = "c")
 ```
+
+```{r, echo=FALSE}
+#| label: tbl-FC_hypso
+#| tbl-cap: Magnitude of the change in extinction rate (*i*.*e*., fold change) between protohypsodont and euhypsodont taxa across the 10 trait-imputated replicates without Caribbean taxa. `Upper CI` and `Lower CI` respectively show the uppper and lower boundaries of the associated 95% HPD interval. The 'Total' row shows the averaged values across the 10 replicates.
+
+tbl <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_Proto_Euhypsodont_across_replicates.RDS")
+# Change column names
+colnames(tbl) <- c("Replicate", "Fold Change", "Upper CI", "Lower CI")
+# Numericise
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = as.numeric)
+# Round
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = round, digits = 2)
+# Highlight last row ('total')
+tbl[nrow(tbl), ] <- sapply(X = tbl[nrow(tbl), ], FUN = convert_bold)
+# Display
+kable(tbl, align = "c")
+```
+
 
 ```{r, echo=FALSE}
 #| label: tbl-MBDex
