@@ -1,7 +1,7 @@
 ---
 title: "*Supplementary Materials for* : A matter of size: what underpinned the emergence and demise of the largest rodents that ever lived?"
 author:  
-  - Lucas Buffan¹\*, Myriam Boivin$^{2,3*}$, Alicia Álvarez², Fabien L. Condamine¹, Laurent Marivaux¹
+  - Lucas Buffan¹\*, Myriam Boivin$^{2,3*}$, Alicia Álvarez$^{2,3}$, Fabien L. Condamine¹, Laurent Marivaux¹
 format:
   pdf:
     documentclass: article
@@ -26,16 +26,16 @@ crossref:
   custom: 
     - key: fig
       kind: float
-      space-before-numbering: false
       caption-prefix: "Figure&nbsp;S"
       reference-prefix: "Figure&nbsp;S"
+      space-before-numbering: false
       latex-env: suppfigure
       
     - key: tbl
       kind: float
-      space-before-numbering: false
       caption-prefix: "Table&nbsp;S"
       reference-prefix: "Table&nbsp;S"
+      space-before-numbering: false
       latex-env: supptbl
   title-delim: "."
 knitr:
@@ -46,7 +46,7 @@ fig-cap-location: bottom
 ---
 
 ¹ Institut des Sciences de l’Évolution de Montpellier, Université de Montpellier, CNRS, IRD, Place Eugène Bataillon, 34095 Montpellier cedex 5, France.\
-² Instituto de Ecorregiones Andinas (INECOA), CONICET -- Universidad Nacional de Jujuy, Avenida Bolivia 1661, 4600 San Salvador de Jujuy, Jujuy, Argentina.\
+² Laboratorio de Paleontología, Instituto de Ecorregiones Andinas (INECOA), CONICET -- Universidad Nacional de Jujuy, Avenida Bolivia 1661, 4600 San Salvador de Jujuy, Jujuy, Argentina.\
 ³ Instituto de Geología y Minería (IdGyM), Universidad Nacional de Jujuy, Avenida Bolivia 1661, 4600 San Salvador de Jujuy, Jujuy, Argentina
 
 \* corresponding authors: lucas.l.buffan\@gmail.com, mboivin\@idgym.unju.edu.ar
@@ -307,7 +307,7 @@ include_graphics("../Figures/Supp/Abiotic_correlates.pdf")
 ```{r, echo=FALSE}
 #| label: fig-UplTrop
 #| out-width: 13cm
-#| fig-cap: Interaction between latitude and Andean uplift in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how the relationship between the Andean uplift and extinction rate changes between tropical and extratropical species.
+#| fig-cap: Interaction between latitude and Andean uplift in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how the relationship between the Andean uplift and extinction rate changes between tropical and extratropical species. Results were arbitrarily taken from the third imputation replicate.
 
 include_graphics("../Figures/Supp/Drivers_interaction/Upl_Tropicality.pdf")
 
@@ -316,7 +316,7 @@ include_graphics("../Figures/Supp/Drivers_interaction/Upl_Tropicality.pdf")
 ```{r, echo=FALSE}
 #| label: fig-UplBM
 #| out-width: 13cm
-#| fig-cap: Interaction between body mass and Andean uplift in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how the relationship between the Andean uplift and extinction rate changes between body mass categories.
+#| fig-cap: Interaction between body mass and Andean uplift in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how the relationship between the Andean uplift and extinction rate changes between body mass categories. Body mass categories are numbered from 1 to 6 by increasing order (*i*.*e*., from XS to XXL). Results were arbitrarily taken from the third imputation replicate.
 
 include_graphics("../Figures/Supp/Drivers_interaction/Upl_BM.pdf")
 
@@ -325,7 +325,7 @@ include_graphics("../Figures/Supp/Drivers_interaction/Upl_BM.pdf")
 ```{r, echo=FALSE}
 #| label: fig-BMTrop
 #| out-width: 13cm
-#| fig-cap: Interaction between latitude and body mass in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how sentitive to extinction body size classes are with respect to their tropical or extratropical origin.
+#| fig-cap: Interaction between latitude and body mass in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how sentitive to extinction body size classes are with respect to their tropical or extratropical origin. Body mass categories are numbered from 1 to 6 by increasing order (*i*.*e*., from XS to XXL). Results were arbitrarily taken from the third imputation replicate. 
 
 include_graphics("../Figures/Supp/Drivers_interaction/BM_Tropicality.pdf")
 
@@ -334,7 +334,7 @@ include_graphics("../Figures/Supp/Drivers_interaction/BM_Tropicality.pdf")
 ```{r, echo=FALSE}
 #| label: fig-hypso
 #| out-width: 13cm
-#| fig-cap: "How extinction rate varies across crown height categories (0: brachydont, 1: mesodont, 2: protohypsodont and 3: euhypsodont)."
+#| fig-cap: "How extinction rate varies across crown height categories (0: brachydont, 1: mesodont, 2: protohypsodont and 3: euhypsodont). Results were arbitrarily taken from the third imputation replicate."
 
 include_graphics("../Figures/Supp/Drivers_interaction/Hypsodonty.pdf")
 ```
@@ -416,7 +416,7 @@ kable(tbl, align = "c")
 
 ```{r, echo=FALSE}
 #| label: tbl-cv_sp
-#| tbl-cap: Coefficient of speciation rate variation across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$), excluding caribbean taxa. Simulated values (`cv_simulated`) were obtained from the analysis of 100 simulated datasets matching the empirical datasets in terms of number of traits, clade age and (approximately) number of extant species, generated under a constant-rate birth-death model. Empirical values (`cv_empirical`) were obtained from the analysis of the empirical dataset.
+#| tbl-cap: "Coefficient of speciation rate variation across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$), excluding caribbean taxa. Simulated values (`cv_simulated`) were obtained from the analysis of 100 simulated datasets matching the empirical datasets in terms of number of traits, clade age and (approximately) number of extant species, generated under a constant-rate birth-death model. Empirical values (`cv_empirical`) were obtained from the analysis of the empirical dataset. *Note: significant variations of speciation rate across lineages imply `cv_empirical` > `cv_expected`*."
 
 # Load and adapt table
 cv_tbl_sp <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/coeff_speciation_rate_variation_across_replicates_NoCar.RDS")
@@ -437,7 +437,7 @@ kable(cv_tbl_sp, align = "c")
 
 ```{r, echo=FALSE}
 #| label: tbl-cv_ex
-#| tbl-cap: Coefficient of extinction rate variation across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$), excluding caribbean taxa.
+#| tbl-cap: "Coefficient of extinction rate variation across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$), excluding caribbean taxa. *Note: significant variations of speciation rate across lineages imply `cv_empirical` > `cv_expected`*."
 
 # Load and adapt table
 cv_tbl_ex <- readRDS("../Data/supp_tbl/BDNN_imputation_NoCar/coeff_extinction_rate_variation_across_replicates_NoCar.RDS")
@@ -525,7 +525,6 @@ tbl[nrow(tbl), ] <- sapply(X = tbl[nrow(tbl), ], FUN = convert_bold)
 kable(tbl, align = "c")
 ```
 
-
 ```{r, echo=FALSE}
 #| label: tbl-MBDex
 #| tbl-cap: Posterior estimates of the multivariate birth--death (MBD) correlation parameters with the extinction rate ($G_{\mu}$, median), shown along with their 95% Highest Posterior Density (HPD) interval, for each of the four environmental variable tested. The only significant correlation, *i*.*e*., of which the 95% HPD of the associated coefficient does not significantly overlap with 0, is shown in bold.
@@ -553,7 +552,6 @@ tbl_weibull <- read.table("../Figures/ADE/recap_tbl_w_shape_species.txt", sep = 
 tbl_weibull <- tbl_weibull[, -c(4)]
 kable(tbl_weibull, align = "c")
 ```
-
 
 {{< pagebreak >}}
 

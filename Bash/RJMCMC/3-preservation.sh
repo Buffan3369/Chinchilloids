@@ -22,7 +22,7 @@
 ## ------------------ Genus-level ------------------ ##
 #######################################################
 
-for pth in 1-Full 2-Singleton 3-Spatially_scaled
+for pth in 1-Full 2-Singleton 3-Spatially_scaled 4-NoIndet
 do
 # For each individual retained run
 	for file in ../../Results/RJMCMC/genus/$pth/pyrate_mcmc_logs/*_KEEP_mcmc.log

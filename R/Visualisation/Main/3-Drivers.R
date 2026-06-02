@@ -56,9 +56,10 @@ bm_ext <- ex_rate_distrib_df %>%
   ggplot(aes(x = BM_category, y = Extinction_rate)) +
   geom_violin(aes(fill = BM_category), width = .8) +
   scale_fill_manual(values = c("#fcbba1", "#fc9272", "#fb6a4a", "#ef3b2c", "#cb181d", "#99000d")) +
+  scale_y_continuous(breaks = seq(0, 1.2, .2)) +
   stat_summary(fun.data = sum_violin, size = 0.3) + # `sum_violin` loaded from helper_functions.R
-  annotate(geom = "segment", linetype = "dashed", x = 2, xend = 5, y = 1.08, yend = 1.08) +
-  annotate(geom = "text", x = 3.5, y = 1.14, label = "FC=1.91") +
+  annotate(geom = "segment", linetype = "dashed", x = 2, xend = 5, y = 1.35, yend = 1.35) +
+  annotate(geom = "text", x = 3.5, y = 1.41, label = "FC=1.84") +
   labs(x = NULL, y = "Extinction rate") +
   theme(axis.line.y = element_line(colour = "black"), 
         panel.background = element_blank(),
@@ -96,8 +97,8 @@ lat_ext <- ex_rate_distrib_df %>%
   stat_summary(fun.data = sum_violin) + # `sum_violin` loaded from helper_functions.R
   labs(x = NULL, y = NULL) +
   scale_y_continuous(breaks = seq(0, 0.8, 0.2)) +
-  annotate(geom = "segment", linetype = "dashed", x = 1, xend = 2, y = 0.8, yend = 0.8) +
-  annotate(geom = "text", x = 1.5, y = 0.84, label = "FC=1.52") +
+  annotate(geom = "segment", linetype = "dashed", x = 1, xend = 2, y = 0.7, yend = 0.7) +
+  annotate(geom = "text", x = 1.5, y = 0.73, label = "FC=1.5") +
   theme(axis.line.y = element_line(colour = "black"), 
         panel.background = element_blank(),
         legend.position = "none")
