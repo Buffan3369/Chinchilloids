@@ -1,7 +1,7 @@
 ---
 title: "*Supplementary Materials for* : A matter of size: what underpinned the emergence and demise of the largest rodents that ever lived?"
 author:  
-  - Lucas Buffan¹\*, Myriam Boivin$^{2,3*}$, Alicia Álvarez$^{2,3}$, Fabien L. Condamine¹, Laurent Marivaux¹
+  - Lucas Buffan¹\*, Myriam Boivin$^{2,3}$\*, Alicia Álvarez$^{2,3}$, Fabien L. Condamine¹, Laurent Marivaux¹
 format:
   pdf:
     documentclass: article
