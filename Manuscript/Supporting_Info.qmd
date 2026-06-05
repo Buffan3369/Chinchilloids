@@ -67,8 +67,6 @@ Codes are available at: <https://github.com/Buffan3369/Chinchilloids.git>
 
 # Supplementary text
 
-## Some details regarding decisions we took during our occurrence data cleaning
-
 Age ranges of the Miocene occurrences from the Río Santa Cruz (Santacrucian SALMA) were sharpened based on their assigned locality [@arnal2019]. Hence, occurrence from Barrancas Blancas were respectively assigned the 16.3--17.21 and 15.3--16.47 Ma intervals.
 
 Given that *Lagostomus (Lagostomopsis)* is a subgenus [@rasia2012], we set the `genus` column of each *Lagostomus (Lagostomopsis)* occurrence to *Lagostomus*, and switched their `genus_level_status` from `extinct` to `extant`.
