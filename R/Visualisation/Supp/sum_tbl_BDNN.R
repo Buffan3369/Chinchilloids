@@ -72,13 +72,13 @@ for(i in 2:10){
 # Summarise CV for speciation rate
 CV_sp <- CV %>% 
   filter(rate == "speciation") %>% 
-  select(all_of(c("cv_empirical", "cv_expected", "replicate")))
+  dplyr::select(all_of(c("cv_empirical", "cv_expected", "replicate")))
 CV_sp[nrow(CV_sp)+1, ] <- c(mean(CV_sp$cv_empirical), mean(CV_sp$cv_expected), "Total")
 saveRDS(CV_sp, "./Data/supp_tbl/BDNN_imputation_NoCar/coeff_speciation_rate_variation_across_replicates_NoCar.RDS")
 # Summarise CV for extinction rate
 CV_ex <- CV %>% 
   filter(rate == "extinction") %>% 
-  select(all_of(c("cv_empirical", "cv_expected", "replicate")))
+  dplyr::select(all_of(c("cv_empirical", "cv_expected", "replicate")))
 CV_ex[nrow(CV_ex)+1, ] <- c(mean(CV_ex$cv_empirical), mean(CV_ex$cv_expected), "Total")
 saveRDS(CV_ex, "./Data/supp_tbl/BDNN_imputation_NoCar/coeff_extinction_rate_variation_across_replicates_NoCar.RDS")
 
