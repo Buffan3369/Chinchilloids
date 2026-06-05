@@ -120,14 +120,15 @@ include_graphics("../Figures/Supp/Occurrence_map_Chinchilloidea.png")
 
 ```{r, echo=FALSE}
 #| label: fig-EffectSamplingRTT
-#| out-height: 16cm
-#| fig-cap: Impact of the sampling scheme of extant species lacking fossil record on the estimation of speciation and extinction rates. Rates were estimated with PyRate using the rjMCMC algorithm. (**A**) and (**D**) show the rates estimated from a database only encompassing fossil taxa. In (**B**) and (**E**), extant taxa were included by means of an occurrence with origination and extinction ages ($T_e$ and $T_e$) set to 0 Ma. In (**C**) and (**F**), extant taxa were included or with our newly-introduced pipeline relying on ages extracted from dated phylogenies. Full lines indicate median rate estimation (blue for speciation, red for extinction), and ribbons their associated 95% HPD interval. Grey histograms in the background depict the frequency of rate shift per 1-My time bins. The two horizontal lines labelled \* and \*\*\* respectively indicate significant and strongly supported rate shift.
+#| out-width: 17.5cm
+#| fig-cap: Impact of the sampling scheme of extant species lacking fossil record on upstream macroevolutionary inferences with PyRate (rjMCMC algorithm). (**A**, **D**, **G**) show speciation rate, extinction rate and sampled diversity estimated from a database only encompassing fossil taxa. In (**B**, **E**, **H**), extant taxa were included by means of an occurrence with origination and extinction ages ($T_e$ and $T_e$) set to 0 Ma (*i*.*e*., 'biased incorporation'). In (**C**, **F**, **I**), extant taxa were included or with our newly-introduced pipeline relying on ages extracted from dated phylogenies. Full lines indicate median rate estimation (blue for speciation, red for extinction), and ribbons their associated 95% HPD interval. Grey histograms in the background depict the frequency of rate shift per 1-My time bins. The two horizontal lines labelled \* and \*\*\* respectively indicate significant and strongly supported rate shift.
 
 include_graphics("../Figures/Supp/Age_combination_effect/age_comb_effect_RTT.png")
 ```
 
 ```{r, echo=FALSE}
 #| label: fig-TsPhyloPyRate
+#| out-width: 13cm
 #| fig-cap: Correspondance between divergence times leading to extant species estimated from our phylogeny ('Ts Phylogeny') and the times of species origination de novo estimated ('Ts PyRate') after implementing our sampling scheme for extant species absent from the fossil record (*Main text*, Figure 2). For each species, we set $\alpha=0.95$, except for *D. branickii*, for which we set $\alpha=0.999$. Dots show median estimates and error bars the associated 95% HPD. Dashed line shows the line with equation $y=x$.
 
 include_graphics("../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
@@ -136,7 +137,7 @@ include_graphics("../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
 
 ```{r, echo=FALSE}
 #| label: fig-preservation_rate
-#| out-height: 7cm
+#| out-height: 9cm
 #| fig-cap: Preservation rate through time in our species-level dataset estimated with PyRate. The solid line represents the mean posterior estimate and the shaded area the associated 95% HPD interval.
 
 include_graphics("../Figures/Supp/Preservation_through_time.pdf")

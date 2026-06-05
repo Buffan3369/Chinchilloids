@@ -3,7 +3,7 @@
 # Author: Lucas Buffan
 # E-mail: lucas.l.buffan@gmail.com
 # Description: Prepare PyRate inputs for cleaned Chinchilloidea occurrence data
-################################################################################
+################################################0################################
 
 library(tidyverse)
 library(readxl)
@@ -69,13 +69,31 @@ true_sp <- sapply(X = chinchi_sp$Species,
                   FUN = open_checkR)
 chinchi_sp <- chinchi_sp[true_sp, ]
 
+# Save data without extant lineages & extract ages
+write.table.lucas(chinchi_sp %>% 
+                    filter(!(Species %in% c("Chinchilla_chinchilla", "Lagidium_viscacia"))), 
+                  "./Data/PyRate_inputs/Species/2-Chinchilloidea_sp_lvl_occ_FossilOnly.txt")
+extract.ages("./Data/PyRate_inputs/Species/2-Chinchilloidea_sp_lvl_occ_FossilOnly.txt", replicates = 20)
+
+# Add an occurrence of min_age = max_age = 0 for each extant species
+chinchi_sp_extendedRaw <- chinchi_sp %>% 
+  add_row(Species = c("Chinchilla_chinchilla", "Chincilla_lanigera", "Lagidium_viscacia", "Lagidium_ahuacaense",
+                      "Lagidium_peruanum", "Lagidium_wolffsohni", "Lagostomus_maximus", "Dinomys_branickii"),
+          Status = rep("extant", 8),
+          min_age = rep(0, 8),
+          max_age = rep(0, 8))
+
+# Save raw combination & extract ages
+write.table.lucas(chinchi_sp_extendedRaw, 
+                  "./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_RawComb.txt")
+extract.ages("./Data/PyRate_inputs/Species/4-Chinchilloidea_sp_lvl_occ_RawComb.txt", replicates = 20)
+
+
 # Add simulated occurrences of extant taxa (see `1c-extant_Ts_sampling.R`)
-chinchi_sp <- rbind(chinchi_sp, extant_chinchi)
+chinchi_sp_comb <- rbind(chinchi_sp, extant_chinchi)
 
-# Save occurrence dataframe
-write.table.lucas(chinchi_sp, "./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt")
-
-# Extract ages
+# Save occurrence dataframe & extract ages
+write.table.lucas(chinchi_sp_comb, "./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt")
 extract.ages("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ.txt", replicates = 20)
 
 
