@@ -73,13 +73,13 @@ for(i in 2:10){
 CV_sp <- CV %>% 
   filter(rate == "speciation") %>% 
   dplyr::select(all_of(c("cv_empirical", "cv_expected", "replicate")))
-CV_sp[nrow(CV_sp)+1, ] <- c(mean(CV_sp$cv_empirical), mean(CV_sp$cv_expected), "Total")
+CV_sp[nrow(CV_sp)+1, ] <- c(mean(CV_sp$cv_empirical), mean(CV_sp$cv_expected), "Mean")
 saveRDS(CV_sp, "./Data/supp_tbl/BDNN_imputation_NoCar/coeff_speciation_rate_variation_across_replicates_NoCar.RDS")
 # Summarise CV for extinction rate
 CV_ex <- CV %>% 
   filter(rate == "extinction") %>% 
   dplyr::select(all_of(c("cv_empirical", "cv_expected", "replicate")))
-CV_ex[nrow(CV_ex)+1, ] <- c(mean(CV_ex$cv_empirical), mean(CV_ex$cv_expected), "Total")
+CV_ex[nrow(CV_ex)+1, ] <- c(mean(CV_ex$cv_empirical), mean(CV_ex$cv_expected), "Mean")
 saveRDS(CV_ex, "./Data/supp_tbl/BDNN_imputation_NoCar/coeff_extinction_rate_variation_across_replicates_NoCar.RDS")
 
 
@@ -131,21 +131,21 @@ FC_tbl_BM <- data.frame(Replicate = 1:10,
                         Fold_Change_UprCI = as.numeric(FC_BM25_upr),
                         Fold_Change_LwrCI = as.numeric(FC_BM25_lwr))
 FC_tbl_BM[nrow(FC_tbl_BM)+1, ] <- 
-  c("Total", apply(X = FC_tbl_BM[, 2:ncol(FC_tbl_BM)], FUN = mean, MARGIN = 2))
+  c("Mean", apply(X = FC_tbl_BM[, 2:ncol(FC_tbl_BM)], FUN = mean, MARGIN = 2))
   # Latitude
 FC_tbl_Lat <- data.frame(Replicate = 1:10, 
                          Fold_Change = as.numeric(FC_ET),
                          Fold_Change_UprCI = as.numeric(FC_ET_upr),
                          Fold_Change_LwrCI = as.numeric(FC_ET_lwr))
 FC_tbl_Lat[nrow(FC_tbl_Lat)+1, ] <- 
-  c("Total", apply(X = FC_tbl_Lat[, 2:ncol(FC_tbl_Lat)], FUN = mean, MARGIN = 2))
+  c("Mean", apply(X = FC_tbl_Lat[, 2:ncol(FC_tbl_Lat)], FUN = mean, MARGIN = 2))
   # Hypsodonty
 FC_tbl_hypso <- data.frame(Replicate = 1:10,
                            Fold_Change = as.numeric(FC_hyps23),
                            Fold_Change_UprCI = as.numeric(FC_hyps23_upr),
                            Fold_Change_LwrCI = as.numeric(FC_hyps23_lwr))
 FC_tbl_hypso[nrow(FC_tbl_hypso)+1, ] <- 
-  c("Total", apply(X = FC_tbl_hypso[, 2:ncol(FC_tbl_hypso)], FUN = mean, MARGIN = 2))
+  c("Mean", apply(X = FC_tbl_hypso[, 2:ncol(FC_tbl_hypso)], FUN = mean, MARGIN = 2))
 # Save
 saveRDS(FC_tbl_BM, "./Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_S_XL_across_replicates.RDS")
 saveRDS(FC_tbl_Lat, "./Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_Trop_Etrop_across_replicates.RDS")
