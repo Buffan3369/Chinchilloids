@@ -110,7 +110,7 @@ library(knitr)
 ```{r, echo=FALSE}
 #| label: fig-OccMap
 #| out-width: 16cm
-#| fig-cap: Location of the chinchilloid bearing sites that yielded the material used in this study ($N=177$, but note that some localities have been amalgamated for visual purpose).
+#| fig-cap: Location of the chinchilloid bearing sites that yielded the material used in this study ($N=177$, but note that some localities have been amalgamated for visual purpose). GPS coordinates are from the PBDB.
 
 include_graphics("../Figures/Supp/Occurrence_map_Chinchilloidea.png")
 
@@ -119,7 +119,7 @@ include_graphics("../Figures/Supp/Occurrence_map_Chinchilloidea.png")
 ```{r, echo=FALSE}
 #| label: fig-EffectSamplingRTT
 #| out-width: 17.5cm
-#| fig-cap: Impact of the sampling scheme of extant species lacking fossil record on upstream macroevolutionary inferences with PyRate (rjMCMC algorithm). (**A**, **D**, **G**) show speciation rate, extinction rate and sampled diversity estimated from a database only encompassing fossil taxa. In (**B**, **E**, **H**), extant taxa were included by means of an occurrence with origination and extinction ages ($T_e$ and $T_e$) set to 0 Ma (*i*.*e*., 'biased incorporation'). In (**C**, **F**, **I**), extant taxa were included or with our newly-introduced pipeline relying on ages extracted from dated phylogenies. Full lines indicate median rate estimation (blue for speciation, red for extinction), and ribbons their associated 95% HPD interval. Grey histograms in the background depict the frequency of rate shift per 1-My time bins. The two horizontal lines labelled \* and \*\*\* respectively indicate significant and strongly supported rate shift.
+#| fig-cap: Impact of the sampling scheme of extant species lacking fossil record on upstream macroevolutionary inferences with PyRate (rjMCMC algorithm). (**A**, **D**, **G**) show speciation rate, extinction rate and sampled diversity estimated from a database only encompassing fossil taxa. In (**B**, **E**, **H**), extant taxa were included by means of an occurrence with origination and extinction ages ($T_e$ and $T_e$) set to 0 Ma (*i*.*e*., 'biased incorporation'). In (**C**, **F**, **I**), extant taxa were included or with our newly-introduced pipeline relying on ages extracted from dated phylogenies. Full lines indicate median rate estimation (blue for speciation, **A**--**C**, red for extinction, **D**--**F**), and ribbons their associated 95% HPD interval. Grey histograms in the background depict the frequency of rate shift per 1-My time bins. The two horizontal lines labelled \* and \*\*\* respectively indicate significant and strongly supported rate shift.
 
 include_graphics("../Figures/Supp/Age_combination_effect/age_comb_effect_RTT.png")
 ```
