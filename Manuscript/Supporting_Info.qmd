@@ -60,8 +60,9 @@ This file contains:
 | 
 | 
 
-Other Supplementary Materials may be found at `<placeholder>`.\
-Codes are available at: <https://github.com/Buffan3369/Chinchilloids.git>
+Codes are available at: <https://github.com/Buffan3369/Chinchilloids.git>.
+
+Other Supplementary Materials may be found at: <https://doi.org/10.6084/m9.figshare.33111809>.
 
 \newpage
 
@@ -110,7 +111,7 @@ library(knitr)
 ```{r, echo=FALSE}
 #| label: fig-OccMap
 #| out-width: 16cm
-#| fig-cap: Location of the chinchilloid bearing sites that yielded the material used in this study ($N=177$, but note that some localities have been amalgamated for visual purpose). GPS coordinates are from The Paleobiology Database.
+#| fig-cap: Location of the chinchilloid-bearing sites that yielded the material used in this study ($N=177$, but note that some localities have been amalgamated for visual purpose). GPS coordinates are from The Paleobiology Database.
 
 include_graphics("../Figures/Supp/Occurrence_map_Chinchilloidea.png")
 
