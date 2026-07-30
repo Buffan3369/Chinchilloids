@@ -1,0 +1,574 @@
+---
+title: "*Supplementary Materials for* : A matter of size: what underpinned the emergence and demise of the largest rodents that ever lived?"
+author:  
+  - Lucas Buffan¹\*, Myriam Boivin$^{2,3}$\*, Alicia Álvarez$^{2,3}$, Fabien L. Condamine¹, Laurent Marivaux¹
+format:
+  pdf:
+    documentclass: article
+    papersize: letter
+    geometry: 
+      - left=20mm
+      - right=20mm
+      - bottom=25mm
+      - top=25mm
+    link-citations: true
+    include-in-header:
+      text: \usepackage[labelfont=bf]{caption}
+editor: visual
+bibliography: supp_references.bib
+csl: systematic-biology.csl
+tbl-cap-location: top
+crossref:
+  fig-title: "Figure&nbsp;S"
+  fig-prefix: "Figure&nbsp;S"
+  tbl-title: "Table&nbsp;S"
+  tbl-prefix: "Table&nbsp;S"
+  custom: 
+    - key: fig
+      kind: float
+      caption-prefix: "Figure&nbsp;S"
+      reference-prefix: "Figure&nbsp;S"
+      space-before-numbering: false
+      latex-env: suppfigure
+      
+    - key: tbl
+      kind: float
+      caption-prefix: "Table&nbsp;S"
+      reference-prefix: "Table&nbsp;S"
+      space-before-numbering: false
+      latex-env: supptbl
+  title-delim: "."
+knitr:
+  opts_chunk:
+    fig.pos: "H"
+fontsize: "9pt"
+fig-cap-location: bottom
+---
+
+¹ Institut des Sciences de l’Évolution de Montpellier, Université de Montpellier, CNRS, IRD, Place Eugène Bataillon, 34095 Montpellier cedex 5, France.\
+² Laboratorio de Paleontología de Vertebrados, Instituto de Ecorregiones Andinas (INECOA), CONICET -- Universidad Nacional de Jujuy, Avenida Bolivia 1661, 4600 San Salvador de Jujuy, Jujuy, Argentina.\
+³ Instituto de Geología y Minería (IdGyM), Universidad Nacional de Jujuy, Avenida Bolivia 1661, 4600 San Salvador de Jujuy, Jujuy, Argentina
+
+\* corresponding authors: lucas.l.buffan\@gmail.com, mboivin\@idgym.unju.edu.ar
+
+This file contains:
+
+- Supplementary text
+- Supplementary figures
+- Supplementary tables
+
+| 
+| 
+
+Codes are available at: <https://github.com/Buffan3369/Chinchilloids.git>.
+
+Other Supplementary Materials may be found at: <https://doi.org/10.6084/m9.figshare.33111809>.
+
+\newpage
+
+# Supplementary text
+
+Additional details regarding the cleaning process are provided in the `Remark` and `Age justification` columns of *Dataset S1*.
+
+## Taxonomic decisions
+
+Given that *Lagostomus (Lagostomopsis)* is a subgenus [@rasia2012], we set the `genus` column of each *Lagostomus (Lagostomopsis)* occurrence to *Lagostomus*, and switched their `genus_level_status` from `extinct` to `extant`.
+
+All specimens referred to as *Lagostomus cavifrons*, *L. debilis*, *L. egenus*, *L. heterogenidens* and *L. minimus* were synonymised with *Lagostomus maximus*, following [@ubilla2016; @rasia_vizcacha_2024].
+
+Following @busker2019, we added two occurrences of *Saremmys ligcura* from the two localities of Bryn Gwyn and Gran Barranca (Chubut, Argentina).
+
+We incorporated four occurrences -- corresponding to four different taxa -- from the AMD-45 locality (18.9--17.1 Ma) published by @arnal2026: *Maquiamys praecursor*, *Manumys materdei*, *Marianamys altadens* and *Peruchinchilla prima*.
+
+We followed the latest taxonomic revisions proposed by @rasia2026 regarding the hyperdiverse dinomyid fauna from the Ituzaingó Formation (Late Miocene).
+
+## Age of the localities/formations
+
+The age ranges of the Miocene occurrences from the Río Santa Cruz (Santacrucian SALMA) were sharpened based on their assigned locality [@arnal2019]. Hence, occurrence from Barrancas Blancas and Segundas Barrancas Blancas were respectively assigned the 16.49--17.45 and 15.63--16.46 Ma intervals [@fernicola2019].
+
+The single occurrence assigned to *Lagostomus striatus* was removed as considered *nomen nodum* by @rasia2016.
+
+The age of the Ituzaingó formation was set to Huayquerian SALMA (Late Miocene), *ca*. 5--8 Ma [@romano2023].
+
+The age range of occurrences from @bucher2021 were set to the one of the original publication: 14.6--12.75 Ma when coming from the "Cruces Infinitos" and "Los Yeguarizos localities", 12.75--12.05 Ma when coming from the "La Gloria" and "La Hoyada" localities.
+
+Based on @brandoni2016, the age range of the occurrences from the Pinturas fauna [*e*.*g*., @kramarz2002; -@kramarz2004; -@kramarz2006], Burdigalian, were set between 20 and 16.8 Ma.
+
+The age range of the occurrences belonging to the Andalhualá Formation was set to Huayquerian--Chapadmalalan, *ca*. 7.14--3.66 Ma [@esteban2014; -@esteban2019].
+
+The age range of the occurrences belonging to the Sierra Baguales (Santa Cruz formation, Magallanes, Chile) were set to 19--17.8 Ma according to the isotopic constraints provided in @bostelmann2013.
+
+The age range of the occurrences reported from the Cerro Boleadoras Formation was set to 16.5--15.1 Ma, according to @vizcaino2022.
+
+## Remark on extinct chinchilloids from Caribbean islands
+
+Systematics based on morphological characters [primarily dental traits; @marivaux_early_2020] also placed the Pleistocene Caribbean 'Giant Hutias' $\dagger$*Amblyrhiza inundata* Cope, 1868 and $\dagger$*Elasmodontomys obliquus* Anthony, 1916 within Chinchilloidea. One might however mention that, as summarised by @marivaux2022, the phylogenetic placement of $\dagger$*Elasmodontomys* still represents a real *conundrum*, with contrasting sources of evidence either suggesting this taxon to be nested within Chinchilloidea [*e*.*g*., @marivaux_early_2020; -@marivaux2022], Octodontoidea [*e*.*g*., @woods2021] -- another caviomorph superfamily -- or to be a morphological intermediate between those two clades (*i*.*e*., Octochinchilloi, *sensu* @boivin2019) [@macphee2011; @dacunha2023].
+
+## Remarks on the extant taxa lacking fossil record
+
+Remains of *Chinchilla chinchilla* and  *Lagidium viscacia* were in fact once reported from an archaeological assemblage, but we assume their age to be too close to the present to provide useful information on the time of speciation of the species.
+
+The validity of *Lagidium peruanum* is questionable. The species indeed appears on the Mammal Diversity Database 2025 [@burgin2025], but is sometimes regarded as a synonymous of *L. viscaccia*. For practical reasons (and as it was included in our phylogeny), we decided to keep it for the rest of our analyses, but this choice does not reflect any taxonomic decision.
+
+\newpage
+
+# Supplementary Figures
+
+```{r, echo=FALSE}
+library(knitr)
+```
+
+```{r, echo=FALSE}
+#| label: fig-OccMap
+#| out-width: 16cm
+#| fig-cap: Location of the chinchilloid-bearing sites that yielded the material used in this study ($N=177$, but note that some localities have been amalgamated for visual purpose). GPS coordinates are from The Paleobiology Database.
+
+include_graphics("../../Figures/Supp/Occurrence_map_Chinchilloidea.png")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-EffectSamplingRTT
+#| out-width: 17.5cm
+#| fig-cap: Impact of the sampling scheme of extant species lacking fossil record on upstream macroevolutionary inferences with PyRate (rjMCMC algorithm). (**A**, **D**, **G**) show speciation rate, extinction rate and sampled diversity estimated from a database only encompassing fossil taxa. In (**B**, **E**, **H**), extant taxa were included by means of an occurrence with origination and extinction ages ($T_e$ and $T_e$) set to 0 Ma (*i*.*e*., 'biased incorporation'). In (**C**, **F**, **I**), extant taxa were included or with our newly-introduced pipeline relying on ages extracted from dated phylogenies. Full lines indicate median rate estimation (blue for speciation, **A**--**C**, red for extinction, **D**--**F**), and ribbons their associated 95% HPD interval. Grey histograms in the background depict the frequency of rate shift per 1-My time bins (**A**--**F**). The two horizontal lines labelled \* and \*\*\* respectively indicate significant and strongly supported rate shift (**A**--**F**).
+
+include_graphics("../../Figures/Supp/Age_combination_effect/age_comb_effect_RTT.png")
+```
+
+```{r, echo=FALSE}
+#| label: fig-TsPhyloPyRate
+#| out-width: 13cm
+#| fig-cap: Correspondance between divergence times leading to extant species estimated from our phylogeny ('Ts Phylogeny') and the times of species origination *de novo* estimated ('Ts PyRate') after implementing our sampling scheme for extant species absent from the fossil record (*Main text*, Figure 2). For each species, we set $\alpha=0.95$, except for *D. branickii*, for which we set $\alpha=0.999$. Dots show median estimates and error bars the associated 95% HPD. Dashed line shows the line with equation $y=x$.
+
+include_graphics("../../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-preservation_rate
+#| out-height: 9cm
+#| fig-cap: Preservation rate through time in our species-level dataset estimated with PyRate. The solid line represents the mean posterior estimate and the shaded area the associated 95% HPD interval.
+
+include_graphics("../../Figures/Supp/Preservation_through_time.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-ESSplot
+#| out-height: 8cm
+#| fig-cap: Convergence of the PyRate runs (rjMCMC algorithm) for the analysis of the species-level temporal occurrence database. (**A**) shows the ESS of the model posterior probability for all the 20 replicates we ran. ESS greater than 200 (first-scale indicator of a run that converged, $n=20$ in that case) are displayed in green. The yellow and red line respectively depict ESS=200 and ESS=100. The proportion of origination and extinction times (resp. $T_S$ and $T_E$) that converged (i.e., with $ESS > 200$) are shown in (**B**), for each of our 20 replicates. (**C**) shows the posterior estimates of the mean root age of our group, together with their lower and upper boundaries of the 95% HPD interval, across the 20 replicates.
+
+include_graphics("../../Results/RJMCMC/species/1-Full/pyrate_mcmc_logs/ESS_plot.png")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-FreqRateShift
+#| out-height: 8cm
+#| fig-cap: Histogram showing the frequency of speciation (**A**) and extinction (**B**) rate shifts in our species-level chinchilloid dataset estimated by PyRate (rjMCMC algorithm). This quantity indicates, within 1My time bins, the support given to a model with rate shift compared to a model with constant rates. The two dashed lines respectively labelled $2log(BF)>2$ and $2log(BF)>6$ respectively indicate significant and strongly supported rate shift.
+
+include_graphics("../../Figures/recap_figures_RJMCMC/New/Chinchilloidea_species_Full_frequency_of_rate_shift.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-LifespanHypso
+#| out-height: 18cm
+#| fig-cap: "Bayesian reconstruction of the longevities of the 124 chinchilloid species considered in our dataset. Each segment depicts the longevity of a given species, that is, the interval between species' speciation and extinction times averaged across PyRate runs that achieved convergence. Segments and taxonomic names were coloured according to the crown height category to which species were assigned. The histogram at the centre of the plot shows the number of species within each crown height class. Depending on the phylogenetic hypothesis considered [*i*.*e*., @boivin2019 or @rasia_comprehensive_2021], taxa labelled a 'Stem Chinchilloidea' may either be considered as actual stem, or as *Familia incertae sedis*. The first four silhouettes (from top to bottom) are from Phylopic (credits available in Table S3). The last two silhouettes (*Elasmodontomys obliquus* and *Borikenomys praecursor*) were designed by L.M. for a previous work [@marivaux_early_2020]." 
+
+include_graphics("../../Figures/Supp/Lifespans_hypso/Lifespans_HI_Chinchi.png")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-RecapSingletonRTT
+#| out-height: 10cm
+#| fig-cap: Joint estimation of origination (blue) and extinction (red) rates (**A**), net diversification rate (**B**), diversity through time (**C**) and preservation rates (**D**) from our species-level chinchilloid database made my PyRate (rjMCMC algorithm) after removing singletons.
+
+include_graphics("../../Figures/recap_figures_RJMCMC/New/Chinchilloidea_species_Singleton_Recap_figure.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-SingletonFRS
+#| out-height: 8cm
+#| fig-cap: Frequency of origination (**A**) and extinction (**B**) rates estimated by the rjMCMC analysis of our species-level database after removing singletons.
+
+include_graphics("../../Figures/recap_figures_RJMCMC/New/Chinchilloidea_species_Singleton_frequency_of_rate_shift.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-RecapGenRTT
+#| out-height: 10cm
+#| fig-cap: Joint estimation of origination (blue) and extinction (red) rates (**A**), net diversification rate (**B**), diversity through time (**C**) and preservation rates (**D**) from the genus-level chinchilloid database made my PyRate (rjMCMC algorithm).
+
+include_graphics("../../Figures/recap_figures_RJMCMC/New/Chinchilloidea_genus_Full_Recap_figure.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-FRSGen
+#| out-height: 8cm
+#| fig-cap: Frequency of origination (**A**) and extinction (**B**) rates estimated by the rjMCMC analysis of our genus-level database.
+
+include_graphics("../../Figures/recap_figures_RJMCMC/New/Chinchilloidea_genus_Full_frequency_of_rate_shift.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-RasiaEffect
+#| out-height: 19cm
+#| fig-cap: Impact of accounting for the revision of the dinomyid fauna of the Ituzaingó Formation (Entre Ríos Province, Argentina) on the estimation of the temporal dynamics of chinchilloid extinction rate [@rasia2026]. (**A**) Lifespans of species making up the 'Mesopotamiense' fauna (Ituzaingó Fm.) before (*left*) and after (*right*) the taxonomic revision. Removed taxa were coloured in red (five taxa lost). (**B**) Chinchilloid extinction rates estimated from our temporal occurrence database before (*left*) and after (*right*) incorporating the aforementioned revision. The histogram in background shows the frequency of rate shift estimated by the rjMCMC model, that is, for a given time frame (by default set to 1My), how likely it is to consider that the reconstructed extinction rate experienced a shift. The dashed lines labelled (\*) and (\*\*\*) respectively indicate significant and strongly supported rate shift.
+
+include_graphics("../../Figures/Supp/Effect_Rasia2026/rasia_effect.pdf")
+```
+
+```{r, echo = FALSE}
+#| label: fig-violinADE
+#| out-height: 7.5cm
+#| out-width: 15cm
+#| fig-cap: Posterior estimate of the shape parameter of the Weibull distribution for the ADE analyses of the 'Early' (> 6 Ma) and 'Late' (< 6 Ma) occurrence datasets, each with constant extinction rate (@fig-FreqRateShift). 2.5%, 50% and 97.5% quantiles are indicated in the distribution of each parameter by black horizontal lines, respectively from bottom to top.
+
+include_graphics("../../Figures/ADE/Weibull_shape_species.png")
+```
+
+| 
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: fig-RTTperBM
+#| fig-cap: Speciation (**A**) and extinction (**B**) rates through time per body mass class as inferred by the rjMCMC model.
+
+include_graphics("../../Figures/Supp/RTT_per_BM/RTT_plot_per_BM.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-FreqRateShiftBM
+#| fig-cap: "Frequency of speciation and extinction rate shifts per body size class as estimated by the analysis of our species-level chinchilloid occurrence dataset with the rjMCMC model. Dashed horizontal lines indicate 2 * log(Bayes factor) of 2 and 6, respectively suggesting significant and strongly-supported rate shifts."
+
+include_graphics("../../Figures/Supp/RTT_per_BM/freq_rate_shift_per_BM.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-RTT_BDNN_NoCar15
+#| fig-cap: Marginal chinchilloid speciation (blue) and extinction (red) rates through time as estimated by our BDNN analyses of the datasets with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$). Caribbean taxa were excluded. Full lines show median rate estimates and ribbons their associated 95% Highest Posterior Density (HPD) interval, assessed acrossed the 10 independent BDNN runs randomising fossil ages under a uniform law made for each trait imputation. This panel only depicts the rates through time from replicate 1 to 5.
+
+include_graphics("../../Figures/Supp/RTT_imputation/RTT_imput_full_NoCar15.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-RTT_BDNN_NoCar610
+#| fig-cap: Marginal chinchilloid speciation (blue) and extinction (red) rates through time as estimated by our BDNN analyses of the datasets with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$). Caribbean taxa were excluded. Full lines show median rate estimates and ribbons their associated 95% Highest Posterior Density (HPD) interval, assessed acrossed the 10 independent BDNN runs randomising fossil ages under a uniform law made for each trait imputation. This panel only depicts the rates through time from replicate 1 to 5.
+
+include_graphics("../../Figures/Supp/RTT_imputation/RTT_imput_full_NoCar610.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-ddHistPlotL2D2
+#| out-height: 7.5cm
+#| out-width: 20cm
+#| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising two LSTM units (64 and 32 nodes) connected to two dense layers (64 and 32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts increasing, indicative of overfitting. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
+
+include_graphics("../../Results/DeepDive/species_extant_extended/species_extant_extended_models/simulation_species_extant_extended_ET_20260224_lstm128_64_32_d64_32_conditional/history_plotsimulation_species_extant_extended_ET_20260224_lstm128_64_32_d64_32_conditional.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-ddHistPlotL3D2 
+#| out-height: 7.5cm
+#| out-width: 20cm
+#| fig-cap: Training and validation loss across training epochs for a DeepDive network comprising three LSTM units (128, 64 and 32 nodes) connected to two dense layers (64 and 32 nodes) before the output layer. The red vertical line indicates the "early stopping point", *i*.*e*., when the validation loss starts increasing, indicative of overfitting. It determines the optimal value of number of iterations, at which we derive the training and validation loss values depicted between parenthesis.
+
+include_graphics("../../Results/DeepDive/species_extant_extended/species_extant_extended_models/simulation_species_extant_extended_ET_20260224_lstm64_32_d64_32_conditional/history_plotsimulation_species_extant_extended_ET_20260224_lstm64_32_d64_32_conditional.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-MBDcorrelations
+#| fig-cap: Bayesian estimation of correlation coefficients of extinction (*left*) and speciation (*right*) rates with a selected set of environmental variable carried out by the MBD model (*see Methods in the main text*). A gamma prior was set to correlation parameters. Light colours (respectively blue for speciation and red for extinction) indicate non-significant correlations, and plain colours indicate significant correlations. A correlation was considered to be significant if 0 was not included in the parameter 95% HPD interval.
+
+include_graphics("../../Figures/Main/Drivers/MBD_species_complete_scaled_hsp0.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-Comprative_Persistence
+#| out-height: 10cm
+#| fig-cap: "Comparative persistence (*i*.*e*., FAD minus LAD) of the 84 taxa in common between our database (in blue) and @carrillo2026. Mean persistences between the two studies were compared with a paired Wilcoxon test."
+
+include_graphics("../../Results/comparing_with_Carrillo/persistence_violin.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-Comparative_LADFAD
+#| out-height: 25cm
+#| out-width: 20cm
+#| fig-cap: Persistence in the fossil record of the 84 species shared between our database (in blue) and @carrillo2026 (in red). Persistence is assessed as the interval between the First and Last Appearance Data (resp. FAD and LAD) of each taxon.
+
+include_graphics("../../Results/comparing_with_Carrillo/comparative_LAD_FAD.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-EnvCorrelates
+#| out-width: 16cm
+#| fig-cap: Abiotic variables used in the environment-dependent diversification analyses carried out over this study. These have been temporally scaled to the same resolution (500ky-step). Andean uplift was from @boschman2021, South American regional temperature was from @tardif2025 and sea-level changes were from @miller2020.
+
+include_graphics("../../Figures/Supp/Abiotic_correlates.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-UplTrop
+#| out-width: 13cm
+#| fig-cap: Interaction between latitude and Andean uplift in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how the relationship between the Andean uplift and extinction rate changes between tropical and extratropical species. Results were arbitrarily taken from the third imputation replicate of our BDNN analysis.
+
+include_graphics("../../Figures/Supp/Drivers_interaction/Upl_Tropicality.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-UplBM
+#| out-width: 13cm
+#| fig-cap: Interaction between body mass and Andean uplift in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how the relationship between the Andean uplift and extinction rate changes between body mass categories. Body mass categories are numbered from 1 to 6 by increasing order (*i*.*e*., from XS to XXL). Results were arbitrarily taken from the third imputation replicate of our BDNN analysis.
+
+include_graphics("../../Figures/Supp/Drivers_interaction/Upl_BM.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-BMTrop
+#| out-width: 13cm
+#| fig-cap: Interaction between latitude and body mass in shaping chinchilloid extinction rate variations across lineages, *i*.*e*., how sentitive to extinction body size classes are with respect to their tropical (light red) or extratropical (dark red) origin. Body mass categories are numbered from 1 to 6 by increasing order (*i*.*e*., from XS to XXL). Results were arbitrarily taken from the third imputation replicate of our BDNN analysis. 
+
+include_graphics("../../Figures/Supp/Drivers_interaction/BM_Tropicality.pdf")
+
+```
+
+```{r, echo=FALSE}
+#| label: fig-hypso
+#| out-width: 13cm
+#| fig-cap: "How extinction rate varies across crown height categories (0: brachydont, 1: mesodont, 2: protohypsodont and 3: euhypsodont). Results were arbitrarily taken from the third imputation replicate."
+
+include_graphics("../../Figures/Supp/Drivers_interaction/Hypsodonty.pdf")
+```
+
+{{< pagebreak >}}
+
+# Supplementary Tables
+
+```{r, echo=FALSE}
+# Load kableExtra library
+library(kableExtra)
+# Function to convert elements of a table cell to bold
+convert_bold <- function(el){
+  return(paste0("**", el, "**"))
+}
+# Load additional libraries
+library(readxl)
+library(dplyr, warn.conflicts = FALSE)
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl-DDperf
+#| tbl-cap: "Performance of the different network architectures tested in our DeepDive analyses. `LSTM Layers` and `Fully-connected` are respectively the number of Long Short Term Memory and Fully-connected units of the network (3: 128, 64 and 32 nodes; 2: 64 and 32 nodes; 1: 32 nodes). `Dropout` represents the Monte-Carlo dropout fraction, that is, the proportion of connections between neurons randomly toggled off between two learning epochs -- one epoch being characterised by a complete pass through the entire training dataset −, preventing from overfitting. `Nb. training epochs` is the optimal number of training epochs. `Training loss` and `Validation loss` are the values of the Mean Squared Error (MSE) estimated between the 'true' diversity of each simulated dataset (resp. from the training or the validation set), and the predicted diversity made by the network after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs. `Evaluation loss` represent the MSE between each true and its associated predicted diversity trajectory from the test datset, once the is trained (*i*.*e*., after $n$ rounds of optimisation, where $n$ is the optimal number of training epochs). The optimal number of epochs is determined when the `Validation loss` starts increasing (see @fig-ddHistPlotL2D2 and @fig-ddHistPlotL3D2). Architectures resulting in the smallest evaluation loss values, *i*.*e*., generating the most accurate predictions, are depicted in bold."
+
+tbl_dd <- read.csv("../../Data/supp_tbl/dd_network_perf.csv")
+colnames(tbl_dd) <- c("LSTM layers", "Fully-connected", "Dropout", "Nb. training epochs", "Training loss", "Validation loss", "Evaluation loss")
+# Turn to bold best architectures
+tbl_dd[1,] <- sapply(tbl_dd[1,], FUN = convert_bold)
+tbl_dd[3,] <- sapply(tbl_dd[3,], FUN = convert_bold)
+# Display
+kable(tbl_dd, align = 'c')
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl_PhyloHPD
+#| tbl-cap: Table representing the lower and upper bounds of the 95% HPD (resp. 'q_2.5%' and 'q_97.5%') of the distribution of the divergence ages leading to all the extant chinchilloid species absent from the fossil record -- *i*.*e*., all species but *Lagostomus maximus*. Ages are expressed in Ma.
+
+tbl <- read.table("../../Data/supp_tbl/95pct_HPD_tbl.txt", header = T)
+# Add space and italicise species names
+colnames(tbl) <- sapply(X = colnames(tbl),
+                        FUN = function(x){
+                          gensp <- gsub(x, pattern = "_", replacement = " ")
+                          return(paste0("*", gensp, "*"))
+                          })
+# Round values
+tbl <- apply(X = tbl,
+             FUN = round,
+             MARGIN = c(1,2),
+             digits = 2)
+# Indicate row names
+rownames(tbl) <- c("q_2.5%", "q_97.5%")
+# Display
+kable(tbl, align = "c")
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl-Refsilhouettes
+#| tbl-cap: References of the silhouettes used in Figure 1, from [Phylopic](https://www.phylopic.org/).
+
+
+tbl <- read_xlsx("../../Data/supp_tbl/phylopic_ID_table.xlsx")
+# Italicise species names
+tbl$Silhouette <- sapply(X = tbl$Silhouette, FUN = function(x){paste0("*", x, "*")})
+# Header in bold
+colnames(tbl) <- sapply(X = colnames(tbl), FUN = function(x){paste0("**", x, "**")})
+
+# Display
+kable(tbl, align = "c")
+```
+
+```{r, echo=FALSE}
+#| label: tbl-cv_sp
+#| tbl-cap: "Coefficient of speciation rate variation across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$), excluding Caribbean taxa. Simulated values (`cv_simulated`) were obtained from the analysis of 100 simulated datasets matching the empirical datasets in terms of number of traits, clade age and (approximately) number of extant species, generated under a constant-rate birth-death model. Empirical values (`cv_empirical`) were obtained from the analysis of the empirical dataset. *Note: significant variations of speciation rate across lineages imply `cv_empirical` > `cv_expected`*."
+
+# Load and adapt table
+cv_tbl_sp <- readRDS("../../Data/supp_tbl/BDNN_imputation_NoCar/coeff_speciation_rate_variation_across_replicates_NoCar.RDS")
+cv_tbl_sp$replicate[nrow(cv_tbl_sp)] <- "Mean"
+colnames(cv_tbl_sp)[3] <- "Replicate"
+cv_tbl_sp <- cv_tbl_sp %>% 
+  mutate(cv_empirical = as.numeric(cv_empirical), cv_expected = as.numeric(cv_expected)) %>% 
+  mutate(cv_empirical = sapply(X = cv_empirical, FUN = round, digits = 2)) %>% 
+  mutate(cv_expected = sapply(X = cv_expected, FUN = round, digits = 2))
+cv_tbl_sp[nrow(cv_tbl_sp), ] <- sapply(X = cv_tbl_sp[nrow(cv_tbl_sp), ],
+                                       FUN = convert_bold)
+
+# Display
+kable(cv_tbl_sp, align = "c")
+```
+
+| 
+| 
+
+```{r, echo=FALSE}
+#| label: tbl-cv_ex
+#| tbl-cap: "Coefficient of extinction rate variation across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$), excluding caribbean taxa. *Note: significant variations of speciation rate across lineages imply `cv_empirical` > `cv_expected`*."
+
+# Load and adapt table
+cv_tbl_ex <- readRDS("../../Data/supp_tbl/BDNN_imputation_NoCar/coeff_extinction_rate_variation_across_replicates_NoCar.RDS")
+cv_tbl_ex$replicate[nrow(cv_tbl_ex)] <- "Mean"
+colnames(cv_tbl_ex)[3] <- "Replicate"
+cv_tbl_ex <- cv_tbl_ex %>% 
+  mutate(cv_empirical = as.numeric(cv_empirical), cv_expected = as.numeric(cv_expected)) %>% 
+  mutate(cv_empirical = sapply(X = cv_empirical, FUN = round, digits = 2)) %>% 
+  mutate(cv_expected = sapply(X = cv_expected, FUN = round, digits = 2))
+cv_tbl_ex[nrow(cv_tbl_ex), ] <- sapply(X = cv_tbl_ex[nrow(cv_tbl_ex), ],
+                                       FUN = convert_bold)
+# Display
+kable(cv_tbl_ex, align = "c")
+
+```
+
+{{< pagebreak >}}
+
+```{r, echo=FALSE}
+#| label: tbl-pred_imp_ex
+#| tbl-cap: Predictor importance on extinction rate across the 10 BDNN replicates with random trait (*i*.*e*., body mass and/or hypsodonty index) imputation for taxa with missing trait reconstruction ($n=11$) after excluding caribbean taxa. We highlighted in bold the three factors that contribute the most to variations in extinction rates across species.
+
+# Load
+pred_imp_tbl_ex <- readRDS("../../Data/supp_tbl/BDNN_imputation_NoCar/BDNN_predictor_importance_ex_rate_NoCar.RDS")
+pred_imp_tbl_ex$Predictor[which(pred_imp_tbl_ex$Predictor == "Hypsodonty")] <- "Crown_Height"
+pred_imp_tbl_ex <- pred_imp_tbl_ex[order(pred_imp_tbl_ex$OverallRank), ]
+rownames(pred_imp_tbl_ex) <- 1:nrow(pred_imp_tbl_ex)
+# Make it clearer
+colnames(pred_imp_tbl_ex) <- gsub("^Replicate_", "R. ", colnames(pred_imp_tbl_ex))
+pred_imp_tbl_ex <- pred_imp_tbl_ex %>% rename(Rank = "OverallRank")
+# Highlight the podium
+pred_imp_tbl_ex[1:3, c("Predictor", "Rank")] <- apply(X = pred_imp_tbl_ex[1:3, c("Predictor", "Rank")],
+                                                      FUN = convert_bold,
+                                                      MARGIN = c(1,2))
+# Display
+kable(pred_imp_tbl_ex, align = "c")
+```
+
+```{r, echo=FALSE}
+#| label: tbl-FC_BM
+#| tbl-cap: Magnitude of the change in extinction rate (*i*.*e*., `Fold Change`) between the two extreme body size classes showing the most pronounced extinction rate variation (S and XL; Figure 6A) across the 10 trait-imputed replicates without Caribbean taxa. `Upper CI` and `Lower CI` respectively show the uppper and lower boundaries of the associated 95% HPD interval. The 'Total' row shows the averaged values across the 10 replicates.
+
+tbl <- readRDS("../../Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_S_XL_across_replicates.RDS")
+# Change column names
+colnames(tbl) <- c("Replicate", "Fold Change", "Upper CI", "Lower CI")
+# Numericise
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = as.numeric)
+# Round
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = round, digits = 2)
+# Highlight last row ('total')
+tbl[nrow(tbl), ] <- sapply(X = tbl[nrow(tbl), ], FUN = convert_bold)
+# Display
+kable(tbl, align = "c")
+```
+
+```{r, echo=FALSE}
+#| label: tbl-FC_ET
+#| tbl-cap: Magnitude of the change in extinction rate (*i*.*e*., fold change) between tropical and extratropical taxa across the 10 trait-imputated replicates without Caribbean taxa. `Upper CI` and `Lower CI` respectively show the uppper and lower boundaries of the associated 95% HPD interval. The 'Total' row shows the averaged values across the 10 replicates.
+
+tbl <- readRDS("../../Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_Trop_Etrop_across_replicates.RDS")
+# Change column names
+colnames(tbl) <- c("Replicate", "Fold Change", "Upper CI", "Lower CI")
+# Numericise
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = as.numeric)
+# Round
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = round, digits = 2)
+# Highlight last row ('total')
+tbl[nrow(tbl), ] <- sapply(X = tbl[nrow(tbl), ], FUN = convert_bold)
+# Display
+kable(tbl, align = "c")
+```
+
+```{r, echo=FALSE}
+#| label: tbl-FC_hypso
+#| tbl-cap: Magnitude of the change in extinction rate (*i*.*e*., fold change) between protohypsodont and euhypsodont taxa across the 10 trait-imputated replicates without Caribbean taxa. `Upper CI` and `Lower CI` respectively show the uppper and lower boundaries of the associated 95% HPD interval. The 'Total' row shows the averaged values across the 10 replicates.
+
+tbl <- readRDS("../../Data/supp_tbl/BDNN_imputation_NoCar/Fold_change_Proto_Euhypsodont_across_replicates.RDS")
+# Change column names
+colnames(tbl) <- c("Replicate", "Fold Change", "Upper CI", "Lower CI")
+# Numericise
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = as.numeric)
+# Round
+tbl[, 2:ncol(tbl)] <- apply(X = tbl[, 2:ncol(tbl)], MARGIN = c(1,2), FUN = round, digits = 2)
+# Highlight last row ('total')
+tbl[nrow(tbl), ] <- sapply(X = tbl[nrow(tbl), ], FUN = convert_bold)
+# Display
+kable(tbl, align = "c")
+```
+
+```{r, echo=FALSE}
+#| label: tbl-MBDex
+#| tbl-cap: Posterior estimates of the multivariate birth--death (MBD) correlation parameters with the extinction rate ($G_{\mu}$, median), shown along with their 95% Highest Posterior Density (HPD) interval, for each of the four environmental variable tested. The only significant correlation, *i*.*e*., of which the 95% HPD of the associated coefficient does not significantly overlap with 0, is shown in bold.
+
+tbl <- readRDS("../../Data/supp_tbl/MBD_recap_tbl/MBD_extinction_recap_tbl.RDS")
+tbl[4,] <- sapply(X = tbl[4,], FUN = convert_bold)
+# Display
+kable(tbl, align = "c")
+```
+
+```{r, echo=FALSE}
+#| label: tbl-MBDsp
+#| tbl-cap: Posterior estimates of the multivariate birth--death (MBD) correlation parameters with the speciation rate ($G_{\mu}$, median), shown along with their 95% Highest Posterior Density (HPD) interval, for each of the four environmental variable tested. As all HPD intervals overlap with zero, no ignificant correlation was highlighted by this analysis.
+
+tbl <- readRDS("../../Data/supp_tbl/MBD_recap_tbl/MBD_speciation_recap_tbl.RDS")
+# Display
+kable(tbl, align = "c")
+```
+
+```{r, echo=FALSE}
+#| label: tbl-ADEcoeff
+#| tbl-cap: Median estimate and associated 95% HPD bounds of the shape parameter of the Weibull shape parameter ($\Phi$) of the Age-Dependent Extinction analysis of our species-level chinchilloid temporal occurrence dataset. Since the ADE model should be run on periods of constant extinction rate through time, `Species_Early` and `Species_After` respectively designate the species before and after the  shift in extinction rate occurring *ca*. 6 Ma.
+
+tbl_weibull <- read.table("../../Figures/ADE/recap_tbl_w_shape_species.txt", sep = "\t", header = T)
+tbl_weibull <- tbl_weibull[, -c(4)]
+kable(tbl_weibull, align = "c")
+```
+
+{{< pagebreak >}}
+
+# Supplementary references
+
+::: {#refs}
+:::

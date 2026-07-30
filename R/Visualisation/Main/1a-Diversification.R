@@ -225,12 +225,18 @@ ex_mbd <- rtt_plot(rtt_mbd, type = "ex",
 full_plot <- ggarrange(plotlist = list(sp_rj, sp_bdcs, sp_bd, sp_mbd,
                                        ex_rj, ex_bdcs, ex_bd, ex_mbd),
                        ncol = 4, nrow = 2, 
-                       labels = c("(A)", "(C)", "(E)", "(G)",
-                                  "(B)", "(D)", "(F)", "(H)"),
+                       labels = c("a)", "c)", "e)", "g)",
+                                  "b)", "d)", "f)", "h)"),
+                       # labels = c("(A)", "(C)", "(E)", "(G)",
+                       #            "(B)", "(D)", "(F)", "(H)"),
                        font.label = list(size = 10),
                        vjust = c(rep(2, 4), rep(1.5, 4)))
 
-ggsave("./Figures/Main/Diversification_rates.pdf", full_plot,
+# ggsave("./Figures/Main/Diversification_rates.pdf", full_plot,
+#        height = 120, width = 250, units = "mm")
+# ggsave("./Figures/Main/Diversification_rates.png", full_plot,
+#        height = 120, width = 250, units = "mm", dpi = 600)
+ggsave("./Figures/Main-SB/Diversification_rates.pdf", full_plot,
        height = 120, width = 250, units = "mm")
-ggsave("./Figures/Main/Diversification_rates.png", full_plot,
+ggsave("./Figures/Main-SB/Diversification_rates.png", full_plot,
        height = 120, width = 250, units = "mm", dpi = 600)

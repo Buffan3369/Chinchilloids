@@ -179,13 +179,18 @@ step_plot <- ds %>%
 ## Combine ---------------------------------------------------------------------
 div_BM_plots <- ggarrange(plotlist = list(ltt.plot, dd_div, step_plot),
                           nrow = 3,
-                          labels = list("(A)", "(B)", "(C)"), 
+                          # labels = list("(A)", "(B)", "(C)"), 
+                          labels = list("a)", "b)", "c)"), 
                           font.label = list(size = 10), vjust = 3)
 
-ggsave("./Figures/Main/Diversity_and_BM_through_time.pdf", div_BM_plots,
-       height = 200, width = 70, units = "mm")
+# ggsave("./Figures/Main/Diversity_and_BM_through_time.pdf", div_BM_plots,
+#        height = 200, width = 70, units = "mm")
+# ggsave("./Figures/Main/Diversity_and_BM_through_time.png", div_BM_plots,
+#        height = 200, width = 70, units = "mm", dpi = 600)
 
-ggsave("./Figures/Main/Diversity_and_BM_through_time.png", div_BM_plots,
+ggsave("./Figures/Main-SB/Diversity_and_BM_through_time.pdf", div_BM_plots,
+       height = 200, width = 70, units = "mm")
+ggsave("./Figures/Main-SB/Diversity_and_BM_through_time.png", div_BM_plots,
        height = 200, width = 70, units = "mm", dpi = 600)
 
 ## Preservation rate -----------------------------------------------------------
