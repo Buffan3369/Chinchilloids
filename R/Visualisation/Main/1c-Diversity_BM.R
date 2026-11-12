@@ -196,7 +196,6 @@ ggsave("./Figures/Main-SB/Diversity_and_BM_through_time.png", div_BM_plots,
 ## Preservation rate -----------------------------------------------------------
 path_to_q <- "./Results/RJMCMC/species/1-Full/Q_SHIFTS/Parsed_Q_rates.txt"
 q.table <- read.table(path_to_q, header = TRUE)
-q.table <- q.table[-c(nrow(q.table)),] # remove Holocene preservation rates
 
 # q-rates plot
 Q_plot <- q_plot(q.table,

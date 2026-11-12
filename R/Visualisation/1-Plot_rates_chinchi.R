@@ -103,7 +103,6 @@ for(lvl in c("species", "genus")){
     # q-rates table
     path_to_q <- paste0("./Results/RJMCMC/", lvl, "/", ana, "/Q_SHIFTS/Parsed_Q_rates.txt")
     q.table <- read.table(path_to_q, header = TRUE)
-    q.table <- q.table[-c(nrow(q.table)),] # remove Holocene preservation rates
     # q-rates plot
     Q_plot <- q_plot(q.table,
                      ltt_df,
