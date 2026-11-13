@@ -21,7 +21,7 @@ chinchi_sp <- c("Chinchilla_chinchilla", "Chinchilla_lanigera", "Lagidium_peruan
                 "Lagidium_ahuacaense", "Lagidium_viscacia", "Lagidium_wolffsohni",
                 "Lagostomus_maximus", "Dinomys_branickii")
 
-chinchi_tree <- keep.tip(cavio_tree, tip = chinchi_sp)
+chinchi_tree <- keep.tip(cavio_tree@phylo, tip = chinchi_sp)
 
 # Get the boundaries of the 95%HPD of Ts distribs for species lacking fossil record
 dinomys_hpd <- chinchi_tree@data$CAheight_0.95_HPD[[9]]
