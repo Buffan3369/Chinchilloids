@@ -8,38 +8,33 @@
 ################################################################################
 
 library(SpeciesAge)
+library(treeio)
+library(ape)
 source("~/Documents/GitHub/CorsaiR/R/1-extract_param_from_PyRate_outputs.R")
 
 ## Playaround ------------------------------------------------------------------
 
-# t <- seq(0.1, 10, 0.1)
-# 
-# mean_Ts <- sapply(X = t, 
-#              FUN = function(x){meanAge(v = x, lambda = 0.4, mu = 0.3)})
-# 
-# median_Ts <- sapply(X = t,
-#                     FUN = function(x){medianAge(v = x, lambda = 0.4, mu = 0.3, rho = 1)})
-# 
-# 
-# par(mfrow = c(2,2))
-# plot(x = t, y = mean_Ts, type = "l", xlab = "Td_phylo", ylab = "mean_Ts")
-# plot(x = t, y = median_Ts, type = "l", xlab = "Td_phylo", ylab = "median_Ts")
-# plot(x = mean_Ts, y = median_Ts, type = "l", xlab = "mean_Ts", ylab = "median_Ts")
-# lines(x = 0:3, y = 0:3, col = "red")
-# dev.off()
-# 
-# T_si <- meanAge(v = 4, lambda = 0.4, mu = 0.3)
-# 
-# q <- 2.2
-# 
-# # Number of sampled occ follows a poisson law of intensity q*T_si
-# N_occ <- rpois(n = 1, lambda = q*T_si)
-# 
-# # Homogeneous poisson process
-# rexp(n = 2*N_occ, 1/q)
+l <- 0.5
+v <- runif(n = 1000, min = 0.5, max = 30)
+
+par(mfrow = c(2, 3))
+for(m in c(seq(0, 0.4, 0.1), 0.49)){
+  s <- sapply(X = v, 
+              FUN = function(x){
+                meanAge(x, lambda = l, mu = m, rho = 1)
+                })
+  plot(x = v, y = s, main = paste0("mu: ", m))
+  lines(x = 0:50, y = 0:50, lty = "dashed")
+}
+
+integrateRate
 
 ## 95 HPD boundaries of extant species' divergence times from phylogeny --------
 df_hpd <- read.table("./Data/supp_tbl/95pct_HPD_tbl.txt", header = T)
+
+# for(sp in colnames(df_hpd)){
+#   sp_idx <- 
+# }
 
 # Sampling a divergence time from phylogeny (v_sp)
 # The 95% HPD will be approximated to a N(mu, sigma²)
@@ -66,6 +61,7 @@ s_sp <- meanAge(v = v_sp,
                 mu = m_vsp,
                 rho = 1) # assumption of complete extant sampling
 
+?SpeciesAge::integrateRate
 ## Occurrence sampling following a piecewise-constant Poisson process ----------
 # Get all the q_rates from s_sp to present
 diff_tq <- q_tbl$Age - s_sp
@@ -97,7 +93,86 @@ if(length(unique(sign(diff_tq))) == 1){
 }
 
 
+
+# Simulate age distribution of a species with branching time = Dinomys' divergence time
+age_distrib_Dinomys <- simSpAge(branching_time = v_sp,
+                                lambda = l_vsp,
+                                mu = m_vsp,
+                                reps = 500)
+
+v_chinchilla <- sp_ages$age[which(sp_ages$tip == "Chinchilla_chinchilla")]
+age_distrib_chinchilla <- simSpAge(branching_time = v_chinchilla,
+                                lambda = l_vsp,
+                                mu = m_vsp,
+                                reps = 500)
+
+v_lagostomus <- sp_ages$age[which(sp_ages$tip == "Lagostomus_maximus")]
+age_distrib_lagostomus <- simSpAge(branching_time = v_lagostomus,
+                                   lambda = l_vsp,
+                                   mu = m_vsp,
+                                   reps = 500)
+
+par(mfrow = c(1,2))
+
+hist(age_distrib_Dinomys, breaks = 20)
+hist(age_distrib_lagostomus, breaks = 20)
+
+
+hist(age_distrib_chinchilla, breaks = 20)
+
+t <- seq(0, 12, 0.01)
+age_Density_Dinomys <- sapply(X = t, 
+                              FUN = function(x){
+                                ageDensity(x,
+                                           lambda = l_vsp,
+                                           mu = m_vsp,
+                                           rho = 1)
+                                })
+
+med <- medianAge(v = v_sp,
+          lambda = l_vsp,
+          mu = m_vsp,
+          rho = 1)
+
+mn <- meanAge(v = v_sp,
+              lambda = l_vsp,
+              mu = m_vsp,
+              rho = 1)
+
+par(mfrow = c(1,2))
+
+hist(age_distrib_Dinomys, breaks = 20)
+abline(v = med, col = "forestgreen", lty = "dashed")
+abline(v = mn, col = "darkred", lty = "dashed")
+
+plot(x= t, y = age_Density_Dinomys, type = "l")
+abline(v = med, col = "forestgreen", lty = "dashed")
+abline(v = mn, col = "darkred", lty = "dashed")
+
+
+
 # if s_sp belongs to an earlier q bin, occurrence sampling will combine multiple time-consecutive exponential distributions (see Silvestro et al. 2019)
 # else{
 #   
 # }
+
+
+q_rates <- c(0.5, 1, 5, 10)
+par(mfrow = c(2, 2))
+for(q in q_rates){
+  x <- rexp(n = 1000, rate = 1/q)
+  hist(x, main = paste0("q = ", q))
+}
+
+
+
+
+cavio_tree <- read.mega("./Data/Phylogeny/chinchi_consensus.tree")
+
+chinchi_sp <- c("Chinchilla_chinchilla", "Chinchilla_lanigera", "Lagidium_peruanum",
+                "Lagidium_ahuacaense", "Lagidium_viscacia", "Lagidium_wolffsohni",
+                "Lagostomus_maximus", "Dinomys_branickii")
+
+chinchi_tree <- ape::keep.tip(cavio_tree@phylo, tip = chinchi_sp)
+
+sp_ages <- calculateTipAges(chinchi_tree)
