@@ -12,6 +12,10 @@ t_df$species_name <- row.names(t_df)
 # plot_df_x <- t_df %>%
 #   pivot_longer(cols = !Species)
 
+################################################################################
+################################# OLD APPROACH #################################
+################################################################################
+
 # Re-estimated ages
 TL <- read.table("./Data/PyRate_inputs/Species/1-Chinchilloidea_sp_lvl_occ_EXTENDED_TaxonList.txt",
                  header = T)

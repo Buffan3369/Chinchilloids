@@ -120,19 +120,29 @@ include_graphics("../Figures/Supp/Occurrence_map_Chinchilloidea.png")
 ```{r, echo=FALSE}
 #| label: fig-EffectSamplingRTT
 #| out-width: 17.5cm
-#| fig-cap: Impact of the sampling scheme of extant species lacking fossil record on upstream macroevolutionary inferences with PyRate (rjMCMC algorithm). (**A**, **D**, **G**) show speciation rate, extinction rate and sampled diversity estimated from a database only encompassing fossil taxa. In (**B**, **E**, **H**), extant taxa were included by means of an occurrence with origination and extinction ages ($T_e$ and $T_e$) set to 0 Ma (*i*.*e*., 'biased incorporation'). In (**C**, **F**, **I**), extant taxa were included or with our newly-introduced pipeline relying on ages extracted from dated phylogenies. Full lines indicate median rate estimation (blue for speciation, **A**--**C**, red for extinction, **D**--**F**), and ribbons their associated 95% HPD interval. Grey histograms in the background depict the frequency of rate shift per 1-My time bins (**A**--**F**). The two horizontal lines labelled \* and \*\*\* respectively indicate significant and strongly supported rate shift (**A**--**F**).
+#| fig-cap: Impact of the sampling scheme of extant species lacking fossil record on upstream macroevolutionary inferences with PyRate (rjMCMC algorithm). (**A**, **D**, **G**) show speciation rate, extinction rate and sampled diversity estimated from a database only encompassing fossil taxa. In (**B**, **E**, **H**), extant taxa were included by means of an occurrence with origination and extinction ages ($T_e$ and $T_e$) set to 0 Ma (*i*.*e*., biased incorporation). In (**C**, **F**, **I**), extant taxa were included or with our newly-introduced pipeline relying on ages extracted from dated phylogenies. Full lines indicate median rate estimation (blue for speciation, **A**--**C**, red for extinction, **D**--**F**), and ribbons their associated 95% HPD interval. Grey histograms in the background depict the frequency of rate shift per 1-My time bins (**A**--**F**). The two horizontal lines labelled \* and \*\*\* respectively indicate significant and strongly supported rate shift (**A**--**F**).
 
 include_graphics("../Figures/Supp/Age_combination_effect/age_comb_effect_RTT.png")
 ```
 
 ```{r, echo=FALSE}
-#| label: fig-TsPhyloPyRate
-#| out-width: 13cm
-#| fig-cap: Correspondance between divergence times leading to extant species estimated from our phylogeny ('Ts Phylogeny') and the times of species origination *de novo* estimated ('Ts PyRate') after implementing our sampling scheme for extant species absent from the fossil record (*Main text*, Figure 2). For each species, we set $\alpha=0.95$, except for *D. branickii*, for which we set $\alpha=0.999$. Dots show median estimates and error bars the associated 95% HPD. Dashed line shows the line with equation $y=x$.
+# label: fig-TsPhyloPyRate
+# out-width: 13cm
+# fig-cap: Correspondance between divergence times leading to extant species estimated from our phylogeny (Ts Phylogeny) and the times of species origination *de novo* estimated (Ts PyRate) after implementing our sampling scheme for extant species absent from the fossil record (*Main text*, Figure 2). For each species, we set $\alpha=0.95$, except for *D. branickii*, for which we set $\alpha=0.999$. Dots show median estimates and error bars the associated 95% HPD. Dashed line shows the line with equation $y=x$.
 
-include_graphics("../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
+# include_graphics("../Figures/Supp/corr_Ts_phylo_PyRate.pdf")
 
 ```
+
+```{r, echo=FALSE}
+#| label: fig-TsPhyloPyRate
+#| out-width: 16m
+#| fig-cap: Expected distribution of the corrected age of extant taxa from a phylogeny matching our chinchilloid tree in terms of speciation ('lambda'), extinction rate ('mu') and extant sampling fraction ('rho'). 'lambda' and 'mu' were chosen as the basal extinction and speciation rate values, *i*.*e*., before the late Miocene change in extinction regime reported in this study (Figure 5 and @fig-EffectSamplingRTT). Dots (along with errorbars) represent extant chinchilloid species phylogenetic ages (and their 95% HPD), extracted from the phylogenetic reconstruction used across this study (see Main Text, *Methods* section).
+
+include_graphics("../Figures/Supp/ExtantSampling/ExpectedTsDensity.pdf")
+ 
+```
+
 
 ```{r, echo=FALSE}
 #| label: fig-preservation_rate
