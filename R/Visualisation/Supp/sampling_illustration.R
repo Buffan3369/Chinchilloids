@@ -2,7 +2,6 @@
 
 library(tidyverse)
 source("./R/useful/Poisson_sampling.R")
-source("./R/useful/helper_functions.R")
 
 set.seed(17112026)
 
@@ -26,13 +25,16 @@ q_df <- q_df |>
 # Plot & save
 sampling_plot <- ggplot() +
   geom_step(data = q_df, aes(x = Age, y = mean_Q), colour = "#810f7c", linewidth = 1) +
-  geom_point(data = point_df, aes(x = time, y = y), size = 0.5) +
+  geom_point(data = point_df, aes(x = time, y = y), size = 0.75) +
   scale_x_reverse() +
   labs(x = "Time (Ma)", y = "Preservation rate") +
   annotate(geom = "rect", xmin = 0, xmax = q_df$Age[5], ymin = -Inf, ymax = Inf, fill = "grey", alpha = 0.2) +
   annotate(geom = "rect", xmin = q_df$Age[4], xmax = q_df$Age[3], ymin = -Inf, ymax = Inf, fill = "grey", alpha = 0.2) +
   annotate(geom = "rect", xmin = q_df$Age[2], xmax = q_df$Age[1], ymin = -Inf, ymax = Inf, fill = "grey", alpha = 0.2) +
-  theme_lucas()
+  theme(panel.background = element_blank(),
+        panel.border = element_rect(linewidth = .75, colour = "black", fill = NA),
+        axis.text = element_text(size = 12),
+        axis.title = element_text(size = 15))
 
 ggsave("./Figures/Supp/ExtantSampling/sampling_plot.pdf", 
        plot = sampling_plot, height = 140, width = 180, units = "mm")

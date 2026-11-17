@@ -152,6 +152,16 @@ include_graphics("../Figures/Supp/ExtantSampling/ExpectedTsDensity.pdf")
 include_graphics("../Figures/Supp/Preservation_through_time.pdf")
 ```
 
+
+```{r, echo=FALSE}
+#| label: fig-sampling_scheme
+#| out-height: 9cm
+#| fig-cap: Illustration of our occurrence sampling pipeline following a Poisson process with piecewise-constant intensity. The purple line shows the mean posterior preservation rate obtained from our PyRate fossil-only analyses, acting as the intensity of the occurrence sampling process. Black dots represent sampled occurrences, along with their sampling times.
+
+include_graphics("../Figures/Supp/ExtantSampling/sampling_plot.pdf")
+```
+
+
 ```{r, echo=FALSE}
 #| label: fig-ESSplot
 #| out-height: 8cm
