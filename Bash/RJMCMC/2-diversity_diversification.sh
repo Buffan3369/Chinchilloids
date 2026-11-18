@@ -5,7 +5,7 @@
 #########################################################
 
 # Diversity & Diversification
-for pth in 1-Full 2-Singleton 3-NoCaribbea 7-FossilOnly 8-Biased_extant
+for pth in 0-NewComb 1-Full 2-Singleton 3-NoCaribbea 7-FossilOnly 8-Biased_extant
 do
 	#Combine log files for runs that converged
 	python ~/PyRate/PyRate.py -combLogRJ ../../Results/RJMCMC/species/$pth/pyrate_mcmc_logs -tag KEEP -b 10 -resample 100
