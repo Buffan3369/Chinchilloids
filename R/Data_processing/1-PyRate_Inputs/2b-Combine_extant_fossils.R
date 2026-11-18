@@ -32,7 +32,7 @@ ends_e <- which(extantAges == "]") # ends of extant age samples
 
 ## Write combined file ---------------------------------------------------------
 outfile <- "./Data/PyRate_inputs/Species/Combined/Chinchilloidea_sp_lvl_COMBINED_occ_PyRate.py"
-cat("#!/usr/bin/env python", "from numpy import * ", "",  file=outfile, sep="\n")
+cat("#!/usr/bin/env python", "from numpy import * ", "", "",  file=outfile, sep="\n")
 
 datasets <- c()
 names <- c()
@@ -54,14 +54,15 @@ for(i in 1:length(ends_f)){
     to_insert <- ds_ext[which(pos_extant == pos)]
     if(length(grep(paste0("data_", i, "\\s*="), to_insert)) > 0){
       to_insert <- gsub(paste0("data_", i, "\\s*="), "", to_insert)
-      to_insert <- gsub("\\[", "", to_insert) # trailing opening bracket removal
+      to_insert <- paste0("array", strsplit(to_insert, split="\\[array")[[1]][2]) # trailing opening bracket removal
     }
     dsF_bf <- ds_combined[1:(pos-1)]
     dsF_af <- ds_combined[pos:length(ds_combined)]
     ds_combined <- c(dsF_bf, to_insert, dsF_af)
   }
 
-  cat(noquote(paste(ds_combined, collapse = "\n")), file = outfile, append=TRUE, sep="\n")
+  cat(noquote(paste(ds_combined, collapse = "\n")), "]", "", "",
+      file = outfile, append=TRUE, sep="\n")
 }
 
 # Closing words
