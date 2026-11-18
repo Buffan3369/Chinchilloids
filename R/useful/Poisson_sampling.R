@@ -35,6 +35,11 @@ combine_q_distribs <- function(MCMC_path, # Folder where MCMClog files are store
   return(q_table)
 }
 
+## Convert an R vector to a numpy-like array -----------------------------------
+to_array <- function(vect){
+  coll_vect <- paste(vect, collapse = ",")
+  return(paste0("array([", coll_vect, "])"))
+}
 
 ## Sample within a given CI (only designed for sample of size 1) ---------------
 sampleCI <- function(distrib,
@@ -74,8 +79,14 @@ time_varying_sampling <- function(s_sp,         # Corrected age (Calderón del C
   # Sampling Scheme (Poisson process with time-varying intensity)
   i <- 1
   q <- q_ssp[i]
-  waiting <- c()
-  BIG_T <- 0
+  # Initialise (constraint: we sample at least 1 occ of each sp)
+  new_t <- rexp(n = 1, rate = q)
+  while(new_t > times_qshift[i]){
+    new_t <- rexp(n = 1, rate = q)
+  }
+  waiting <- c(new_t)
+  BIG_T <- new_t
+  # Loop
   while(BIG_T < s_sp){
     while(BIG_T < times_qshift[i]){
       new_t <- rexp(n = 1, rate = q)
