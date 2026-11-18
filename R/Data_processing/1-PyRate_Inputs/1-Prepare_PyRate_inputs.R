@@ -1,9 +1,9 @@
 ################################################################################
-# Name: 1b-Prepare_PyRate_inputs.R
+# Name: 1-Prepare_PyRate_inputs.R
 # Author: Lucas Buffan
 # E-mail: lucas.l.buffan@gmail.com
 # Description: Prepare PyRate inputs for cleaned Chinchilloidea occurrence data
-################################################0################################
+################################################################################
 
 library(tidyverse)
 library(readxl)
