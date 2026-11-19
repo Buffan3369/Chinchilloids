@@ -106,7 +106,7 @@ Systematics based on morphological characters [primarily dental traits; @marivau
 
 ## Remarks on the extant taxa lacking fossil record
 
-Remains of *Chinchilla chinchilla* and  *Lagidium viscacia* were in fact once reported from an archaeological assemblage, but we assume their age to be too close to the present to provide useful information on the time of speciation of the species.
+Remains of *Chinchilla chinchilla* and *Lagidium viscacia* were in fact once reported from an archaeological assemblage, but we assume their age to be too close to the present to provide useful information on the time of speciation of the species.
 
 The validity of *Lagidium peruanum* is questionable. The species indeed appears on the Mammal Diversity Database 2025 [@burgin2025], but is sometimes regarded as a synonymous of *L. viscaccia*. For practical reasons (and as it was included in our phylogeny), we decided to keep it for the rest of our analyses, but this choice does not reflect any taxonomic decision.
 
@@ -146,10 +146,10 @@ include_graphics("../../Figures/Supp/Age_combination_effect/age_comb_effect_RTT.
 
 ```{r, echo=FALSE}
 #| label: fig-TsPhyloPyRate
-#| out-width: 16m
-#| fig-cap: Expected distribution of the corrected age of extant taxa from a phylogeny matching our chinchilloid tree in terms of speciation ('lambda'), extinction rate ('mu') and extant sampling fraction ('rho'). 'lambda' and 'mu' were chosen as the basal extinction and speciation rate values, *i*.*e*., before the late Miocene change in extinction regime reported in this study (Figure 5 and @fig-EffectSamplingRTT). Dots (along with errorbars) represent extant chinchilloid species phylogenetic ages (and their 95% HPD), extracted from the phylogenetic reconstruction used across this study (see Main Text, *Methods* section).
+#| out-width: 17m
+#| fig-cap: Expected distribution of the corrected age of extant taxa from a phylogeny matching our chinchilloid tree in terms of speciation, extinction rate and extant sampling fraction (resp. $\lambda, \mu$ and $\rho$). We set $\lambda=0.53$, $\mu=0.44$, $\rho=1$. Dots (along with errorbars) represent extant chinchilloid species phylogenetic ages (and their 95% HPD) extracted from two dated phylogenies [@upham2019; @carrillo2026].
 
-include_graphics("../../Figures/Supp/ExtantSampling/ExpectedTsDensity.pdf")
+include_graphics("../../Figures/Supp/ExtantSampling/ExpectedTsDensity_Upham_Carrillo.pdf")
  
 ```
 
@@ -405,7 +405,7 @@ kable(tbl_dd, align = 'c')
 #| label: tbl_PhyloHPD
 #| tbl-cap: Table representing the lower and upper bounds of the 95% HPD (resp. 'q_2.5%' and 'q_97.5%') of the distribution of the divergence ages leading to all the extant chinchilloid species absent from the fossil record -- *i*.*e*., all species but *Lagostomus maximus*. Ages are expressed in Ma.
 
-tbl <- read.table("../../Data/supp_tbl/95pct_HPD_tbl.txt", header = T)
+tbl <- read.table("../../Data/supp_tbl/95pct_HPD_tbl-UPHAM2019.txt", header = T)
 # Add space and italicise species names
 colnames(tbl) <- sapply(X = colnames(tbl),
                         FUN = function(x){
