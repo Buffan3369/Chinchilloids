@@ -76,11 +76,11 @@ library(ggpubr)
 
 lamb <- 0.53
 mu <- 0.44
-rho <- 1
 
 t <- seq(0, 36, 0.1)
-age_dens <- sapply(X = t, FUN = ageDensity, lambda = lamb, mu = mu, rho = rho)
-plot_df <- data.frame(age = t, dens = age_dens)
+age_dens_upham <- sapply(X = t, FUN = ageDensity, lambda = lamb, mu = mu, rho = 1)
+age_dens_carrillo <- sapply(X = t, FUN = ageDensity, lambda = lamb, mu = mu, rho = 6/8)
+plot_df <- data.frame(age = t, dens_upham = age_dens_upham, dens_car = age_dens_carrillo)
 
 pal <- c("#e41a1c", "#377eb8", "#4daf4a", "#984ea3", "#ff7f00", "#e7298a", "#bf5b17")
 
@@ -104,11 +104,12 @@ t_hpd_upham <- data.frame(min = t(hpd_upham)[,1],
 u_plot <- ggplot() + 
   scale_x_reverse() +
   geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.25) +
-  geom_line(data = plot_df, aes(x = age, y = dens), linewidth = 0.5) +
+  geom_line(data = plot_df, aes(x = age, y = dens_upham), linewidth = 0.5) +
   geom_segment(data = t_hpd_upham, aes(x = min, xend = max, y = y, yend = y, colour = Species), linewidth = 0.35) +
   geom_point(data = t_hpd_upham, aes(x = mid, y = y, fill = Species), size = 0.7) +
   scale_colour_manual(values = pal) +
-#  annotate(geom = "text", label = "lambda=0.53\nmu=0.44\nrho=1", size = 2, x = 33, y = 0.27) +
+  ylim(c(-0.03, 0.32)) +
+  annotate(geom = "text", label = "rho=1", size = 3, x = 34, y = 0.31, fontface = "bold") +
   labs(x = "Age (Ma)", y = "Density", title = "Upham et al. (2019)") +
   theme(panel.background = element_blank(),
         panel.border = element_rect(linewidth = .75, colour = "black", fill = NA),
@@ -132,10 +133,12 @@ t_hpd_carrillo <- data.frame(min = t(hpd_carrillo)[,1],
 c_plot <- ggplot() + 
   scale_x_reverse() +
   geom_hline(yintercept = 0, linetype = "dashed", linewidth = 0.25) +
-  geom_line(data = plot_df, aes(x = age, y = dens), linewidth = 0.5) +
+  geom_line(data = plot_df, aes(x = age, y = dens_car), linewidth = 0.5) +
   geom_segment(data = t_hpd_carrillo, aes(x = min, xend = max, y = y, yend = y, colour = Species), linewidth = 0.35) +
   geom_point(data = t_hpd_carrillo, aes(x = mid, y = y, fill = Species), size = 0.7) +
+  ylim(c(-0.03, 0.32)) +
   scale_colour_manual(values = pal) +
+  annotate(geom = "text", label = "rho=6/8", fontface = "bold", size = 3, x = 33, y = 0.31) +
   labs(x = "Age (Ma)", y = NULL, title = "Carrillo et al. (2026)") +
   theme(panel.background = element_blank(),
         panel.border = element_rect(linewidth = .75, colour = "black", fill = NA),

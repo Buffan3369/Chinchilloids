@@ -147,7 +147,7 @@ include_graphics("../../Figures/Supp/Age_combination_effect/age_comb_effect_RTT.
 ```{r, echo=FALSE}
 #| label: fig-TsPhyloPyRate
 #| out-width: 17m
-#| fig-cap: Expected distribution of the corrected age of extant taxa from a phylogeny matching our chinchilloid tree in terms of speciation, extinction rate and extant sampling fraction (resp. $\lambda, \mu$ and $\rho$). We set $\lambda=0.53$, $\mu=0.44$, $\rho=1$. Dots (along with errorbars) represent extant chinchilloid species phylogenetic ages (and their 95% HPD) extracted from two dated phylogenies [@upham2019; @carrillo2026].
+#| fig-cap: Expected distribution of the corrected age of extant taxa from a phylogeny matching our chinchilloid trees in terms of speciation, extinction rate and extant sampling fraction (resp. $\lambda, \mu$ and $\rho$). We set $\lambda=0.53$ and $\mu=0.44$. Two different levels of sampling completeness were considered, matching those of the two trees considered, resp. $\rho=1$ (**a**, phylogeny of @upham2019) and $\rho=6/8$ (**b**, phylogeny of @carrillo2026). Dots (along with error bars) represent extant chinchilloid species phylogenetic ages (and their 95% HPD) extracted from the two dated phylogenies.
 
 include_graphics("../../Figures/Supp/ExtantSampling/ExpectedTsDensity_Upham_Carrillo.pdf")
  
@@ -240,6 +240,7 @@ include_graphics("../../Figures/recap_figures_RJMCMC/New/Chinchilloidea_genus_Fu
 include_graphics("../../Figures/Supp/Effect_Rasia2026/rasia_effect.pdf")
 ```
 
+::: {.content-visible unless-format="pdf"}
 ```{r, echo = FALSE}
 #| label: fig-violinADE
 #| out-height: 7.5cm
@@ -248,7 +249,7 @@ include_graphics("../../Figures/Supp/Effect_Rasia2026/rasia_effect.pdf")
 
 include_graphics("../../Figures/ADE/Weibull_shape_species.png")
 ```
-
+:::
 | 
 | 
 | 

@@ -5,7 +5,7 @@
 #########################################################
 
 # Standard analyses
-for pth in 0-NewComb 1-Full 2-Singleton 3-NoCaribbea 7-FossilOnly 8-Biased_extant
+for pth in 0-NewComb_CARRILLO2026 0-NewComb_UPHAM2019 1-Full 2-Singleton 3-NoCaribbea 7-FossilOnly 8-Biased_extant
 do
     python ~/Documents/GitHub/CorsaiR/Python/assess_run_convergence.py -dir ../../Results/RJMCMC/species/$pth/pyrate_mcmc_logs
     Rscript ~/Documents/GitHub/CorsaiR/R/plot_ess.r ../../Results/RJMCMC/species/$pth/pyrate_mcmc_logs/ESS_summary.txt ../../Results/RJMCMC/species/$pth/pyrate_mcmc_logs/ESS_plot.png

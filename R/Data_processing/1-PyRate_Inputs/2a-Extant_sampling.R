@@ -29,6 +29,8 @@ meanQ_tbl <- read.table("./Results/RJMCMC/species/7-FossilOnly/Q_SHIFTS/Parsed_Q
 q_distribs <- combine_q_distribs(MCMC_path = "./Results/RJMCMC/species/7-FossilOnly/pyrate_mcmc_logs/")
 
 for(phylo in c("CARRILLO2026", "UPHAM2019")){
+  # Adjust sampling fractions
+  rho <- ifelse(phylo == "CARRILLO2026", 6/8, 1)
   # 95% HPD interval for phylogenetic ages
   tbl_path <- paste0("./Data/supp_tbl/95pct_HPD_tbl-", phylo, ".txt")
   df_hpd <- read.table(tbl_path, header = T)
@@ -59,7 +61,7 @@ for(phylo in c("CARRILLO2026", "UPHAM2019")){
       s_sp <- meanAge(v = v_sp,
                       lambda = lambda, 
                       mu = mu,
-                      rho = 1) # assumption of complete extant sampling
+                      rho = rho)
       
       ## 3. Occurrence sampling following a Poisson Process with piecewise-constant intensity -------
       events_sp <- time_varying_sampling(s_sp = s_sp,

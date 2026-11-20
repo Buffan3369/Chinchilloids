@@ -83,6 +83,6 @@ for(phylo in c("CARRILLO2026", "UPHAM2019")){
   TL <- paste0("./Data/PyRate_inputs/Species/Combined/Chinchilloidea_sp_lvl_COMBINED_", phylo, "_occ_TaxonList.txt")
   TL_df <- data.frame(Species = sort(c(extantnames_vec, fossilnames_vec)),
                       Status = sapply(X = sort(c(extantnames_vec, fossilnames_vec)),
-                                      FUN = function(x){ifelse(x %in% extantnames_vec, "extant", "extinct")}))
+                                      FUN = function(x){ifelse(x %in% c(extantnames_vec, "Lagostomus_maximus"), "extant", "extinct")}))
   write.table(TL_df, file = TL, quote = F, row.names = F, sep = "\t")
 }

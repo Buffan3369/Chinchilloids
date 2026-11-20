@@ -7,6 +7,10 @@
 ################################################################################
 
 library(treeio)
+library(tidyverse)
+library(paleotree)
+library(ggtree)
+library(deeptime)
 library(tidytree)
 library(hash)
 
@@ -69,3 +73,35 @@ dict_hpd_carrillo <- hash("Dinomys_branickii" = dinomys_hpd,
 # Save 95% HPD table
 df_hpd_carrillo <- data.frame(values(dict_hpd_carrillo))
 write.table.lucas(df_hpd_carrillo, "./Data/supp_tbl/95pct_HPD_tbl-CARRILLO2026.txt")
+
+
+
+## Comparative plot ------------------------------------------------------------
+
+# Plot the tree with the 95% HPD
+ggtree(chinchi_tree_carrillo) + 
+  geom_tiplab(fontface=3) + 
+  geom_range("height_0.95_HPD", color="lightblue",size=1, alpha=.5)
+
+# Get node numbers
+ggtree(tree) + geom_text(aes(label=node), hjust=-.3)
+# Chinchilloidea = node 373
+# Octodontoidea = node 203
+
+# Plot with time scale and tip labels
+
+p <- ggtree(chinchi_tree_carrillo) + 
+  geom_tiplab(fontface=3) + # add tip labels
+  geom_range("height_0.95_HPD", color="purple",size=1.5, alpha=.5) + # add 95% HPD bars
+
+  # coord_geo(xlim = c(-50,20),
+  #           dat = list("epochs", "periods"),
+  #           neg = TRUE, abbrv = TRUE) + # change limits to show tip labels
+  theme_tree2()
+
+revts(p)
+
+# Export and save figure (it doesnt work with DeepTime)
+#ggsave("Fig S3.tiff", plot= revts(p), width=30, height=50, units = "cm", dpi=300)
+ggsave("Fig S3_290824.tiff", plot= revts(p), width=30, height=50, units = "cm", dpi=300)
+
