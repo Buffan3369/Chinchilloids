@@ -102,6 +102,7 @@ bins <- data.frame(bin = 1:35,
 binned_rats <- bin_time(occdf = TsTe_BM,
                         bins = bins,
                         method = "all")
+saveRDS(binned_rats, "./Data/Traits/Binned_BM.RDS")
 
 unique_mid <- unique(binned_rats$bin_midpoint)
 median_BM <- c()

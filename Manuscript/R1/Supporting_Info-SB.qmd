@@ -197,6 +197,15 @@ include_graphics("../../Figures/Supp/Lifespans_hypso/Lifespans_HI_Chinchi.png")
 ```
 
 ```{r, echo=FALSE}
+#| label: fig-disparity
+#| out-width: 15cm
+#| fig-cap: "Chinchilloid body mass disparity through time quantified using two metrics: (**a**) Maximal Euclidian distance and (**b**) Mean Pairwise Distance."
+
+include_graphics("../../Figures/Supp/Disparity.pdf")
+```
+
+
+```{r, echo=FALSE}
 #| label: fig-RecapSingletonRTT
 #| out-height: 10cm
 #| fig-cap: Joint estimation of origination (blue) and extinction (red) rates (**A**), net diversification rate (**B**), diversity through time (**C**) and preservation rates (**D**) from our species-level chinchilloid database made my PyRate (rjMCMC algorithm) after removing singletons.
