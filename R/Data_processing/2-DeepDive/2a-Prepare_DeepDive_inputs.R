@@ -1,5 +1,5 @@
 ################################################################################
-# Name: 3a-Prepare_DeepDive_inputs.R
+# Name: 2a-Prepare_DeepDive_inputs.R
 # Author: Lucas Buffan
 # E-mail: lucas.l.buffan@gmail.com
 # Description: Prepare DeepDive inputs for cleaned Chinchilloidea occurrence data
