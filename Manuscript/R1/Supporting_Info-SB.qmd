@@ -106,7 +106,7 @@ Systematics based on morphological characters [primarily dental traits; @marivau
 
 ## Remarks on the extant taxa lacking fossil record
 
-Remains of *Chinchilla chinchilla* and *Lagidium viscacia* were in fact once reported from an archaeological assemblage, but we assume their age to be too close to the present to provide useful information on the time of speciation of the species.
+Remains of *Chinchilla chinchilla* and *Lagidium viscacia* were in fact once reported from an archaeological assemblage [@ortiz_roedores_2012], but we assume their age to be too close to the present to provide useful information on the time of speciation of the species.
 
 The validity of *Lagidium peruanum* is questionable. The species indeed appears on the Mammal Diversity Database 2025 [@burgin2025], but is sometimes regarded as a synonymous of *L. viscaccia*. For practical reasons (and as it was included in our phylogeny), we decided to keep it for the rest of our analyses, but this choice does not reflect any taxonomic decision.
 
@@ -174,7 +174,7 @@ include_graphics("../../Figures/Supp/ExtantSampling/sampling_plot.pdf")
 #| out-height: 8cm
 #| fig-cap: Convergence of the PyRate runs (rjMCMC algorithm) for the analysis of the species-level temporal occurrence database. (**A**) shows the ESS of the model posterior probability for all the 20 replicates we ran. ESS greater than 200 (first-scale indicator of a run that converged, $n=20$ in that case) are displayed in green. The yellow and red line respectively depict ESS=200 and ESS=100. The proportion of origination and extinction times (resp. $T_S$ and $T_E$) that converged (i.e., with $ESS > 200$) are shown in (**B**), for each of our 20 replicates. (**C**) shows the posterior estimates of the mean root age of our group, together with their lower and upper boundaries of the 95% HPD interval, across the 20 replicates.
 
-include_graphics("../../Results/RJMCMC/species/1-Full/pyrate_mcmc_logs/ESS_plot.png")
+include_graphics("../../Results/RJMCMC/species/0-NewComb_CARRILLO2026/pyrate_mcmc_logs/ESS_plot.png")
 
 ```
 
@@ -203,7 +203,6 @@ include_graphics("../../Figures/Supp/Lifespans_hypso/Lifespans_HI_Chinchi.png")
 
 include_graphics("../../Figures/Supp/Disparity.pdf")
 ```
-
 
 ```{r, echo=FALSE}
 #| label: fig-RecapSingletonRTT
@@ -259,6 +258,7 @@ include_graphics("../../Figures/Supp/Effect_Rasia2026/rasia_effect.pdf")
 include_graphics("../../Figures/ADE/Weibull_shape_species.png")
 ```
 :::
+
 | 
 | 
 | 
@@ -268,6 +268,14 @@ include_graphics("../../Figures/ADE/Weibull_shape_species.png")
 #| fig-cap: Speciation (**A**) and extinction (**B**) rates through time per body mass class as inferred by the rjMCMC model.
 
 include_graphics("../../Figures/Supp/RTT_per_BM/RTT_plot_per_BM.pdf")
+```
+
+```{r, echo=FALSE}
+#| label: fig-EffectPhylo
+#| out-width: 18cm
+#| fig-cap: Comparative inference of chinchilloid speciation and extinction rates from our combined temporal occurrence database. Phylogenetic information on extant taxa were either extracted from @carrillo2026 (**a**) or @upham2019 (**b**). The dashed lines labelled (\*) and (\*\*\*) respectively indicate significant and strongly supported rate shift.
+
+include_graphics("../../Figures/Supp/ExtantSampling/Comparing_RTT-Upham_Carrillo.png")
 ```
 
 ```{r, echo=FALSE}
